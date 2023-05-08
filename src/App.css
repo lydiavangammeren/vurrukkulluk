@@ -1,4 +1,4 @@
-
+import magnifyingglass from 
 
 :root {
 
@@ -37,6 +37,23 @@
   position: absolute;
   left: 50px;
   top: 50px;
+}
+
+#searchbar {
+  position: absolute;
+  left: 1150px;
+  top: 50px;
+}
+
+/* Searchbar */
+
+#search {
+  background-image: url("../src/assets/images/magnifyingglass.png");
+  background-repeat: no-repeat;
+  background-position: 2px 3px;
+  border: hidden; 
+  border-radius: 12px;
+  font-size: large;
 }
 
 /* Contact  */
