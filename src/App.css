@@ -21,7 +21,7 @@
 
   --darker-green: #6e8722;
   --lighter-green: #95b82d;
-
+  
   --white: #FFF;
   --black: #000;
 
@@ -94,6 +94,34 @@ section{
   flex: 10%;
   border: solid;
 }
+
+/* Hero Image */
+
+#container {
+  position:relative;
+}
+
+#logo {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+}
+
+/* Contact  */
+
+/* Hero Image */
+
+#container {
+  position:relative;
+}
+
+#logo {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+}
+
+/* Contact  */
 
 .contact {
   color: var(--white);

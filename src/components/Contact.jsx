@@ -3,7 +3,7 @@ import React from "react";
 const Contact = () => {
   return (
     <div className="contact">
-      <img src={require("./vurrukkulluk-logo.png")} alt="vurrukkulluk logo" />
+      <img src={require("../assets/images/vurrukkulluk-logo.png")} alt="vurrukkulluk logo" />
       <div className="address">
         <h1>Contact</h1>
         <p>Verrukkulluk.nl</p>

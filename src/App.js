@@ -1,6 +1,7 @@
 import HeroImage from './components/HeroImage';
 import Contact from './components/Contact';
 import DetailContent from './components/DetailContent';
+
 import './App.css';
 
 
