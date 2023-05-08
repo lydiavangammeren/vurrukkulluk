@@ -21,16 +21,31 @@
 
   --darker-green: #6e8722;
   --lighter-green: #95b82d;
-
+  
   --white: #FFF;
   --black: #000;
 
 }
 
+/* Hero Image */
+
+#container {
+  position:relative;
+}
+
+#logo {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+}
+
+/* Contact  */
+
 .contact {
   color: var(--white);
   background-color: var(--darker-orange);
   padding-left: 2%;
+  height: 20%;
 }
 
 .address {
@@ -41,6 +56,7 @@
 div.address p {
   margin: 0;
 }
+
 
 
 
