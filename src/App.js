@@ -1,6 +1,5 @@
 import HeroImage from './components/HeroImage';
 import Contact from './components/Contact';
-import SearchBar from './components/SearchBar';
 import DetailContent from './components/DetailContent';
 import HomeContent from './components/HomeContent';
 
@@ -10,7 +9,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <HeroImage/>
+        
+      {/* <Contact/> */}
+      <div className='HeroImage'><HeroImage/></div>      
       <section>
         <div className='side'>
           <div className='Agenda'>
@@ -32,8 +33,7 @@ function App() {
           <HomeContent />
         </div>
       </section>
-      {/* <div className='Contact'><h1>Contact</h1></div> */}
-      <Contact/>
+      <div className='Contact'><Contact/></div>      
     </div>
   );
 }

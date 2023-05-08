@@ -20,6 +20,7 @@ const HeroImage = () => {
           id="logo"
         />
         <div id="searchbar"><SearchBar/></div>
+        <div id="hamburger"><img src={require("../assets/images/hamburgermenu.png")} alt="hamburger" width="20%" height="20%"/></div>
         
 
       </div>
