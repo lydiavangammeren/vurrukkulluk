@@ -1,6 +1,5 @@
 import HeroImage from './components/HeroImage';
 import Contact from './components/Contact';
-import SearchBar from './components/SearchBar';
 
 import './App.css';
 
