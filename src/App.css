@@ -26,11 +26,80 @@
   --black: #000;
 
 }
+* {
+  box-sizing: border-box;
+}
+.App {
+  height: 2000px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 6em 0px 6em;
+}
+
+.HeroImage{
+  border: solid;
+  flex: 20%;
+}
+
+section{
+  flex: 50%;
+  display: flex;
+  flex-direction: row;
+}
+
+.side {
+  display: flex;
+  align-items: stretch;
+  border: solid;
+  flex: 25%;
+  flex-direction: column;
+  margin: 3em 0 3em 3em;
+  padding-bottom: 3em;
+}
+
+.Agenda {
+  background-color: #95b82d;
+  flex-grow: 2;
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+}
+
+.Agenda_item {
+  border: solid;
+  text-align: center;
+  margin: 10px;
+  flex-grow: 1;
+}
+
+.Login {
+  background-color: var(--darker-red);
+  flex-grow: 1;
+  text-align: center;
+}
+
+.content {
+  border: solid;
+  flex: 75%;
+  align-items: stretch;
+  margin: 3em;
+}
+
+
+
+
+.Contact {
+  flex: 10%;
+  border: solid;
+}
 
 .contact {
   color: var(--white);
   background-color: var(--darker-orange);
   padding-left: 2%;
+  
 }
 
 .address {
@@ -40,6 +109,38 @@
 
 div.address p {
   margin: 0;
+}
+
+/* Detail Content */
+.detailContent {
+  display: flex;
+  flex-direction: column;
+}
+.detailTop {
+
+}
+.detailBottom {
+
+}
+.details {
+  display: flex;
+  flex-direction: row;
+}
+.details_img {
+  flex: 50%;
+}
+.details_info {
+  flex: 50%;
+}
+.kitchen_type  {
+  display: flex;
+  flex-direction: row;
+}
+.details_kitchen {
+  flex: 50%;
+}
+.details_type {
+  flex: 50%;
 }
 
 
