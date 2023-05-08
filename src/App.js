@@ -8,10 +8,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <HeroImage/>    
-      <Contact/>
-      <div className='HeroImage'><h1>HeroImage</h1></div>
-      {/* <HeroImage/> */}
+        
+      {/* <Contact/> */}
+      <div className='HeroImage'><HeroImage/></div>      
       <section>
         <div className='side'>
           <div className='Agenda'>
@@ -33,8 +32,7 @@ function App() {
          
         </div>
       </section>
-      <div className='Contact'><h1>Contact</h1></div>
-      {/* <Contact/> */}
+      <div className='Contact'><Contact/></div>      
     </div>
   );
 }

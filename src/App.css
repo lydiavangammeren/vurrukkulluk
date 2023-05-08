@@ -1,4 +1,3 @@
-import magnifyingglass from 
 
 :root {
 
@@ -36,8 +35,7 @@ import magnifyingglass from
   padding: 0px 6em 0px 6em;
 }
 
-.HeroImage{
-  border: solid;
+.HeroImage{  
   flex: 20%;
 }
 
@@ -49,8 +47,7 @@ section{
 
 .side {
   display: flex;
-  align-items: stretch;
-  border: solid;
+  align-items: stretch;  
   flex: 25%;
   flex-direction: column;
   margin: 3em 0 3em 3em;
@@ -67,8 +64,7 @@ section{
   text-align: center;
 }
 
-.Agenda_item {
-  border: solid;
+.Agenda_item {  
   text-align: center;
   margin: 10px;
   flex-grow: 1;
@@ -80,34 +76,15 @@ section{
   text-align: center;
 }
 
-.content {
-  border: solid;
+.content {  
   flex: 75%;
   align-items: stretch;
   margin: 3em;
 }
 
-
-
-
 .Contact {
-  flex: 10%;
-  border: solid;
+  flex: 10%;  
 }
-
-/* Hero Image */
-
-#container {
-  position:relative;
-}
-
-#logo {
-  position: absolute;
-  left: 50px;
-  top: 50px;
-}
-
-/* Contact  */
 
 /* Hero Image */
 
@@ -123,16 +100,24 @@ section{
 
 #searchbar {
   position: absolute;
-  left: 1150px;
+  left: 950px;
   top: 50px;
+}
+
+#hamburger {
+  position: absolute;
+  left: 1250px;
+  top: 50px;
+ 
 }
 
 /* Searchbar */
 
-#search {
-  background-image: url("../src/assets/images/magnifyingglass.png");
-  background-repeat: no-repeat;
-  background-position: 2px 3px;
+#search {  
+  background: white url(../src/assets/images/magnifyingglass.png) left no-repeat;
+  background-size: 18px Auto;
+  text-indent: 20px;
+  padding-left: 17px;
   border: hidden; 
   border-radius: 12px;
   font-size: large;
