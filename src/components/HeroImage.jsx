@@ -1,4 +1,5 @@
 import React from "react";
+import SearchBar from "./SearchBar";
 
 const HeroImage = () => {
   return (
@@ -18,6 +19,9 @@ const HeroImage = () => {
           height="20%"
           id="logo"
         />
+        <div id="searchbar"><SearchBar/></div>
+        
+
       </div>
     </>
   );
