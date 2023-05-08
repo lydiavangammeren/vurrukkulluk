@@ -31,8 +31,8 @@ function App() {
           <DetailContent />
         </div>
       </section>
-      <div className='Contact'><h1>Contact</h1></div>
-      {/* <Contact/> */}
+      {/* <div className='Contact'><h1>Contact</h1></div> */}
+      <Contact/>
     </div>
   );
 }
