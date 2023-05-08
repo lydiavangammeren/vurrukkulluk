@@ -3,7 +3,7 @@ import Details from './Details'
 
 const DetailContent = (props) => {
   return (
-    <div className='detailContent'>
+    <div className='DetailContent'>
       <div className='detailTop'>
         <Details />
       </div>
