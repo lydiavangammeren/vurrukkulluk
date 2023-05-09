@@ -1,11 +1,13 @@
 import React from 'react';
 import Rating from './Rating';
+import {Link} from 'react-router-dom';
 
 import '../css/Recipe.css';
 
 const Recipe = (props) => {
   return (
     <div className='Recipe'>
+      <Link to='details'>
       <div className='recipe_img'>
         <img src={require("../assets/images/" + props.image )}
         alt={props.image}
@@ -24,6 +26,7 @@ const Recipe = (props) => {
         elementum. Cras et tempus lorem.
         </p>
       </div>
+      </Link>
       <div className='recipe_bottom'>
         <div className='recipe_button'>
           <button>Smullen</button>

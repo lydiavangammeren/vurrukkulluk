@@ -24,12 +24,12 @@ function App() {
             </div>          
         </div>
         <div className='content'>
-          <BrowserRouter>
+          {/* <BrowserRouter> */}
             <Routes>
               <Route index element={<HomeContent />}/>
               <Route path="details" element={<DetailContent />}/>
             </Routes>
-          </BrowserRouter>
+          {/* </BrowserRouter> */}
           
         </div>
       </section>
