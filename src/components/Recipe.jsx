@@ -1,6 +1,8 @@
 import React from 'react';
 import Rating from './Rating';
 
+import '../css/Recipe.css';
+
 const Recipe = (props) => {
   return (
     <div className='Recipe'>

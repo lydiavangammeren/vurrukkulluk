@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HeroImage from './components/HeroImage';
 import Contact from './components/Contact';
 import DetailContent from './components/DetailContent';
@@ -29,8 +30,13 @@ function App() {
             </div>          
         </div>
         <div className='content'>
-          {/* <h1>Content</h1> */}
-          <HomeContent />
+          <BrowserRouter>
+            <Routes>
+              <Route index element={<HomeContent />}/>
+              <Route path="details" element={<DetailContent />}/>
+            </Routes>
+          </BrowserRouter>
+          
         </div>
       </section>
       <div className='Contact'><Contact/></div>      

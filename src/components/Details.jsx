@@ -1,11 +1,8 @@
 import React from 'react'
 import Rating from './Rating';
+import '../css/Details.css';
 
 const Details = () => {
-  const styling = {
-
-  }
-
   return (
     <div className='details'>
       <div className='details_img'>
@@ -18,7 +15,7 @@ const Details = () => {
         </div>
         <div className='title_rating'>
           <div className='details_title'>
-            <h1>Title</h1>
+            <h2>Title</h2>
           </div>
           <div className='details_rating'>
             <Rating />

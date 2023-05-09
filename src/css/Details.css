@@ -1,0 +1,32 @@
+.details {
+  display: flex;
+  flex-direction: row;
+}
+.details_img {
+  flex: 50%;
+}
+.details_info {
+  flex: 50%;
+}
+.title_rating {
+  display:flex;
+  flex-direction: row;
+}
+.details_title {
+  flex: 50%;
+}
+.details_rating {
+  flex: 50%;
+  /* align-content: center; */
+  padding: auto;
+}
+.kitchen_type  {
+  display: flex;
+  flex-direction: row;
+}
+.details_kitchen {
+  flex: 50%;
+}
+.details_type {
+  flex: 50%;
+}
