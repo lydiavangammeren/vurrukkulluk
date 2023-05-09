@@ -42,7 +42,7 @@
   font-family: var(--regular);
 }
 
-h1, h2 {
+h1, h2, h3 {
   font-family: var(--heading);
 }
 
@@ -54,6 +54,10 @@ h1 {
 h2 {  
   font-size: 34px;
   color: var(--darker-green)
+}
+
+h3 {
+  font-size: 25px;
 }
 
 .HeroImage{  
