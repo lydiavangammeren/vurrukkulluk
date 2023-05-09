@@ -159,8 +159,62 @@ div.address p {
   margin: 0;
 }
 
+/* Home Content */
+.HomeContent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* Recipe Component */
+.Recipe{
+  border: solid;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 40%;
+  margin: auto;
+  height: 600px;
+}
+.recipe_img {
+  flex: 40%;
+}
+.recipe_title_rating{
+  flex: 14%;
+  display: flex;
+  flex-direction: row;
+  padding: 0 5% 0 5%;
+}
+.recipe_title {
+  flex: 50%;
+  /* margin-left: 5%; */
+}
+.recipe_rating{
+  flex: 50%;
+  /* margin-right: 5%; */
+}
+.recipe_desc {
+  flex: 32%;
+  margin: 0 5% 0 5%;
+}
+.recipe_bottom {
+  flex: 14%;
+  display: flex;
+  flex-direction: row;
+}
+.recipe_button{
+  flex:50%;
+  margin-left: 5%;
+}
+.recipe_stats{
+  flex:50%;
+  margin-right: 5%;
+}
+
+
+
+
 /* Detail Content */
-.detailContent {
+.DetailContent {
   display: flex;
   flex-direction: column;
 }
@@ -180,6 +234,18 @@ div.address p {
 .details_info {
   flex: 50%;
 }
+.title_rating {
+  display:flex;
+  flex-direction: row;
+}
+.details_title {
+  flex: 50%;
+}
+.details_rating {
+  flex: 50%;
+  /* align-content: center; */
+  padding: auto;
+}
 .kitchen_type  {
   display: flex;
   flex-direction: row;
@@ -190,6 +256,7 @@ div.address p {
 .details_type {
   flex: 50%;
 }
+
 
 
 

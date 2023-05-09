@@ -1,4 +1,5 @@
 import React from 'react'
+import Rating from './Rating';
 
 const Details = () => {
   const styling = {
@@ -20,6 +21,7 @@ const Details = () => {
             <h1>Title</h1>
           </div>
           <div className='details_rating'>
+            <Rating />
             {/* <Rating /> --> Rating Component */}
           </div>
         </div>
