@@ -2,7 +2,6 @@ import React from 'react';
 import Rating from './Rating';
 
 const Recipe = (props) => {
-  
   return (
     <div className='Recipe'>
       <div className='recipe_img'>
