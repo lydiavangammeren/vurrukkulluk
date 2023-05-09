@@ -16,7 +16,7 @@ function App() {
       <section>
         <div className='side'>
           <div className='Agenda'>
-            <h2>Agenda</h2>
+            <h1>Agenda</h1>
             <div className='Agenda_item'>1</div>
             <div className='Agenda_item'>2</div>
             <div className='Agenda_item'>3</div>

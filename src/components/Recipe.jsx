@@ -5,7 +5,7 @@ const Recipe = (props) => {
   return (
     <div className='Recipe'>
       <div className='recipe_img'>
-        <img src={require("../assets/images/" + props.image)}
+        <img src={require("../assets/images/" + props.image )}
         alt={props.image}
         width="100%"
         height="auto" />
