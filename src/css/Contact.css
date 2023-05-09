@@ -1,0 +1,28 @@
+.Contact {
+    flex: 10%;  
+  }
+
+
+.contact {
+    display: flex;
+    color: var(--white);
+    background-color: var(--darker-orange);
+    padding-left: 2%;
+    
+  }
+
+  .contact-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;      
+    padding-bottom: 5%;
+  }
+  
+  .contact-address {
+    padding-left: 2%;
+    
+  }
+  
+  div.contact-address p {
+    margin: 0;
+  }

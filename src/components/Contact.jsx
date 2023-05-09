@@ -1,10 +1,13 @@
 import React from "react";
+import "../css/Contact.css";
 
 const Contact = () => {
   return (
     <div className="contact">
-      <img src={require("../assets/images/vurrukkulluk-logo.png")} alt="vurrukkulluk logo" />
-      <div className="address">
+      <div className="contact-image">
+      <img src={require("../assets/images/logo-zonder-verrukkeluk.png")} alt="vurrukkulluk logo zonder tekst" width="100" height="auto"/>
+      </div>
+      <div className="contact-address">
         <h1>Contact</h1>
         <p>Verrukkulluk.nl</p>
         <p>Poststraat 2b</p>

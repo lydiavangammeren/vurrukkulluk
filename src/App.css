@@ -121,10 +121,6 @@ section{
   margin: 3em;
 }
 
-.Contact {
-  flex: 10%;  
-}
-
 /* Hero Image */
 
 #container {
@@ -162,20 +158,3 @@ section{
   font-size: large;
 }
 
-/* Contact  */
-
-.contact {
-  color: var(--white);
-  background-color: var(--darker-orange);
-  padding-left: 2%;
-  
-}
-
-.address {
-  padding-left: 20%;
-  padding-bottom: 5%;
-}
-
-div.address p {
-  margin: 0;
-}
