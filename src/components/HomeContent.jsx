@@ -5,10 +5,10 @@ const HomeContent = (props) => {
 
   return (
     <div className='HomeContent'>
-      <Recipe title="Eggs & Veggies" />
-      <Recipe title="Vegan Burger" />
-      <Recipe title="Sushi Rolls" />
-      <Recipe title="Pizza Green" />
+      <Recipe title="Eggs & Veggies" image="EggsAndVeggies" />
+      <Recipe title="Vegan Burger" image="VeganBurger" />
+      <Recipe title="Sushi Rolls" image="SushiRolls" />
+      <Recipe title="Pizza Green" image="PizzaGreen" />
     </div>
   )
 }
