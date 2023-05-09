@@ -2,6 +2,7 @@ import HeroImage from './components/HeroImage';
 import Contact from './components/Contact';
 import DetailContent from './components/DetailContent';
 import HomeContent from './components/HomeContent';
+import Login from './components/Login';
 
 import './App.css';
 
@@ -24,9 +25,8 @@ function App() {
           </div>
           {/* <Agenda /> */}
           <div className='Login'>
-            <h2>Login</h2>
-            </div>
-          {/* <Login /> */}
+            <Login/>
+            </div>          
         </div>
         <div className='content'>
           {/* <h1>Content</h1> */}
