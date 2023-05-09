@@ -35,6 +35,10 @@
   padding: 0px 6em 0px 6em;
 }
 
+h2 {
+  font-family: var(--heading);
+}
+
 .HeroImage{  
   flex: 20%;
 }
@@ -72,8 +76,22 @@ section{
 
 .Login {
   background-color: var(--darker-red);
+  color: var(--white);
   flex-grow: 1;
   text-align: center;
+
+}
+
+.label {
+  font-size: 10px;
+  text-align: left;
+}
+
+#button {
+  color: var(--white);
+  background-color: var(--darker-orange);
+  border: none;
+  border-radius: 10px;
 }
 
 .content {  
