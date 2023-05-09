@@ -178,9 +178,6 @@ div.address p {
 .recipe_img {
   flex: 40%;
 }
-.recipe_img img{
-  object-fit:scale-down;
-}
 .recipe_title_rating{
   flex: 14%;
   display: flex;
