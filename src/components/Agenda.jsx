@@ -1,15 +1,24 @@
-import React from 'react';
+import React from "react";
+import AgendaItem from "./AgendaItem";
 
 const Agenda = () => {
-    return (<div className='Agenda'>
-    <h1>Agenda</h1>
-    <div className='Agenda_item'>1</div>
-    <div className='Agenda_item'>2</div>
-    <div className='Agenda_item'>3</div>
-    <div className='Agenda_item'>4</div>
-    <div className='Agenda_item'>5</div>
-  </div>  );
-}
- 
-export default Agenda;
+  const months = [
+    "Juni",
+    "Augustus",
+    "September",
+    
+  ];
+  return (
+    <div className="Agenda">
+      <h1>Agenda</h1>
+      {months.map((name) => (
+        <>
+          <h2>{name}</h2>
+          <AgendaItem />
+        </>
+      ))}
+    </div>
+  );
+};
 
+export default Agenda;

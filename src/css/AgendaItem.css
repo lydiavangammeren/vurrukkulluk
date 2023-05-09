@@ -1,0 +1,17 @@
+.agenda-image-title {
+    display: flex;
+    flex-direction: row;   
+}
+
+.agenda-image { 
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    flex: 20%; 
+    padding-bottom: 5%;
+}
+
+.agenda-title {
+    flex: 80%;
+    
+}
