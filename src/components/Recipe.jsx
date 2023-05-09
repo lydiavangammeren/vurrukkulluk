@@ -8,7 +8,7 @@ const Recipe = (props) => {
         <img src={require("../assets/images/" + props.image )}
         alt={props.image}
         width="100%"
-        height="100%" />
+        height="auto" />
       </div>
       <div className='recipe_title_rating'>
         <div className='recipe_title'><h2>{props.title}</h2></div>
