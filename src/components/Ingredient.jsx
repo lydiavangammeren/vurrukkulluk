@@ -8,9 +8,9 @@ const Ingredient = (props) => {
         <img src="" />
       </div>
       <div className='ingredient_info'>
-        <h3>{props.ingredient.title}</h3>
-        <p>{props.ingredient.desc}</p>
-        <span className='quantity_span'>Hoeveelheid:</span><span className='quantity_value'>{props.ingredient.quantity}</span>'
+        <h3>{props.title}</h3>
+        <p>{props.desc}</p>
+        <span className='quantity_span'>Hoeveelheid:</span><span className='quantity_value'>{props.quantity}</span>'
       </div>
     </div>
   );
