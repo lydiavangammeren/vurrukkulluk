@@ -1,5 +1,6 @@
 import React from 'react';
 import Ingredient from './Ingredient';
+import '../css/Ingredients.css';
 
 const Ingredients = () => {
   const ingredients = [

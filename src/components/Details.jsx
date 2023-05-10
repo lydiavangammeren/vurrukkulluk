@@ -25,28 +25,24 @@ const Details = (props) => {
       </div>
       <div className="details_info">
         <div className="details_stats">
-        <p>
-            <HiUsers color='#b31714'/> 4 
-            <MdEuro color='#b31714'/>12,- 
-            <VscFlame color='#b31714'/> 432
-          </p>
-          {/* Aantal personen  / Prijs / Calorieen */}
+          <div className="details_person"><HiUsers color='#b31714'/> 4</div>
+          <div className="details_price"><MdEuro color='#b31714'/>12,- </div>
+          <div className="details_calorie"><VscFlame color='#b31714'/> 432</div>
         </div>
         <div className="title_rating">
           <div className="details_title">
-            <h2>Title</h2>
+            <h2>{props.recipe.title}</h2>
           </div>
           <div className="details_rating">
             <Rating />
-            {/* <Rating /> --> Rating Component */}
           </div>
         </div>
         <div className="kitchen_type">
           <div className="details_kitchen">
-            <span>Keuken</span>
+            <span className="SpanFont">Keuken</span><span>{props.recipe.kitchen}</span>
           </div>
           <div className="details_type">
-            <span>Type</span>
+            <span className="SpanFont">Type</span><span>{props.recipe.type}</span>
           </div>
         </div>
         <p>
@@ -69,9 +65,8 @@ const Details = (props) => {
           lorem.
         </p>
         <div className="details_buttons">
-          <button>Op Lijst</button>
-          <button><BsHeart color='#b31714' /></button>
-          {/* Op Lijst-Button      Favourite-Button */}
+          <button className="ListButton">Op Lijst</button>
+          <button className="FavouriteButton"><BsHeart size={30} color='#b31714' /></button>
         </div>
       </div>
     </div>

@@ -39,11 +39,9 @@ const DetailContent = () => {
 
   const recipe = recipes.find((x) => x.id === id);
   return (
-    <div className="DetailContent">
-      <div className="detailTop">
-        {id}
-        {recipe.kitchen}
-        {/* <Details  /> */}
+    <div className='DetailContent'>
+      <div className='detailTop'>
+        <Details  recipe={recipe}/>
       </div>
       <div className="detailBottom">
         <TabWrapper />
