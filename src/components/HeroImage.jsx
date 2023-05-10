@@ -1,28 +1,32 @@
 import React from "react";
 import SearchBar from "./SearchBar";
+import "../css/HeroImage.css";
 
 const HeroImage = () => {
   return (
     <>
-      <div className="container">
-        <img
-          src={require("../assets/images/heroimage.jpg")}
-          alt="hero"
-          width="100%"
-          height="600"
-          id="img1"
-        />
-        <img
-          src={require("../assets/images/vurrukkulluk-logo.png")}
-          alt="vurrukkulluk logo"
-          width="20%"
-          height="20%"
-          id="logo"
-        />
-        <div id="searchbar"><SearchBar/></div>
-        <div id="hamburger"><img src={require("../assets/images/hamburgermenu.png")} alt="hamburger" width="20%" height="20%"/></div>
-        
-
+      <div className="HeroImage">
+        <div className="HeroImage-left">
+          <img
+            src={require("../assets/images/vurrukkulluk-logo.png")}
+            alt="vurrukkulluk logo"
+            id="logo"
+            width="90%"
+          />
+        </div>
+        <div className="HeroImage-right">
+          <div className="searchbar">
+            <SearchBar />
+          </div>
+          <div id="hamburger">
+            <img
+              src={require("../assets/images/hamburgermenu.png")}
+              alt="hamburger"
+              width="25px"
+              height="25px"
+            />
+          </div>
+        </div>
       </div>
     </>
   );

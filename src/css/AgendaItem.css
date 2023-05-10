@@ -1,3 +1,9 @@
+.Agenda_item {  
+    text-align: center;
+    margin: 10px;
+    flex-grow: 1;
+  }
+  
 .agenda-image-title {
     display: flex;
     flex-direction: row;   

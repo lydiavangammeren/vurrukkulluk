@@ -1,0 +1,9 @@
+.Agenda {
+    background-color: #95b82d;
+    flex-grow: 2;
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
