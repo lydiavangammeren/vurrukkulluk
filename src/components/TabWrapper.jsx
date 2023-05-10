@@ -1,8 +1,14 @@
 // Wrapper component for tabs
 import React from 'react';
+import Ingredients from './Ingredients';
 
 const TabWrapper = () => {
-    return (<h1>Wrapper</h1>  );
+    return (
+        <div className='TabWrapper'>
+            <Ingredients />
+        </div>
+        
+    )
 }
  
 export default TabWrapper;

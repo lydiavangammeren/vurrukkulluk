@@ -36,7 +36,7 @@ const Ingredients = () => {
   return (
     <div className='Ingredients'>
       {ingredients.map(ingredient => {
-        <Ingredient />
+        <Ingredient ingredient={ingredient}/>
       })}
     </div>
   )
