@@ -4,16 +4,24 @@ import "../css/Details.css";
 import { HiUsers } from 'react-icons/hi';
 import { MdEuro } from 'react-icons/md';
 import { VscFlame } from 'react-icons/vsc';
+import {BsHeart} from 'react-icons/bs';
 
 
 const Details = (props) => {
+  const myStyle = {
+    objectFit: "cover",
+    objectPosition: "50%"
+  }
+{/* <img src={require("../assets/images/VeganBurger.jpg")} */ }
   return (
     <div className='details'>
       <div className='details_img'>
       <img src={require("../assets/images/" + props.recipe.image )}
+      
         alt={props.recipe.image}
         width="100%"
-        height="auto" />
+        height="100%" 
+        style={myStyle}/>
       </div>
       <div className="details_info">
         <div className="details_stats">
@@ -62,7 +70,7 @@ const Details = (props) => {
         </p>
         <div className="details_buttons">
           <button>Op Lijst</button>
-          <button>Favourite</button>
+          <button><BsHeart color='#b31714' /></button>
           {/* Op Lijst-Button      Favourite-Button */}
         </div>
       </div>

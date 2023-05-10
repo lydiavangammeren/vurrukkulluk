@@ -36,13 +36,13 @@ const DetailContent = () => {
       "type": "Vlees"
     }];
 
-    const recipe = recipes.find(x => x.id === "3");
+    const recipe = recipes.find(x => x.id === id);
   return (
     <div className='DetailContent'>
       <div className='detailTop'>
         {id}
         {recipe.kitchen}
-        {/* <Details recipe={recipe} /> */}
+        {/* <Details  /> */}
       </div>
       <div className='detailBottom'>
 
