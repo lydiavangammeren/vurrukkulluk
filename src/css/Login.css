@@ -3,7 +3,7 @@
     color: var(--white);
     flex-grow: 1;
     text-align: center;
-  
+    box-shadow: 5px 10px 10px #888888;
   }
   
   .login-header {
