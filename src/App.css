@@ -4,7 +4,6 @@
     url("../src/assets/fonts/pretty_lily-webfont.woff2") format("woff");
 }
 
-
 :root {
 
   /* FONTS */
@@ -31,9 +30,11 @@
   --black: #000;
 
 }
+
 * {
   box-sizing: border-box;
 }
+
 .App {
   height: 2000px;
   display: flex;
@@ -42,7 +43,7 @@
   font-family: var(--regular);
 }
 
-h1, h2, h3 {
+h1, h2, h3, #button {
   font-family: var(--heading);
 }
 
@@ -60,10 +61,6 @@ h3 {
   font-size: 25px;
 }
 
-.HeroImage{  
-  flex: 20%;
-}
-
 section{
   flex: 50%;
   display: flex;
@@ -79,82 +76,8 @@ section{
   padding-bottom: 3em;
 }
 
-.Agenda {
-  background-color: #95b82d;
-  flex-grow: 2;
-  margin-bottom: 2em;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  text-align: center;
-}
-
-.Agenda_item {  
-  text-align: center;
-  margin: 10px;
-  flex-grow: 1;
-}
-
-.Login {
-  background-color: var(--darker-red);
-  color: var(--white);
-  flex-grow: 1;
-  text-align: center;
-
-}
-
-.label {
-  font-size: 10px;
-  text-align: left;
-}
-
-#button {
-  color: var(--white);
-  background-color: var(--darker-orange);
-  border: none;
-  border-radius: 10px;
-}
-
 .content {  
   flex: 75%;
   align-items: stretch;
   margin: 3em;
 }
-
-/* Hero Image */
-
-#container {
-  position:relative;
-}
-
-#logo {
-  position: absolute;
-  left: 50px;
-  top: 50px;
-}
-
-#searchbar {
-  position: absolute;
-  left: 950px;
-  top: 50px;
-}
-
-#hamburger {
-  position: absolute;
-  left: 1250px;
-  top: 50px;
- 
-}
-
-/* Searchbar */
-
-#search {  
-  background: white url(../src/assets/images/magnifyingglass.png) left no-repeat;
-  background-size: 18px Auto;
-  text-indent: 20px;
-  padding-left: 17px;
-  border: hidden; 
-  border-radius: 12px;
-  font-size: large;
-}
-

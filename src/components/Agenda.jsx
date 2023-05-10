@@ -1,5 +1,6 @@
 import React from "react";
 import AgendaItem from "./AgendaItem";
+import "../css/Agenda.css";
 
 const Agenda = () => {
   const months = [

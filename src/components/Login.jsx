@@ -1,9 +1,10 @@
 import React from "react";
+import "../css/Login.css";
 
 const Login = () => {
   return (
-    <>
-      <h1>Login</h1>
+    <div className="Login">
+      <h1 className="login-header">Login</h1>
       <div className="form-container">
         <form className="form">
           <label className="label" htmlFor="email">Email </label>
@@ -17,7 +18,7 @@ const Login = () => {
           <input id="button" type="submit" value="Login" />
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
