@@ -1,15 +1,15 @@
 // Wrapper component for tabs
 import React from "react";
 import Tabs from "./Tabs";
+import Ingredients from "./Ingredients";
 
 const TabWrapper = () => {
   return (
     <>
       <h1>Tabs Demo</h1>
       <Tabs>
-        <div label="Ingredienten">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <div label="Ingredienten">          
+          <Ingredients/>
         </div>
         <div label="Bereidingswijze">
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
