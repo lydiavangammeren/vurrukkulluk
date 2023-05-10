@@ -1,12 +1,13 @@
 import React from 'react'
+import "../css/Rating.css";
 
 const Rating = () => {
   
   return (
     <div className='Rating'>
-      <h1 style={{fontSize:'30px'}}>
+      <p style={{fontSize:'30px'}}>
         <span style={{color:'red'}}>*****</span>*
-      </h1>
+      </p>
       
     </div>
   )
