@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import HeroImage from './components/HeroImage';
 import Contact from './components/Contact';
 import Agenda from './components/Agenda';
@@ -12,24 +12,19 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-        
-      {/* <Contact/> */}
       <div className='HeroImage'><HeroImage/></div>      
       <section>
         <div className='side'>
-          
           <Agenda />
           <div className='Login'>
             <Login/>
             </div>          
         </div>
         <div className='content'>
-          {/* <BrowserRouter> */}
             <Routes>
-              <Route index element={<HomeContent />}/>
-              <Route path="details" element={<DetailContent />}/>
+              <Route path="/" element={<HomeContent />}/>
+              <Route path="/details/:id" element={<DetailContent />}/>
             </Routes>
-          {/* </BrowserRouter> */}
           
         </div>
       </section>

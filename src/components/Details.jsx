@@ -1,16 +1,27 @@
 import React from 'react'
 import Rating from './Rating';
 import '../css/Details.css';
+import { HiUsers } from 'react-icons/hi';
+import { MdEuro } from 'react-icons/md';
+import { VscFlame } from 'react-icons/vsc';
 
-const Details = () => {
+
+const Details = (props) => {
   return (
     <div className='details'>
       <div className='details_img'>
-        <img src='' />
+      <img src={require("../assets/images/" + props.recipe.image )}
+        alt={props.recipe.image}
+        width="100%"
+        height="auto" />
       </div>
       <div className='details_info'>
         <div className='details_stats'>
-          <p>Person: 4 / Price: €12,- / KC: 432</p>
+        <p>
+            <HiUsers color='#b31714'/> 4 
+            <MdEuro color='#b31714'/>12,- 
+            <VscFlame color='#b31714'/> 432
+          </p>
           {/* Aantal personen  / Prijs / Calorieen */}
         </div>
         <div className='title_rating'>
