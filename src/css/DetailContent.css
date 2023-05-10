@@ -1,10 +1,11 @@
 .DetailContent {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .detailTop {
-
+  height: 50%;
 }
 .detailBottom {
-
+  height: 45%;
 }

@@ -2,6 +2,8 @@ import React from 'react'
 import Details from './Details'
 import '../css/DetailContent.css'
 import { useParams } from 'react-router-dom';
+import Ingredients from './Ingredients';
+import TabWrapper from './TabWrapper';
 
 
 const DetailContent = () => {
@@ -43,7 +45,7 @@ const DetailContent = () => {
         <Details  recipe={recipe}/>
       </div>
       <div className='detailBottom'>
-        
+        <TabWrapper />
       </div>
     </div>
   )

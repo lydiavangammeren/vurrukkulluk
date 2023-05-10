@@ -19,14 +19,14 @@
 .title_rating {
   display:flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .details_title {
   flex: 50%;
 }
 .details_rating {
-  flex: 50%;
+  flex: 30%;
   display: flex;
-  justify-content: flex-end;
 }
 .kitchen_type  {
   display: flex;
