@@ -40,9 +40,7 @@ const DetailContent = () => {
   return (
     <div className='DetailContent'>
       <div className='detailTop'>
-        {id}
-        {recipe.kitchen}
-        {/* <Details  /> */}
+        <Details  recipe={recipe}/>
       </div>
       <div className='detailBottom'>
 

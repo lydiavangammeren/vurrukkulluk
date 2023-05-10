@@ -60,6 +60,9 @@ h2 {
 h3 {
   font-size: 25px;
 }
+button, #button{
+  cursor: pointer;
+}
 
 section{
   flex: 50%;

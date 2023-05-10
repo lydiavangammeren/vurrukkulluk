@@ -10,6 +10,12 @@
   width: 50%;
   padding: 3% 5%;
 }
+.details_stats{
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .title_rating {
   display:flex;
   flex-direction: row;
@@ -25,10 +31,35 @@
 .kitchen_type  {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+}
+.SpanFont{
+  font-family: var(--heading);
+  color: var(--darker-green);
+  font-size: 30px;
+  padding-right: 20%;
 }
 .details_kitchen {
-  flex: 50%;
+  width: 50%;
 }
 .details_type {
-  flex: 50%;
+  width: 50%;
+}
+.details_buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.ListButton {
+  color: var(--white);
+  font-family: var(--heading);
+  font-size: 30px;
+  background-color: var(--darker-red);
+  border: none;
+  border-radius: 15px;
+  width: 30%;
+}
+.FavouriteButton{
+  border: none;
+  background-color: white;
 }
