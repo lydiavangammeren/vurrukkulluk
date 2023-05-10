@@ -1,6 +1,6 @@
-import React from 'react';
-import Ingredient from './Ingredient';
-import '../css/Ingredients.css';
+import React from "react";
+import Ingredient from "./Ingredient";
+import "../css/Ingredients.css";
 
 const Ingredients = () => {
   const ingredients = [
@@ -9,38 +9,43 @@ const Ingredients = () => {
       image: "",
       title: "Vegan Burger Bun",
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      quantity: "1 Broodje"
+      quantity: "1 Broodje",
     },
     {
       id: "2",
       image: "",
       title: "Vegan Burger",
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      quantity: "320 gram"
+      quantity: "320 gram",
     },
     {
       id: "3",
       image: "",
       title: "Vegan Burger Sauce",
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      quantity: "30 ml"
+      quantity: "30 ml",
     },
     {
       id: "4",
       image: "",
       title: "Avocado",
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      quantity: "1 stuks"
-    }
-  ]
+      quantity: "1 stuks",
+    },
+  ];
   return (
-    <div className='Ingredients'>
-      {ingredients.map(ingredient => {
-        <Ingredient ingredient={ingredient}/>
-      })}
+    <div className="Ingredients">
+      {ingredients.map((ingredient) => (
+        <>
+          <Ingredient
+            title={ingredient.title}
+            desc={ingredient.desc}
+            quantity={ingredient.quantity}
+          />
+        </>
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default Ingredients
-
+export default Ingredients;
