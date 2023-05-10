@@ -43,7 +43,7 @@ const DetailContent = () => {
         <Details  recipe={recipe}/>
       </div>
       <div className='detailBottom'>
-
+        
       </div>
     </div>
   )
