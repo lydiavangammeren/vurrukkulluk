@@ -58,3 +58,8 @@
 .recipe_stats{
   width:50%;
 }
+@media(max-width:1600px){
+  .recipe_img img{
+    max-height: 208px;
+  }
+}
