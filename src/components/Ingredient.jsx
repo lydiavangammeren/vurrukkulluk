@@ -12,7 +12,7 @@ const Ingredient = (props) => {
       <div className='ingredient_info'>
         <h3>{props.title}</h3>
         <p>{props.desc}</p>
-        <span className='quantity_span'>Hoeveelheid:</span><span className='quantity_value'>{props.quantity}</span>'
+        <span className='quantity_span'>Hoeveelheid:</span><span className='quantity_value'>{props.quantity}</span>
       </div>
     </div>
   );

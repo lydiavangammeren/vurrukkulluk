@@ -3,6 +3,8 @@ import React from "react";
 import Tabs from "./Tabs";
 import Ingredients from "./Ingredients";
 
+import Comments from "./Comments";
+
 const TabWrapper = () => {
   return (
     <>
@@ -16,8 +18,7 @@ const TabWrapper = () => {
           nisi ut aliquip ex ea commodo consequat
         </div>
         <div label="Opmerkingen">
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur.
+          <Comments />
         </div>
       </Tabs>
     </>
