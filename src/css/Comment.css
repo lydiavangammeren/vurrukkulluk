@@ -11,6 +11,7 @@
 }
 .comment_img img{
   border-radius: 50%;
+  border: solid 4px var(--darker-orange)
 }
 .comment_info{
   flex-grow: 8;
