@@ -70,7 +70,6 @@ const TabWrapper = () => {
   const prepstepsForId = prepSteps.find((x) => x.recept_id === id).prep_steps;
   return (
     <>
-      <h1>Tabs Demo</h1>
       <Tabs>
         <div label="Ingredienten">
           <Ingredients />
