@@ -23,10 +23,10 @@
   padding: 0 5%;
 }
 .recipe_title {
-  flex-basis: 50%;
+  flex-basis: 70%;
 }
 .recipe_rating{
-  flex: 50%;
+  flex: 30%;
   display: flex;
   justify-content: flex-end;
 }
@@ -52,7 +52,7 @@
   background-color: var(--darker-red);
   border: none;
   border-radius: 25px;
-  width: 50%;
+  width: 3em;
 }
 
 .recipe_stats{
