@@ -38,6 +38,7 @@ const Ingredients = () => {
       {ingredients.map((ingredient) => (
         <>
           <Ingredient
+            image={ingredient.image}
             title={ingredient.title}
             desc={ingredient.desc}
             quantity={ingredient.quantity}

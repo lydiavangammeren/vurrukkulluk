@@ -12,7 +12,7 @@ const DetailContent = () => {
       title: "Eggs & Veggies",
       image: "EggsAndVeggies.jpg",
       kitchen: "Nederlands",
-      type: "Vegatarisch",
+      type: "Vegetarisch",
     },
     {
       id: "2",
