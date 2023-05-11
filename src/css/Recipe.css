@@ -9,6 +9,7 @@
 }
 .Recipe a{
   text-decoration: none;
+  color: black;
 }
 .recipe_img {
   flex-basis: 4;
@@ -61,5 +62,6 @@
 @media(max-width:1600px){
   .recipe_img img{
     max-height: 208px;
+    min-height: 208px;
   }
 }

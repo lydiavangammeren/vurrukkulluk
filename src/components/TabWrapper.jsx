@@ -5,6 +5,8 @@ import Ingredients from "./Ingredients";
 import Preparation from "./Preparation";
 import { useParams } from "react-router-dom";
 
+import Comments from "./Comments";
+
 const TabWrapper = () => {
   const { id } = useParams();
 
@@ -77,8 +79,7 @@ const TabWrapper = () => {
           <Preparation prepsteps={prepstepsForId} />
         </div>
         <div label="Opmerkingen">
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur.
+          <Comments />
         </div>
       </Tabs>
     </>
