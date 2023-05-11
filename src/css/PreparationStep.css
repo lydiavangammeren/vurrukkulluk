@@ -1,0 +1,21 @@
+.numberCircle {
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    padding: 1%;
+    background: var(--lighter-orange);
+    border: 2px solid  var(--lighter-orange);
+    color: var(--white);
+    text-align: center;
+    font-weight: bold;
+    font: 32px Arial, sans-serif;
+
+   
+}
+
+@media (max-width:1600px) {
+     .numberCircle {
+        padding: 3%;
+
+     }  
+}

@@ -1,8 +1,9 @@
 import React from 'react';
+import "../css/PreparationStep.css";
 
 const PreparationStep = (props) => {
     return (<>
-    <h5>{props.prepstep.step}</h5>
+    <div className="numberCircle">{props.prepstep.step}.</div>
     <p>{props.prepstep.desc}</p>
     </>  );
 }
