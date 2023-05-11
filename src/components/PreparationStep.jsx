@@ -3,8 +3,10 @@ import "../css/PreparationStep.css";
 
 const PreparationStep = (props) => {
     return (<>
+    <div className="step">
     <div className="numberCircle">{props.prepstep.step}.</div>
-    <p>{props.prepstep.desc}</p>
+    <span>{props.prepstep.desc}</span>    
+    </div>   
     </>  );
 }
  
