@@ -37,6 +37,7 @@ const DetailContent = () => {
     },
   ];
 
+
   const recipe = recipes.find((x) => x.id === id);
   return (
     <div className='DetailContent'>
