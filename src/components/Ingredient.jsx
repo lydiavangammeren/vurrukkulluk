@@ -2,6 +2,7 @@ import React from "react";
 import "../css/Ingredient.css";
 
 const Ingredient = (props) => {
+  
   return (
     <div className="ingredient">
       <div className="ingredient_img">
