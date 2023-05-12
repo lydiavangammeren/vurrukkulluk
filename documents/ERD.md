@@ -16,5 +16,5 @@ erDiagram
         string slang             UK  %%{` a slang is a url friendly concaternation of the name `}%%
         %%{` Fill in the rest of the properties `}%%        
     }
-     %%{` Fill in the rest of the tables `}%%  
+%%{` Fill in the rest of the tables `}%%  
 ```
