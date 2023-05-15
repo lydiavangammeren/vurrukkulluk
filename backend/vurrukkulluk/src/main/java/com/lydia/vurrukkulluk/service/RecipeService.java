@@ -10,4 +10,5 @@ public interface RecipeService {
   public void deleteById(int id);
   public void deleteRecipe(Recipe recipe);
   public List<Recipe> getAllRecipes();
+  public List<Recipe> getRecipeByTitle(String title);
 }
