@@ -1,30 +1,30 @@
 import { Routes, Route } from "react-router-dom";
-import HeroImage from "./components/HeroImage";
-import Contact from "./components/Contact";
-import Agenda from "./components/Agenda/Agenda";
-import DetailContent from "./components/DetailContent";
-import HomeContent from "./components/HomeContent";
-import Login from "./components/Login";
+import Header from "./layouts/Header";
+import Agenda from "./layouts/Agenda";
+import Login from "./layouts/Login";
+import Footer from "./layouts/Footer";
+import DetailContent from "./pages/DetailPage";
+import HomeContent from "./pages/HomePage";
 
-import "./App.css";
+import "./assets/styles/main.css";
 
 function App() {
   return (
     <div className="App">
-      <HeroImage />
+      <Header />
       <section>
         <div className="side">
           <Agenda />
           <Login />
         </div>
-        <div className='content'>
+        <div className='pageContainer'>
           <Routes>
             <Route path="/" element={<HomeContent />}/>
             <Route path="/details/:id" element={<DetailContent />}/>
           </Routes>
         </div>
       </section>
-      <Contact />
+      <Footer />
     </div>
   );
 }
