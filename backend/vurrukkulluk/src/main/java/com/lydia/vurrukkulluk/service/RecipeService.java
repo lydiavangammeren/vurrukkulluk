@@ -1,6 +1,6 @@
-package com.lydia.vurrukkulluk.recipeservice;
+package com.lydia.vurrukkulluk.service;
 
-import com.lydia.vurrukkulluk.recipemodel.Recipe;
+import com.lydia.vurrukkulluk.model.Recipe;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package com.lydia.vurrukkulluk.reciperepository;
+package com.lydia.vurrukkulluk.reposetory;
 
-import com.lydia.vurrukkulluk.recipemodel.Recipe;
+import com.lydia.vurrukkulluk.model.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

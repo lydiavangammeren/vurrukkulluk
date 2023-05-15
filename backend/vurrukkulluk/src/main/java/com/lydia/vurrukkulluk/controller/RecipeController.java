@@ -1,7 +1,7 @@
-package com.lydia.vurrukkulluk.recipecontroller;
+package com.lydia.vurrukkulluk.controller;
 
-import com.lydia.vurrukkulluk.recipemodel.Recipe;
-import com.lydia.vurrukkulluk.recipeservice.RecipeService;
+import com.lydia.vurrukkulluk.model.Recipe;
+import com.lydia.vurrukkulluk.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

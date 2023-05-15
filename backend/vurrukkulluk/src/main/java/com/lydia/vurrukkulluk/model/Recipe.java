@@ -1,4 +1,4 @@
-package com.lydia.vurrukkulluk.recipemodel;
+package com.lydia.vurrukkulluk.model;
 
 
 import jakarta.persistence.Entity;
