@@ -1,23 +1,20 @@
 package com.lydia.vurrukkulluk.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Recipe {
-
-  public Recipe() {
-  }
-
+public class KitchenType {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
+  private String type;
+  private String description;
 
-
-  private String title;
+  public KitchenType() {
+  }
 
   public int getId() {
     return id;
@@ -27,13 +24,19 @@ public class Recipe {
     this.id = id;
   }
 
-  public String getTitle() {
-    return title;
+  public String getType() {
+    return type;
   }
 
-  public void setTitle(String title) {
-    this.title = title;
+  public void setType(String type) {
+    this.type = type;
   }
 
+  public String getDescription() {
+    return description;
+  }
 
+  public void setDescription(String description) {
+    this.description = description;
+  }
 }

@@ -1,7 +1,7 @@
 package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Recipe;
-import com.lydia.vurrukkulluk.reposetory.RecipeRepository;
+import com.lydia.vurrukkulluk.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +30,15 @@ public class RecipeServiceImplementation implements RecipeService {
   @Override
   public List<Recipe> getAllRecipes() {
     return recipeRepository.findAll();
+  }
+
+  @Override
+  public List<Recipe> getRecipeByTitle(String title) {
+    return recipeRepository.findByTitle(title);
+  }
+
+  @Override
+  public void updateRecipe(Recipe recipe) {
+    recipeRepository.save(recipe);
   }
 }

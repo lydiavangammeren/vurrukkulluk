@@ -1,4 +1,4 @@
-package com.lydia.vurrukkulluk.reposetory;
+package com.lydia.vurrukkulluk.repository;
 
 import com.lydia.vurrukkulluk.model.Article;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -20,8 +20,9 @@ public class ArticleController {
     }
 
     @PostMapping("/add")
-    public String add(@RequestBody Article ingredient){
-        ingredientService.saveArticle(ingredient);
+    public String add(@RequestBody Article article){
+        System.out.println(article.getPrice());
+        ingredientService.saveArticle(article);
         return "new ingredient added";
     }
 

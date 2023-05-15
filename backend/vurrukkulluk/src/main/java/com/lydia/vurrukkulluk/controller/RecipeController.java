@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.controller;
 
+import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,21 @@ public class RecipeController {
     return "New recipe is added";
   }
 
-//  @DeleteMapping("/delete/{id}")
-//  public String delete(@PathVariable int id) {
-//    recipeService.deleteById(id);
-//    return "Recipe is deleted";
-//  }
+  @GetMapping("/getAll")
+  public List<Recipe> get() {
+    return recipeService.getAllRecipes();
+  }
+
+  @GetMapping("/get/{title}")
+  public List<Recipe> getTitle(@PathVariable String title){
+    return recipeService.getRecipeByTitle(title);
+  }
+
+  @PutMapping("/update")
+  public String update(@RequestBody Recipe recipe) {
+    recipeService.updateRecipe(recipe);
+    return "Recipe is updated";
+  }
 
   @DeleteMapping("/delete")
   public String delete(@RequestBody Recipe recipe) {
@@ -31,9 +42,6 @@ public class RecipeController {
     return "Recipe is deleted";
   }
 
-  @GetMapping("/getAll")
-  public List<Recipe> get() {
-    return recipeService.getAllRecipes();
-  }
+
 
 }
