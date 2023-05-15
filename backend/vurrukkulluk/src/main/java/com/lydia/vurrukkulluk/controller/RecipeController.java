@@ -20,20 +20,28 @@ public class RecipeController {
     return "New recipe is added";
   }
 
+  @GetMapping("/getAll")
+  public List<Recipe> get() {
+    return recipeService.getAllRecipes();
+  }
+
+  @GetMapping("/get/{title}")
+  public List<Recipe> getTitle(@PathVariable String title){
+    return recipeService.getRecipeByTitle(title);
+  }
+
+  @PutMapping("/update")
+  public String update(@RequestBody Recipe recipe) {
+    recipeService.updateRecipe(recipe);
+    return "Recipe is updated";
+  }
+
   @DeleteMapping("/delete")
   public String delete(@RequestBody Recipe recipe) {
     recipeService.deleteRecipe(recipe);
     return "Recipe is deleted";
   }
 
-  @GetMapping("/getAll")
-  public List<Recipe> get() {
-    return recipeService.getAllRecipes();
-  }
 
-  @GetMapping("/get/{name}")
-  public List<Recipe> getTitle(@PathVariable String title){
-    return recipeService.getRecipeByTitle(title);
-  }
 
 }

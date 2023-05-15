@@ -36,4 +36,9 @@ public class RecipeServiceImplementation implements RecipeService {
   public List<Recipe> getRecipeByTitle(String title) {
     return recipeRepository.findByTitle(title);
   }
+
+  @Override
+  public void updateRecipe(Recipe recipe) {
+    recipeRepository.save(recipe);
+  }
 }

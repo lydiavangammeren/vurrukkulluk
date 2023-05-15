@@ -1,4 +1,43 @@
 package com.lydia.vurrukkulluk.service;
 
-public class UserServiceImplementation {
+import com.lydia.vurrukkulluk.model.User;
+import com.lydia.vurrukkulluk.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UserServiceImplementation implements UserService {
+  @Autowired
+  private UserRepository userRepository;
+  @Override
+  public User saveUser(User user) {
+    return userRepository.save(user);
+  }
+
+  @Override
+  public List<User> getAllUsers() {
+    return userRepository.findAll();
+  }
+
+  @Override
+  public List<User> getUserByName(String name) {
+    return userRepository.findByName(name);
+  }
+
+  @Override
+  public void updateUser(User user) {
+    userRepository.save(user);
+  }
+
+  @Override
+  public void deleteById(int id) {
+    userRepository.deleteById(id);
+  }
+
+  @Override
+  public void deleteUser(User user) {
+      userRepository.delete(user);
+  }
 }

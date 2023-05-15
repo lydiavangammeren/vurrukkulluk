@@ -9,11 +9,14 @@ import jakarta.persistence.Id;
 @Entity
 public class Recipe {
 
+  public Recipe() {
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  
+
   private String title;
 
   public int getId() {
@@ -32,6 +35,5 @@ public class Recipe {
     this.title = title;
   }
 
-  public Recipe() {
-  }
+
 }
