@@ -1,7 +1,7 @@
 package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Article;
-import com.lydia.vurrukkulluk.reposetory.ArticleRepository;
+import com.lydia.vurrukkulluk.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
