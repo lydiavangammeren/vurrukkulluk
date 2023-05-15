@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import HeroImage from "./components/HeroImage";
 import Contact from "./components/Contact";
-import Agenda from "./components/Agenda";
+import Agenda from "./components/Agenda/Agenda";
 import DetailContent from "./components/DetailContent";
 import HomeContent from "./components/HomeContent";
 import Login from "./components/Login";
@@ -18,11 +18,10 @@ function App() {
           <Login />
         </div>
         <div className='content'>
-            <Routes>
-              <Route path="/" element={<HomeContent />}/>
-              <Route path="/details/:id" element={<DetailContent />}/>
-            </Routes>
-          
+          <Routes>
+            <Route path="/" element={<HomeContent />}/>
+            <Route path="/details/:id" element={<DetailContent />}/>
+          </Routes>
         </div>
       </section>
       <Contact />
