@@ -1,0 +1,10 @@
+@import "App";
+@import "../../layouts/Header/index.css";
+@import "../../layouts/Agenda/index.css";
+@import "../../layouts/Login/index.css";
+@import "../../layouts/Footer/index.css";
+
+@import "../../pages/HomePage/index.css";
+@import "../../pages/DetailPage/index.css";
+
+@import "../../components/index.css";

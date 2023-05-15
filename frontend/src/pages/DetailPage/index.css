@@ -1,0 +1,9 @@
+@import "./DetailContent.style.css";
+@import "./Details.style.css";
+@import "./Tabs.style.css";
+@import "./Ingredients.style.css";
+@import "./Ingredient.style.css";
+/* @import "./Preparation.style.css"; */
+@import "./PreparationStep.style.css";
+@import "./Comments.style.css";
+@import "./Comment.style.css";

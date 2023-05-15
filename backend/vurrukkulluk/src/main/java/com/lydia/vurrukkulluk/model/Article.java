@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Article {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
     private String name;
     private String description;
@@ -25,7 +25,7 @@ public class Article {
         this.description = description;
     }
 
-    public long getPrice() {
+    public float getPrice() {
         return price;
     }
 
