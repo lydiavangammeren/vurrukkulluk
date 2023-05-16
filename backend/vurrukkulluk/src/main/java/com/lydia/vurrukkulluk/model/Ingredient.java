@@ -11,10 +11,12 @@ public class Ingredient {
     private long amount;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id",nullable = false)
+    @JsonIgnore
     private Article article;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id",nullable = false)
+    @JsonIgnore
     private Recipe recipe;
 
     public int getId() {

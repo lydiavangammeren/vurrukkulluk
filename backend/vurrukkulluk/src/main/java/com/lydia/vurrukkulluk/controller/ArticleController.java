@@ -19,21 +19,34 @@ public class ArticleController {
 
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     public String add(@RequestBody Article article){
         System.out.println(article.getPrice());
         articleService.saveArticle(article);
         return "new ingredient added";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping()
     public List<Article> getAll(){
         return articleService.getAllArticles();
     }
 
-    @GetMapping("/get/{name}")
-    public List<Article> getName(@PathVariable String name){
-        return articleService.getArticleByName(name);
+    @GetMapping("/{id}")
+    public Article getId(@PathVariable int id){
+        return articleService.getArticleById(id);
     }
+
+    @PatchMapping("/{id}")
+    public String update(@RequestBody Article article){
+        articleService.updateArticle(article);
+        return "article updated";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id){
+        articleService.deleteArticleById(id);
+        return "article updated";
+    }
+
 
 }

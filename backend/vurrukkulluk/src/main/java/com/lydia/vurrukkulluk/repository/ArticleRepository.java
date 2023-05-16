@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article,Integer> {
     List<Article> findByName(String name);
+    Article findById(int id);
 }
