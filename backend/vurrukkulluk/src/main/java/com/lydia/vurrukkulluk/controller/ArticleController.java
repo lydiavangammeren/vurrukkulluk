@@ -13,7 +13,7 @@ import java.util.List;
 public class ArticleController {
 
     @Autowired
-    private ArticleService ingredientService;
+    private ArticleService articleService;
 
     public ArticleController(){
 
@@ -22,18 +22,18 @@ public class ArticleController {
     @PostMapping("/add")
     public String add(@RequestBody Article article){
         System.out.println(article.getPrice());
-        ingredientService.saveArticle(article);
+        articleService.saveArticle(article);
         return "new ingredient added";
     }
 
     @GetMapping("/getAll")
     public List<Article> getAll(){
-        return ingredientService.getAllArticles();
+        return articleService.getAllArticles();
     }
 
     @GetMapping("/get/{name}")
     public List<Article> getName(@PathVariable String name){
-        return ingredientService.getArticleByName(name);
+        return articleService.getArticleByName(name);
     }
 
 }

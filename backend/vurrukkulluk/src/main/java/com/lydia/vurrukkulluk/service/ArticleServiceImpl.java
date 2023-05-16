@@ -10,22 +10,22 @@ import java.util.List;
 @Service
 public class ArticleServiceImpl implements ArticleService{
     @Autowired
-    private ArticleRepository ingredientRepository;
+    private ArticleRepository articleRepository;
     @Override
     public Article saveArticle(Article article) {
         System.out.println("saving");
         System.out.println(article.getName());
-        return ingredientRepository.save(article);
+        return articleRepository.save(article);
     }
 
     @Override
     public List<Article> getAllArticles() {
-        return ingredientRepository.findAll();
+        return articleRepository.findAll();
     }
 
     @Override
     public List<Article> getArticleByName(String name) {
-        return ingredientRepository.findByName(name);
+        return articleRepository.findByName(name);
     }
 
 

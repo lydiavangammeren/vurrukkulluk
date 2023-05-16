@@ -1,9 +1,7 @@
 package com.lydia.vurrukkulluk.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 @Entity
 public class Article {
@@ -14,6 +12,7 @@ public class Article {
     private String description;
     private long price;
     private String unit;
+
     public Article(){
     }
 
