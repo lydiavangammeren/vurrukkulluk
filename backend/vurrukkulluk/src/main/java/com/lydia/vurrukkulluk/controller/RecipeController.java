@@ -14,29 +14,29 @@ import java.util.List;
 public class RecipeController {
   @Autowired
   private RecipeService recipeService;
-  @PostMapping("/add")
+  @PostMapping()
   public String add(@RequestBody Recipe recipe) {
     recipeService.saveRecipe(recipe);
     return "New recipe is added";
   }
 
-  @GetMapping("/getAll")
+  @GetMapping()
   public List<Recipe> get() {
     return recipeService.getAllRecipes();
   }
 
-  @GetMapping("/get/{title}")
+  @GetMapping("/{title}")
   public List<Recipe> getTitle(@PathVariable String title){
     return recipeService.getRecipeByTitle(title);
   }
 
-  @PutMapping("/update")
+  @PutMapping()
   public String update(@RequestBody Recipe recipe) {
     recipeService.updateRecipe(recipe);
     return "Recipe is updated";
   }
 
-  @DeleteMapping("/delete")
+  @DeleteMapping()
   public String delete(@RequestBody Recipe recipe) {
     recipeService.deleteRecipe(recipe);
     return "Recipe is deleted";
