@@ -13,27 +13,40 @@ import java.util.List;
 public class ArticleController {
 
     @Autowired
-    private ArticleService ingredientService;
+    private ArticleService articleService;
 
     public ArticleController(){
 
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     public String add(@RequestBody Article article){
         System.out.println(article.getPrice());
-        ingredientService.saveArticle(article);
+        articleService.saveArticle(article);
         return "new ingredient added";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping()
     public List<Article> getAll(){
-        return ingredientService.getAllArticles();
+        return articleService.getAllArticles();
     }
 
-    @GetMapping("/get/{name}")
-    public List<Article> getName(@PathVariable String name){
-        return ingredientService.getArticleByName(name);
+    @GetMapping("/{id}")
+    public Article getId(@PathVariable int id){
+        return articleService.getArticleById(id);
     }
+
+    @PatchMapping("/{id}")
+    public String update(@RequestBody Article article){
+        articleService.updateArticle(article);
+        return "article updated";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id){
+        articleService.deleteArticleById(id);
+        return "article updated";
+    }
+
 
 }

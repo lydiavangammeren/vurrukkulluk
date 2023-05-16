@@ -14,29 +14,29 @@ import java.util.List;
 public class KitchenTypeController {
   @Autowired
   private KitchenTypeService kitchenTypeService;
-  @PostMapping("/add")
+  @PostMapping()
   public String add(@RequestBody KitchenType kitchenType) {
     kitchenTypeService.saveKitchenType(kitchenType);
     return "New kitchen type is added";
   }
 
-  @GetMapping("/getAll")
+  @GetMapping()
   public List<KitchenType> get() {
     return kitchenTypeService.getAllKitchenTypes();
   }
 
-  @GetMapping("/get/{type}")
+  @GetMapping("/{type}")
   public List<KitchenType> getTitle(@PathVariable String type){
     return kitchenTypeService.getKitchenTypeByType(type);
   }
 
-  @PutMapping("/update")
+  @PutMapping()
   public String update(@RequestBody KitchenType kitchenType) {
     kitchenTypeService.updateKitchenType(kitchenType);
     return "This kitchen type is updated";
   }
 
-  @DeleteMapping("/delete")
+  @DeleteMapping()
   public String delete(@RequestBody KitchenType kitchenType) {
     kitchenTypeService.deleteKitchenType(kitchenType);
     return "Kitchen type is deleted";
