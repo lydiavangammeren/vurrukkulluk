@@ -14,10 +14,12 @@ public class Recipe {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  // Postman: "kitchenType":{ "id": 1},
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "kitchen_id", nullable=false)
   private KitchenType kitchenType;
 
+  // Postman: "user": {"id": 4},
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", nullable=false)
   private User user;
