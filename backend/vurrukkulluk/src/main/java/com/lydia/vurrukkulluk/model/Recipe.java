@@ -1,10 +1,8 @@
 package com.lydia.vurrukkulluk.model;
 
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 @Entity
 public class Recipe {
@@ -16,8 +14,22 @@ public class Recipe {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "kitchen_id", nullable=false)
+  private KitchenType kitchenType;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable=false)
+  private User user;
+
+  // should also be a FK
+  private int categoryId;
   private String title;
+  @Column(unique=true)
+  private String slug;
+  private String description;
+  private LocalDateTime timeAdded = LocalDateTime.now();
+  private String image;
 
   public int getId() {
     return id;
@@ -25,6 +37,30 @@ public class Recipe {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public KitchenType getKitchenType() {
+    return kitchenType;
+  }
+
+  public void setKitchenType(KitchenType kitchenType) {
+    this.kitchenType = kitchenType;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public int getCategoryId() {
+    return categoryId;
+  }
+
+  public void setCategoryId(int categoryId) {
+    this.categoryId = categoryId;
   }
 
   public String getTitle() {
@@ -35,5 +71,35 @@ public class Recipe {
     this.title = title;
   }
 
+  public String getSlug() {
+    return slug;
+  }
 
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public LocalDateTime getTimeAdded() {
+    return timeAdded;
+  }
+
+  public void setTimeAdded(LocalDateTime timeAdded) {
+    this.timeAdded = timeAdded;
+  }
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
 }
