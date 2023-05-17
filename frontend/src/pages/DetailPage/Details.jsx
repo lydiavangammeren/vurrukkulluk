@@ -6,20 +6,23 @@ import { VscFlame } from 'react-icons/vsc';
 import {BsHeart} from 'react-icons/bs';
 
 
-const Details = ({recipe}) => {
+const Details = ({title, image, kitchen, type, description}) => {
   const myStyle = {
     objectFit: "cover",
     objectPosition: "50%"
   }
+
   return (
     <div className='details'>
       <div className='details_img'>
-      <img src={require("../../assets/images/" + recipe.image )}
+        {/* <p>{image}</p> */}
+        {image && <img src={require(`../../assets/images/${image}`)}
+                        alt={image}
+                        width="100%"
+                        height="100%" 
+                        style={myStyle}/>
+        }
       
-        alt={recipe.image}
-        width="100%"
-        height="100%" 
-        style={myStyle}/>
       </div>
       <div className="details_info">
         <div className="details_stats">
@@ -29,7 +32,7 @@ const Details = ({recipe}) => {
         </div>
         <div className="title_rating">
           <div className="details_title">
-            <h2>{recipe.title}</h2>
+            <h2>{title}</h2>
           </div>
           <div className="details_rating">
             <Rating />
@@ -37,13 +40,14 @@ const Details = ({recipe}) => {
         </div>
         <div className="kitchen_type">
           <div className="details_kitchen">
-            <span className="SpanFont">Keuken</span><span>{recipe.kitchen}</span>
+            <span className="SpanFont">Keuken</span><span>{kitchen}</span>
           </div>
           <div className="details_type">
-            <span className="SpanFont">Type</span><span>{recipe.type}</span>
+            <span className="SpanFont">Type</span><span>{type}</span>
           </div>
         </div>
-        <p>
+        <p>{description}</p>
+        {/* <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu
           metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum
           feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor
@@ -55,7 +59,7 @@ const Details = ({recipe}) => {
           lobortis a diam. Curabitur dignissim finibus nunc in facilisis.
           Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam
           ut elit nec eros rhoncus facilisis non a mauris.
-        </p>
+        </p> */}
         <div className="details_buttons">
           <button className="ListButton">Op Lijst</button>
           <button className="FavouriteButton"><BsHeart size={30} color='#b31714' /></button>

@@ -1,37 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+// import { useParams } from "react-router-dom";
 import Ingredient from "./Ingredient";
 
 const Ingredients = () => {
-  const ingredients = [
-    {
-      id: "1",
-      image: "hamb.jpg",
-      title: "Vegan Burger Bun",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      quantity: "1 Broodje",
-    },
-    {
-      id: "2",
-      image: "VeganBurgerI.jpg",
-      title: "Vegan Burger",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      quantity: "320 gram",
-    },
-    {
-      id: "3",
-      image: "VeganSauce.jpg",
-      title: "Vegan Burger Sauce",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      quantity: "30 ml",
-    },
-    {
-      id: "4",
-      image: "avocado.jpg",
-      title: "Avocado",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      quantity: "1 stuks",
-    },
-  ];
+  // const { id } = useParams();
+  const [ingredients, setIngredients] = useState([]);
+
+  const fetchIngredients = () =>{
+    fetch(`http://localhost:3004/ingredients`).then(response => response.json()).then((json) => setIngredients(json));
+  }
+
+  useEffect(() => {
+    fetchIngredients();
+  }, [])
+
   return (
     <div className="Ingredients">
       {ingredients.map((ingredient) => (

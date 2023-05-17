@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/kitchentype")
+@RequestMapping("/kitchentypes")
 @CrossOrigin
 public class KitchenTypeController {
   @Autowired
