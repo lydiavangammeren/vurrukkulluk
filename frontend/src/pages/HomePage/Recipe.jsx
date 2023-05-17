@@ -5,31 +5,33 @@ import { HiUsers } from 'react-icons/hi';
 import { MdEuro } from 'react-icons/md';
 import { VscFlame } from 'react-icons/vsc';
 
-const Recipe = (props) => {
-
+const Recipe = ({id, image, title, desc}) => {
+  
   return (
     <div className='Recipe'>
       {/* <Link to='details' params={{recipe: props.recipe}}> */}
-      <Link to={`/details/${props.recipe.id}`}>
+      
       <div className='recipe_img'>
-        <img src={require("../../assets/images/" + props.recipe.image )}
-        alt={props.recipe.image}
+      <Link to={`/details/${id}`}>
+        <img src={require("../../assets/images/" + image )}
+        alt={image}
         width="100%"
         height="auto" />
+      </Link>
       </div>
       <div className='recipe_title_rating'>
-        <div className='recipe_title'><h2>{props.recipe.title}</h2></div>
+      <Link to={`/details/${id}`}>
+        <div className='recipe_title'><h2>{title}</h2></div>
         <Rating />
+      </Link>
       </div>
       <div className='recipe_desc'>
-        <p>
-        Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis 
+      <Link to={`/details/${id}`}><p>{desc}</p></Link>
+        {/* Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis 
         non a mauris. Nulla arcu sapien, rhoncus vitae suscipit quis, volutpat non eros. Nam lacinia felis ante, 
         a cursus nisi varius ut. Nulla vel rhoncus mauris. Nunc lobortis volutpat leo. Integer consequat molestie 
-        elementum. Cras et tempus lorem.
-        </p>
+        elementum. Cras et tempus lorem. */}
       </div>
-      </Link>
       <div className='recipe_bottom'>
         <div className='recipe_button'>
           <button>Smullen</button>
