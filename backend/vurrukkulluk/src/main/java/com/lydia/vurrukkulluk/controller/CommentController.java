@@ -33,6 +33,12 @@ public class CommentController {
   }
 
   @PutMapping()
+  // Postman Body: {       
+  //        "id": 3,
+  //        "recipe":{ "id": 3},
+  //        "user": {"id": 4},
+  //        "commentText": "Lekker!"
+  //    }
   public String update(@RequestBody Comment comment) {
     commentService.updateComment(comment);
     return "Comment is updated";
