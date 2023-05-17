@@ -28,12 +28,12 @@ public class CommentController {
   }
 
   @GetMapping("/{id}")
-  public List<Comment> getId(@PathVariable int id){
+  public Comment getId(@PathVariable int id){
     return commentService.getCommentById(id);
   }
 
   @PutMapping()
-  // Postman Body: {       
+  // Postman Body: {
   //        "id": 3,
   //        "recipe":{ "id": 3},
   //        "user": {"id": 4},

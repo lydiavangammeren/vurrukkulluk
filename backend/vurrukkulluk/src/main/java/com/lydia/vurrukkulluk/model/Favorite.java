@@ -1,12 +1,9 @@
 package com.lydia.vurrukkulluk.model;
+
 import jakarta.persistence.*;
 
 @Entity
-public class Comment {
-
-  public Comment() {
-  }
-
+public class Favorite {
   @jakarta.persistence.Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -18,8 +15,6 @@ public class Comment {
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "recipe_id",nullable = false)
   private Recipe recipe;
-
-  String commentText;
 
   public int getId() {
     return id;
@@ -43,13 +38,5 @@ public class Comment {
 
   public void setRecipe(Recipe recipe) {
     this.recipe = recipe;
-  }
-
-  public String getCommentText() {
-    return commentText;
-  }
-
-  public void setCommentText(String commentText) {
-    this.commentText = commentText;
   }
 }

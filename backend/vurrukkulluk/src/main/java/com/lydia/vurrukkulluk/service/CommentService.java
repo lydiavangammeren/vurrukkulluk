@@ -10,7 +10,7 @@ public interface CommentService {
 
   List<Comment> getAllComments();
 
-  List<Comment> getCommentById(int id);
+  Comment getCommentById(int id);
 
   void updateComment(Comment comment);
 
