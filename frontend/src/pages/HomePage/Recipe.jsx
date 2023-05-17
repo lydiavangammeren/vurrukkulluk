@@ -13,10 +13,11 @@ const Recipe = ({id, image, title, desc}) => {
       
       <div className='recipe_img'>
       <Link to={`/details/${id}`}>
-        <img src={require("../../assets/images/" + image )}
-        alt={image}
-        width="100%"
-        height="auto" />
+        {image && <img src={require(`../../assets/images/${image}`)}
+                      alt={image}
+                      width="100%"
+                      height="auto" />
+        }
       </Link>
       </div>
       <div className='recipe_title_rating'>
@@ -26,11 +27,9 @@ const Recipe = ({id, image, title, desc}) => {
       </Link>
       </div>
       <div className='recipe_desc'>
-      <Link to={`/details/${id}`}><p>{desc}</p></Link>
-        {/* Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis 
-        non a mauris. Nulla arcu sapien, rhoncus vitae suscipit quis, volutpat non eros. Nam lacinia felis ante, 
-        a cursus nisi varius ut. Nulla vel rhoncus mauris. Nunc lobortis volutpat leo. Integer consequat molestie 
-        elementum. Cras et tempus lorem. */}
+      <Link to={`/details/${id}`}>
+          <p>{desc}</p>
+        </Link>
       </div>
       <div className='recipe_bottom'>
         <div className='recipe_button'>
