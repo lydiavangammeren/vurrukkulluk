@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class KitchenTypeServiceImplementation implements KitchenTypeService {
+public class KitchenTypeServiceImpl implements KitchenTypeService {
   @Autowired
   private KitchenTypeRepository kitchenTypeRepository;
   @Override

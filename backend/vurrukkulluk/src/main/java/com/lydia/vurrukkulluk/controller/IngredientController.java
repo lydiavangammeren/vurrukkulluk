@@ -7,12 +7,13 @@ import com.lydia.vurrukkulluk.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ingredient")
-public class IngredientController {
+@RequestMapping("/ingredients")
+public class IngredientController implements Serializable {
 
     @Autowired
     private IngredientService ingredientService;

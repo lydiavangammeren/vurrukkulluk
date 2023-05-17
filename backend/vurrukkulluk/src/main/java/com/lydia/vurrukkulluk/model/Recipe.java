@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -15,12 +16,12 @@ public class Recipe {
   private int id;
 
   // Postman: "kitchenType":{ "id": 1},
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "kitchen_id", nullable=false)
   private KitchenType kitchenType;
 
   // Postman: "user": {"id": 4},
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id", nullable=false)
   private User user;
 
