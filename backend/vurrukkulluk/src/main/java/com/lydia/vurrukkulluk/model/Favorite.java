@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 @Entity
 public class Favorite {
+
+  public Favorite() {
+  }
+
   @jakarta.persistence.Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;

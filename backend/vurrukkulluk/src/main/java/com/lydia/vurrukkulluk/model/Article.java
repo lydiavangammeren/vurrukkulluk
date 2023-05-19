@@ -16,7 +16,7 @@ public class Article {
     public Article(){
     }
 
-    public String getDescription() {
+  public String getDescription() {
         return description;
     }
 
