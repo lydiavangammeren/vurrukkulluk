@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./layouts/Header";
 import Agenda from "./layouts/Agenda";
@@ -8,7 +9,34 @@ import HomeContent from "./pages/HomePage";
 
 import "./assets/styles/main.css";
 
+import api from "./lib/recipeAPI";
+
 function App() {
+  const [recipes, setRecipes] = useState([]);
+  const [ search, setSearch ] = useState('');
+
+  useEffect(() => {
+    const getData = async () => {
+      try{
+        const response = await api.get('/recipes');
+        setRecipes(response.data);
+        // console.log('recipes set');
+      } catch(err){
+        if(err.response){
+          //Not in the 200 response range
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        }else{
+          console.log(`Error: ${err.message}`)
+        }
+      }
+    }
+    getData();
+  }, [])
+
+  
+
   return (
     <div className="App">
       <Header />
@@ -19,7 +47,7 @@ function App() {
         </div>
         <div className='pageContainer'>
           <Routes>
-            <Route path="/" element={<HomeContent />}/>
+            <Route path="/" element={<HomeContent recipes={recipes}/>}/>
             <Route path="/details/:id" element={<DetailContent />}/>
           </Routes>
         </div>

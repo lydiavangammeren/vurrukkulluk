@@ -8,7 +8,7 @@ import { VscFlame } from 'react-icons/vsc';
 const Recipe = ({id, image, title, desc}) => {
   
   return (
-    <div className='Recipe'>
+    <div className='Recipe' key={id}>
       {/* <Link to='details' params={{recipe: props.recipe}}> */}
       
       <div className='recipe_img'>
@@ -28,8 +28,8 @@ const Recipe = ({id, image, title, desc}) => {
       </div>
       <div className='recipe_desc'>
       <Link to={`/details/${id}`}>
-          <p>{desc}</p>
-        </Link>
+        <p>{desc}</p>
+      </Link>
       </div>
       <div className='recipe_bottom'>
         <div className='recipe_button'>

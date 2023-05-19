@@ -3,33 +3,60 @@ import { useParams } from "react-router-dom";
 import Details from "./Details";
 import TabWrapper from "./TabWrapper";
 
+import api from "../../lib/recipeAPI";
+
+
 const DetailContent = () => {
   
   const { id } = useParams();
+  const [details, setDetails] = useState({});
+  const [ingredients, setIngredients] = useState([]);
+  const [prepsteps, setPrepsteps] = useState([]);
+  const [comments, setComments] = useState([]);
 
-  const [recipe, setRecipe] = useState({});
-
-    const fetchRecipe = () =>{
-      fetch(`http://localhost:3004/recipes/${id}`).then(response => response.json()).then((json) => setRecipe(json));
+  useEffect(() => {
+    const getData = async () => {
+      try{
+        const response = await api.get(`/details/${id}`);
+        setDetails(response.data);
+        console.log(response.data);
+      } catch(err){
+        if(err.response){
+          //Not in the 200 response range
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        }else{
+          console.log(`Error: ${err.message}`)
+        }
+      }
     }
+    getData();
+    // console.log(details.ingredients);
+  }, [])
 
-    useEffect(() => {
-      console.log('onMount')
-      fetchRecipe();
-    }, [])
+  useEffect(() => {
+    setIngredients(details.ingredients);
+    setPrepsteps(details.preparation);
+    setComments(details.comments); 
+  }, [details])
 
 
   return (
     <div className='DetailContent'>
       <div className='detailTop'>
-        <Details title={recipe.title}
-                  image={recipe.image}
-                  kitchen={recipe.kitchen}
-                  type={recipe.type}
-                  description={recipe.description}/>
+        <Details title={details.title}
+                  image={details.image}
+                  kitchen={details.kitchen}
+                  type={details.type}
+                  description={details.description}/>
       </div>
       <div className="detailBottom">
-        <TabWrapper />
+        {ingredients && prepsteps && comments && 
+          <TabWrapper ingredients={ingredients}
+            prepsteps={prepsteps}
+            comments={comments}/>
+        }
       </div>
     </div>
   );
