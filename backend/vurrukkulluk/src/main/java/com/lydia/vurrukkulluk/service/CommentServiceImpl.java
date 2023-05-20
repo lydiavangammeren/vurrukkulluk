@@ -1,7 +1,6 @@
 package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Comment;
-import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
