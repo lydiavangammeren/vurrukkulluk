@@ -1,0 +1,19 @@
+.Header{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-left {
+  display:flex;
+  padding: 2em 3em 0 0;
+}
+
+.hamburger{
+  border: none;
+  background-color: transparent;
+  height: 3em;
+  width: 3em;
+}

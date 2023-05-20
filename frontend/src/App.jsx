@@ -13,7 +13,9 @@ import api from "./lib/recipeAPI";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
-  const [ search, setSearch ] = useState('');
+  // const [ search, setSearch ] = useState('');
+  const [ images, setImages ] = useState([]);
+
 
   useEffect(() => {
     const getData = async () => {
@@ -35,11 +37,19 @@ function App() {
     getData();
   }, [])
 
-  
+  useEffect(() => {
+    let items = [];
+    recipes.map((recipe, index) => {
+      return items.push({src:recipe.image, alt:recipe.image})
+    })
+    // console.log(items);
+    setImages(items);
+  }, [recipes])
+
 
   return (
     <div className="App">
-      <Header />
+      <Header data={images}/>
       <section>
         <div className="side">
           <Agenda />

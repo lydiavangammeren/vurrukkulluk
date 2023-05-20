@@ -14,12 +14,13 @@ const DetailContent = () => {
   const [prepsteps, setPrepsteps] = useState([]);
   const [comments, setComments] = useState([]);
 
+
   useEffect(() => {
     const getData = async () => {
       try{
         const response = await api.get(`/details/${id}`);
         setDetails(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch(err){
         if(err.response){
           //Not in the 200 response range
@@ -32,15 +33,20 @@ const DetailContent = () => {
       }
     }
     getData();
-    // console.log(details.ingredients);
-  }, [])
+  }, [id])
 
   useEffect(() => {
+    // console.log(`Details for setting recipe: ${details.image}`);
+    // setRecipes([details]);
     setIngredients(details.ingredients);
     setPrepsteps(details.preparation);
     setComments(details.comments); 
   }, [details])
 
+  // useEffect(()=>{
+  //   console.log(`Details for setting recipe: ${details.image}`);
+  //   setImages([{src:details.image, alt:details.image}]);
+  // }, [details.image])
 
   return (
     <div className='DetailContent'>
