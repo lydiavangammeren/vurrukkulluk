@@ -7,10 +7,7 @@ const Home = ({recipes}) => {
     <div className='Home'>
       {recipes.map((recipe, index) => {
         return (
-          <Recipe id={recipe.id}
-                  image={recipe.image}
-                  title={recipe.title}
-                  desc={recipe.description}/>
+          <Recipe recipe={recipe} />
         )
       })}
     </div>

@@ -10,12 +10,14 @@ const Login = () => {
           <label className="label" htmlFor="email">Email </label>
           <br/>
           <input name="email" id="email" type="email" />
-          <br />
+          <br/><br/>
           <label className="label" htmlFor="wachtwoord">Wachtwoord </label>  
           <br/>        
           <input name="wachtwoord" id="wachtwoord" type="password" />
-          <br />
-          <input id="button" type="submit" value="Login" />
+          <div className="login-bottom">
+            <button>Login</button>
+          </div>
+          
         </form>
       </div>
     </div>

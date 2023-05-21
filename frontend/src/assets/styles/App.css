@@ -37,7 +37,7 @@
 }
 
 .App {
-  height: 2000px;
+  /* height: 2000px; */
   display: flex;
   flex-direction: column;
   /* padding: 0px 6em 0px 6em; */
@@ -66,7 +66,7 @@ button, #button{
 }
 
 section{
-  flex: 50%;
+  /* flex: 50%; */
   display: flex;
   flex-direction: row;
 }

@@ -1,0 +1,21 @@
+.agenda_items{
+    padding-left: 2em;
+    /* border-bottom: solid 1px; */
+}
+.agenda_items p{
+    margin: 0;
+}
+.agenda_items h3{
+    margin: 0;
+}
+.agenda_item{
+    height: 8em;
+    display: flex;
+    flex-direction: row;
+}
+.agenda_calendar{
+    padding-top: 0;
+}
+.agenda_item_info{
+    padding: 0 3em 0 1em;
+}

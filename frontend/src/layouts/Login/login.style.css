@@ -1,0 +1,38 @@
+.Login {
+    background-color: var(--darker-red);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    max-height: 17em;
+    align-items: center;
+    box-shadow: 5px 10px 10px #888888;
+  }
+  
+.login-header {
+      margin: 1%;
+}
+
+.label {
+    font-size: 16px;
+    text-align: left;
+    margin-top: 1em;
+}
+
+input[type=email], input[type=password]{
+  width: 25em;
+  height: 2em;
+}
+.login-bottom{
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+}
+.Login button{
+    color: var(--white);
+    font-family: var(--heading);
+    font-size: 48px;
+    background-color: var(--lighter-orange);
+    border: none;
+    width: 5em;
+    border-radius: 20px;
+}

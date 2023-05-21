@@ -1,7 +1,7 @@
 @import "App";
 @import "../../layouts/Header/index.css";
 @import "../../layouts/Agenda/index.css";
-@import "../../layouts/Login/index.css";
+@import "../../layouts/Login/login.style.css";
 @import "../../layouts/Footer/index.css";
 
 @import "../../pages/HomePage/index.css";

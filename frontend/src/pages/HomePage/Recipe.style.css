@@ -45,8 +45,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 5%;
+  padding: 0 5em 0 1.5em;
   margin-top: 5%;;
+}
+.recipe_bottom span{
+  font-size: 18px;
+  margin-left: 0.3em;
 }
 .recipe_button{
   width:50%;
@@ -58,12 +62,21 @@
   background-color: var(--darker-red);
   border: none;
   border-radius: 25px;
-  width: 3em;
+  width: 5em;
 }
 
 .recipe_stats{
-  width:50%;
+  width:6em;
+  display: flex;
+  justify-content: space-around;
 }
+
+.icon-align{
+  display: flex;
+  justify-content: center;
+  padding: 0.5em;
+}
+
 @media(max-width:1600px){
   .recipe_img img{
     max-height: 208px;

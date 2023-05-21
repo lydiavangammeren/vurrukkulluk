@@ -7,7 +7,10 @@
       "image": "EggsAndVeggies.jpg",
       "kitchen": "Nederlands",
       "type": "Vegatarisch",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris."
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
+      "persons": "4",
+      "price": "12,-",
+      "calories": "432"
     },
     {
       "id":2,
@@ -15,7 +18,10 @@
       "image": "VeganBurger.jpg",
       "kitchen": "Amerikaans",
       "type": "Vegan",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris."
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
+      "persons": "4",
+      "price": "12,-",
+      "calories": "432"
     },
     {
       "id":3,
@@ -23,7 +29,10 @@
       "image": "SushiRolls.jpg",
       "kitchen": "Japans",
       "type": "Vis",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris."
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
+      "persons": "4",
+      "price": "12,-",
+      "calories": "432"
     },
     {
       "id":4,
@@ -31,7 +40,10 @@
       "image": "PizzaGreen.jpg",
       "kitchen": "Italiaans",
       "type": "Vlees",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris."
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
+      "persons": "4",
+      "price": "12,-",
+      "calories": "432"
     }
   ],
 "details":
@@ -329,6 +341,74 @@
           "image": "IMG_4420.JPG",
           "user_name": "Katinka Cool",
           "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu."
+        }
+      ]
+    }
+  ],
+  "agenda":
+  [
+    {
+      "month":"Juni",
+      "items":
+      [
+        {
+          "title":"Elke woensdagmiddag: Vegetarisch koken",
+          "description":"Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
+          "date":"07-06-2023",
+          "time":"14:00"
+        }
+      ]
+    },
+    {
+      "month":"Juli",
+      "items":
+      []
+    },
+    {
+      "month":"Augustus",
+      "items":
+      [
+        {
+          "title":"Elke woensdagmiddag: Vegetarisch koken",
+          "description":"Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
+          "date":"07-06-2023",
+          "time":"14:00"
+        }
+      ]
+    },
+    {
+      "month":"September",
+      "items":
+      [
+        {
+          "title":"Elke woensdagmiddag: Vegetarisch koken",
+          "description":"Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
+          "date":"07-06-2023",
+          "time":"14:00"
+        }
+      ]
+    },
+    {
+      "month":"Oktober",
+      "items":
+      [
+        {
+          "title":"Elke woensdagmiddag: Vegetarisch koken",
+          "description":"Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
+          "date":"07-06-2023",
+          "time":"14:00"
+        }
+      ]
+    },
+    {
+      "month":"November",
+      "items":
+      [
+        {
+          "title":"Elke woensdagmiddag: Vegetarisch koken",
+          "description":"Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
+          "date":"07-06-2023",
+          "time":"14:00"
         }
       ]
     }
