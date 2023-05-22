@@ -57,8 +57,8 @@ function App() {
         </div>
         <div className='pageContainer'>
           <Routes>
-            <Route path="/" element={<HomeContent recipes={recipes}/>}/>
-            <Route path="/details/:id" element={<DetailContent />}/>
+            <Route path="/" element={<HomeContent recipes={recipes} />}/>
+            <Route path="/details/:id" element={<DetailContent setImages={setImages} />}/>
           </Routes>
         </div>
       </section>

@@ -6,20 +6,21 @@ import TabWrapper from "./TabWrapper";
 import api from "../../lib/recipeAPI";
 
 
-const DetailContent = () => {
+const DetailContent = ({setImages}) => {
   
   const { id } = useParams();
   const [details, setDetails] = useState({});
-  const [ingredients, setIngredients] = useState([]);
-  const [prepsteps, setPrepsteps] = useState([]);
-  const [comments, setComments] = useState([]);
 
+  const ingredients = details?.ingredients ?? [];
+  const prepsteps = details?.prepsteps ?? [];
+  const comments = details?.comments ?? [];
 
   useEffect(() => {
     const getData = async () => {
       try{
         const response = await api.get(`/details/${id}`);
         setDetails(response.data);
+        setImages([{src:response.data.image, alt:response.data.image}]);
         // console.log(response.data);
       } catch(err){
         if(err.response){
@@ -33,20 +34,7 @@ const DetailContent = () => {
       }
     }
     getData();
-  }, [id])
-
-  useEffect(() => {
-    // console.log(`Details for setting recipe: ${details.image}`);
-    // setRecipes([details]);
-    setIngredients(details.ingredients);
-    setPrepsteps(details.preparation);
-    setComments(details.comments); 
-  }, [details])
-
-  // useEffect(()=>{
-  //   console.log(`Details for setting recipe: ${details.image}`);
-  //   setImages([{src:details.image, alt:details.image}]);
-  // }, [details.image])
+  }, [id, setImages])
 
   return (
     <div className='DetailContent'>
