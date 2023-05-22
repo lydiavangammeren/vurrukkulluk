@@ -6,6 +6,7 @@ import Login from "./layouts/Login";
 import Footer from "./layouts/Footer";
 import DetailContent from "./pages/DetailPage";
 import HomeContent from "./pages/HomePage";
+import Shoppingcarts from "./pages/Shoppingcart/ShoppingCarts";
 
 import "./assets/styles/main.css";
 
@@ -55,10 +56,11 @@ function App() {
           <Agenda />
           <Login />
         </div>
-        <div className='pageContainer'>
+        <div className="pageContainer">
           <Routes>
             <Route path="/" element={<HomeContent recipes={recipes}/>}/>
             <Route path="/details/:id" element={<DetailContent />}/>
+            <Route path="/shoppingcart" element={<Shoppingcarts />} />
           </Routes>
         </div>
       </section>
