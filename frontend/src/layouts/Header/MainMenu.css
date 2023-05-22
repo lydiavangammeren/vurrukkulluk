@@ -1,0 +1,23 @@
+.main-menu{
+  position: absolute;
+  top: 0;
+  background-color: white;
+  height: 12em;
+  width: 100%;
+  display: flex;
+}
+
+.menu-visible{
+  top: 0;
+}
+.menu-gone{
+  top: -12em;
+}
+
+.menu-logo{
+  padding: 0 4em;
+}
+.menu-logo img{
+  height: 12em;
+  width: auto;
+}

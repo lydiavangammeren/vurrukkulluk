@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./Carousel.css";
 import Header from "./Header";
+import MainMenu from "./MainMenu";
 
 const Carousel = ({ data }) => {
   const [slide, setSlide] = useState(0);
+  const [menuVisible, setMenuVisible] = useState(false);
 
   useEffect(() => {
     // console.log('Switch Image');
@@ -32,7 +34,11 @@ const Carousel = ({ data }) => {
         );
       })}
 
-      <Header />
+      <Header setVisible={setMenuVisible} />
+      {/* <MainMenu visible={menuVisible} setVisible={setMenuVisible}/> */}
+      <div className={menuVisible ? 'main-menu menu-visible' : 'main-menu menu-gone'} onClick={() =>setMenuVisible(false)}>
+        <MainMenu />
+      </div>
 
       <span className="indicators">
         {data.map((_, idx) => {

@@ -3,7 +3,7 @@ import SearchBar from './SearchBar'
 import { SlMenu } from 'react-icons/sl'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({setVisible}) => {
   return (
     <div className='Header'>
       <div className='header-logo'>
@@ -15,7 +15,9 @@ const Header = () => {
       </div>
       <div className='header-left'>
         <SearchBar />
-        <button className='hamburger'><SlMenu size={45} color="#eb8d1f"/></button>
+        <button className='hamburger' onClick={() => setVisible(true)}> 
+          <SlMenu size={45} color="#eb8d1f"/>
+        </button>
       </div>
     </div>
   )
