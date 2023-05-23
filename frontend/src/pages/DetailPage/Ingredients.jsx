@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Ingredient from "./Ingredient";
 
 const Ingredients = ({ingredients}) => {
@@ -9,7 +9,7 @@ const Ingredients = ({ingredients}) => {
           <Ingredient
             image={ingredient.image}
             title={ingredient.title}
-            desc={ingredient.desc}
+            description={ingredient.desc}
             quantity={ingredient.quantity}
           />
       ))}

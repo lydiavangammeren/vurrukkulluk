@@ -9,7 +9,7 @@
     margin: 0;
 }
 .agenda_item{
-    height: 8em;
+    height: 7em;
     display: flex;
     flex-direction: row;
 }

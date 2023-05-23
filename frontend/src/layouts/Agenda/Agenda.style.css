@@ -1,16 +1,15 @@
 
 .Agenda {
     background-color: #95b82d;
-    margin-bottom: 2em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 5px 10px 10px #888888;
-    max-height: 59em;
-    overflow: clip;
+    height: 56rem;
+    /* overflow: clip; */
   }
   .Agenda h1{
-    margin: 0 0 0 2.8em;
+    margin: 1rem 0 1rem 2.8em;
   }
   .Agenda h2{
     margin: 0 0 0 2.8em;

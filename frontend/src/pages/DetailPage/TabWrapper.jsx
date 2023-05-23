@@ -1,6 +1,5 @@
 // Wrapper component for tabs
 import React from "react";
-import { useParams } from "react-router-dom";
 
 import Tabs from "./Tabs";
 import Ingredients from "./Ingredients";

@@ -6,7 +6,6 @@ import { MdEuro } from 'react-icons/md';
 import { VscFlame } from 'react-icons/vsc';
 
 const Recipe = ({recipe}) => {
-  const iconStyle = {}
   
   return (
     <div className='Recipe' key={recipe.id}>

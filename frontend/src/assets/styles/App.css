@@ -74,16 +74,18 @@ section{
 
 .side {
   display: flex;
-  align-items: stretch;  
-  flex: 25%;
+  justify-content: space-between; 
+  width: 25%;
   flex-direction: column;
   margin: 3em 0 3em 3em;
   padding-bottom: 3em;
+  height: 80rem;
 }
 
 .pageContainer {  
-  flex: 75%;
-  align-items: stretch;
-  margin: 3em;
+  width: 75%;
+  margin: 3em 3em 0 3em;
+  padding-bottom: 3em;
+  height: 80rem;
 }
 

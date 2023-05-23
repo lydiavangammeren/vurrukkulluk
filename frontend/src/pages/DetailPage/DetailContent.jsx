@@ -12,7 +12,7 @@ const DetailContent = ({setImages}) => {
   const [details, setDetails] = useState({});
 
   const ingredients = details?.ingredients ?? [];
-  const prepsteps = details?.prepsteps ?? [];
+  const prepsteps = details?.preparation ?? [];
   const comments = details?.comments ?? [];
 
   useEffect(() => {
