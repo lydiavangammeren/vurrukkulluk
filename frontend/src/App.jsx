@@ -38,14 +38,7 @@ function App() {
     getData();
   }, [])
 
-  useEffect(() => {
-    let items = [];
-    recipes.map((recipe, index) => {
-      return items.push({src:recipe.image, alt:recipe.image})
-    })
-    // console.log(items);
-    setImages(items);
-  }, [recipes])
+  
 
 
   return (
@@ -58,7 +51,7 @@ function App() {
         </div>
         <div className="pageContainer">
           <Routes>
-            <Route path="/" element={<HomeContent recipes={recipes} />}/>
+            <Route path="/" element={<HomeContent recipes={recipes} setImages={setImages} />}/>
             <Route path="/details/:id" element={<DetailContent setImages={setImages} />}/>
             <Route path="/shoppingcart" element={<Shoppingcarts />} />
           </Routes>
