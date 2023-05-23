@@ -38,7 +38,12 @@ public class IngredientController implements Serializable {
 
     @GetMapping("/{id}")
     public Ingredient getId(@PathVariable int id){
-        return ingredientService.getIngredientByID(id);
+        return ingredientService.getIngredientById(id);
+    }
+
+    @GetMapping("recipe/{id}")
+    public Ingredient getRecpId(@PathVariable int id){
+        return ingredientService.getIngredientById(id);
     }
 
 }

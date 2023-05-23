@@ -8,5 +8,7 @@ public interface IngredientService {
 
     public Ingredient saveIngredient(Ingredient ingredient);
     public List<Ingredient> getAllIngredients();
-    public Ingredient getIngredientByID(int id);
+    public Ingredient getIngredientById(int id);
+
+    List<Ingredient> getIngredientsRecipeId(int id);
 }

@@ -10,6 +10,9 @@ public interface UserService {
   public User saveUser(User user);
   public List<User> getAllUsers();
   public List<User> getUserByName(String name);
+
+  User getUserById(int id);
+
   public void updateUser(User user);
   public void deleteById(int id);
   public void deleteUser(User user);

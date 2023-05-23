@@ -10,6 +10,8 @@ public interface CommentService {
 
   List<Comment> getAllComments();
 
+  List<Comment> getAllCommentsOfRecipe(int recipeId);
+
   Comment getCommentById(int id);
 
   void updateComment(Comment comment);

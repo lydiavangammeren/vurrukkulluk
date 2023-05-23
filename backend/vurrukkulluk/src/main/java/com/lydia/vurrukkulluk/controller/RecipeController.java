@@ -1,12 +1,19 @@
 package com.lydia.vurrukkulluk.controller;
 
+import com.lydia.vurrukkulluk.dto.CommentDto;
+import com.lydia.vurrukkulluk.dto.IngredientDto;
+import com.lydia.vurrukkulluk.dto.RecipeDto;
 import com.lydia.vurrukkulluk.model.Article;
+import com.lydia.vurrukkulluk.model.Comment;
+import com.lydia.vurrukkulluk.model.Ingredient;
 import com.lydia.vurrukkulluk.model.Recipe;
-import com.lydia.vurrukkulluk.service.RecipeService;
+import com.lydia.vurrukkulluk.service.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/recipes")
@@ -14,6 +21,19 @@ import java.util.List;
 public class RecipeController {
   @Autowired
   private RecipeService recipeService;
+  @Autowired
+  private PreparationService preparationService;
+  @Autowired
+  private CommentService commentService;
+  @Autowired
+  private RatingService ratingService;
+  @Autowired
+  private IngredientService ingredientService;
+  @Autowired
+  private FavoriteService favoriteService;
+  @Autowired
+  private ModelMapper modelMapper;
+
   @PostMapping()
   public String add(@RequestBody Recipe recipe) {
     recipeService.saveRecipe(recipe);
@@ -25,9 +45,22 @@ public class RecipeController {
     return recipeService.getAllRecipes();
   }
 
-  @GetMapping("/{title}")
-  public List<Recipe> getTitle(@PathVariable String title){
-    return recipeService.getRecipeByTitle(title);
+  @GetMapping("/{slug}")
+  public RecipeDto getTitle(@PathVariable String slug){
+    Recipe recipe = recipeService.getRecipeBySlug(slug);
+    RecipeDto recipeDto = convertRecipeToDto(recipe);
+
+    List<Comment> comments = commentService.getAllCommentsOfRecipe(recipe.getId());
+    List<CommentDto> commentsDto= comments.stream().map(this::convertCommentToDto).collect(Collectors.toList());
+    recipeDto.setComments(commentsDto);
+
+    List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(recipeDto.getId());
+    List<IngredientDto> ingredientsDto = ingredients.stream().map(this::convertIngredientToDto).collect(Collectors.toList());
+    recipeDto.setIngredients(ingredientsDto);
+
+    recipeDto.setAvgRating(0);
+
+    return recipeDto;
   }
 
   @PutMapping()
@@ -42,6 +75,15 @@ public class RecipeController {
     return "Recipe is deleted";
   }
 
+  public RecipeDto convertRecipeToDto(Recipe recipe){
+    return modelMapper.map(recipe, RecipeDto.class);
+  }
+  public CommentDto convertCommentToDto(Comment comment){
+    return modelMapper.map(comment,CommentDto.class);
+  }
 
+  public IngredientDto convertIngredientToDto(Ingredient ingredient){
+    return modelMapper.map(ingredient,IngredientDto.class);
+  }
 
 }
