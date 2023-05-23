@@ -1,10 +1,11 @@
 .main-menu{
   position: absolute;
-  top: 0;
+  /* top: 0; */
   background-color: white;
   height: 12em;
   width: 100%;
   display: flex;
+  transition: top 1s;
 }
 
 .menu-visible{
@@ -15,9 +16,32 @@
 }
 
 .menu-logo{
+  width: 40%;
   padding: 0 4em;
 }
 .menu-logo img{
   height: 12em;
   width: auto;
+}
+
+.menu-links{
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  padding-right: 8em;
+}
+.menu-links a{
+  text-decoration: none;
+}
+.menu-link{
+  height: 100%;
+  display:flex;
+  align-items: center;
+  margin-right: 4em;
+  
+}
+.menu-links div span{
+  font-family: var(--heading);
+  color: var(--darker-red);
+  font-size: 50px;
 }
