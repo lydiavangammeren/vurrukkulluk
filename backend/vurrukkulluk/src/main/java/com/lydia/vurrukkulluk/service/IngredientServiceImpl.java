@@ -23,7 +23,12 @@ public class IngredientServiceImpl implements IngredientService{
     }
 
     @Override
-    public Ingredient getIngredientByID(int id) {
+    public Ingredient getIngredientById(int id) {
         return ingredientRepository.findById(id);
+    }
+
+    @Override
+    public List<Ingredient> getIngredientsRecipeId(int id) {
+        return ingredientRepository.findByRecipeId(id);
     }
 }

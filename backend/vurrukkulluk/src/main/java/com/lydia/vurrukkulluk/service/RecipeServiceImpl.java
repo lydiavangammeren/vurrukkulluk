@@ -37,7 +37,12 @@ public class RecipeServiceImpl implements RecipeService {
     return recipeRepository.findByTitle(title);
   }
 
-  @Override
+@Override
+public Recipe getRecipeBySlug(String slug) {
+    return recipeRepository.findBySlug(slug);
+}
+
+    @Override
   public void updateRecipe(Recipe recipe) {
     recipeRepository.save(recipe);
   }

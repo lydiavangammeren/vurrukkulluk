@@ -21,6 +21,11 @@ public class CommentServiceImpl implements CommentService{
   }
 
   @Override
+  public List<Comment> getAllCommentsOfRecipe(int recipeId) {
+    return commentRepository.findAllByRecipeId(recipeId);
+  }
+
+  @Override
   public Comment getCommentById(int id) {
     return commentRepository.findById(id);
   }

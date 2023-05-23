@@ -7,7 +7,7 @@ public class Comment {
   public Comment() {
   }
 
-  @jakarta.persistence.Id
+  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
