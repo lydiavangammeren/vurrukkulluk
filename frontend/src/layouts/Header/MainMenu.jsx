@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const MainMenu = () => {
   return (
@@ -10,10 +11,16 @@ const MainMenu = () => {
         />
       </div>
       <div className='menu-links'>
-        <ul>
-          <li>Mijn Favorieten</li>
-          <li>Mijn Boodschappenlijst</li>
-        </ul>
+        <Link to={'/favourites'} >
+        <div className='menu-link'>
+          <span>Mijn Favorieten</span>
+        </div>
+        </Link>
+        <Link to={'/shoppingcart'} >
+        <div className='menu-link'>
+          <span>Mijn Boodschappenlijst</span>
+        </div>
+        </Link>
       </div>
     </>
     // </div>
