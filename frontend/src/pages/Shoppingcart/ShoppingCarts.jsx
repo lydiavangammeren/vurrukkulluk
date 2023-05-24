@@ -3,6 +3,25 @@ import ShoppingcartContent from "./ShoppingcartContent";
 import "./Shoppingcarts.css";
 
 const Shoppingcarts = () => {
+    useEffect(() => {
+      const getData = async () => {
+        try {
+          const response = await api.get("/recipes");
+          setRecipes(response.data);
+          // console.log('recipes set');
+        } catch (err) {
+          if (err.response) {
+            //Not in the 200 response range
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+          } else {
+            console.log(`Error: ${err.message}`);
+          }
+        }
+      };
+      getData();
+    }, []);
   const products = [
     {
       id: "1",
