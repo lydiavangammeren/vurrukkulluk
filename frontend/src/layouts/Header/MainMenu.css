@@ -28,7 +28,7 @@
   width: 60%;
   display: flex;
   justify-content: space-around;
-  padding-right: 8em;
+  /* padding-right: 8em; */
 }
 .menu-links a{
   text-decoration: none;
