@@ -13,8 +13,12 @@ const SearchBar = ({setResults}) => {
         return (
           value &&
           recipe &&
-          recipe.title &&
-          recipe.title.toLowerCase().includes(value)
+          recipe.title && (
+            recipe.title.toLowerCase().includes(value) ||
+            recipe.kitchen.toLowerCase().includes(value) ||
+            recipe.type.toLowerCase().includes(value) ||
+            recipe.description.toLowerCase().includes(value)
+          )
         )
       }));
 
@@ -36,17 +40,6 @@ const SearchBar = ({setResults}) => {
   }
 
   return (
-      // <div>
-
-      //   <input id="search" 
-      //          type="search" 
-      //          className="input" 
-      //          placeholder="Zoeken" 
-      //          value={search}
-      //          onChange={e => setSearch(e.target.value)}
-      //   />
-      // </div>
-
       <div className="input-wrapper">
       <FaSearch color="#b31714" size={20} id="search-icon" />
       <input
