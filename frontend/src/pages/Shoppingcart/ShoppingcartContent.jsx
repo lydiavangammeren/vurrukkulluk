@@ -5,6 +5,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
 
 const ShoppingcartContent = (props) => {
+  console.log(props);
   return (
     <div className="ShoppingcartContent">
       <div className="shoppingcart_img">
@@ -17,7 +18,7 @@ const ShoppingcartContent = (props) => {
       </div>
       <div
         className={
-          "shoppingcart_info" + props.checked ? "shoppingcart_checked" : ""
+          "shoppingcart_info " + (props.checked ? "shoppingcart_checked" : "")
         }
       >
         <h3>{props.title}</h3>
