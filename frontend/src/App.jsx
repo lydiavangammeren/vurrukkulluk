@@ -10,10 +10,7 @@ import Shoppingcarts from "./pages/Shoppingcart/ShoppingCarts";
 
 import "./assets/styles/main.css";
 
-// import api from "./lib/recipeAPI";
-
 function App() {
-  // const [ search, setSearch ] = useState('');
   const [ images, setImages ] = useState([]);
 
   return (
