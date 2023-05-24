@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ShoppingcartContent from "./ShoppingcartContent";
 import "./Shoppingcarts.css";
 
-
 const Shoppingcarts = () => {
   const products = [
     {
@@ -27,7 +26,7 @@ const Shoppingcarts = () => {
       title: "Vegan Burger Sauce",
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
       quantity: "1 stuk",
-      price: 6.5,
+      price: 3,
     },
     {
       id: "4",
@@ -53,6 +52,13 @@ const Shoppingcarts = () => {
     }
   }
   console.log(checkedProductList);
+
+  const totalPrice = ProductList.reduce((acc, product) => {
+    if (!checkedProductList.includes(product.id)) {
+      return acc + product.price;
+    }
+    return acc;
+  }, 0);
 
   return (
     <div className="Shoppingcarts">
@@ -89,7 +95,7 @@ const Shoppingcarts = () => {
           checkedProduct={toggleCheckMark}
         />
       ))}
-      <h2>Totaal</h2>
+      <h2>Total: {totalPrice}</h2>
     </div>
   );
 };
