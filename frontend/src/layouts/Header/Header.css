@@ -5,11 +5,6 @@
   display: flex;
   justify-content: space-between;
 }
-
-.header-left {
-  display: flex;
-  padding: 2em 3em 0 0;
-}
 .header-logo{
   padding: 0 4em;
 
@@ -17,6 +12,18 @@
 .header-logo img{
   height: 12em;
   width: auto;
+}
+
+.header-right {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+  padding: 2em 3em 0 0;
+}
+.searchBar{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 .hamburger{
   border: none;

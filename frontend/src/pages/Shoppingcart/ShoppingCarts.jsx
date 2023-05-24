@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ShoppingcartContent from "./ShoppingcartContent";
 import "./Shoppingcarts.css";
+import api from "../../lib/recipeAPI";
 
 const Shoppingcarts = () => {
     useEffect(() => {
       const getData = async () => {
         try {
           const response = await api.get("/recipes");
-          setRecipes(response.data);
+          setProductList(response.data);
           // console.log('recipes set');
         } catch (err) {
           if (err.response) {
@@ -54,7 +55,7 @@ const Shoppingcarts = () => {
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
       quantity: "2 stuks",
       price: 6.5,
-    },
+    }
   ];
 
   const [ProductList, setProductList] = useState(products);
