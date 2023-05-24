@@ -6,7 +6,8 @@ import { VscFlame } from 'react-icons/vsc';
 import {BsHeart} from 'react-icons/bs';
 
 
-const Details = ({title, image, kitchen, type, description}) => {
+const Details = ({title, image, kitchen, type, description, persons, price, calories}) => {
+
   const myStyle = {
     objectFit: "cover",
     objectPosition: "50%"
@@ -26,10 +27,11 @@ const Details = ({title, image, kitchen, type, description}) => {
       </div>
       <div className="details_info">
         <div className="details_stats">
-          <div className="details_person"><HiUsers color='#b31714'/> 4</div>
-          <div className="details_price"><MdEuro color='#b31714'/>12,- </div>
-          <div className="details_calorie"><VscFlame color='#b31714'/> 432</div>
+          <div className=".icon-align"><HiUsers size={18} color='#b31714'/><span className="setFont">{persons}</span></div>
+          <div className=".icon-align"><MdEuro size={18} color='#b31714'/><span className="setFont">{price}</span></div>
+          <div className=".icon-align"><VscFlame size={18} color='#b31714'/><span className="setFont">{calories}</span></div>
         </div>
+
         <div className="title_rating">
           <div className="details_title">
             <h2>{title}</h2>
