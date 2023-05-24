@@ -2,7 +2,6 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <div className="Contact">
     <div className="contact">
       <div className="contact-image">
       <img src={require("../.././assets/images/logo-zonder-verrukkeluk.png")} 
@@ -16,7 +15,6 @@ const Contact = () => {
         <p>Sittard</p>
         <p>info@vurrukkulluk.nl</p>
       </div>
-    </div>  
     </div>
     
   );

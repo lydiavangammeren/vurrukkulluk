@@ -412,5 +412,40 @@
         }
       ]
     }
+  ],
+  "products":
+  [
+    {
+      "id": 1,
+      "image": "hamb.jpg",
+      "title": "Vegan Burger Bun",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "quantity": "4 Broodje",
+      "price": 6.5
+    },
+    {
+      "id": 2,
+      "image": "VeganBurgerI.jpg",
+      "title": "Vegan Burger",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "quantity": "6 stuks",
+      "price": 6.5
+    },
+    {
+      "id": 3,
+      "image": "VeganSauce.jpg",
+      "title": "Vegan Burger Sauce",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "quantity": "1 stuk",
+      "price": 3
+    },
+    {
+      "id": 4,
+      "image": "avocado.jpg",
+      "title": "Avocado",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "quantity": "2 stuks",
+      "price": 6.5
+    }
   ]
 }

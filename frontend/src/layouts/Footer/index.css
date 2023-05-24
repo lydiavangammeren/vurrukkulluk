@@ -1,13 +1,8 @@
-.Contact {
-    flex: 10%;  
-  }
-
-
 .contact {
     display: flex;
     color: var(--white);
     background-color: var(--darker-orange);
-    padding-left: 2%;
+    padding: 2rem 0 4rem 4rem;
     
   }
 

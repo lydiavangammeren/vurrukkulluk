@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./layouts/Header";
 import Agenda from "./layouts/Agenda";
@@ -14,29 +14,7 @@ import api from "./lib/recipeAPI";
 import AddRecipeDetails from "./pages/AddRecipe/AddRecipeDetails";
 
 function App() {
-  const [recipes, setRecipes] = useState([]);
-  // const [ search, setSearch ] = useState('');
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await api.get("/recipes");
-        setRecipes(response.data);
-        // console.log('recipes set');
-      } catch (err) {
-        if (err.response) {
-          //Not in the 200 response range
-          console.log(err.response.data);
-          console.log(err.response.status);
-          console.log(err.response.headers);
-        } else {
-          console.log(`Error: ${err.message}`);
-        }
-      }
-    };
-    getData();
-  }, []);
+  const [ images, setImages ] = useState([]);
 
   return (
     <div className="App">
@@ -50,7 +28,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<HomeContent recipes={recipes} setImages={setImages} />}
+              element={<HomeContent setImages={setImages} />}
             />
             <Route
               path="/details/:id"
