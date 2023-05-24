@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface KitchenTypeService {
   public KitchenType saveKitchenType(KitchenType kitchenType);
-  public List<KitchenType> getAllKitchenTypes();
-  public List<KitchenType> getKitchenTypeByType(String type);
   public void updateKitchenType(KitchenType kitchenType);
   public void deleteById(int id);
   public void deleteKitchenType(KitchenType kitchenType);
+
+  public KitchenType getById(int id);
 }

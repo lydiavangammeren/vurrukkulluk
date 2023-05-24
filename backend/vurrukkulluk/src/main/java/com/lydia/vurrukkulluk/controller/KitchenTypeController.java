@@ -20,16 +20,6 @@ public class KitchenTypeController {
     return "New kitchen type is added";
   }
 
-  @GetMapping()
-  public List<KitchenType> get() {
-    return kitchenTypeService.getAllKitchenTypes();
-  }
-
-  @GetMapping("/{type}")
-  public List<KitchenType> getTitle(@PathVariable String type){
-    return kitchenTypeService.getKitchenTypeByType(type);
-  }
-
   @PutMapping()
   public String update(@RequestBody KitchenType kitchenType) {
     kitchenTypeService.updateKitchenType(kitchenType);

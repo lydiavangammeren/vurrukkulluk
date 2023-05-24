@@ -2,17 +2,16 @@ package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.dto.CommentDto;
 import com.lydia.vurrukkulluk.dto.IngredientDto;
+import com.lydia.vurrukkulluk.dto.RecipeCreateDto;
 import com.lydia.vurrukkulluk.dto.RecipeDto;
-import com.lydia.vurrukkulluk.model.Article;
-import com.lydia.vurrukkulluk.model.Comment;
-import com.lydia.vurrukkulluk.model.Ingredient;
-import com.lydia.vurrukkulluk.model.Recipe;
+import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @RestController
@@ -32,12 +31,38 @@ public class RecipeController {
   @Autowired
   private FavoriteService favoriteService;
   @Autowired
+  private KitchenTypeService kitchenTypeService;
+  @Autowired
+  private KitchenRegionService kitchenRegionService;
+  @Autowired
+  private UserService userService;
+  @Autowired
   private ModelMapper modelMapper;
 
   @PostMapping()
-  public String add(@RequestBody Recipe recipe) {
+  public Recipe add(@RequestBody RecipeCreateDto recipeCreateDto) {
+    Recipe recipe = new Recipe();
+    recipe.setTitle(recipeCreateDto.getTitle());
+    recipe.setDescription(recipeCreateDto.getDescription());
+    recipe.setSlug(recipeCreateDto.getSlug());
+    recipe.setImage(recipeCreateDto.getImage());
+    KitchenType kitchenType = kitchenTypeService.getById(recipeCreateDto.getKitchenTypeId());
+    recipe.setKitchenType(kitchenType);
+    KitchenRegion kitchenRegion = kitchenRegionService.getById(recipeCreateDto.getKitchenRegionId());
+    recipe.setKitchenRegion(kitchenRegion);
+    User user = userService.getUserById(recipeCreateDto.getUserId());
+    recipe.setUser(user);
     recipeService.saveRecipe(recipe);
-    return "New recipe is added";
+
+    /*
+    recipeCreateDto.getCategoryIds().forEach((categoryId) ->{
+      KitchenCategoriesLinkList link = new KitchenCategoriesLinkList();
+      link.setRecipe();
+      kitchenCategoriesLinkListService.save();
+    });*/
+
+
+    return recipe; //"New recipe is added";
   }
 
   @GetMapping()

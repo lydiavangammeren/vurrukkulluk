@@ -10,5 +10,6 @@ import java.util.List;
 
 @Repository
 public interface KitchenTypeRepository extends JpaRepository<KitchenType,Integer> {
-  List<KitchenType> findByType(String type);
+    List<KitchenType> findByName(String name);
+    KitchenType findById(int id);
 }
