@@ -49,38 +49,40 @@ const Shoppingcarts = () => {
   return (
     <div className="Shoppingcarts">
       <h1>Boodschappen</h1>
-      {ProductList.filter(
-        (product) => !checkedProductList.includes(product.id)
-      ).map((product) => (
-        <ShoppingcartContent
-          checked={false}
-          key={product.id}
-          id={product.id}
-          image={product.image}
-          title={product.title}
-          desc={product.desc}
-          quantity={product.quantity}
-          price={product.price}
-          removeProduct={removeProductWithId}
-          checkedProduct={toggleCheckMark}
-        />
-      ))}
-      {ProductList.filter((product) =>
-        checkedProductList.includes(product.id)
-      ).map((product) => (
-        <ShoppingcartContent
-          checked={true}
-          key={product.id}
-          id={product.id}
-          image={product.image}
-          title={product.title}
-          desc={product.desc}
-          quantity={product.quantity}
-          price={product.price}
-          removeProduct={removeProductWithId}
-          checkedProduct={toggleCheckMark}
-        />
-      ))}
+      <table>
+        {ProductList.filter(
+          (product) => !checkedProductList.includes(product.id)
+        ).map((product) => (
+          <ShoppingcartContent
+            checked={false}
+            key={product.id}
+            id={product.id}
+            image={product.image}
+            title={product.title}
+            desc={product.desc}
+            quantity={product.quantity}
+            price={product.price}
+            removeProduct={removeProductWithId}
+            checkedProduct={toggleCheckMark}
+          />
+        ))}
+        {ProductList.filter((product) =>
+          checkedProductList.includes(product.id)
+        ).map((product) => (
+          <ShoppingcartContent
+            checked={true}
+            key={product.id}
+            id={product.id}
+            image={product.image}
+            title={product.title}
+            desc={product.desc}
+            quantity={product.quantity}
+            price={product.price}
+            removeProduct={removeProductWithId}
+            checkedProduct={toggleCheckMark}
+          />
+        ))}
+      </table>
       <h2>Total: {totalPrice}</h2>
     </div>
   );
