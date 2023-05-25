@@ -4,6 +4,9 @@
   flex-direction: row;
   padding-bottom: 2%;
 }
+.icon:hover {
+  cursor: pointer;
+}
 .shoppingcart_img {
   flex-grow: 2;
   min-width: 4em;

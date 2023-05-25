@@ -35,6 +35,7 @@ const ShoppingcartContent = (props) => {
       </td>
       <td>
         <AiOutlineCheck
+          className="icon"
           color="#6e8722"
           size={20}
           onClick={() => props.checkedProduct(props.id)}
@@ -42,6 +43,7 @@ const ShoppingcartContent = (props) => {
       </td>
       <td>
         <RiDeleteBinLine
+          className="icon"
           color="#b31714"
           size={20}
           onClick={() => props.removeProduct(props.id)}
