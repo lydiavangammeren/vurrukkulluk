@@ -23,7 +23,7 @@ public class RecipeDto {
 
     private List<IngredientDto> ingredients;
 
-    private int avgRating;
+    private float avgRating;
 
     public List<IngredientDto> getIngredients() {
         return ingredients;
@@ -81,11 +81,11 @@ public class RecipeDto {
         this.comments = comments;
     }
 
-    public int getAvgRating() {
+    public float getAvgRating() {
         return avgRating;
     }
 
-    public void setAvgRating(int avgRating) {
+    public void setAvgRating(float avgRating) {
         this.avgRating = avgRating;
     }
 

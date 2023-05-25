@@ -7,7 +7,6 @@ import com.lydia.vurrukkulluk.model.KitchenType;
 import java.util.List;
 
 public class RecipeCreateDto {
-    private int id;
     private String title;
     private String image;
     private  String slug;
@@ -19,6 +18,8 @@ public class RecipeCreateDto {
 
     private int userId;
 
+    private List<Integer> categoryIds;
+    private List<IngredientCreateDto> ingredients;
     public int getUserId() {
         return userId;
     }
@@ -35,23 +36,12 @@ public class RecipeCreateDto {
         this.userId = userId;
     }
 
-    private List<Integer> categoryIds;
-    private List<IngredientCreateDto> ingredients;
-
-    public int getId() {
-        return id;
-    }
-
     public String getSlug() {
         return slug;
     }
 
     public void setSlug(String slug) {
         this.slug = slug;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {

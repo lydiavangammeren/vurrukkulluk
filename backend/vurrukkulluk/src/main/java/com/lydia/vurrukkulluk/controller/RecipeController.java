@@ -6,10 +6,12 @@ import com.lydia.vurrukkulluk.dto.RecipeCreateDto;
 import com.lydia.vurrukkulluk.dto.RecipeDto;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
+import jdk.jfr.Category;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -29,11 +31,17 @@ public class RecipeController {
   @Autowired
   private IngredientService ingredientService;
   @Autowired
+  private ArticleService articleService;
+  @Autowired
   private FavoriteService favoriteService;
   @Autowired
   private KitchenTypeService kitchenTypeService;
   @Autowired
   private KitchenRegionService kitchenRegionService;
+  @Autowired
+  private KitchenCategoriesLinkService kitchenCategoriesLinkService;
+  @Autowired
+  private KitchenCategoryService kitchenCategoryService;
   @Autowired
   private UserService userService;
   @Autowired
@@ -54,13 +62,24 @@ public class RecipeController {
     recipe.setUser(user);
     recipeService.saveRecipe(recipe);
 
-    /*
-    recipeCreateDto.getCategoryIds().forEach((categoryId) ->{
-      KitchenCategoriesLinkList link = new KitchenCategoriesLinkList();
-      link.setRecipe();
-      kitchenCategoriesLinkListService.save();
-    });*/
+    recipeCreateDto.getIngredients().forEach((ingredientCreateDto) ->{
+      Ingredient ingredient = new Ingredient();
+      ingredient.setAmount(ingredientCreateDto.getAmount());
+      Article article = new Article();
+      article.setId(ingredientCreateDto.getArticleId());
+      ingredient.setArticle(article);
+      ingredient.setRecipe(recipe);
+      ingredientService.saveIngredient(ingredient);
+    });
 
+    recipeCreateDto.getCategoryIds().forEach((categoryId) ->{
+      KitchenCategoriesLink link = new KitchenCategoriesLink();
+      KitchenCategory kitchenCategory = new KitchenCategory();
+      kitchenCategory.setId(categoryId);
+      link.setKitchenCategory(kitchenCategory);
+      link.setRecipe(recipe);
+      kitchenCategoriesLinkService.saveKCLink(link);
+    });
 
     return recipe; //"New recipe is added";
   }
@@ -83,7 +102,13 @@ public class RecipeController {
     List<IngredientDto> ingredientsDto = ingredients.stream().map(this::convertIngredientToDto).collect(Collectors.toList());
     recipeDto.setIngredients(ingredientsDto);
 
-    recipeDto.setAvgRating(0);
+    List<KitchenCategory> kitchenCategories = new ArrayList<>();
+    List<KitchenCategoriesLink> kitchenCategoriesLinks = kitchenCategoriesLinkService.getKCLinkByRecipeId(recipeDto.getId());
+    kitchenCategoriesLinks.forEach((link) -> {
+      kitchenCategories.add(link.getKitchenCategory());
+    });
+    recipeDto.setCategories(kitchenCategories);
+    recipeDto.setAvgRating(ratingService.getAvgRatingOfRecipe(recipeDto.getId()));
 
     return recipeDto;
   }

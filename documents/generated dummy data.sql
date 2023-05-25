@@ -1,18 +1,3 @@
-#
-# TABLE STRUCTURE FOR: article
-#
-
-DROP TABLE IF EXISTS `article`;
-
-CREATE TABLE `article` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `price` bigint(20) NOT NULL,
-  `unit` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 INSERT INTO `article` (`id`, `description`, `name`, `price`, `unit`) VALUES (1, 'Quia nobis exercitationem omnis doloribus. Quas recusandae eaque et maiores libero. Minima quo ullam nobis explicabo animi id. Commodi molestias exercitationem ullam rem deleniti amet sequi.', 'et', '19', 't');
 INSERT INTO `article` (`id`, `description`, `name`, `price`, `unit`) VALUES (2, 'Numquam eum qui aperiam accusantium voluptas id. Qui quod quae velit quis. Dolores accusamus non nisi quibusdam. Sit sed ad fugit cupiditate ut.', 'placeat', '1351463', 'i');
 INSERT INTO `article` (`id`, `description`, `name`, `price`, `unit`) VALUES (3, 'Aut earum et eos a rerum nemo temporibus. Corrupti repellendus fugit reprehenderit. Et nihil sapiente atque est repellendus suscipit et. Quis sed enim repellendus consectetur.', 'quo', '155682207', 'j');
@@ -114,24 +99,6 @@ INSERT INTO `article` (`id`, `description`, `name`, `price`, `unit`) VALUES (98,
 INSERT INTO `article` (`id`, `description`, `name`, `price`, `unit`) VALUES (99, 'Odit laboriosam adipisci voluptatem. Est et perferendis ea.', 'ipsum', '25738', 'g');
 INSERT INTO `article` (`id`, `description`, `name`, `price`, `unit`) VALUES (100, 'Nostrum facere natus qui itaque voluptatum et esse. Vero exercitationem qui debitis aut ea dignissimos corrupti.', 'reiciendis', '2278155', 'w');
 
-
-#
-# TABLE STRUCTURE FOR: comment
-#
-
-DROP TABLE IF EXISTS `comment`;
-
-CREATE TABLE `comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `comment_text` varchar(255) DEFAULT NULL,
-  `recipe_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKe5i1rxybcm40jcn98fj1jmvit` (`recipe_id`),
-  KEY `FK8kcum44fvpupyw6f5baccx25c` (`user_id`),
-  CONSTRAINT `FK8kcum44fvpupyw6f5baccx25c` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FKe5i1rxybcm40jcn98fj1jmvit` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `comment` (`id`, `comment_text`, `recipe_id`, `user_id`) VALUES (1, 'Omnis illo tempore quas nam sunt.', 1, 1);
 INSERT INTO `comment` (`id`, `comment_text`, `recipe_id`, `user_id`) VALUES (2, 'Velit et ullam nihil aspernatur sint ut quisquam nemo.', 2, 2);
@@ -235,23 +202,6 @@ INSERT INTO `comment` (`id`, `comment_text`, `recipe_id`, `user_id`) VALUES (99,
 INSERT INTO `comment` (`id`, `comment_text`, `recipe_id`, `user_id`) VALUES (100, 'Voluptatem et impedit odio nobis qui.', 5, 20);
 
 
-#
-# TABLE STRUCTURE FOR: favorite
-#
-
-DROP TABLE IF EXISTS `favorite`;
-
-CREATE TABLE `favorite` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `recipe_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKf9bc7126riig40ixsxetxtnnv` (`recipe_id`),
-  KEY `FKh3f2dg11ibnht4fvnmx60jcif` (`user_id`),
-  CONSTRAINT `FKf9bc7126riig40ixsxetxtnnv` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`),
-  CONSTRAINT `FKh3f2dg11ibnht4fvnmx60jcif` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 INSERT INTO `favorite` (`id`, `recipe_id`, `user_id`) VALUES (1, 1, 1);
 INSERT INTO `favorite` (`id`, `recipe_id`, `user_id`) VALUES (2, 2, 2);
 INSERT INTO `favorite` (`id`, `recipe_id`, `user_id`) VALUES (3, 3, 3);
@@ -273,24 +223,6 @@ INSERT INTO `favorite` (`id`, `recipe_id`, `user_id`) VALUES (18, 3, 18);
 INSERT INTO `favorite` (`id`, `recipe_id`, `user_id`) VALUES (19, 4, 19);
 INSERT INTO `favorite` (`id`, `recipe_id`, `user_id`) VALUES (20, 5, 20);
 
-
-#
-# TABLE STRUCTURE FOR: ingredient
-#
-
-DROP TABLE IF EXISTS `ingredient`;
-
-CREATE TABLE `ingredient` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `amount` bigint(20) NOT NULL,
-  `article_id` int(11) NOT NULL,
-  `recipe_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKcm8tbtqvgm7r1q08spmuvcmve` (`article_id`),
-  KEY `FKj0s4ywmqqqw4h5iommigh5yja` (`recipe_id`),
-  CONSTRAINT `FKcm8tbtqvgm7r1q08spmuvcmve` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
-  CONSTRAINT `FKj0s4ywmqqqw4h5iommigh5yja` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `ingredient` (`id`, `amount`, `article_id`, `recipe_id`) VALUES (1, '41', 1, 1);
 INSERT INTO `ingredient` (`id`, `amount`, `article_id`, `recipe_id`) VALUES (2, '17191559', 2, 2);
@@ -394,23 +326,6 @@ INSERT INTO `ingredient` (`id`, `amount`, `article_id`, `recipe_id`) VALUES (99,
 INSERT INTO `ingredient` (`id`, `amount`, `article_id`, `recipe_id`) VALUES (100, '427', 100, 5);
 
 
-#
-# TABLE STRUCTURE FOR: kitchen_categories_link_list
-#
-
-DROP TABLE IF EXISTS `kitchen_categories_link_list`;
-
-CREATE TABLE `kitchen_categories_link_list` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kitchen_category_id` int(11) NOT NULL,
-  `recipe_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKmp7q2it2vdywvlv4upmqs6599` (`kitchen_category_id`),
-  KEY `FKr5cik3y6c9bdcjhetwdxgv1sq` (`recipe_id`),
-  CONSTRAINT `FKmp7q2it2vdywvlv4upmqs6599` FOREIGN KEY (`kitchen_category_id`) REFERENCES `kitchen_category` (`id`),
-  CONSTRAINT `FKr5cik3y6c9bdcjhetwdxgv1sq` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (1, 1, 1);
 INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (2, 2, 2);
 INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (3, 3, 3);
@@ -433,18 +348,6 @@ INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe
 INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (20, 20, 5);
 
 
-#
-# TABLE STRUCTURE FOR: kitchen_category
-#
-
-DROP TABLE IF EXISTS `kitchen_category`;
-
-CREATE TABLE `kitchen_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 INSERT INTO `kitchen_category` (`id`, `name`) VALUES (1, 'eum');
 INSERT INTO `kitchen_category` (`id`, `name`) VALUES (2, 'illo');
 INSERT INTO `kitchen_category` (`id`, `name`) VALUES (3, 'rerum');
@@ -466,18 +369,6 @@ INSERT INTO `kitchen_category` (`id`, `name`) VALUES (18, 'sequi');
 INSERT INTO `kitchen_category` (`id`, `name`) VALUES (19, 'nihil');
 INSERT INTO `kitchen_category` (`id`, `name`) VALUES (20, 'occaecati');
 
-
-#
-# TABLE STRUCTURE FOR: kitchen_region
-#
-
-DROP TABLE IF EXISTS `kitchen_region`;
-
-CREATE TABLE `kitchen_region` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `kitchen_region` (`id`, `name`) VALUES (1, 'Burkina Faso');
 INSERT INTO `kitchen_region` (`id`, `name`) VALUES (2, 'Oman');
@@ -581,18 +472,6 @@ INSERT INTO `kitchen_region` (`id`, `name`) VALUES (99, 'Central African Republi
 INSERT INTO `kitchen_region` (`id`, `name`) VALUES (100, 'Japan');
 
 
-#
-# TABLE STRUCTURE FOR: kitchen_type
-#
-
-DROP TABLE IF EXISTS `kitchen_type`;
-
-CREATE TABLE `kitchen_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 INSERT INTO `kitchen_type` (`id`, `name`) VALUES (1, 'sunt');
 INSERT INTO `kitchen_type` (`id`, `name`) VALUES (2, 'natus');
 INSERT INTO `kitchen_type` (`id`, `name`) VALUES (3, 'enim');
@@ -694,22 +573,6 @@ INSERT INTO `kitchen_type` (`id`, `name`) VALUES (98, 'voluptas');
 INSERT INTO `kitchen_type` (`id`, `name`) VALUES (99, 'similique');
 INSERT INTO `kitchen_type` (`id`, `name`) VALUES (100, 'qui');
 
-
-#
-# TABLE STRUCTURE FOR: preparation
-#
-
-DROP TABLE IF EXISTS `preparation`;
-
-CREATE TABLE `preparation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `instructions` varchar(255) DEFAULT NULL,
-  `step` int(11) NOT NULL,
-  `recipe_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKskl3v1eshvuct0dfppkqquhl4` (`recipe_id`),
-  CONSTRAINT `FKskl3v1eshvuct0dfppkqquhl4` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `preparation` (`id`, `instructions`, `step`, `recipe_id`) VALUES (1, 'Accusantium aut voluptate est animi debitis. Soluta fuga eum quis quisquam totam quidem. Sequi temporibus laborum accusamus vero. Beatae sunt sapiente veniam quia suscipit aliquid qui. Ipsum est cum sint quo quisquam ex.', 5, 1);
 INSERT INTO `preparation` (`id`, `instructions`, `step`, `recipe_id`) VALUES (2, 'Quia ut in aliquid voluptatem eius et eligendi. Deleniti quis ab officiis reiciendis facere delectus deleniti omnis. Qui impedit rerum nisi in. Alias architecto in dolor expedita.', 5, 2);
@@ -813,24 +676,6 @@ INSERT INTO `preparation` (`id`, `instructions`, `step`, `recipe_id`) VALUES (99
 INSERT INTO `preparation` (`id`, `instructions`, `step`, `recipe_id`) VALUES (100, 'In iusto libero qui aliquam. Voluptas blanditiis beatae voluptatum mollitia est velit est. Quod modi enim est sint sit esse. Aut repellendus amet quasi ad.', 7, 5);
 
 
-#
-# TABLE STRUCTURE FOR: rating
-#
-
-DROP TABLE IF EXISTS `rating`;
-
-CREATE TABLE `rating` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rating` int(11) NOT NULL,
-  `recipe_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK6x7y7iu3omnr3wcg93jkfdorb` (`recipe_id`),
-  KEY `FKpn05vbx6usw0c65tcyuce4dw5` (`user_id`),
-  CONSTRAINT `FK6x7y7iu3omnr3wcg93jkfdorb` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`),
-  CONSTRAINT `FKpn05vbx6usw0c65tcyuce4dw5` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 INSERT INTO `rating` (`id`, `rating`, `recipe_id`, `user_id`) VALUES (1, 351526942, 1, 1);
 INSERT INTO `rating` (`id`, `rating`, `recipe_id`, `user_id`) VALUES (2, 294895, 2, 2);
 INSERT INTO `rating` (`id`, `rating`, `recipe_id`, `user_id`) VALUES (3, 704, 3, 3);
@@ -933,53 +778,12 @@ INSERT INTO `rating` (`id`, `rating`, `recipe_id`, `user_id`) VALUES (99, 912284
 INSERT INTO `rating` (`id`, `rating`, `recipe_id`, `user_id`) VALUES (100, 0, 5, 20);
 
 
-#
-# TABLE STRUCTURE FOR: recipe
-#
-
-DROP TABLE IF EXISTS `recipe`;
-
-CREATE TABLE `recipe` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `time_added` datetime DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `kitchen_region_id` int(11) DEFAULT NULL,
-  `kitchen_type_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_r6fr7vfovs1k2wq7bjeqberj5` (`slug`),
-  KEY `FKhgf5lf9kpa7wrc16ckhdesud0` (`kitchen_region_id`),
-  KEY `FKmn4eufll019jxyi8h1fqavmif` (`kitchen_type_id`),
-  KEY `FKc8o8io8s0f7nqcd3429u6cxjs` (`user_id`),
-  CONSTRAINT `FKc8o8io8s0f7nqcd3429u6cxjs` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FKhgf5lf9kpa7wrc16ckhdesud0` FOREIGN KEY (`kitchen_region_id`) REFERENCES `kitchen_region` (`id`),
-  CONSTRAINT `FKmn4eufll019jxyi8h1fqavmif` FOREIGN KEY (`kitchen_type_id`) REFERENCES `kitchen_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 INSERT INTO `recipe` (`id`, `description`, `image`, `slug`, `time_added`, `title`, `kitchen_region_id`, `kitchen_type_id`, `user_id`) VALUES (1, 'Ut enim ipsum consequatur consequatur est fugiat aliquam qui. Explicabo dolores accusamus quisquam laborum sit. Cum quas earum officiis sed aliquam error non.', 'tmp//44a159ee0dd444551321f78dbc708d8e.jpg', '277', '2001-08-13 07:19:09', 'Velit ipsa aliquid quae amet at voluptatum.', 1, 1, 1);
 INSERT INTO `recipe` (`id`, `description`, `image`, `slug`, `time_added`, `title`, `kitchen_region_id`, `kitchen_type_id`, `user_id`) VALUES (2, 'Et illum natus vitae maxime velit quia eos earum. Iusto recusandae fugit optio officiis. Necessitatibus tempore dignissimos aspernatur.', 'tmp//2a460e6bb15a3c03499c3590195f3493.jpg', '865', '1998-07-23 08:11:43', 'Animi sed consequuntur reiciendis excepturi molestiae qui.', 2, 2, 2);
 INSERT INTO `recipe` (`id`, `description`, `image`, `slug`, `time_added`, `title`, `kitchen_region_id`, `kitchen_type_id`, `user_id`) VALUES (3, 'Amet doloribus rerum delectus nihil illo in. Omnis enim beatae et exercitationem assumenda voluptate quo consequatur. Dolores dolorem magni nobis aspernatur sit sequi at. Illo repellendus sed error nam sit enim. Temporibus non soluta fugiat quia.', 'tmp//68e3e7b981c61f2b0a622e4aa5d09299.jpg', '381', '1996-01-08 05:07:51', 'Iure et minus voluptatem.', 3, 3, 3);
 INSERT INTO `recipe` (`id`, `description`, `image`, `slug`, `time_added`, `title`, `kitchen_region_id`, `kitchen_type_id`, `user_id`) VALUES (4, 'Reiciendis eos qui consequatur laboriosam sit. Molestiae quo molestiae dolorum cum voluptas sit deleniti. Ratione illo cumque consequatur asperiores. Repellat et iste maxime eligendi blanditiis nobis molestiae.', 'tmp//c0709d493d63a7dd3994d8600f4964f1.jpg', '898', '1989-06-12 08:28:56', 'Ex dolorum fugit libero ut.', 4, 4, 4);
 INSERT INTO `recipe` (`id`, `description`, `image`, `slug`, `time_added`, `title`, `kitchen_region_id`, `kitchen_type_id`, `user_id`) VALUES (5, 'Dolorem doloremque autem ut sint nobis. Hic possimus molestiae deleniti non ex ipsa.', 'tmp//ae1490f80602b6a9686a0a142a87d96e.jpg', '263', '2014-03-23 08:02:19', 'Sint quae rerum omnis facere dolorem eum quia.', 5, 5, 5);
 
-
-#
-# TABLE STRUCTURE FOR: user
-#
-
-DROP TABLE IF EXISTS `user`;
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `user` (`id`, `email`, `image`, `name`, `password`) VALUES (1, 'karl.king@example.net', 'tmp//bb0a4b826a0893ef98889d50a5de3469.jpg', 'Gerry Towne Sr.', '8e74d1f71552bc7c3e9348abeffaa5c505552bef');
 INSERT INTO `user` (`id`, `email`, `image`, `name`, `password`) VALUES (2, 'laila.hand@example.net', 'tmp//903e5338f5cd2f68569a6049b985fc73.jpg', 'Michaela Bins', '39b331373c6a1bc43577b40acdc7ea5e92fd3a51');
@@ -1002,20 +806,6 @@ INSERT INTO `user` (`id`, `email`, `image`, `name`, `password`) VALUES (18, 'mur
 INSERT INTO `user` (`id`, `email`, `image`, `name`, `password`) VALUES (19, 'jconn@example.org', 'tmp//0673465c86454d9c2b19fa1771544521.jpg', 'Chris Batz', '24ae50559579280a004172b8ba58a44387e36237');
 INSERT INTO `user` (`id`, `email`, `image`, `name`, `password`) VALUES (20, 'zion.roberts@example.net', 'tmp//28c66e55cf692ce6aeaf43adec821400.jpg', 'Wiley Crist II', '00629d68ae6d886f681a8490cbd0ad36d7e6cf5f');
 
-
-#
-# TABLE STRUCTURE FOR: user_image
-#
-
-DROP TABLE IF EXISTS `user_image`;
-
-CREATE TABLE `user_image` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `imagedata` mediumblob DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `user_image` (`id`, `imagedata`, `name`, `type`) VALUES (1, 'tmp//e4e4c75d7daad1fcc017aac7777edc85.jpg', 'omnis', NULL);
 INSERT INTO `user_image` (`id`, `imagedata`, `name`, `type`) VALUES (2, 'tmp//6c1ce8d74a9fdae103d0389c63d2a533.jpg', 'rerum', NULL);

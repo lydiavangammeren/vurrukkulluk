@@ -3,7 +3,7 @@ package com.lydia.vurrukkulluk.model;
 import jakarta.persistence.*;
 
 @Entity
-public class KitchenCategoriesLinkList {
+public class KitchenCategoriesLink {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -15,7 +15,7 @@ public class KitchenCategoriesLinkList {
   @JoinColumn(name = "recipe_id",nullable = false)
   private Recipe recipe;
 
-  public KitchenCategoriesLinkList() {
+  public KitchenCategoriesLink() {
   }
 
   public int getId() {
