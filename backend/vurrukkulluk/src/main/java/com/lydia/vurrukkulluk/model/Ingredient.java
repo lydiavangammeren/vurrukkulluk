@@ -13,7 +13,7 @@ public class Ingredient {
     @JoinColumn(name = "article_id",nullable = false)
     private Article article;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     @JoinColumn(name = "recipe_id",nullable = false)
     private Recipe recipe;
 

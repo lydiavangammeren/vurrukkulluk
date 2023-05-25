@@ -13,6 +13,11 @@ public class Rating {
     @JoinColumn(name = "user_id", nullable=false)
     private User user;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "recipe_id",nullable = false)
+    private Recipe recipe;
+
+
     public Recipe getRecipe() {
         return recipe;
     }
@@ -20,11 +25,6 @@ public class Rating {
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "recipe_id",nullable = false)
-    private Recipe recipe;
-
     public int getId() {
         return id;
     }

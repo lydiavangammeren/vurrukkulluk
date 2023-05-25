@@ -12,6 +12,6 @@ public interface RatingService {
 
     public void saveRating(Rating rating);
 
-    public int getAvgRatingOfRecipe(int recipeId);
+    public float getAvgRatingOfRecipe(int recipeId);
 
 }
