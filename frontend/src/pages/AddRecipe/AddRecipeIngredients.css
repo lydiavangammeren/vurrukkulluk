@@ -1,0 +1,38 @@
+:root {
+  --main-font: "Pacifico", cursive;
+}
+
+label.ingredients-title {
+  color: #95b82d;
+  font-family: var(--main-font);
+  font-size: 16px;
+}
+h1.ing-header {
+  color: #95b82d;
+  font-family: var(--main-font);
+  font-size: 25px;
+}
+.Hoeveel {
+  color: #95b82d;
+  font-family: var(--main-font);
+  display: flex;
+  flex-flow: wrap row;
+}
+.ingredients-title {
+  display: flex;
+  flex-flow: wrap row;
+}
+.ingredients-text {
+  display: flex;
+  flex-flow: wrap row;
+}
+.title-input {
+  display: flex;
+}
+.text-input {
+  display: flex;
+  flex-flow: wrap row;
+}
+.hoeveel-input {
+  display: flex;
+}

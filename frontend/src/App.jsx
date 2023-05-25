@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./layouts/Header";
 import Agenda from "./layouts/Agenda";
@@ -10,11 +10,8 @@ import Shoppingcarts from "./pages/Shoppingcart/ShoppingCarts";
 import AddRecipePage from "./pages/AddRecipe/AddRecipePage";
 import "./assets/styles/main.css";
 
-import api from "./lib/recipeAPI";
-import AddRecipeDetails from "./pages/AddRecipe/AddRecipeDetails";
-
 function App() {
-  const [ images, setImages ] = useState([]);
+  const [images, setImages] = useState([]);
 
   return (
     <div className="App">
@@ -26,10 +23,7 @@ function App() {
         </div>
         <div className="pageContainer">
           <Routes>
-            <Route
-              path="/"
-              element={<HomeContent setImages={setImages} />}
-            />
+            <Route path="/" element={<HomeContent setImages={setImages} />} />
             <Route
               path="/details/:id"
               element={<DetailContent setImages={setImages} />}
