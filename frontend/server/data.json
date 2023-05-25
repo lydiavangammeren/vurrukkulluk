@@ -1,8 +1,7 @@
 {
-"recipes":
-  [
+  "recipes": [
     {
-      "id":1,
+      "id": 1,
       "title": "Eggs & Veggies",
       "image": "EggsAndVeggies.jpg",
       "kitchen": "Nederlands",
@@ -13,7 +12,7 @@
       "calories": "432"
     },
     {
-      "id":2,
+      "id": 2,
       "title": "Vegan Burger",
       "image": "VeganBurger.jpg",
       "kitchen": "Amerikaans",
@@ -24,7 +23,7 @@
       "calories": "432"
     },
     {
-      "id":3,
+      "id": 3,
       "title": "Sushi Rolls",
       "image": "SushiRolls.jpg",
       "kitchen": "Japans",
@@ -35,7 +34,7 @@
       "calories": "432"
     },
     {
-      "id":4,
+      "id": 4,
       "title": "Pizza Green",
       "image": "PizzaGreen.jpg",
       "kitchen": "Italiaans",
@@ -46,10 +45,9 @@
       "calories": "432"
     }
   ],
-"details":
-  [
+  "details": [
     {
-      "id":1,
+      "id": 1,
       "title": "Eggs & Veggies",
       "image": "EggsAndVeggies.jpg",
       "kitchen": "Nederlands",
@@ -126,7 +124,7 @@
       ]
     },
     {
-      "id":2,
+      "id": 2,
       "title": "Vegan Burger",
       "image": "VeganBurger.jpg",
       "kitchen": "Amerikaans",
@@ -203,7 +201,7 @@
       ]
     },
     {
-      "id":3,
+      "id": 3,
       "title": "Sushi Rolls",
       "image": "SushiRolls.jpg",
       "kitchen": "Japans",
@@ -280,7 +278,7 @@
       ]
     },
     {
-      "id":4,
+      "id": 4,
       "title": "Pizza Green",
       "image": "PizzaGreen.jpg",
       "kitchen": "Italiaans",
@@ -357,82 +355,74 @@
       ]
     }
   ],
-  "agenda":
-  [
+  "agenda": [
     {
-      "month":"Juni",
-      "items":
-      [
+      "month": "Juni",
+      "items": [
         {
-          "title":"Elke woensdagmiddag: Vegetarisch koken",
-          "description":"Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
-          "date":"07-06-2023",
-          "time":"14:00"
+          "title": "Elke woensdagmiddag: Vegetarisch koken",
+          "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
+          "date": "07-06-2023",
+          "time": "14:00"
         }
       ]
     },
     {
-      "month":"Juli",
-      "items":
-      []
+      "month": "Juli",
+      "items": []
     },
     {
-      "month":"Augustus",
-      "items":
-      [
+      "month": "Augustus",
+      "items": [
         {
-          "title":"Elke woensdagmiddag: Vegetarisch koken",
-          "description":"Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
-          "date":"07-06-2023",
-          "time":"14:00"
+          "title": "Elke woensdagmiddag: Vegetarisch koken",
+          "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
+          "date": "07-06-2023",
+          "time": "14:00"
         }
       ]
     },
     {
-      "month":"September",
-      "items":
-      [
+      "month": "September",
+      "items": [
         {
-          "title":"Elke woensdagmiddag: Vegetarisch koken",
-          "description":"Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
-          "date":"07-06-2023",
-          "time":"14:00"
+          "title": "Elke woensdagmiddag: Vegetarisch koken",
+          "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
+          "date": "07-06-2023",
+          "time": "14:00"
         }
       ]
     },
     {
-      "month":"Oktober",
-      "items":
-      [
+      "month": "Oktober",
+      "items": [
         {
-          "title":"Elke woensdagmiddag: Vegetarisch koken",
-          "description":"Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
-          "date":"07-06-2023",
-          "time":"14:00"
+          "title": "Elke woensdagmiddag: Vegetarisch koken",
+          "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
+          "date": "07-06-2023",
+          "time": "14:00"
         }
       ]
     },
     {
-      "month":"November",
-      "items":
-      [
+      "month": "November",
+      "items": [
         {
-          "title":"Elke woensdagmiddag: Vegetarisch koken",
-          "description":"Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
-          "date":"07-06-2023",
-          "time":"14:00"
+          "title": "Elke woensdagmiddag: Vegetarisch koken",
+          "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee",
+          "date": "07-06-2023",
+          "time": "14:00"
         }
       ]
     }
   ],
-  "products":
-  [
+  "products": [
     {
       "id": 1,
       "image": "hamb.jpg",
       "title": "Vegan Burger Bun",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      "quantity": "4 Broodje",
+      "quantity": "4",
       "price": 6.5
     },
     {
@@ -440,7 +430,7 @@
       "image": "VeganBurgerI.jpg",
       "title": "Vegan Burger",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      "quantity": "6 stuks",
+      "quantity": "6",
       "price": 6.5
     },
     {
@@ -448,7 +438,7 @@
       "image": "VeganSauce.jpg",
       "title": "Vegan Burger Sauce",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      "quantity": "1 stuk",
+      "quantity": "1",
       "price": 3
     },
     {
@@ -456,7 +446,7 @@
       "image": "avocado.jpg",
       "title": "Avocado",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      "quantity": "2 stuks",
+      "quantity": "2",
       "price": 6.5
     }
   ]

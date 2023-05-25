@@ -6,6 +6,7 @@
 }
 .shoppingcart_img {
   flex-grow: 2;
+  min-width: 4em;
   max-width: 8em;
   max-height: auto;
 }
@@ -25,4 +26,11 @@
 .shoppingcart_checked {
   text-decoration: line-through;
   text-decoration-thickness: 2px;
+}
+
+.quantity_value {
+  width: 30px;
+}
+.price_value span {
+  color: var(--darker-red);
 }
