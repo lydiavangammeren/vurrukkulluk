@@ -28,10 +28,10 @@ const ShoppingcartContent = (props) => {
         <input className="quantity_value" value={props.quantity}></input>
       </td>
       <td>
-        <h3 className="price_value">
-          <span>&euro;&nbsp;</span>
+        <p>
+          <span className="price_value">&euro;&nbsp;</span>
           {props.price.toFixed(2)}
-        </h3>
+        </p>
       </td>
       <td>
         <AiOutlineCheck

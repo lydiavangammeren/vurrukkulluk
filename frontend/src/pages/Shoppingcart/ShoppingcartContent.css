@@ -31,6 +31,7 @@
 .quantity_value {
   width: 30px;
 }
-.price_value span {
+.price_value {
   color: var(--darker-red);
+  font-size: 18px;
 }
