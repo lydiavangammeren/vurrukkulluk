@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import React, { useState, useEffect } from "react";
 import ShoppingcartContent from "./ShoppingcartContent";
 import "./Shoppingcarts.css";
-import api from "../../lib/recipeAPI";
 import api from "../../lib/recipeAPI";
 
 const Shoppingcarts = () => {
