@@ -4,7 +4,10 @@ import {FaSearch} from 'react-icons/fa';
 import api from "../../lib/recipeAPI";
 
 const SearchBar = ({setResults}) => {
+  // const [items, setItems] = useState([]);
   const [input, setInput] = useState("");
+
+
 
   const fetchData = async (value) => {
     try{
@@ -34,6 +37,8 @@ const SearchBar = ({setResults}) => {
     }
   }
 
+
+
   const handleChange = (value) => {
     setInput(value);
     fetchData(value);
@@ -43,7 +48,7 @@ const SearchBar = ({setResults}) => {
       <div className="input-wrapper">
       <FaSearch color="#b31714" size={20} id="search-icon" />
       <input
-        placeholder="Type to search..."
+        placeholder="Zoeken"
         value={input}
         onChange={(e) => handleChange(e.target.value)}
       />

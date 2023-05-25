@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import "./AddRecipeIngredients.css";
 
-
-
-
-<h1>ingredienten</h1>;
 const AddRecipeIngredients = () => {
-  const [image, setImage] = useState("null");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [Hoeveelheid, setHoeveelheid] = useState("");
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setImage(file);
-  };
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -26,56 +18,55 @@ const AddRecipeIngredients = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Recipe ingredients:", { image, title, text, Hoeveelheid });
+    console.log("Recipe ingredients:", { title, text, Hoeveelheid });
 
-    setImage("null");
     setTitle("");
     setText("");
     setHoeveelheid("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="image">Image:</label>
-        <input
-          type="file"
-          id="image"
-          accept="image/*"
-          onChange={handleImageChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={handleTitleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="text">Text:</label>
-        <textarea
-          id="text"
-          value={title}
-          onChange={handleTextChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="title">Hoeveelheid:</label>
-        <input
-          type="text"
-          id="title"
-          value={Hoeveelheid}
-          onChange={handleHoeveelheidChange}
-          required
-        />
-      </div>
-    </form>
+    <div>
+      <h1 className="ing-header">Ingredients</h1>
+
+      <form className="IngredientForm" onSubmit={handleSubmit}>
+        <div className="ingredients-title">
+          <div className="title-input">
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={handleTitleChange}
+              required
+            />
+          </div>
+        </div>
+        <div className="ingredients-text">
+          <div className="text-input">
+            <label htmlFor="text">Text:</label>
+            <textarea
+              id="text"
+              value={title}
+              onChange={handleTextChange}
+              required
+            />
+          </div>
+        </div>
+        <div className="Hoeveel">
+          <div className="hoeveel-input">
+            <label htmlFor="hoeveelheid">Hoeveelheid:</label>
+            <input
+              type="text"
+              id="hoeveelheid"
+              value={Hoeveelheid}
+              onChange={handleHoeveelheidChange}
+              required
+            />
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -22,8 +22,8 @@
   align-items: center;
   padding: 0.5em;
 }
-.setFont{
-  font-size: 18;
+.details_stats span{
+  font-size: 18px;
   margin-left: 0.3rem;
 }
 .title_rating {
@@ -32,10 +32,10 @@
   justify-content: space-between;
 }
 .details_title {
-  flex: 50%;
+  width: 50%;
 }
 .details_rating {
-  flex: 30%;
+  width: 50%;
   display: flex;
 }
 .kitchen_type  {

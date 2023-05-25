@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./AddRecipeDetails.css";
 
 const AddRecipeDetails = () => {
   const [aantalPersonen, setAantal] = useState("");
@@ -43,62 +44,86 @@ const AddRecipeDetails = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="aantalPersonen">Aantal Personen</label>
-        <input
-          type="number"
-          min={1}
-          onChange={handleAantalPersonenChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="image">Image:</label>
-        <input
-          //look about the type of image//
-          type="file"
-          id="image"
-          accept="image/*"
-          onChange={handleImageChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={handleTitleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="keuken">Keuken:</label>
-        <input
-          type="text"
-          id="keuken"
-          value={keuken}
-          onChange={handleKeukenChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="title">Type:</label>
-        <input
-          type="text"
-          id="type"
-          value={type}
-          onChange={handleTypeChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="text">Text:</label>
-        <textarea id="text" value={text} onChange={handleTextChange} required />
-      </div>
-    </form>
+    <div className="AddDetails">
+      <h1 >Voeg hier uw recept info toe</h1>
+      <form onSubmit={handleSubmit}>
+        <div id="AantalDetail">
+          <label htmlFor="aantalPersonen">Aantal Personen</label>
+          <input
+            type="number"
+            min={1}
+            onChange={handleAantalPersonenChange}
+            required
+          />
+        </div>
+        <div className="container">
+          <div id="imageDetail">
+            <label htmlFor="image">Image:</label>
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              onChange={handleImageChange}
+              required
+            />
+          </div>
+          <div>
+            <div id="DetailTitle">
+              <div className="user-input">
+                <label htmlFor="title">Title:</label>
+                <input
+                  type="text"
+                  id="title"
+                  value={title}
+                  onChange={handleTitleChange}
+                  required
+                />
+              </div>
+            </div>
+            <div className="infoDetail">
+              <div className="user-input">
+                <div id="keuken">
+                  <label htmlFor="keuken">Keuken:</label>
+                  <input
+                    className="input-style"
+                    type="text"
+                    id="keuken"
+                    value={keuken}
+                    onChange={handleKeukenChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div id="titleDetail">
+                <div className="user-input">
+                  <label htmlFor="title">Type:</label>
+                  <input
+                    className="input-style"
+                    type="text"
+                    id="type"
+                    value={type}
+                    onChange={handleTypeChange}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <label className="text-label" htmlFor="text">
+                Text:
+              </label>
+              <textarea
+                className="text"
+                id="text"
+                value={text}
+                onChange={handleTextChange}
+                required
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 

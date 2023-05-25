@@ -1,21 +1,22 @@
 .numberCircle {
     border-radius: 50%;
-    width: 2em;
-    height: 2em;
-    padding: 1%;
+    width: 6em;
+    height: 6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--lighter-orange);
-    border: 2px solid  var(--lighter-orange);
-    color: var(--white);
-    text-align: center;
-    font-weight: bold;
+}
+.numberCircle span{
     font: 32px Arial, sans-serif;
-
-   
+    font-weight: bold;
+    color: var(--white);
 }
 
 .step {
     display: flex;
     flex-direction: row;
+    align-items: center;
     margin: 1%;
 }
 

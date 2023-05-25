@@ -1,23 +1,22 @@
 .contact {
-    display: flex;
-    color: var(--white);
-    background-color: var(--darker-orange);
-    padding: 2rem 0 4rem 4rem;
-    
-  }
+  display: flex;
+  color: var(--white);
+  background-color: var(--darker-orange);
+  padding: 2rem 0 4rem 4rem;
 
-  .contact-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;      
-    padding-bottom: 5%;
-  }
-  
-  .contact-address {
-    padding-left: 2%;
-    
-  }
-  
-  div.contact-address p {
-    margin: 0;
-  }
+}
+
+.contact-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5%;
+}
+
+.contact-address {
+  padding-left: 2%;
+}
+
+div.contact-address p {
+  margin: 0;
+}
