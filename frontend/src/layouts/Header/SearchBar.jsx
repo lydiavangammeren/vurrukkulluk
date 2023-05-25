@@ -7,8 +7,6 @@ const SearchBar = ({setResults}) => {
   // const [items, setItems] = useState([]);
   const [input, setInput] = useState("");
 
-
-
   const fetchData = async (value) => {
     try{
       const response = await api.get('/recipes');
@@ -36,8 +34,6 @@ const SearchBar = ({setResults}) => {
       }
     }
   }
-
-
 
   const handleChange = (value) => {
     setInput(value);
