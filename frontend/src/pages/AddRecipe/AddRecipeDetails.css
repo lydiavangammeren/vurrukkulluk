@@ -1,0 +1,61 @@
+:root {
+  --main-font: "Pacifico", cursive;
+}
+
+#AantalDetail {
+  color: #95b82d;
+}
+
+#DetailTitle {
+  color: #95b82d;
+  font-family: var(--main-font);
+  font-size: 16px;
+}
+#DetailTitle input {
+  width: 70%;
+}
+.user-input {
+  display: flex;
+  flex-flow: wrap row;
+}
+.user-input input.input-style {
+  width: 20%;
+}
+#imageDetail {
+  color: #95b82d;
+  font-family: var(--main-font);
+  font-size: 16px;
+}
+#keuken {
+  color: #95b82d;
+  font-family: var(--main-font);
+  font-size: 16px;
+}
+#titleDetail {
+  color: #95b82d;
+  font-family: var(--main-font);
+  font-size: 16px;
+}
+.infoDetail {
+  display: flex;
+  flex-flow: wrap row;
+}
+.container {
+  display: flex;
+  flex-flow: wrap row;
+}
+
+textarea.text {
+  font-size: 14px;
+  color: #000;
+  line-height: 1.4;
+  width: 45%;
+  outline: none;
+  resize: none;
+}
+label.text-label {
+  color: #95b82d;
+  font-family: var(--main-font);
+  font-size: 16px;
+  margin-right: 5px;
+}
