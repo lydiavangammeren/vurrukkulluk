@@ -9,7 +9,7 @@ public interface UserService {
 
   public User saveUser(User user);
   public List<User> getAllUsers();
-  public List<User> getUserByName(String name);
+  public List<User> getUserByEmail(String email);
 
   User getUserById(int id);
 

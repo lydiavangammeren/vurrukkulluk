@@ -1,15 +1,18 @@
 package com.lydia.vurrukkulluk.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-public class KitchenType {
+public class KitchenRegion {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   private String name;
 
-  public KitchenType() {
+  public KitchenRegion() {
   }
 
   public int getId() {

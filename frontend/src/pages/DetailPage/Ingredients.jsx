@@ -11,6 +11,7 @@ const Ingredients = ({ingredients}) => {
             title={ingredient.title}
             description={ingredient.desc}
             quantity={ingredient.quantity}
+            key={index}
           />
       ))}
     </div>

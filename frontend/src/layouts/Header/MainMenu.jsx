@@ -11,6 +11,11 @@ const MainMenu = () => {
         />
       </div>
       <div className='menu-links'>
+        <Link to={'/addrecipe'} >
+          <div className='menu-link'>
+            <span>Voeg Recept toe</span>
+          </div>
+        </Link>
         <Link to={'/favourites'} >
         <div className='menu-link'>
           <span>Mijn Favorieten</span>

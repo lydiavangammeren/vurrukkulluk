@@ -31,9 +31,9 @@ public class UserController {
     return userService.getAllUsers();
   }
 
-  @GetMapping("name/{name}")
-  public List<User> getName(@PathVariable String name){
-    return userService.getUserByName(name);
+  @GetMapping("email/{email}")
+  public List<User> getName(@PathVariable String email){
+    return userService.getUserByEmail(email);
   }
 
 

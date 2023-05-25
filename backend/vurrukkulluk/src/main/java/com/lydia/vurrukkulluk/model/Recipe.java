@@ -17,16 +17,17 @@ public class Recipe {
 
   // Postman: "kitchenType":{ "id": 1},
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "kitchen_id", nullable=false)
+  @JoinColumn(name = "kitchen_type_id", nullable=false)
   private KitchenType kitchenType;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "kitchen_region_id", nullable=true)
+  private KitchenRegion kitchenRegion;
 
   // Postman: "user": {"id": 4},
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id", nullable=false)
   private User user;
 
-  // should also be a FK
-  private int categoryId;
   private String title;
   @Column(unique=true)
   private String slug;
@@ -58,12 +59,12 @@ public class Recipe {
     this.user = user;
   }
 
-  public int getCategoryId() {
-    return categoryId;
+  public KitchenRegion getKitchenRegion() {
+    return kitchenRegion;
   }
 
-  public void setCategoryId(int categoryId) {
-    this.categoryId = categoryId;
+  public void setKitchenRegion(KitchenRegion kitchenRegion) {
+    this.kitchenRegion = kitchenRegion;
   }
 
   public String getTitle() {

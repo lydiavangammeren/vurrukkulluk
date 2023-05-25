@@ -17,6 +17,15 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.details_stats div{
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+}
+.setFont{
+  font-size: 18;
+  margin-left: 0.3rem;
+}
 .title_rating {
   display:flex;
   flex-direction: row;

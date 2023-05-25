@@ -74,7 +74,7 @@
 
 .icon-align{
   display: flex;
-  justify-content: center;
+  align-items: center;
   padding: 0.5em;
 }
 

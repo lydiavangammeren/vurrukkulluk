@@ -43,7 +43,8 @@ const DetailContent = ({setImages}) => {
                   image={details.image}
                   kitchen={details.kitchen}
                   type={details.type}
-                  description={details.description}/>
+                  description={details.description}
+                  persons={details.persons} price={details.price} calories={details.calories}/>
       </div>
       <div className="detailBottom">
         {ingredients && prepsteps && comments && 

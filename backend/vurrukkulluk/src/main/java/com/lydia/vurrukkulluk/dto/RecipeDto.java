@@ -1,6 +1,8 @@
 package com.lydia.vurrukkulluk.dto;
 
 import com.lydia.vurrukkulluk.model.Ingredient;
+import com.lydia.vurrukkulluk.model.KitchenCategory;
+import com.lydia.vurrukkulluk.model.KitchenRegion;
 import com.lydia.vurrukkulluk.model.KitchenType;
 
 import java.util.List;
@@ -8,11 +10,15 @@ import java.util.List;
 public class RecipeDto {
 
     private int id;
-
     private String title;
 
     private String description;
 
+    private KitchenType kitchenType;
+
+    private KitchenRegion kitchenRegion;
+
+    private List<KitchenCategory> categories;
     private List<CommentDto> comments;
 
     private List<IngredientDto> ingredients;
@@ -21,6 +27,30 @@ public class RecipeDto {
 
     public List<IngredientDto> getIngredients() {
         return ingredients;
+    }
+
+    public KitchenType getKitchenType() {
+        return kitchenType;
+    }
+
+    public void setKitchenType(KitchenType kitchenType) {
+        this.kitchenType = kitchenType;
+    }
+
+    public KitchenRegion getKitchenRegion() {
+        return kitchenRegion;
+    }
+
+    public void setKitchenRegion(KitchenRegion kitchenRegion) {
+        this.kitchenRegion = kitchenRegion;
+    }
+
+    public List<KitchenCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<KitchenCategory> categories) {
+        this.categories = categories;
     }
 
     public void setIngredients(List<IngredientDto> ingredients) {

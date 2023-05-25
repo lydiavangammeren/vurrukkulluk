@@ -35,9 +35,9 @@ const Home = ({setImages}) => {
 
   return (
     <div className='Home'>
-      {recipes.map((recipe) => {
+      {recipes.map((recipe, index) => {
         return (
-          <Recipe recipe={recipe} />
+          <Recipe recipe={recipe} key={index}/>
         )
       })}
     </div>

@@ -16,16 +16,6 @@ public class KitchenTypeServiceImpl implements KitchenTypeService {
   }
 
   @Override
-  public List<KitchenType> getAllKitchenTypes() {
-    return kitchenTypeRepository.findAll();
-  }
-
-  @Override
-  public List<KitchenType> getKitchenTypeByType(String type) {
-    return kitchenTypeRepository.findByType(type);
-  }
-
-  @Override
   public void updateKitchenType(KitchenType kitchenType) {
     kitchenTypeRepository.save(kitchenType);
   }
@@ -38,5 +28,10 @@ public class KitchenTypeServiceImpl implements KitchenTypeService {
   @Override
   public void deleteKitchenType(KitchenType kitchenType) {
     kitchenTypeRepository.delete(kitchenType);
+  }
+
+  @Override
+  public KitchenType getById(int id) {
+    return kitchenTypeRepository.findById(id);
   }
 }
