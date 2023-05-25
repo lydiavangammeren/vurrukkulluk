@@ -3,17 +3,17 @@
 }
 
 label.ingredients-title {
-  color: #95b82d;
+  color: var(--darker-green);
   font-family: var(--main-font);
   font-size: 16px;
 }
 h1.ing-header {
-  color: #95b82d;
+  color: var(--darker-green);
   font-family: var(--main-font);
   font-size: 25px;
 }
 .Hoeveel {
-  color: #95b82d;
+  color: var(--darker-green);
   font-family: var(--main-font);
   display: flex;
   flex-flow: wrap row;

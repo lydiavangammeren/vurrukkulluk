@@ -31,6 +31,7 @@ const AddRecipePreperation = () => {
 
   return (
     <div className="AddPreperation">
+      <h1>Voeg bereiding stappen toe</h1>
       <form onSubmit={handleSubmit}>
         {Recipe.map((recipe, index) => (
           <div key={index}>

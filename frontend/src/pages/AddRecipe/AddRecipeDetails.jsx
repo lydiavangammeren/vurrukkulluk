@@ -45,6 +45,7 @@ const AddRecipeDetails = () => {
 
   return (
     <div className="AddDetails">
+      <h1 >Voeg hier uw recept info toe</h1>
       <form onSubmit={handleSubmit}>
         <div id="AantalDetail">
           <label htmlFor="aantalPersonen">Aantal Personen</label>

@@ -3,11 +3,11 @@
 }
 
 #AantalDetail {
-  color: #95b82d;
+  color: var(--darker-green);
 }
 
 #DetailTitle {
-  color: #95b82d;
+  color: var(--darker-green);
   font-family: var(--main-font);
   font-size: 16px;
 }
@@ -22,17 +22,17 @@
   width: 20%;
 }
 #imageDetail {
-  color: #95b82d;
+  color: var(--darker-green);
   font-family: var(--main-font);
   font-size: 16px;
 }
 #keuken {
-  color: #95b82d;
+  color: var(--darker-green);
   font-family: var(--main-font);
   font-size: 16px;
 }
 #titleDetail {
-  color: #95b82d;
+  color: var(--darker-green);
   font-family: var(--main-font);
   font-size: 16px;
 }
@@ -54,8 +54,11 @@ textarea.text {
   resize: none;
 }
 label.text-label {
-  color: #95b82d;
+  color: var(--darker-green);
   font-family: var(--main-font);
   font-size: 16px;
   margin-right: 5px;
+}
+.AddDetails h1 {
+  color: var(--darker-green);
 }
