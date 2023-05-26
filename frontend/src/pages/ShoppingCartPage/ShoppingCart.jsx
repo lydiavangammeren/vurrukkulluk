@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ShoppingcartContent from "./ShoppingcartContent";
-import "./Shoppingcarts.css";
+import ShoppingCartItem from "./ShoppingCartItem";
+import "./ShoppingCart.css";
 import api from "../../lib/recipeAPI";
 import { RiDeleteBinLine } from "react-icons/ri";
 
@@ -63,7 +63,7 @@ const Shoppingcarts = () => {
         {ProductList.filter(
           (product) => !checkedProductList.includes(product.id)
         ).map((product) => (
-          <ShoppingcartContent
+          <ShoppingCartItem
             checked={false}
             key={product.id}
             product={product}
@@ -75,7 +75,7 @@ const Shoppingcarts = () => {
         {ProductList.filter((product) =>
           checkedProductList.includes(product.id)
         ).map((product) => (
-          <ShoppingcartContent
+          <ShoppingCartItem
             checked={true}
             key={product.id}
             product={product}

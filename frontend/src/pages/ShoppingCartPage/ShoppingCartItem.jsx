@@ -1,10 +1,10 @@
 import React from "react";
-import "./ShoppingcartContent.css";
+import "./ShoppingCartItem.css";
 
 import { AiOutlineCheck } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-const ShoppingcartContent = ({product, checked, checkedProduct, removeProduct, updateQuantity}) => {
+const ShoppingCartItem = ({product, checked, checkedProduct, removeProduct, updateQuantity}) => {
   return (
     <tr
       className={
@@ -53,4 +53,4 @@ const ShoppingcartContent = ({product, checked, checkedProduct, removeProduct, u
   );
 };
 
-export default ShoppingcartContent;
+export default ShoppingCartItem;
