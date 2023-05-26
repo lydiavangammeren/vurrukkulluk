@@ -4,7 +4,7 @@ import "./ShoppingcartContent.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-const ShoppingcartContent = ({product, checked, checkedProduct, removeProduct}) => {
+const ShoppingcartContent = ({product, checked, checkedProduct, removeProduct, updateQuantity}) => {
   return (
     <tr
       className={
@@ -24,7 +24,8 @@ const ShoppingcartContent = ({product, checked, checkedProduct, removeProduct}) 
         <p>{product.desc}</p>
       </td>
       <td>
-        <input className="quantity_value" value={product.quantity}></input>
+        <input className="quantity_value" type="number" value={product.quantity}
+               onChange={(e) => updateQuantity(product.id, e.target.value)} ></input>
       </td>
       <td>
         <p>

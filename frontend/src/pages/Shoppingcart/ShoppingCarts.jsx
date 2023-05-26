@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ShoppingcartContent from "./ShoppingcartContent";
 import "./Shoppingcarts.css";
 import api from "../../lib/recipeAPI";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 const Shoppingcarts = () => {
   const [ProductList, setProductList] = useState([]);
@@ -29,6 +30,15 @@ const Shoppingcarts = () => {
     setProductList(ProductList.filter((p) => p.id !== id));
   }
 
+  function updateQuantity(id, quantity) {
+    setProductList(ProductList.map((p) => {
+      if (p.id === id) {
+        return { ...p, quantity: quantity };
+      } 
+      return p;
+    }))
+  }
+
   const [checkedProductList, setCheckedProductList] = useState([]);
   function toggleCheckMark(id) {
     if (checkedProductList.includes(id)) {
@@ -41,7 +51,7 @@ const Shoppingcarts = () => {
 
   const totalPrice = ProductList.reduce((acc, product) => {
     if (!checkedProductList.includes(product.id)) {
-      return acc + product.price;
+      return acc + (product.quantity * product.price);
     }
     return acc;
   }, 0);
@@ -59,6 +69,7 @@ const Shoppingcarts = () => {
             product={product}
             removeProduct={removeProductWithId}
             checkedProduct={toggleCheckMark}
+            updateQuantity={updateQuantity}
           />
         ))}
         {ProductList.filter((product) =>
@@ -70,10 +81,28 @@ const Shoppingcarts = () => {
             product={product}
             removeProduct={removeProductWithId}
             checkedProduct={toggleCheckMark}
+            updateQuantity={updateQuantity}
           />
         ))}
+        <tfoot>
+          <td colspan="3">
+            <h2>Total</h2>
+          </td>
+          <td>
+            <span className="price_value">&euro;&nbsp;</span>
+            {totalPrice.toFixed(2)}
+          </td>
+          <td></td>
+          <td>
+            <RiDeleteBinLine
+              className="icon"
+              color="#b31714"
+              size={20}
+              onClick={() => setProductList([])}
+            />
+          </td>
+        </tfoot>
       </table>
-      <h2>Total: {totalPrice}</h2>
     </div>
   );
 };
