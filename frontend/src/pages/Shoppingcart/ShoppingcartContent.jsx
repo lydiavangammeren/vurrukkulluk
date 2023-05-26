@@ -4,33 +4,32 @@ import "./ShoppingcartContent.css";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-const ShoppingcartContent = (props) => {
-  console.log(props);
+const ShoppingcartContent = ({product, checked, checkedProduct, removeProduct}) => {
   return (
     <tr
       className={
-        "shoppingcart_info " + (props.checked ? "shoppingcart_checked" : "")
+        "shoppingcart_info " + (checked ? "shoppingcart_checked" : "")
       }
     >
       <td className="shoppingcart_img">
         <img
-          src={require("../../assets/images/" + props.image)}
-          alt={"props.image"}
+          src={require("../../assets/images/" + product.image)}
+          alt={product.image}
           width="100%"
           height="100%"
         />
       </td>
       <td>
-        <h3>{props.title}</h3>
-        <p>{props.desc}</p>
+        <h3>{product.title}</h3>
+        <p>{product.desc}</p>
       </td>
       <td>
-        <input className="quantity_value" value={props.quantity}></input>
+        <input className="quantity_value" value={product.quantity}></input>
       </td>
       <td>
         <p>
           <span className="price_value">&euro;&nbsp;</span>
-          {props.price.toFixed(2)}
+          {product.price.toFixed(2)}
         </p>
       </td>
       <td>
@@ -38,7 +37,7 @@ const ShoppingcartContent = (props) => {
           className="icon"
           color="#6e8722"
           size={20}
-          onClick={() => props.checkedProduct(props.id)}
+          onClick={() => checkedProduct(product.id)}
         />
       </td>
       <td>
@@ -46,7 +45,7 @@ const ShoppingcartContent = (props) => {
           className="icon"
           color="#b31714"
           size={20}
-          onClick={() => props.removeProduct(props.id)}
+          onClick={() => removeProduct(product.id)}
         />
       </td>
     </tr>

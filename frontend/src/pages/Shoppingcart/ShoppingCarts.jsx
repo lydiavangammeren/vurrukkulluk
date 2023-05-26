@@ -56,12 +56,7 @@ const Shoppingcarts = () => {
           <ShoppingcartContent
             checked={false}
             key={product.id}
-            id={product.id}
-            image={product.image}
-            title={product.title}
-            desc={product.desc}
-            quantity={product.quantity}
-            price={product.price}
+            product={product}
             removeProduct={removeProductWithId}
             checkedProduct={toggleCheckMark}
           />
@@ -72,12 +67,7 @@ const Shoppingcarts = () => {
           <ShoppingcartContent
             checked={true}
             key={product.id}
-            id={product.id}
-            image={product.image}
-            title={product.title}
-            desc={product.desc}
-            quantity={product.quantity}
-            price={product.price}
+            product={product}
             removeProduct={removeProductWithId}
             checkedProduct={toggleCheckMark}
           />
