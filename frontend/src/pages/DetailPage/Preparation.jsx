@@ -4,10 +4,9 @@ import PreparationStep from './PreparationStep';
 const Preparation = ({prepsteps}) => {
     return ( 
     <div className='Preparation'>
-        {prepsteps && prepsteps.map((prepstep) => (
+        {prepsteps && prepsteps.map((prepstep, index) => (
             // <h4>{`${prepstep.step} ${prepstep.desc}`}</h4>
-            <PreparationStep step={prepstep.step}
-                             description={prepstep.desc}/>
+            <PreparationStep prepstep={prepstep} key={index}/>
         ))}
         <h4>{}</h4>
         <h4>{}</h4>

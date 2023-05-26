@@ -1,16 +1,16 @@
 import React from "react";
 
-const Comment = ({name, comment, image}) => {
+const Comment = ({comment}) => {
   return (
     <div className="Comment">
       <div className="comment_img">
-        <img src={require(`../../assets/images/${image}`)} alt={image}
+        <img src={require(`../../assets/images/${comment.image}`)} alt={comment.image}
         />
       </div>
       <div className="comment_info">
-        <h3>{name}</h3>
+        <h3>{comment.name}</h3>
         <p>
-          {comment}
+          {comment.comment}
         </p>
       </div>
     </div>

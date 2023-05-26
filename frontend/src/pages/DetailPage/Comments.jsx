@@ -5,12 +5,8 @@ const Comments = ({comments}) => {
   
   return (
     <div className="Comments">
-      {comments && comments.map((comment) => (
-        <Comment
-          name={comment.user_name}
-          comment={comment.comment}
-          image={comment.image}
-        />
+      {comments && comments.map((comment, index) => (
+        <Comment comment={comment} key={index} />
       ))}
     </div>
   );

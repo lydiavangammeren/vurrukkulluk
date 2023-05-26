@@ -1,16 +1,16 @@
 import React from "react";
 
-const Ingredient = ({image, title, description, quantity}) => {
+const Ingredient = ({ingredient}) => {
   
   return (
     <div className="ingredient">
       <div className="ingredient_img">
-        <img src={require(`../../assets/images/${image}`)} alt={image}/>
+        <img src={require(`../../assets/images/${ingredient.image}`)} alt={ingredient.image}/>
       </div>
       <div className='ingredient_info'>
-        <h3>{title}</h3>
-        <p>{description}</p>
-        <span className='quantity_span'>Hoeveelheid:</span><span className='quantity_value'>{quantity}</span>
+        <h3>{ingredient.title}</h3>
+        <p>{ingredient.description}</p>
+        <span className='quantity_span'>Hoeveelheid:</span><span className='quantity_value'>{ingredient.quantity}</span>
       </div>
     </div>
   );

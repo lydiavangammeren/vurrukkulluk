@@ -1,12 +1,12 @@
 import React from 'react';
 
-const PreparationStep = ({step, description}) => {
+const PreparationStep = ({prepstep}) => {
     return (
         <div className="step">
         <div className="numberCircle">
-            <span>{step}.</span>
+            <span>{prepstep.step}.</span>
         </div>
-            <span>{description}</span>
+            <span>{prepstep.description}</span>
         </div>
     );
 }
