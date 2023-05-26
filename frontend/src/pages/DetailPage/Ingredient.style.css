@@ -1,7 +1,5 @@
 .ingredient {
-  flex-grow: 1;
   display: flex;
-  flex-direction: row;
   padding-bottom: 2%;
 }
 .ingredient_img{

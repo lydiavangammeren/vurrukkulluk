@@ -1,6 +1,10 @@
 .Home {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  /* align-items: center; */
+  height: 77rem;
+}
+.home-recipes{
+  height: 77rem;
 }

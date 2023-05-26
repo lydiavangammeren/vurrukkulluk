@@ -11,6 +11,7 @@ import AddRecipePage from "./pages/AddRecipe/AddRecipePage";
 import "./assets/styles/main.css";
 
 function App() {
+  const [recipes, setRecipes] = useState([]);
   const [images, setImages] = useState([]);
 
   return (
@@ -23,7 +24,7 @@ function App() {
         </div>
         <div className="pageContainer">
           <Routes>
-            <Route path="/" element={<HomeContent setImages={setImages} />} />
+            <Route path="/" element={<HomeContent setImages={setImages} recipes={recipes} setRecipes={setRecipes}/>} />
             <Route
               path="/details/:id"
               element={<DetailContent setImages={setImages} />}
