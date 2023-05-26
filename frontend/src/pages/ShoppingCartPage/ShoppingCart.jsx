@@ -66,48 +66,58 @@ const ShoppingCart = () => {
 
   const checkedProducts = state.products.filter(
     (product) => state.checkedProductIds.includes(product.id))
-    
+
   const totalPrice = uncheckedProducts.reduce((acc, product) => {
       return acc + (product.quantity * product.price);
     }, 0);
 
   return (
     <div className="Shoppingcarts">
-      <h1>Boodschappen</h1>
       <table>
-        {uncheckedProducts.map((product) => (
-          <ShoppingCartItem
-            checked={false}
-            key={product.id}
-            product={product}
-            dispatch={dispatch}
-          />
-        ))}
-        {checkedProducts.map((product) => (
-          <ShoppingCartItem
-            checked={true}
-            key={product.id}
-            product={product}
-            dispatch={dispatch}
-          />
-        ))}
+        <thead>
+          <tr>
+            <th colSpan="6">
+              <h1>Boodschappen</h1>
+            </th>
+          </tr>    
+        </thead>
+          <tbody>
+            {uncheckedProducts.map((product) => (
+              <ShoppingCartItem
+                checked={false}
+                key={product.id}
+                product={product}
+                dispatch={dispatch}
+              />
+            ))}
+            {checkedProducts.map((product) => (
+              <ShoppingCartItem
+                checked={true}
+                key={product.id}
+                product={product}
+                dispatch={dispatch}
+              />
+            ))}
+          </tbody>
         <tfoot>
-          <td colspan="3">
-            <h2>Total</h2>
-          </td>
-          <td>
-            <span className="price_value">&euro;&nbsp;</span>
-            {totalPrice.toFixed(2)}
-          </td>
-          <td></td>
-          <td>
-            <RiDeleteBinLine
-              className="icon"
-              color="#b31714"
-              size={20}
-              onClick={() => dispatch({type: SC_ACTION.REMOVE_ALL})}
-            />
-          </td>
+          <tr>
+            <td colspan="3">
+              <h2>Total</h2>
+            </td>
+            <td>
+              <span className="price_value">&euro;&nbsp;</span>
+              {totalPrice.toFixed(2)}
+            </td>
+            <td></td>
+            <td>
+              <RiDeleteBinLine
+                className="icon"
+                color="#b31714"
+                size={20}
+                onClick={() => dispatch({type: SC_ACTION.REMOVE_ALL})}
+              />
+            </td>
+          </tr>
         </tfoot>
       </table>
     </div>

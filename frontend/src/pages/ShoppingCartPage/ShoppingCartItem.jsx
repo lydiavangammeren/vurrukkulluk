@@ -21,7 +21,7 @@ const ShoppingCartItem = ({product, checked, dispatch}) => {
         />
       </td>
       <td>
-        <h3>{product.title}</h3>
+        <h2>{product.title}</h2>
         <p>{product.desc}</p>
       </td>
       <td>
