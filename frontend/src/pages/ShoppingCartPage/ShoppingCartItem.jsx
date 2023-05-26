@@ -1,10 +1,11 @@
 import React from "react";
 import "./ShoppingCartItem.css";
+import { SC_ACTION } from "./ShoppingCartActions";
 
 import { AiOutlineCheck } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-const ShoppingCartItem = ({product, checked, checkedProduct, removeProduct, updateQuantity}) => {
+const ShoppingCartItem = ({product, checked, dispatch}) => {
   return (
     <tr
       className={
@@ -24,8 +25,9 @@ const ShoppingCartItem = ({product, checked, checkedProduct, removeProduct, upda
         <p>{product.desc}</p>
       </td>
       <td>
-        <input className="quantity_value" type="number" value={product.quantity}
-               onChange={(e) => updateQuantity(product.id, e.target.value)} ></input>
+        <input className="quantity_value" type="number" value={product.quantity} minValue="0" maxValue="999"
+               onChange={(e) => dispatch({ type: SC_ACTION.UPDATE_QUANTITY, 
+                                           payload: {id: product.id, quantity: e.target.value}})} ></input>
       </td>
       <td>
         <p>
@@ -38,7 +40,7 @@ const ShoppingCartItem = ({product, checked, checkedProduct, removeProduct, upda
           className="icon"
           color="#6e8722"
           size={20}
-          onClick={() => checkedProduct(product.id)}
+          onClick={() => dispatch({ type: SC_ACTION.TOGGLE_ITEM, payload: {id: product.id}})}
         />
       </td>
       <td>
@@ -46,7 +48,7 @@ const ShoppingCartItem = ({product, checked, checkedProduct, removeProduct, upda
           className="icon"
           color="#b31714"
           size={20}
-          onClick={() => removeProduct(product.id)}
+          onClick={() => dispatch({ type: SC_ACTION.REMOVE_ITEM, payload: {id: product.id}})}
         />
       </td>
     </tr>
