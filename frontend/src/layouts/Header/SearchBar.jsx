@@ -1,16 +1,21 @@
 import React, {useState, useEffect} from "react";
 import {FaSearch} from 'react-icons/fa';
-
+import { useNavigate } from "react-router-dom";
 import api from "../../lib/recipeAPI";
+import { useRecipes, useRecipesUpdate } from '../../contexts/RecipesContext';
 
-const SearchBar = ({setResults}) => {
+const SearchBar = ({}) => {
+  const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [input, setInput] = useState("");
+  
+  const recipes = useRecipes();
+  const setRecipes = useRecipesUpdate();
 
   const handleChange = (value) => {
     setInput(value);
-    // fetchData(value);
-    setResults(items.filter((recipe)=> {
+    if(!value) return setRecipes(items);
+    setRecipes(items.filter((recipe)=> {
       return (
         value &&
         recipe &&
@@ -22,6 +27,8 @@ const SearchBar = ({setResults}) => {
         )
       )
     }));
+    
+    navigate('/');
   }
 
   useEffect(() => {

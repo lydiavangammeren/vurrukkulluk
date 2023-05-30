@@ -9,6 +9,7 @@ import HomeContent from "./pages/HomePage";
 import Shoppingcarts from "./pages/Shoppingcart/ShoppingCarts";
 import AddRecipePage from "./pages/AddRecipe/AddRecipePage";
 import "./assets/styles/main.css";
+import { RecipesProvider } from "./contexts/RecipesContext";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -16,7 +17,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header data={images} />
+    <RecipesProvider >
+      <Header data={images} setRecipes={setRecipes} />
       <section>
         <div className="side">
           <Agenda />
@@ -34,6 +36,7 @@ function App() {
           </Routes>
         </div>
       </section>
+    </RecipesProvider>
       <Footer />
     </div>
   );
