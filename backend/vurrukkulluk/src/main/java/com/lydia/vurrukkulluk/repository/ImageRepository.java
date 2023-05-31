@@ -1,12 +1,12 @@
 package com.lydia.vurrukkulluk.repository;
 
-import com.lydia.vurrukkulluk.model.UserImage;
+import com.lydia.vurrukkulluk.model.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserImageRepository extends JpaRepository<UserImage, Integer> {
-  Optional<UserImage> findByName(String fileName);
+public interface ImageRepository extends JpaRepository<Image, Integer> {
+  Optional<Image> findByName(String fileName);
 }

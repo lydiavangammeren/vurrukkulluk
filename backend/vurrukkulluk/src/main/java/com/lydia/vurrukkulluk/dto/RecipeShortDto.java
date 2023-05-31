@@ -14,6 +14,7 @@ public class RecipeShortDto {
     private String description;
 
     private KitchenType kitchenType;
+    private List<KitchenCategory> categories;
     private int persons;
     private int price;
     private int calories;
@@ -101,5 +102,13 @@ public class RecipeShortDto {
 
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    public List<KitchenCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<KitchenCategory> categories) {
+        this.categories = categories;
     }
 }

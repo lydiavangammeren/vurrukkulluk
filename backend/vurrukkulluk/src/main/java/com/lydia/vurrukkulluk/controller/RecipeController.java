@@ -3,14 +3,13 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.dto.*;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
-import jdk.jfr.Category;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @RestController
@@ -50,7 +49,6 @@ public class RecipeController {
     recipe.setTitle(recipeCreateDto.getTitle());
     recipe.setDescription(recipeCreateDto.getDescription());
     recipe.setSlug(recipeCreateDto.getSlug());
-    recipe.setImage(recipeCreateDto.getImage());
     KitchenType kitchenType = kitchenTypeService.getById(recipeCreateDto.getKitchenTypeId());
     recipe.setKitchenType(kitchenType);
     KitchenRegion kitchenRegion = kitchenRegionService.getById(recipeCreateDto.getKitchenRegionId());
@@ -86,6 +84,21 @@ public class RecipeController {
     List<Recipe> allRecipes = recipeService.getAllRecipes();
     List<RecipeShortDto> allRecipesShort = allRecipes.stream().map(this::covertRecipeToShortDto).collect(Collectors.toList());
 
+    allRecipesShort.forEach(recipeShortDto -> {
+      List<KitchenCategory> kitchenCategories = new ArrayList<>();
+      List<KitchenCategoriesLink> kitchenCategoriesLinks = kitchenCategoriesLinkService.getKCLinkByRecipeId(recipeShortDto.getId());
+      kitchenCategoriesLinks.forEach((link) -> {
+        kitchenCategories.add(link.getKitchenCategory());
+      });
+      recipeShortDto.setCategories(kitchenCategories);
+
+      List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(recipeShortDto.getId());
+      List<IngredientDto> ingredientsDto = ingredients.stream().map(this::convertIngredientToDto).collect(Collectors.toList());
+      recipeShortDto.setPrice(calculateCurrentPrice(ingredientsDto));
+      recipeShortDto.setCalories(calculateCalories(ingredientsDto));
+
+    });
+
     return allRecipesShort;
   }
 
@@ -101,6 +114,8 @@ public class RecipeController {
     List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(recipeDto.getId());
     List<IngredientDto> ingredientsDto = ingredients.stream().map(this::convertIngredientToDto).collect(Collectors.toList());
     recipeDto.setIngredients(ingredientsDto);
+    recipeDto.setPrice(calculateCurrentPrice(ingredientsDto));
+    recipeDto.setCalories(calculateCalories(ingredientsDto));
 
     List<KitchenCategory> kitchenCategories = new ArrayList<>();
     List<KitchenCategoriesLink> kitchenCategoriesLinks = kitchenCategoriesLinkService.getKCLinkByRecipeId(recipeDto.getId());
@@ -128,6 +143,28 @@ public class RecipeController {
   public String delete(@RequestBody Recipe recipe) {
     recipeService.deleteRecipe(recipe);
     return "Recipe is deleted";
+  }
+
+  public int calculateCurrentPrice(List<IngredientDto> ingredients){
+    AtomicInteger totalPrice = new AtomicInteger();
+
+    ingredients.forEach(ingredientDto -> {
+      int amount = ingredientDto.getAmount();
+      int articlePrice = ingredientDto.getArticle().getPrice();
+      totalPrice.addAndGet(amount * articlePrice);
+    });
+    return totalPrice.get();
+  }
+
+  public int calculateCalories(List<IngredientDto> ingredients) {
+    AtomicInteger totalCalories = new AtomicInteger();
+
+    ingredients.forEach(ingredientDto -> {
+      int amount = ingredientDto.getAmount();
+      int articlePrice = ingredientDto.getArticle().getCalories();
+      totalCalories.addAndGet(amount * articlePrice);
+    });
+    return totalCalories.get();
   }
 
   public RecipeDto convertRecipeToDto(Recipe recipe){
