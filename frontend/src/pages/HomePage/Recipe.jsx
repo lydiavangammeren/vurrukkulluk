@@ -7,29 +7,33 @@ import { VscFlame } from 'react-icons/vsc';
 
 const Recipe = ({recipe}) => {
   const navigate = useNavigate();
+  
   return (
-    <div className='Recipe' key={recipe.id}>
-      {/* <Link to='details' params={{recipe: props.recipe}}> */}
+    //Change for BACKEND API !!!
+    <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.id}`)}>
+    {/* <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.slug}`)}> */}
       
       <div className='recipe_img'>
-      <Link to={`/details/${recipe.id}`}>
+      {/* <Link to={`/details/${recipe.id}`}> */}
         {recipe.image && <img src={require(`../../assets/images/${recipe.image}`)}
                       alt={recipe.image}
                       width="100%"
                       height="auto" />
         }
-      </Link>
+      {/* </Link> */}
       </div>
       <div className='recipe_title_rating'>
-      <Link to={`/details/${recipe.id}`}>
+      {/* <Link to={`/details/${recipe.id}`}> */}
         <div className='recipe_title'><h2>{recipe.title}</h2></div>
-        <Rating />
-      </Link>
+      {/* </Link> */}
+      <Rating />
       </div>
       <div className='recipe_desc'>
-      <Link to={`/details/${recipe.id}`}>
-        <p>{recipe.description}</p>
-      </Link>
+        <div>
+          {/* <Link to={`/details/${recipe.id}`}> */}
+            {recipe.description}
+          {/* </Link> */}
+        </div>
       </div>
       <div className='recipe_bottom'>
         <div className='recipe_button'>

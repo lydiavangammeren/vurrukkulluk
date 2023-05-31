@@ -1,13 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import Recipe from './Recipe';
+// import Recipe from './Recipe';
 
 import api from "../../lib/recipeAPI";
 import Recipes from './Recipes';
 import Pagination from './Pagination';
+import { useRecipes, useRecipesUpdate } from '../../contexts/RecipesContext';
 
-const Home = ({setImages, recipes, setRecipes}) => {
+// const Home = ({setImages, recipes, setRecipes}) => {
+  const Home = ({setImages}) => {
+
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 4;
+  
+  const recipes = useRecipes();
+  const setRecipes = useRecipesUpdate();
+
 
   useEffect(() => {
     const getData = async () => {
@@ -16,10 +23,12 @@ const Home = ({setImages, recipes, setRecipes}) => {
         setRecipes(response.data);
 
         // Set images for carousel
+        // Verzin iets om 5 'random' images te krijgen -> !!
         let items = [];
-        response.data.map((recipe) => {
-          return items.push({src:recipe.image, alt:recipe.image})
-        })
+        for(var i = 0; i < response.data.length; i++){
+          if(i > 4) break;
+          items.push({src:response.data[i].image, alt:response.data[i].image})
+        }
         setImages(items);
 
       } catch(err){

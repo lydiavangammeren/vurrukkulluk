@@ -8,20 +8,29 @@ import api from "../../lib/recipeAPI";
 
 const DetailContent = ({setImages}) => {
   
-  const { id } = useParams();
+  // const { id } = useParams();
+  const { slug } = useParams();
+
   const [details, setDetails] = useState({});
+  
+  // const {info, ingredients, prepsteps, comments} = [...details, details.ingredients, details.preparation, details.comments];
 
   const ingredients = details?.ingredients ?? [];
   const prepsteps = details?.preparation ?? [];
   const comments = details?.comments ?? [];
 
+  // const price = ingredients.length > 0 && ingredients.reduce((currentTotal, ingredient) => {
+  //   return ingredient.article.price + currentTotal;
+  // });
+
   useEffect(() => {
     const getData = async () => {
       try{
-        const response = await api.get(`/details/${id}`);
+        const response = await api.get(`/details/${slug}`);
+        // const response = await api.get(`/recipes/${slug}`);
         setDetails(response.data);
         setImages([{src:response.data.image, alt:response.data.image}]);
-        // console.log(response.data);
+        // console.log(response.data.kitchenRegion.name);
       } catch(err){
         if(err.response){
           //Not in the 200 response range
@@ -34,17 +43,12 @@ const DetailContent = ({setImages}) => {
       }
     }
     getData();
-  }, [id, setImages])
+  }, [slug, setImages])
 
   return (
     <div className='DetailContent'>
       <div className='detailTop'>
-        <Details title={details.title}
-                  image={details.image}
-                  kitchen={details.kitchen}
-                  type={details.type}
-                  description={details.description}
-                  persons={details.persons} price={details.price} calories={details.calories}/>
+        <Details details={details}/>
       </div>
       <div className="detailBottom">
         {ingredients && prepsteps && comments && 

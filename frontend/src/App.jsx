@@ -9,6 +9,7 @@ import HomeContent from "./pages/HomePage";
 import ShoppingCart from "./pages/ShoppingCartPage/ShoppingCart";
 import AddRecipePage from "./pages/AddRecipe/AddRecipePage";
 import "./assets/styles/main.css";
+import { RecipesProvider } from "./contexts/RecipesContext";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -16,7 +17,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header data={images} />
+    <RecipesProvider >
+      <Header data={images} setRecipes={setRecipes} /> {/* Deze werkt niet met BACKEND API */}
       <section>
         <div className="side">
           <Agenda />
@@ -26,7 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomeContent setImages={setImages} recipes={recipes} setRecipes={setRecipes}/>} />
             <Route
-              path="/details/:id"
+              path="/details/:slug"
               element={<DetailContent setImages={setImages} />}
             />
             <Route path="/shoppingcart" element={<ShoppingCart />} />
@@ -34,6 +36,7 @@ function App() {
           </Routes>
         </div>
       </section>
+    </RecipesProvider>
       <Footer />
     </div>
   );

@@ -43,7 +43,12 @@
   /* padding: 0px 6em 0px 6em; */
   font-family: var(--regular);
 }
-
+.greenFont{
+  color: var(--darker-green)
+}
+.pretty{
+  font-family: var(--heading);
+}
 h1, h2, h3, #button {
   font-family: var(--heading);
   font-weight: normal;

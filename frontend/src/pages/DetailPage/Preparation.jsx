@@ -8,10 +8,8 @@ const Preparation = ({prepsteps}) => {
             // <h4>{`${prepstep.step} ${prepstep.desc}`}</h4>
             <PreparationStep prepstep={prepstep} key={index}/>
         ))}
-        <h4>{}</h4>
-        <h4>{}</h4>
-
-    </div> );
+    </div> 
+    );
 }
  
 export default Preparation;
