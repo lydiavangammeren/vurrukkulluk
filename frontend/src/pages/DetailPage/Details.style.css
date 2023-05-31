@@ -10,6 +10,8 @@
 .details_info {
   width: 50%;
   padding: 3% 5%;
+  display: flex;
+  flex-direction: column;
 }
 .details_stats{
   width: 30%;

@@ -9,6 +9,7 @@ const Recipe = ({recipe}) => {
   const navigate = useNavigate();
   
   return (
+    //Change for BACKEND API !!!
     <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.id}`)}>
     {/* <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.slug}`)}> */}
       
