@@ -11,7 +11,7 @@ const Carousel = ({ data }) => {
     // console.log('Switch Image');
     const intervalId = setInterval(() => {
       // console.log(`Data.length: ${data.length}`)
-      console.log(`Slide at useEffect: ${slide}`)
+      // console.log(`Slide at useEffect: ${slide}`)
       setSlide(prevIndex => (prevIndex + 1) % data.length);
     }, 8000);
     return () => clearInterval(intervalId);

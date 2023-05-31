@@ -1,21 +1,21 @@
-.agenda_items{
-    padding-left: 2em;
-    /* border-bottom: solid 1px; */
-}
-.agenda_items p{
-    margin: 0;
-}
-.agenda_items h3{
-    margin: 0;
-}
 .agenda_item{
-    height: 7em;
+    height: 8rem;
     display: flex;
     flex-direction: row;
 }
 .agenda_calendar{
-    padding-top: 0;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
 }
 .agenda_item_info{
-    padding: 0 2em 0 1em;
+    padding: 0 1rem 0 0;
+}
+.agenda_item_title span{
+    font-family: var(--heading);
+    font-size: 1.8rem;
+}
+.agenda_item_date{
+    display: flex;
+    justify-content: space-between;
 }

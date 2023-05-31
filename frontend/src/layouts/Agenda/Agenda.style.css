@@ -8,9 +8,12 @@
     height: 56rem;
     /* overflow: clip; */
   }
-  .Agenda h1{
-    margin: 1rem 0 1rem 2.8em;
+  .agenda-title{
+    display: flex;
+    justify-content: center;
   }
-  .Agenda h2{
-    margin: 0 0 0 2.8em;
+  .agenda-title span{
+    font-family: var(--heading);
+    font-size: 4rem;
+    color: white;
   }
