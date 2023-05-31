@@ -1,16 +1,21 @@
 import React from "react";
 
 const Comment = ({comment}) => {
+  const userImage = comment.user.image;
+  const userName = comment.user.name;
+  const commentTxt = comment.commentText;
+
   return (
     <div className="Comment">
       <div className="comment_img">
-        <img src={require(`../../assets/images/${comment.image}`)} alt={comment.image}
-        />
+        {userImage &&
+          <img src={require(`../../assets/images/${userImage}`)} alt={userImage} />
+        }
       </div>
       <div className="comment_info">
-        <h3>{comment.name}</h3>
+        <h3>{userName}</h3>
         <p>
-          {comment.comment}
+          {commentTxt}
         </p>
       </div>
     </div>

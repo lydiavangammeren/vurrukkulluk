@@ -6,7 +6,27 @@ import { VscFlame } from 'react-icons/vsc';
 import {BsHeart} from 'react-icons/bs';
 
 
-const Details = ({title, image, kitchen, type, description, persons, price, calories}) => {
+const Details = ({details}) => {
+
+  // console.log(`Details: ${details}`)
+
+  const title = details.title;
+  const description = details.description;
+  const image = details.image;
+  const persons = details.persons;
+  // const price = details.price;
+  const calories = details.calories;
+  const kitchenRegion = details?.kitchenRegion?.name ?? '';
+  const kitchenType = details?.kitchenType?.name ?? '';
+
+  const ingredients = details?.ingredients ?? [];
+
+  const price = ingredients.length > 0 && ingredients.reduce((currentTotal, ingredient) => {
+    console.log(`Prijs: ${ingredient.article.price} en currentTotal: ${currentTotal}`)
+    return ingredient.article.price + currentTotal;
+  }, 0);
+
+  // const {title, description, image, kitchenRegion, kitchenType, persons, price, calories} = details;
 
   const myStyle = {
     objectFit: "cover",
@@ -16,7 +36,6 @@ const Details = ({title, image, kitchen, type, description, persons, price, calo
   return (
     <div className='details'>
       <div className='details_img'>
-        {/* <p>{image}</p> */}
         {image && <img src={require(`../../assets/images/${image}`)}
                         alt={image}
                         width="100%"
@@ -34,7 +53,7 @@ const Details = ({title, image, kitchen, type, description, persons, price, calo
 
         <div className="title_rating">
           <div className="details_title">
-            <h2>{title}</h2>
+            <span className="greenFont pretty">{title}</span>
           </div>
           <div className="details_rating">
             <Rating />
@@ -42,26 +61,17 @@ const Details = ({title, image, kitchen, type, description, persons, price, calo
         </div>
         <div className="kitchen_type">
           <div className="details_kitchen">
-            <span className="SpanFont">Keuken</span><span>{kitchen}</span>
+            <span className="SpanFont">Keuken</span><span>{kitchenRegion}</span>
           </div>
           <div className="details_type">
-            <span className="SpanFont">Type</span><span>{type}</span>
+            <span className="SpanFont">Type</span><span>{kitchenType}</span>
           </div>
         </div>
-        <p>{description}</p>
-        {/* <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu
-          metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum
-          feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor
-          feugiat lectus, sit amet gravida elit egestas ac.
-          <br/><br/>
-          Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed
-          consectetur pellentesque, orci tortor consectetur nisl, sed posuere
-          enim sem mattis diam. Sed leo magna, commodo et accumsan gravida,
-          lobortis a diam. Curabitur dignissim finibus nunc in facilisis.
-          Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam
-          ut elit nec eros rhoncus facilisis non a mauris.
-        </p> */}
+        <div className="details_desc">
+          <div className="details_desc_inner">
+            <span>{description}</span>
+          </div>
+        </div>
         <div className="details_buttons">
           <button className="ListButton">Op Lijst</button>
           <button className="FavouriteButton"><BsHeart size={30} color='#b31714' /></button>

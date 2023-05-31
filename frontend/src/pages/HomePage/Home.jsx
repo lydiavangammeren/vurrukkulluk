@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Recipe from './Recipe';
+// import Recipe from './Recipe';
 
 import api from "../../lib/recipeAPI";
 import Recipes from './Recipes';

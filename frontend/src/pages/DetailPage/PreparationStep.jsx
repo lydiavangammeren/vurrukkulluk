@@ -6,7 +6,7 @@ const PreparationStep = ({prepstep}) => {
         <div className="numberCircle">
             <span>{prepstep.step}.</span>
         </div>
-            <span>{prepstep.description}</span>
+            <span>{prepstep.instructions}</span>
         </div>
     );
 }

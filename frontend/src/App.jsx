@@ -28,7 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomeContent setImages={setImages} recipes={recipes} setRecipes={setRecipes}/>} />
             <Route
-              path="/details/:id"
+              path="/details/:slug"
               element={<DetailContent setImages={setImages} />}
             />
             <Route path="/shoppingcart" element={<ShoppingCart />} />
