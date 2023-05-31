@@ -21,8 +21,9 @@ const SearchBar = ({}) => {
         recipe &&
         recipe.title && (
           recipe.title.toLowerCase().includes(value) ||
-          recipe.kitchen.toLowerCase().includes(value) ||
-          recipe.type.toLowerCase().includes(value) ||
+          recipe.kitchenRegion.name.toLowerCase().includes(value) ||
+          recipe.kitchenType.name.toLowerCase().includes(value) ||
+          recipe.categories.includes(value) || //Does not work !!!
           recipe.description.toLowerCase().includes(value)
         )
       )

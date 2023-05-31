@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import api from "../../lib/recipeAPI";
 import AgendaItem from "./AgendaItem";
 
 const Agenda = () => {
 
   const [agendaItems, setAgendaItems] = useState([]);
+  const currentMonth = useRef(12);
 
   useEffect(() => {
     const getData = async () => {
@@ -37,7 +38,7 @@ const Agenda = () => {
       </div>
       {firstFive.map((item, index)=> {
         return(
-          <AgendaItem item={item} />
+          <AgendaItem item={item} currentMonth={currentMonth} />
         )
       })}
     </div>
