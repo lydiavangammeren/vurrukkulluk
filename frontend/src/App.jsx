@@ -6,7 +6,7 @@ import Login from "./layouts/Login";
 import Footer from "./layouts/Footer";
 import DetailContent from "./pages/DetailPage";
 import HomeContent from "./pages/HomePage";
-import Shoppingcarts from "./pages/Shoppingcart/ShoppingCarts";
+import ShoppingCart from "./pages/ShoppingCartPage/ShoppingCart";
 import AddRecipePage from "./pages/AddRecipe/AddRecipePage";
 import "./assets/styles/main.css";
 import { RecipesProvider } from "./contexts/RecipesContext";
@@ -31,7 +31,7 @@ function App() {
               path="/details/:id"
               element={<DetailContent setImages={setImages} />}
             />
-            <Route path="/shoppingcart" element={<Shoppingcarts />} />
+            <Route path="/shoppingcart" element={<ShoppingCart />} />
             <Route path="/addrecipe" element={<AddRecipePage />} />
           </Routes>
         </div>

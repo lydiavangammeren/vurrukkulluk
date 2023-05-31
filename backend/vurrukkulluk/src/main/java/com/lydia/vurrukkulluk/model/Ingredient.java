@@ -17,6 +17,8 @@ public class Ingredient {
     @JoinColumn(name = "recipe_id",nullable = false)
     private Recipe recipe;
 
+    public Ingredient(){
+    }
     public int getId() {
         return id;
     }

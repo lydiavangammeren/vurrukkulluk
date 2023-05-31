@@ -32,7 +32,8 @@
 }
 
 .quantity_value {
-  width: 30px;
+  width: 50px;
+  text-align: center;
 }
 .price_value {
   color: var(--darker-red);

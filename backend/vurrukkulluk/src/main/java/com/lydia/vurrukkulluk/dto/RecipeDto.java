@@ -1,9 +1,6 @@
 package com.lydia.vurrukkulluk.dto;
 
-import com.lydia.vurrukkulluk.model.Ingredient;
-import com.lydia.vurrukkulluk.model.KitchenCategory;
-import com.lydia.vurrukkulluk.model.KitchenRegion;
-import com.lydia.vurrukkulluk.model.KitchenType;
+import com.lydia.vurrukkulluk.model.*;
 
 import java.util.List;
 
@@ -23,6 +20,7 @@ public class RecipeDto {
 
     private List<IngredientDto> ingredients;
 
+    private List<PreparationDto> preparation;
     private float avgRating;
 
     public List<IngredientDto> getIngredients() {
@@ -95,5 +93,13 @@ public class RecipeDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<PreparationDto> getPreparation() {
+        return preparation;
+    }
+
+    public void setPreparation(List<PreparationDto> preparation) {
+        this.preparation = preparation;
     }
 }

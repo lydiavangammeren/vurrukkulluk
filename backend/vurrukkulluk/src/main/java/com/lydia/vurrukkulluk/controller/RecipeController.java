@@ -1,9 +1,6 @@
 package com.lydia.vurrukkulluk.controller;
 
-import com.lydia.vurrukkulluk.dto.CommentDto;
-import com.lydia.vurrukkulluk.dto.IngredientDto;
-import com.lydia.vurrukkulluk.dto.RecipeCreateDto;
-import com.lydia.vurrukkulluk.dto.RecipeDto;
+import com.lydia.vurrukkulluk.dto.*;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
 import jdk.jfr.Category;
@@ -85,8 +82,11 @@ public class RecipeController {
   }
 
   @GetMapping()
-  public List<Recipe> get() {
-    return recipeService.getAllRecipes();
+  public List<RecipeShortDto> get() {
+    List<Recipe> allRecipes = recipeService.getAllRecipes();
+    List<RecipeShortDto> allRecipesShort = allRecipes.stream().map(this::covertRecipeToShortDto).collect(Collectors.toList());
+
+    return allRecipesShort;
   }
 
   @GetMapping("/{slug}")
@@ -108,6 +108,11 @@ public class RecipeController {
       kitchenCategories.add(link.getKitchenCategory());
     });
     recipeDto.setCategories(kitchenCategories);
+
+    List<Preparation> preparationsSteps = preparationService.getAllPreparationsRecipe(recipeDto.getId());
+    List<PreparationDto> preparationsStepsDto = preparationsSteps.stream().map(this::convertPreparationToDto).collect(Collectors.toList());
+    recipeDto.setPreparation(preparationsStepsDto);
+
     recipeDto.setAvgRating(ratingService.getAvgRatingOfRecipe(recipeDto.getId()));
 
     return recipeDto;
@@ -132,8 +137,16 @@ public class RecipeController {
     return modelMapper.map(comment,CommentDto.class);
   }
 
+  public RecipeShortDto covertRecipeToShortDto(Recipe recipe){
+    return modelMapper.map(recipe, RecipeShortDto.class);
+  }
+
   public IngredientDto convertIngredientToDto(Ingredient ingredient){
     return modelMapper.map(ingredient,IngredientDto.class);
+  }
+
+  public PreparationDto convertPreparationToDto(Preparation preparation){
+    return modelMapper.map(preparation,PreparationDto.class);
   }
 
 }
