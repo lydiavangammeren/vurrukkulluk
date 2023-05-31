@@ -326,26 +326,26 @@ INSERT INTO `ingredient` (`id`, `amount`, `article_id`, `recipe_id`) VALUES (99,
 INSERT INTO `ingredient` (`id`, `amount`, `article_id`, `recipe_id`) VALUES (100, '427', 100, 5);
 
 
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (1, 1, 1);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (2, 2, 2);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (3, 3, 3);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (4, 4, 4);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (5, 5, 5);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (6, 6, 1);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (7, 7, 2);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (8, 8, 3);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (9, 9, 4);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (10, 10, 5);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (11, 11, 1);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (12, 12, 2);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (13, 13, 3);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (14, 14, 4);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (15, 15, 5);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (16, 16, 1);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (17, 17, 2);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (18, 18, 3);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (19, 19, 4);
-INSERT INTO `kitchen_categories_link_list` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (20, 20, 5);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (1, 1, 1);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (2, 2, 2);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (3, 3, 3);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (4, 4, 4);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (5, 5, 5);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (6, 6, 1);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (7, 7, 2);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (8, 8, 3);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (9, 9, 4);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (10, 10, 5);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (11, 11, 1);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (12, 12, 2);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (13, 13, 3);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (14, 14, 4);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (15, 15, 5);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (16, 16, 1);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (17, 17, 2);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (18, 18, 3);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (19, 19, 4);
+INSERT INTO `kitchen_categories_link` (`id`, `kitchen_category_id`, `recipe_id`) VALUES (20, 20, 5);
 
 
 INSERT INTO `kitchen_category` (`id`, `name`) VALUES (1, 'eum');
