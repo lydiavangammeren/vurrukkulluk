@@ -33,7 +33,11 @@ public class Recipe {
   private String slug;
   private String description;
   private LocalDateTime timeAdded = LocalDateTime.now();
-  private String image;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "image_id", nullable=true)
+  private Image image;
+  private int persons;
+
 
   public int getId() {
     return id;
@@ -99,11 +103,20 @@ public class Recipe {
     this.timeAdded = timeAdded;
   }
 
-  public String getImage() {
+  public Image getImage() {
     return image;
   }
 
-  public void setImage(String image) {
+  public void setImage(Image image) {
     this.image = image;
   }
+
+  public int getPersons() {
+    return persons;
+  }
+
+  public void setPersons(int persons) {
+    this.persons = persons;
+  }
+
 }

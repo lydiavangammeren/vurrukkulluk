@@ -10,7 +10,8 @@ public class Article {
     private int Id;
     private String name;
     private String description;
-    private long price;
+    private int price;
+    private int calories;
     private String unit;
 
     public Article(){
@@ -24,11 +25,11 @@ public class Article {
         this.description = description;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -54,5 +55,13 @@ public class Article {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
     }
 }

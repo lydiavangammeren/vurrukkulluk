@@ -5,7 +5,7 @@ import jakarta.persistence.Lob;
 
 
 @Entity
-public class UserImage {
+public class Image {
 
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -15,7 +15,6 @@ public class UserImage {
   private String type;
   @Lob
   @Column(name = "imagedata", length=1000000)
-
   private byte[] imageData;
   public int getId() {
     return id;
