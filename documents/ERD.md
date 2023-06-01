@@ -18,7 +18,7 @@ erDiagram
     favorite ||--o{ user : Places
     favorite ||--o{ recipe : Places
     user ||--o{ calendar_item : Places
-    
+    image ||--o{ article : Places
     
     user {
         int    id        PK
@@ -43,6 +43,7 @@ erDiagram
     ingredient {
         int id PK
         int amount
+        int image_id FK
         int article_id FK
         int recipe_id FK
     }
