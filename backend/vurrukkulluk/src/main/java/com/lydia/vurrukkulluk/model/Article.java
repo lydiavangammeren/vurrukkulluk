@@ -14,6 +14,12 @@ public class Article {
     private int calories;
     private String unit;
 
+    private int amount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id",nullable = true)
+    private Image image;
+
     public Article(){
     }
 
