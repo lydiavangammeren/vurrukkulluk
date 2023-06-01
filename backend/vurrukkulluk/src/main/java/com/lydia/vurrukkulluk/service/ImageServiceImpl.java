@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Service
-public class UserImageServiceImpl implements UserImageService {
+public class ImageServiceImpl implements ImageService {
   @Autowired
   private ImageRepository imageRepository;
   @Override
@@ -24,8 +24,8 @@ public class UserImageServiceImpl implements UserImageService {
   }
 
   @Override
-  public byte[] downloadImage(String fileName) {
-    Optional<Image> imageData = imageRepository.findByName(fileName);
+  public byte[] downloadImage(int id) {
+    Optional<Image> imageData = imageRepository.findById(id);
     return UserImageUtil.decompressImage(imageData.get().getImageData());
   }
 }
