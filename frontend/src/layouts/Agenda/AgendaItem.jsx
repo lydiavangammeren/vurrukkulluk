@@ -7,17 +7,17 @@ const AgendaItem = ({item, currentMonth}) => {
   const days = ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"];
 
   const date = new Date(item.date);
-  const monthName = () => {
-    console.log(`Month : ${currentMonth.current} != ${date.getMonth()}`);
-    if(currentMonth.current != date.getMonth()){
-      currentMonth.current = date.getMonth();
-      console.log(`<div><span>${months[date.getMonth()]}</span></div>`);
-      return months[date.getMonth()];
-    } else{
-      return '';
-    }
+  const monthName = () => { 
+    //return <div><span>{months[date.getMonth()]}</span></div>
+    if (currentMonth.current != date.getMonth()) { 
+       return <div><span>{months[date.getMonth()]}</span></div>; 
+     } 
+     else return <></>; 
   }
 
+  currentMonth.current = ((currentMonth.current != date.getMonth()) ? date.getMonth() : currentMonth.current);
+  console.log(monthName());
+  console.log(currentMonth.current);
   return (
     <div className="agenda_item">
       <div className="agenda_calendar">
