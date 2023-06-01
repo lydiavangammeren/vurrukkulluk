@@ -56,7 +56,8 @@ class RecipeControllerTest {
         Article article1 = new Article();
         article1.setCalories(200);
         article1.setPrice(250);
-        article1.setUnit("200g");
+        article1.setUnit("g");
+        article1.setAmount(200);
         article1.setId(1);
         Article article2 = new Article();
         article2.setCalories(150);
