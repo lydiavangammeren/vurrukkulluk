@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
     <RecipesProvider >
-      <Header data={images} setRecipes={setRecipes} /> {/* Deze werkt niet met BACKEND API */}
+      <Header data={images} setRecipes={setRecipes} /> { /* Deze werkt niet met BACKEND API */}
       <section>
         <div className="side">
           <Agenda />

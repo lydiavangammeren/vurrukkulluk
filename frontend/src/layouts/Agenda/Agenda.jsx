@@ -38,7 +38,7 @@ const Agenda = () => {
       </div>
       {firstFive.map((item, index)=> {
         return(
-          <AgendaItem item={item} currentMonth={currentMonth} />
+          <AgendaItem key = {index} item={item} currentMonth={currentMonth} />
         )
       })}
     </div>

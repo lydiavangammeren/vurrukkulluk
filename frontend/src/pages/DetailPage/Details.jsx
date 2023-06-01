@@ -14,17 +14,17 @@ const Details = ({details}) => {
   const description = details.description;
   const image = details.image;
   const persons = details.persons;
-  // const price = details.price;
+  const price = details.price;
   const calories = details.calories;
   const kitchenRegion = details?.kitchenRegion?.name ?? '';
   const kitchenType = details?.kitchenType?.name ?? '';
 
-  const ingredients = details?.ingredients ?? [];
+  // const ingredients = details?.ingredients ?? [];
 
-  const price = ingredients.length > 0 && ingredients.reduce((currentTotal, ingredient) => {
-    console.log(`Prijs: ${ingredient.article.price} en currentTotal: ${currentTotal}`)
-    return ingredient.article.price + currentTotal;
-  }, 0);
+  // const price = ingredients.length > 0 && ingredients.reduce((currentTotal, ingredient) => {
+  //   console.log(`Prijs: ${ingredient.article.price} en currentTotal: ${currentTotal}`)
+  //   return ingredient.article.price + currentTotal;
+  // }, 0);
 
   // const {title, description, image, kitchenRegion, kitchenType, persons, price, calories} = details;
 
