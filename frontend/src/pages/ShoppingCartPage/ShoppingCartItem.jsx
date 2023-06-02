@@ -20,7 +20,7 @@ const ShoppingCartItem = ({product, checked, dispatch}) => {
           height="100%"
         />
       </td>
-      <td>
+      <td className="shoppingcart_desc">
         <h2>{product.title}</h2>
         <p>{product.desc}</p>
       </td>
