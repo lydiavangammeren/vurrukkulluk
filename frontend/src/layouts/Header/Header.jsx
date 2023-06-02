@@ -4,7 +4,7 @@ import { SlMenu } from 'react-icons/sl'
 import { Link } from 'react-router-dom'
 import { SearchResultsList } from './SearchResultsList'
 
-const Header = ({setVisible, setRecipes}) => {
+const Header = ({setVisible}) => {
   // const [results, setResults] = useState([]);
 
   return (
@@ -18,7 +18,7 @@ const Header = ({setVisible, setRecipes}) => {
       </div>
       <div className='header-right'>
         <div className='searchBar'>
-          <SearchBar setRecipes={setRecipes} />
+          <SearchBar />
           {/* {results && results.length > 0 && <SearchResultsList results={results} />} */}
         </div>
 

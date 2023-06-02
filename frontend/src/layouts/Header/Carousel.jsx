@@ -2,10 +2,19 @@ import React, { useState, useEffect } from "react";
 import "./Carousel.css";
 import Header from "./Header";
 import MainMenu from "./MainMenu";
+import { useAppContext, useRecipes } from "../../contexts";
 
-const Carousel = ({ data }) => {
+const Carousel = () => {
   const [slide, setSlide] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
+  const {recipes} = useAppContext();
+
+  const setImages = () => {
+    const shuffled = recipes.sort(() => 0.5 - Math.random());
+    
+  }
+
+  const data = []
 
   useEffect(() => {
     // console.log('Switch Image');

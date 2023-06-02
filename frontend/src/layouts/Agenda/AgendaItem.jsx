@@ -16,8 +16,8 @@ const AgendaItem = ({item, currentMonth}) => {
   }
 
   currentMonth.current = ((currentMonth.current != date.getMonth()) ? date.getMonth() : currentMonth.current);
-  console.log(monthName());
-  console.log(currentMonth.current);
+  // console.log(monthName());
+  // console.log(currentMonth.current);
   return (
     <div className="agenda_item">
       <div className="agenda_calendar">
