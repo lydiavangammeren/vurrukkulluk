@@ -31,6 +31,11 @@ public class KitchenTypeServiceImpl implements KitchenTypeService {
   }
 
   @Override
+  public List<KitchenType> getAll() {
+    return kitchenTypeRepository.findAll();
+  }
+
+  @Override
   public KitchenType getById(int id) {
     return kitchenTypeRepository.findById(id);
   }

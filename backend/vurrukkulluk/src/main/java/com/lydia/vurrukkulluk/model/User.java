@@ -1,9 +1,6 @@
 package com.lydia.vurrukkulluk.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class User {
@@ -17,7 +14,9 @@ public class User {
   private String name;
   private String password;
   private String email;
-  private String image;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "image_id",nullable = true)
+  private Image image;
   public int getId() {
     return id;
   }
@@ -50,11 +49,11 @@ public class User {
     this.email = email;
   }
 
-  public String getImage() {
+  public Image getImage() {
     return image;
   }
 
-  public void setImage(String image) {
+  public void setImage(Image image) {
     this.image = image;
   }
 }

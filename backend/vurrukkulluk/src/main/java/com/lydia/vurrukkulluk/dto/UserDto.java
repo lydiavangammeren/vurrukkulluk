@@ -5,7 +5,9 @@ public class UserDto {
 
     private String name;
 
-    private String image;
+    private String email;
+
+    private int imageId;
 
     public int getId() {
         return id;
@@ -23,11 +25,19 @@ public class UserDto {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public int getImageId() {
+        return imageId;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

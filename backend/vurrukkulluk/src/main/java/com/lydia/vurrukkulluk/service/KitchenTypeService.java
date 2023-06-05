@@ -10,5 +10,7 @@ public interface KitchenTypeService {
   public void deleteById(int id);
   public void deleteKitchenType(KitchenType kitchenType);
 
+  public List<KitchenType> getAll();
+
   public KitchenType getById(int id);
 }
