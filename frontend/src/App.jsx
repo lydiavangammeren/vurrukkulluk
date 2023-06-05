@@ -13,9 +13,8 @@ import { useDatabase } from "./hooks"
 import { ContextProvider } from "./contexts";
 
 function App() {
-  const [recipes, isLoaded] = useDatabase('details');
+  const [recipes, isLoaded] = useDatabase('recipes'); // Get all data from database (Recipes+ingredients+preparation+comments)
   const [images, setImages] = useState([]);
-
 
 
   const renderContent = () => {

@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Details from "./Details";
 import TabWrapper from "./TabWrapper";
 import { useAppContext } from "../../contexts";
 
 
-const DetailContent = ({setImages}) => {
+const DetailContent = () => {
   
   const { slug } = useParams();
   
-  const { recipes } = useAppContext();
+  const { recipes, setBannerImages } = useAppContext();
   const details = recipes.find(recipe => recipe.slug === slug);
   
   const ingredients = details?.ingredients ?? [];
   const prepsteps = details?.preparation ?? [];
   const comments = details?.comments ?? [];
+
 
   return (
     <div className='DetailContent'>

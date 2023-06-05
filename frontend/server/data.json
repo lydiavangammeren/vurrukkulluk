@@ -4,7 +4,7 @@
       "id": 0,
       "title": "Eggs & Veggies",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "EggsAndVeggies2.jpg",
+      "image": "EggsAndVeggies.jpg",
       "kitchenType": {
         "id":0,
         "name":"Vegetarisch"
@@ -16,7 +16,7 @@
       "categories":[
         {
           "id":0,
-          "name":"Vegan"
+          "name":"Goedkoop"
         }
       ],
       "persons": 4,
@@ -24,7 +24,108 @@
       "calories": 432,
       "avgRating":3,
       "imgid": 0,
-      "slug": "eggsandveggies"
+      "slug": "eggs-and-veggies",
+      "ingredients": [
+        {
+          "article": {
+            "name": "Vegan Burger Bun",
+            "image": "hamb.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 3,
+            "unit": "broodje",
+            "id": 0
+          },
+          "amount": 1
+        },
+        {
+          "article": {
+            "name": "Vegan Burger",
+            "image": "VeganBurgerI.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 1,
+            "unit": "gram",
+            "id": 0
+          },
+          "amount": 320
+        },
+        {
+          "article": {
+            "name": "Vegan Burger Sauce",
+            "image": "VeganSauce.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 1,
+            "unit": "ml",
+            "id": 0
+          },
+          "amount": 30
+        },
+        {
+          "article": {
+            "name": "Avocado",
+            "image": "avocado.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 2,
+            "unit": "stuks",
+            "id": 0
+          },
+          "amount": 1
+        }
+      ],
+      "preparation": [
+        {
+          "id": 0,
+          "step": 1,
+          "instructions": "Eggs & Veggies ipsum bla bla bla"
+        },
+        {
+          "id": 1,
+          "step": 2,
+          "instructions": "Lorem ipsum bla bla bla"
+        },
+        {
+          "id": 2,
+          "step": 3,
+          "instructions": "Lorem ipsum bla bla bla"
+        }
+      ],
+      "comments": [
+        {
+          "id": 0,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 0,
+            "name": "Tommy Tuup",
+            "image": "IMG_4420.JPG"
+          }
+        },
+        {
+          "id": 1,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 1,
+            "name": "Bennie Blind",
+            "image": "IMG_4420.JPG"
+          }
+        },
+        {
+          "id": 2,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 2,
+            "name": "Sammy Suf",
+            "image": "IMG_4420.JPG"
+          }
+        },
+        {
+          "id": 3,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 3,
+            "name": "Katinka Cool",
+            "image": "IMG_4420.JPG"
+          }
+        }
+      ]
     },
     {
       "id": 1,
@@ -49,8 +150,109 @@
       "price": 12,
       "calories": 432,
       "avgRating":3,
-      "imgid": 0,
-      "slug": "veganburger"
+      "imgid": 1,
+      "slug":"vegan-burger",
+      "ingredients": [
+        {
+          "article": {
+            "name": "Vegan Burger Bun",
+            "image": "hamb.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 3,
+            "unit": "broodje",
+            "id": 0
+          },
+          "amount": 1
+        },
+        {
+          "article": {
+            "name": "Vegan Burger",
+            "image": "VeganBurgerI.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 1,
+            "unit": "gram",
+            "id": 0
+          },
+          "amount": 320
+        },
+        {
+          "article": {
+            "name": "Vegan Burger Sauce",
+            "image": "VeganSauce.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 1,
+            "unit": "ml",
+            "id": 0
+          },
+          "amount": 30
+        },
+        {
+          "article": {
+            "name": "Avocado",
+            "image": "avocado.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 2,
+            "unit": "stuks",
+            "id": 0
+          },
+          "amount": 1
+        }
+      ],
+      "preparation": [
+        {
+          "id": 0,
+          "step": 1,
+          "instructions": "Eggs & Veggies ipsum bla bla bla"
+        },
+        {
+          "id": 1,
+          "step": 2,
+          "instructions": "Lorem ipsum bla bla bla"
+        },
+        {
+          "id": 2,
+          "step": 3,
+          "instructions": "Lorem ipsum bla bla bla"
+        }
+      ],
+      "comments": [
+        {
+          "id": 0,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 0,
+            "name": "Tommy Tuup",
+            "image": "IMG_4420.JPG"
+          }
+        },
+        {
+          "id": 1,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 1,
+            "name": "Bennie Blind",
+            "image": "IMG_4420.JPG"
+          }
+        },
+        {
+          "id": 2,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 2,
+            "name": "Sammy Suf",
+            "image": "IMG_4420.JPG"
+          }
+        },
+        {
+          "id": 3,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 3,
+            "name": "Katinka Cool",
+            "image": "IMG_4420.JPG"
+          }
+        }
+      ]
     },
     {
       "id": 2,
@@ -75,8 +277,109 @@
       "price": 12,
       "calories": 432,
       "avgRating":3,
-      "imgid": 0,
-      "slug": "sushirolls"
+      "imgid": 2,
+      "slug":"sushi-rolls",
+      "ingredients": [
+        {
+          "article": {
+            "name": "Vegan Burger Bun",
+            "image": "hamb.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 3,
+            "unit": "broodje",
+            "id": 0
+          },
+          "amount": 1
+        },
+        {
+          "article": {
+            "name": "Vegan Burger",
+            "image": "VeganBurgerI.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 1,
+            "unit": "gram",
+            "id": 0
+          },
+          "amount": 320
+        },
+        {
+          "article": {
+            "name": "Vegan Burger Sauce",
+            "image": "VeganSauce.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 1,
+            "unit": "ml",
+            "id": 0
+          },
+          "amount": 30
+        },
+        {
+          "article": {
+            "name": "Avocado",
+            "image": "avocado.jpg",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+            "price": 2,
+            "unit": "stuks",
+            "id": 0
+          },
+          "amount": 1
+        }
+      ],
+      "preparation": [
+        {
+          "id": 0,
+          "step": 1,
+          "instructions": "Eggs & Veggies ipsum bla bla bla"
+        },
+        {
+          "id": 1,
+          "step": 2,
+          "instructions": "Lorem ipsum bla bla bla"
+        },
+        {
+          "id": 2,
+          "step": 3,
+          "instructions": "Lorem ipsum bla bla bla"
+        }
+      ],
+      "comments": [
+        {
+          "id": 0,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 0,
+            "name": "Tommy Tuup",
+            "image": "IMG_4420.JPG"
+          }
+        },
+        {
+          "id": 1,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 1,
+            "name": "Bennie Blind",
+            "image": "IMG_4420.JPG"
+          }
+        },
+        {
+          "id": 2,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 2,
+            "name": "Sammy Suf",
+            "image": "IMG_4420.JPG"
+          }
+        },
+        {
+          "id": 3,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 3,
+            "name": "Katinka Cool",
+            "image": "IMG_4420.JPG"
+          }
+        }
+      ]
     },
     {
       "id": 3,
@@ -101,509 +404,8 @@
       "price": 12,
       "calories": 432,
       "avgRating":3,
-      "imgid": 0,
-      "slug": "pizzagreen"
-    },
-    {
-      "id": 4,
-      "title": "Eggs & Veggies 2",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "EggsAndVeggies.jpg",
-      "kitchenType": {
-        "id":0,
-        "name":"Vegetarisch"
-      },
-      "kitchenRegion": {
-        "id":0,
-        "name":"Nederlands"
-      },
-      "categories":[
-        {
-          "id":0,
-          "name":"Vegan"
-        }
-      ],
-      "persons": 4,
-      "price": 12,
-      "calories": 432,
-      "avgRating":3,
-      "imgid": 0,
-      "slug": "eggsandveggies"
-    },
-    {
-      "id": 5,
-      "title": "Vegan Burger 2",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "VeganBurger.jpg",
-      "kitchenType": {
-        "id":0,
-        "name":"Vegan"
-      },
-      "kitchenRegion": {
-        "id":1,
-        "name":"Amerikaans"
-      },
-      "categories":[
-        {
-          "id":0,
-          "name":"Goedkoop"
-        }
-      ],
-      "persons": 4,
-      "price": 12,
-      "calories": 432,
-      "avgRating":3,
-      "imgid": 0,
-      "slug": "veganburger"
-    },
-    {
-      "id": 6,
-      "title": "Sushi Rolls 2",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "SushiRolls.jpg",
-      "kitchenType": {
-        "id":0,
-        "name":"Vis"
-      },
-      "kitchenRegion": {
-        "id":1,
-        "name":"Japans"
-      },
-      "categories":[
-        {
-          "id":1,
-          "name":"Duur"
-        }
-      ],
-      "persons": 4,
-      "price": 12,
-      "calories": 432,
-      "avgRating":3,
-      "imgid": 0,
-      "slug": "sushirolls"
-    },
-    {
-      "id": 7,
-      "title": "Pizza Green 2",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "PizzaGreen.jpg",
-      "kitchenType": {
-        "id":0,
-        "name":"Vlees"
-      },
-      "kitchenRegion": {
-        "id":1,
-        "name":"Italiaans"
-      },
-      "categories":[
-        {
-          "id":2,
-          "name":"Lekker"
-        }
-      ],
-      "persons": 4,
-      "price": 12,
-      "calories": 432,
-      "avgRating":3,
-      "imgid": 0,
-      "slug": "pizzagreen"
-    }
-  ],
-  "details": [
-    {
-      "slug":"eggsandveggies",
-      "id": 0,
-      "title": "Eggs & Veggies",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "EggsAndVeggies.jpg",
-      "kitchenType": {
-        "id":0,
-        "name":"Vegetarisch"
-      },
-      "kitchenRegion": {
-        "id":0,
-        "name":"Nederlands"
-      },
-      "categories":[
-        {
-          "id":0,
-          "name":"Goedkoop"
-        }
-      ],
-      "persons": 4,
-      "calories": 432,
-      "ingredients": [
-        {
-          "article": {
-            "name": "Vegan Burger Bun",
-            "image": "hamb.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 3,
-            "unit": "broodje",
-            "id": 0
-          },
-          "amount": 1
-        },
-        {
-          "article": {
-            "name": "Vegan Burger",
-            "image": "VeganBurgerI.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 1,
-            "unit": "gram",
-            "id": 0
-          },
-          "amount": 320
-        },
-        {
-          "article": {
-            "name": "Vegan Burger Sauce",
-            "image": "VeganSauce.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 1,
-            "unit": "ml",
-            "id": 0
-          },
-          "amount": 30
-        },
-        {
-          "article": {
-            "name": "Avocado",
-            "image": "avocado.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 2,
-            "unit": "stuks",
-            "id": 0
-          },
-          "amount": 1
-        }
-      ],
-      "preparation": [
-        {
-          "id": 0,
-          "step": 1,
-          "instructions": "Eggs & Veggies ipsum bla bla bla"
-        },
-        {
-          "id": 1,
-          "step": 2,
-          "instructions": "Lorem ipsum bla bla bla"
-        },
-        {
-          "id": 2,
-          "step": 3,
-          "instructions": "Lorem ipsum bla bla bla"
-        }
-      ],
-      "comments": [
-        {
-          "id": 0,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 0,
-            "name": "Tommy Tuup",
-            "image": "IMG_4420.JPG"
-          }
-        },
-        {
-          "id": 1,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 1,
-            "name": "Bennie Blind",
-            "image": "IMG_4420.JPG"
-          }
-        },
-        {
-          "id": 2,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 2,
-            "name": "Sammy Suf",
-            "image": "IMG_4420.JPG"
-          }
-        },
-        {
-          "id": 3,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 3,
-            "name": "Katinka Cool",
-            "image": "IMG_4420.JPG"
-          }
-        }
-      ]
-    },
-    {
-      "slug":"veganburger",
-      "id": 1,
-      "title": "Vegan Burger",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "VeganBurger.jpg",
-      "kitchenType": {
-        "id":0,
-        "name":"Vegan"
-      },
-      "kitchenRegion": {
-        "id":1,
-        "name":"Amerikaans"
-      },
-      "categories":[
-        {
-          "id":0,
-          "name":"Goedkoop"
-        }
-      ],
-      "persons": 4,
-      "calories": 432,
-      "ingredients": [
-        {
-          "article": {
-            "name": "Vegan Burger Bun",
-            "image": "hamb.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 3,
-            "unit": "broodje",
-            "id": 0
-          },
-          "amount": 1
-        },
-        {
-          "article": {
-            "name": "Vegan Burger",
-            "image": "VeganBurgerI.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 1,
-            "unit": "gram",
-            "id": 0
-          },
-          "amount": 320
-        },
-        {
-          "article": {
-            "name": "Vegan Burger Sauce",
-            "image": "VeganSauce.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 1,
-            "unit": "ml",
-            "id": 0
-          },
-          "amount": 30
-        },
-        {
-          "article": {
-            "name": "Avocado",
-            "image": "avocado.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 2,
-            "unit": "stuks",
-            "id": 0
-          },
-          "amount": 1
-        }
-      ],
-      "preparation": [
-        {
-          "id": 0,
-          "step": 1,
-          "instructions": "Eggs & Veggies ipsum bla bla bla"
-        },
-        {
-          "id": 1,
-          "step": 2,
-          "instructions": "Lorem ipsum bla bla bla"
-        },
-        {
-          "id": 2,
-          "step": 3,
-          "instructions": "Lorem ipsum bla bla bla"
-        }
-      ],
-      "comments": [
-        {
-          "id": 0,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 0,
-            "name": "Tommy Tuup",
-            "image": "IMG_4420.JPG"
-          }
-        },
-        {
-          "id": 1,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 1,
-            "name": "Bennie Blind",
-            "image": "IMG_4420.JPG"
-          }
-        },
-        {
-          "id": 2,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 2,
-            "name": "Sammy Suf",
-            "image": "IMG_4420.JPG"
-          }
-        },
-        {
-          "id": 3,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 3,
-            "name": "Katinka Cool",
-            "image": "IMG_4420.JPG"
-          }
-        }
-      ]
-    },
-    {
-      "slug":"sushirolls",
-      "id": 2,
-      "title": "Sushi Rolls",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "SushiRolls.jpg",
-      "kitchenType": {
-        "id":0,
-        "name":"Vis"
-      },
-      "kitchenRegion": {
-        "id":1,
-        "name":"Japans"
-      },
-      "categories":[
-        {
-          "id":1,
-          "name":"Duur"
-        }
-      ],
-      "persons": 4,
-      "calories": 432,
-      "ingredients": [
-        {
-          "article": {
-            "name": "Vegan Burger Bun",
-            "image": "hamb.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 3,
-            "unit": "broodje",
-            "id": 0
-          },
-          "amount": 1
-        },
-        {
-          "article": {
-            "name": "Vegan Burger",
-            "image": "VeganBurgerI.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 1,
-            "unit": "gram",
-            "id": 0
-          },
-          "amount": 320
-        },
-        {
-          "article": {
-            "name": "Vegan Burger Sauce",
-            "image": "VeganSauce.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 1,
-            "unit": "ml",
-            "id": 0
-          },
-          "amount": 30
-        },
-        {
-          "article": {
-            "name": "Avocado",
-            "image": "avocado.jpg",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-            "price": 2,
-            "unit": "stuks",
-            "id": 0
-          },
-          "amount": 1
-        }
-      ],
-      "preparation": [
-        {
-          "id": 0,
-          "step": 1,
-          "instructions": "Eggs & Veggies ipsum bla bla bla"
-        },
-        {
-          "id": 1,
-          "step": 2,
-          "instructions": "Lorem ipsum bla bla bla"
-        },
-        {
-          "id": 2,
-          "step": 3,
-          "instructions": "Lorem ipsum bla bla bla"
-        }
-      ],
-      "comments": [
-        {
-          "id": 0,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 0,
-            "name": "Tommy Tuup",
-            "image": "IMG_4420.JPG"
-          }
-        },
-        {
-          "id": 1,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 1,
-            "name": "Bennie Blind",
-            "image": "IMG_4420.JPG"
-          }
-        },
-        {
-          "id": 2,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 2,
-            "name": "Sammy Suf",
-            "image": "IMG_4420.JPG"
-          }
-        },
-        {
-          "id": 3,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 3,
-            "name": "Katinka Cool",
-            "image": "IMG_4420.JPG"
-          }
-        }
-      ]
-    },
-    {
-      "slug":"pizzagreen",
-      "id": 3,
-      "title": "Pizza Green",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "PizzaGreen.jpg",
-      "kitchenType": {
-        "id":0,
-        "name":"Vlees"
-      },
-      "kitchenRegion": {
-        "id":1,
-        "name":"Italiaans"
-      },
-      "categories":[
-        {
-          "id":2,
-          "name":"Lekker"
-        }
-      ],
-      "persons": 4,
-      "calories": 432,
+      "imgid": 3,
+      "slug":"pizza-green",
       "ingredients": [
         {
           "article": {
@@ -790,6 +592,25 @@
       "title":"Vegetarisch koken", 
       "date": "2023-08-25 14:00:00",
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
+    }
+  ], 
+  "download":
+  [
+    {
+      "id":0,
+      "src": "EggsAndVeggies.jpg"
+    },
+    {
+      "id":1,
+      "src": "VeganBurger.jpg"
+    },
+    {
+      "id":2,
+      "src": "SushiRolls.jpg"
+    },
+    {
+      "id":3,
+      "src": "PizzaGreen.jpg"
     }
   ]
 }

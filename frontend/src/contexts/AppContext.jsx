@@ -1,4 +1,4 @@
-import { createContext, useContext, useState} from "react"
+import { createContext, useContext, useEffect, useState} from "react"
 
 const AppContext = createContext()
 
@@ -10,8 +10,12 @@ export function ContextProvider({children, recipes}){
   const [bannerImages, setBannerImages] = useState([]);
   const [searchValue, setSearchValue]= useState('');
 
+  // useEffect(() => {
+  //   console.log('Set banner Images')
+  // }, [bannerImages])
+
   return (
-    <AppContext.Provider value={{recipes, searchValue, setSearchValue}} >
+    <AppContext.Provider value={{recipes, searchValue, setSearchValue, bannerImages, setBannerImages}} >
       {children}
     </AppContext.Provider>
   )

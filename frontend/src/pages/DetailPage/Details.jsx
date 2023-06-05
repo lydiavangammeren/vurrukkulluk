@@ -1,32 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Rating from "../../components/Rating";
 import { HiUsers } from 'react-icons/hi';
 import { MdEuro } from 'react-icons/md';
 import { VscFlame } from 'react-icons/vsc';
 import {BsHeart} from 'react-icons/bs';
 
+import { useDatabase } from "../../hooks";
+import { useAppContext } from "../../contexts";
 
 const Details = ({details}) => {
 
-  // console.log(`Details: ${details}`)
-
   const title = details.title;
   const description = details.description;
-  const image = details.image;
+  const imgid = details.imgid;
   const persons = details.persons;
   const price = details.price;
   const calories = details.calories;
   const kitchenRegion = details?.kitchenRegion?.name ?? '';
   const kitchenType = details?.kitchenType?.name ?? '';
 
-  // const ingredients = details?.ingredients ?? [];
-
-  // const price = ingredients.length > 0 && ingredients.reduce((currentTotal, ingredient) => {
-  //   console.log(`Prijs: ${ingredient.article.price} en currentTotal: ${currentTotal}`)
-  //   return ingredient.article.price + currentTotal;
-  // }, 0);
-
   // const {title, description, image, kitchenRegion, kitchenType, persons, price, calories} = details;
+  // const {setBannerImages} = useAppContext();
+  // setBannerImages([imgid]);
+
+  const [image, imageLoaded] = useDatabase(`download/${imgid}`);
+
+  const renderImage = () => {
+    if(imageLoaded){
+      return (
+         <img src={require(`../../assets/images/${image.src}`)}
+              alt={image.src}
+              width="100%"
+              height="100%" 
+              style={myStyle}/>
+      )
+    }
+  }
 
   const myStyle = {
     objectFit: "cover",
@@ -36,13 +45,7 @@ const Details = ({details}) => {
   return (
     <div className='details'>
       <div className='details_img'>
-        {image && <img src={require(`../../assets/images/${image}`)}
-                        alt={image}
-                        width="100%"
-                        height="100%" 
-                        style={myStyle}/>
-        }
-      
+        {renderImage()}
       </div>
       <div className="details_info">
         <div className="details_stats">
