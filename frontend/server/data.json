@@ -4,10 +4,10 @@
       "id": 0,
       "title": "Eggs & Veggies",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "EggsAndVeggies.jpg",
+      "image": "EggsAndVeggies2.jpg",
       "kitchenType": {
         "id":0,
-        "name":"Vegatarisch"
+        "name":"Vegetarisch"
       },
       "kitchenRegion": {
         "id":0,
@@ -16,7 +16,7 @@
       "categories":[
         {
           "id":0,
-          "name":"Goedkoop"
+          "name":"Vegan"
         }
       ],
       "persons": 4,
@@ -81,6 +81,110 @@
     {
       "id": 3,
       "title": "Pizza Green",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
+      "image": "PizzaGreen.jpg",
+      "kitchenType": {
+        "id":0,
+        "name":"Vlees"
+      },
+      "kitchenRegion": {
+        "id":1,
+        "name":"Italiaans"
+      },
+      "categories":[
+        {
+          "id":2,
+          "name":"Lekker"
+        }
+      ],
+      "persons": 4,
+      "price": 12,
+      "calories": 432,
+      "avgRating":3,
+      "imgid": 0,
+      "slug": "pizzagreen"
+    },
+    {
+      "id": 4,
+      "title": "Eggs & Veggies 2",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
+      "image": "EggsAndVeggies.jpg",
+      "kitchenType": {
+        "id":0,
+        "name":"Vegetarisch"
+      },
+      "kitchenRegion": {
+        "id":0,
+        "name":"Nederlands"
+      },
+      "categories":[
+        {
+          "id":0,
+          "name":"Vegan"
+        }
+      ],
+      "persons": 4,
+      "price": 12,
+      "calories": 432,
+      "avgRating":3,
+      "imgid": 0,
+      "slug": "eggsandveggies"
+    },
+    {
+      "id": 5,
+      "title": "Vegan Burger 2",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
+      "image": "VeganBurger.jpg",
+      "kitchenType": {
+        "id":0,
+        "name":"Vegan"
+      },
+      "kitchenRegion": {
+        "id":1,
+        "name":"Amerikaans"
+      },
+      "categories":[
+        {
+          "id":0,
+          "name":"Goedkoop"
+        }
+      ],
+      "persons": 4,
+      "price": 12,
+      "calories": 432,
+      "avgRating":3,
+      "imgid": 0,
+      "slug": "veganburger"
+    },
+    {
+      "id": 6,
+      "title": "Sushi Rolls 2",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
+      "image": "SushiRolls.jpg",
+      "kitchenType": {
+        "id":0,
+        "name":"Vis"
+      },
+      "kitchenRegion": {
+        "id":1,
+        "name":"Japans"
+      },
+      "categories":[
+        {
+          "id":1,
+          "name":"Duur"
+        }
+      ],
+      "persons": 4,
+      "price": 12,
+      "calories": 432,
+      "avgRating":3,
+      "imgid": 0,
+      "slug": "sushirolls"
+    },
+    {
+      "id": 7,
+      "title": "Pizza Green 2",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
       "image": "PizzaGreen.jpg",
       "kitchenType": {

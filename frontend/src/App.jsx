@@ -9,24 +9,33 @@ import HomeContent from "./pages/HomePage";
 import ShoppingCart from "./pages/ShoppingCartPage/ShoppingCart";
 import AddRecipePage from "./pages/AddRecipe/AddRecipePage";
 import "./assets/styles/main.css";
-import { RecipesProvider } from "./contexts/RecipesContext";
+// import { RecipesProvider, useRecipes } from "./contexts/RecipesContext";
+import { useDatabase } from "./hooks"
+// import { AppContext, RecipesProvider, useRecipes} from "./contexts";
+import { ContextProvider, AppContext } from "./contexts";
 
 function App() {
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, isLoaded] = useDatabase('recipes');
   const [images, setImages] = useState([]);
 
-  return (
-    <div className="App">
-    <RecipesProvider >
-      <Header data={images} setRecipes={setRecipes} /> {/* Deze werkt niet met BACKEND API */}
-      <section>
-        <div className="side">
-          <Agenda />
-          <Login />
-        </div>
-        <div className="pageContainer">
+
+
+  const renderContent = () => {
+    if(isLoaded){
+      // console.log('Data fresh from database:')
+      // console.log(recipes)
+      return (
+        <ContextProvider recipes={recipes} >
+        <div className="App">
+        <Header data={images} />
+        <section>
+          <div className="side">
+            <Agenda />
+            <Login />
+          </div>
+          <div className="pageContainer">
           <Routes>
-            <Route path="/" element={<HomeContent setImages={setImages} recipes={recipes} setRecipes={setRecipes}/>} />
+            <Route path="/" element={<HomeContent setImages={setImages}/>} />
             <Route
               path="/details/:slug"
               element={<DetailContent setImages={setImages} />}
@@ -34,11 +43,19 @@ function App() {
             <Route path="/shoppingcart" element={<ShoppingCart />} />
             <Route path="/addrecipe" element={<AddRecipePage />} />
           </Routes>
+          </div>
+        </section>
+        <Footer />
         </div>
-      </section>
-    </RecipesProvider>
-      <Footer />
-    </div>
+        </ContextProvider>
+      )
+    }
+  }
+
+  return (
+    
+      renderContent()
+    
   );
 }
 

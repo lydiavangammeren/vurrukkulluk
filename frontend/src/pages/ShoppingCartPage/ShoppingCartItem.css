@@ -19,6 +19,14 @@
 .shoppingcart_info h3 {
   color: var(--darker-green);
 }
+
+.shoppingcart_desc p {
+  /* Show at most 3 lines of text */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 .quantity_span {
   font-family: var(--heading);
   font-size: 20px;

@@ -112,25 +112,23 @@ public class RecipeController {
   }
 
   public int calculateCurrentPrice(List<IngredientDto> ingredients){
-    AtomicInteger totalPrice = new AtomicInteger();
 
-    ingredients.forEach(ingredientDto -> {
-      int amount = ingredientDto.getAmount();
-      int articlePrice = ingredientDto.getArticle().getPrice();
-      totalPrice.addAndGet(amount * articlePrice);
-    });
-    return totalPrice.get();
+    return ingredients.stream().map(ingredientDto -> {
+        int amount = ingredientDto.getAmount();
+        int articlePrice = ingredientDto.getArticle().getPrice();
+        int articleAmount = ingredientDto.getArticle().getAmount();
+        return (amount * articlePrice)/ articleAmount;})
+            .reduce(0, (a, b) -> a+b);
   }
 
   public int calculateCalories(List<IngredientDto> ingredients) {
-    AtomicInteger totalCalories = new AtomicInteger();
 
-    ingredients.forEach(ingredientDto -> {
-      int amount = ingredientDto.getAmount();
-      int articlePrice = ingredientDto.getArticle().getCalories();
-      totalCalories.addAndGet(amount * articlePrice);
-    });
-    return totalCalories.get();
+    return ingredients.stream().map(ingredientDto -> {
+              int amount = ingredientDto.getAmount();
+              int articleCalories = ingredientDto.getArticle().getCalories();
+              int articleAmount = ingredientDto.getArticle().getAmount();
+              return (amount * articleCalories)/ articleAmount;})
+            .reduce(0, (a, b) -> a+b);
   }
 
   public RecipeDto fillRecipeDto(RecipeDto recipeDto){

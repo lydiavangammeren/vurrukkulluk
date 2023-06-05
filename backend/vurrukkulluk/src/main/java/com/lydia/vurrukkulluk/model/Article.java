@@ -14,6 +14,12 @@ public class Article {
     private int calories;
     private String unit;
 
+    private int amount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id",nullable = true)
+    private Image image;
+
     public Article(){
     }
 
@@ -63,5 +69,21 @@ public class Article {
 
     public void setCalories(int calories) {
         this.calories = calories;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

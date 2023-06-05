@@ -1,34 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import api from "../../lib/recipeAPI";
 import AgendaItem from "./AgendaItem";
+import { useDatabase } from "../../hooks";
 
 const Agenda = () => {
 
-  const [agendaItems, setAgendaItems] = useState([]);
+  // const [agendaItems, setAgendaItems] = useState([]);
+  const [ agendaItems, isLoaded ] = useDatabase('calendar');
 
-  useEffect(() => {
-    const getData = async () => {
-      try{
-        // const response = await api.get('/agenda');
-        // setAgendaMonths(response.data);
-        const response = await api.get("/calendar");
-        setAgendaItems(response.data);
-      } catch(err){
-        if(err.response){
-          //Not in the 200 response range
-          console.log(err.response.data);
-          console.log(err.response.status);
-          console.log(err.response.headers);
-        }else{
-          console.log(`Error: ${err.message}`)
-        }
-      }
-    }
-    getData();
-  }, [])
+  const currentMonth = useRef(12);
 
+  // const formattedDate = new Intl.DateTimeFormat('nl-NL').format(date);
  
-  const firstFive = agendaItems.slice(0, 5);
+
+  const firstFive = isLoaded ? agendaItems.slice(0, 5): [];
   
   return (
     <div className="Agenda">
@@ -37,7 +22,7 @@ const Agenda = () => {
       </div>
       {firstFive.map((item, index)=> {
         return(
-          <AgendaItem item={item} />
+          <AgendaItem key = {index} item={item} currentMonth={currentMonth} />
         )
       })}
     </div>

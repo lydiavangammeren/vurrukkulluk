@@ -8,6 +8,7 @@ const Comment = ({comment}) => {
   return (
     <div className="Comment">
       <div className="comment_img">
+        {/* Comment Image Uit */}
         {userImage &&
           <img src={require(`../../assets/images/${userImage}`)} alt={userImage} />
         }

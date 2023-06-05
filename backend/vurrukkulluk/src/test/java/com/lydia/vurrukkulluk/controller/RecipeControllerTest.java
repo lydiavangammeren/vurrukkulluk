@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,12 +57,14 @@ class RecipeControllerTest {
         Article article1 = new Article();
         article1.setCalories(200);
         article1.setPrice(250);
-        article1.setUnit("200g");
+        article1.setUnit("g");
+        article1.setAmount(200);
         article1.setId(1);
         Article article2 = new Article();
-        article2.setCalories(150);
+        article2.setCalories(1050);
         article2.setPrice(250);
-        article2.setUnit("100g");
+        article2.setUnit("ml");
+        article2.setAmount(1000);
         article2.setId(2);
 
         IngredientDto ingredient1 = new IngredientDto();
@@ -74,12 +77,22 @@ class RecipeControllerTest {
         List<IngredientDto> ingredients= new ArrayList<>();
         ingredients.add(ingredient1);
         ingredients.add(ingredient2);
-        int totalPrice = 250 * 400 + 250 * 320;
-        int totalCal   = 200 * 400 + 150 * 320;
 
+        int totalPrice = (250 * 400) / 200 + (250 * 320) / 1000;
+        int totalCal   = (200 * 400) / 200 + (1050 * 320) / 1000;
+
+        System.out.println(totalPrice);
+        System.out.println(totalCal);
+
+        long seconds1 = System.currentTimeMillis();
         assertEquals(totalPrice,recipeController.calculateCurrentPrice(ingredients));
-        assertEquals(totalCal,recipeController.calculateCalories(ingredients));
+        long seconds2 = System.currentTimeMillis();
+        System.out.println(seconds2 - seconds1);
 
+        long seconds3 = System.currentTimeMillis();
+        assertEquals(totalCal,recipeController.calculateCalories(ingredients));
+        long seconds4 = System.currentTimeMillis();
+        System.out.println(seconds2 - seconds1);
     }
 
     public RecipeShortDto covertRecipeToShortDto(Recipe recipe){
