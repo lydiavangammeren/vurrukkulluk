@@ -26,4 +26,9 @@ public class PreparationServiceImpl implements PreparationService {
         preparationRepository.save(preparation);
     }
 
+    @Override
+    public void delete(Preparation preparation) {
+        preparationRepository.delete(preparation);
+    }
+
 }

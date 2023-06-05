@@ -9,4 +9,6 @@ public interface PreparationService {
     public List<Preparation> getAllPreparationsRecipe(int id);
     public void savePreparation(Preparation preparation);
 
+    public void delete(Preparation preparation);
+
 }

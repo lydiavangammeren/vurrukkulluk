@@ -80,24 +80,11 @@ public class RecipeController {
   }
 
   @GetMapping()
-  public List<RecipeShortDto> get() {
+  public List<RecipeDto> get() {
     List<Recipe> allRecipes = recipeService.getAllRecipes();
-    List<RecipeShortDto> allRecipesShort = allRecipes.stream().map(this::covertRecipeToShortDto).collect(Collectors.toList());
+    List<RecipeDto> allRecipesShort = allRecipes.stream().map(this::convertRecipeToDto).collect(Collectors.toList());
 
-    allRecipesShort.forEach(recipeShortDto -> {
-      List<KitchenCategory> kitchenCategories = new ArrayList<>();
-      List<KitchenCategoriesLink> kitchenCategoriesLinks = kitchenCategoriesLinkService.getKCLinkByRecipeId(recipeShortDto.getId());
-      kitchenCategoriesLinks.forEach((link) -> {
-        kitchenCategories.add(link.getKitchenCategory());
-      });
-      recipeShortDto.setCategories(kitchenCategories);
-
-      List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(recipeShortDto.getId());
-      List<IngredientDto> ingredientsDto = ingredients.stream().map(this::convertIngredientToDto).collect(Collectors.toList());
-      recipeShortDto.setPrice(calculateCurrentPrice(ingredientsDto));
-      recipeShortDto.setCalories(calculateCalories(ingredientsDto));
-
-    });
+    allRecipesShort.forEach(this::fillRecipeDto);
 
     return allRecipesShort;
   }
@@ -107,28 +94,7 @@ public class RecipeController {
     Recipe recipe = recipeService.getRecipeBySlug(slug);
     RecipeDto recipeDto = convertRecipeToDto(recipe);
 
-    List<Comment> comments = commentService.getAllCommentsOfRecipe(recipe.getId());
-    List<CommentDto> commentsDto= comments.stream().map(this::convertCommentToDto).collect(Collectors.toList());
-    recipeDto.setComments(commentsDto);
-
-    List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(recipeDto.getId());
-    List<IngredientDto> ingredientsDto = ingredients.stream().map(this::convertIngredientToDto).collect(Collectors.toList());
-    recipeDto.setIngredients(ingredientsDto);
-    recipeDto.setPrice(calculateCurrentPrice(ingredientsDto));
-    recipeDto.setCalories(calculateCalories(ingredientsDto));
-
-    List<KitchenCategory> kitchenCategories = new ArrayList<>();
-    List<KitchenCategoriesLink> kitchenCategoriesLinks = kitchenCategoriesLinkService.getKCLinkByRecipeId(recipeDto.getId());
-    kitchenCategoriesLinks.forEach((link) -> {
-      kitchenCategories.add(link.getKitchenCategory());
-    });
-    recipeDto.setCategories(kitchenCategories);
-
-    List<Preparation> preparationsSteps = preparationService.getAllPreparationsRecipe(recipeDto.getId());
-    List<PreparationDto> preparationsStepsDto = preparationsSteps.stream().map(this::convertPreparationToDto).collect(Collectors.toList());
-    recipeDto.setPreparation(preparationsStepsDto);
-
-    recipeDto.setAvgRating(ratingService.getAvgRatingOfRecipe(recipeDto.getId()));
+    fillRecipeDto(recipeDto);
 
     return recipeDto;
   }
@@ -163,6 +129,34 @@ public class RecipeController {
               int articleAmount = ingredientDto.getArticle().getAmount();
               return (amount * articleCalories)/ articleAmount;})
             .reduce(0, (a, b) -> a+b);
+  }
+
+  public RecipeDto fillRecipeDto(RecipeDto recipeDto){
+
+    List<Comment> comments = commentService.getAllCommentsOfRecipe(recipeDto.getId());
+    List<CommentDto> commentsDto= comments.stream().map(this::convertCommentToDto).collect(Collectors.toList());
+    recipeDto.setComments(commentsDto);
+
+    List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(recipeDto.getId());
+    List<IngredientDto> ingredientsDto = ingredients.stream().map(this::convertIngredientToDto).collect(Collectors.toList());
+    recipeDto.setIngredients(ingredientsDto);
+    recipeDto.setPrice(calculateCurrentPrice(ingredientsDto));
+    recipeDto.setCalories(calculateCalories(ingredientsDto));
+
+    List<KitchenCategory> kitchenCategories = new ArrayList<>();
+    List<KitchenCategoriesLink> kitchenCategoriesLinks = kitchenCategoriesLinkService.getKCLinkByRecipeId(recipeDto.getId());
+    kitchenCategoriesLinks.forEach((link) -> {
+      kitchenCategories.add(link.getKitchenCategory());
+    });
+    recipeDto.setCategories(kitchenCategories);
+
+    List<Preparation> preparationsSteps = preparationService.getAllPreparationsRecipe(recipeDto.getId());
+    List<PreparationDto> preparationsStepsDto = preparationsSteps.stream().map(this::convertPreparationToDto).collect(Collectors.toList());
+    recipeDto.setPreparation(preparationsStepsDto);
+
+    recipeDto.setAvgRating(ratingService.getAvgRatingOfRecipe(recipeDto.getId()));
+
+    return recipeDto;
   }
 
   public RecipeDto convertRecipeToDto(Recipe recipe){

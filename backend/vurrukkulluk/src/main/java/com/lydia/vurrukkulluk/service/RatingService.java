@@ -14,4 +14,6 @@ public interface RatingService {
 
     public float getAvgRatingOfRecipe(int recipeId);
 
+    public void delete(Rating rating);
+
 }

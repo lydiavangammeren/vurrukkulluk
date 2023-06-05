@@ -33,8 +33,12 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public float getAvgRatingOfRecipe(int recipeId) {
         float avg = ratingRepository.findAvgByRecipeId(recipeId);
-        System.out.println(avg);
         return avg;
+    }
+
+    @Override
+    public void delete(Rating rating) {
+        ratingRepository.delete(rating);
     }
 
 }

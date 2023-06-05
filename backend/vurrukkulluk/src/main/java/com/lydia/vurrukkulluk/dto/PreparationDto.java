@@ -5,6 +5,8 @@ public class PreparationDto {
     private int step;
     private String instructions;
 
+    private int recipeId;
+
     public int getId() {
         return id;
     }
@@ -27,5 +29,13 @@ public class PreparationDto {
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
+    }
+
+    public int getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
     }
 }

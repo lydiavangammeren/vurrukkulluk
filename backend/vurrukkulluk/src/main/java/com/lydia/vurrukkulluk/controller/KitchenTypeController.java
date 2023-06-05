@@ -14,6 +14,13 @@ import java.util.List;
 public class KitchenTypeController {
   @Autowired
   private KitchenTypeService kitchenTypeService;
+
+  @GetMapping()
+  public List<KitchenType> getAll(){
+    return kitchenTypeService.getAll();
+  }
+
+
   @PostMapping()
   public String add(@RequestBody KitchenType kitchenType) {
     kitchenTypeService.saveKitchenType(kitchenType);
