@@ -9,13 +9,11 @@ import HomeContent from "./pages/HomePage";
 import ShoppingCart from "./pages/ShoppingCartPage/ShoppingCart";
 import AddRecipePage from "./pages/AddRecipe/AddRecipePage";
 import "./assets/styles/main.css";
-// import { RecipesProvider, useRecipes } from "./contexts/RecipesContext";
 import { useDatabase } from "./hooks"
-// import { AppContext, RecipesProvider, useRecipes} from "./contexts";
-import { ContextProvider, AppContext } from "./contexts";
+import { ContextProvider } from "./contexts";
 
 function App() {
-  const [recipes, isLoaded] = useDatabase('recipes');
+  const [recipes, isLoaded] = useDatabase('details');
   const [images, setImages] = useState([]);
 
 

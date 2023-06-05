@@ -7,6 +7,7 @@ export function useAppContext() {
 }
 
 export function ContextProvider({children, recipes}){
+  const [bannerImages, setBannerImages] = useState([]);
   const [searchValue, setSearchValue]= useState('');
 
   return (

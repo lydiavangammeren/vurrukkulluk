@@ -2,25 +2,29 @@ import React, { useState, useEffect } from "react";
 import "./Carousel.css";
 import Header from "./Header";
 import MainMenu from "./MainMenu";
-import { useAppContext, useRecipes } from "../../contexts";
+import { useAppContext } from "../../contexts";
 
 const Carousel = () => {
   const [slide, setSlide] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
   const {recipes} = useAppContext();
 
-  const setImages = () => {
-    const shuffled = recipes.sort(() => 0.5 - Math.random());
-    
+  const getImages = (array) => {
+    // console.log('getImages: ' + array);
+    return array.map(obj => obj.image);
   }
 
-  const data = []
+  const setImages = () => {
+    // const shuffled = recipes.sort(() => 0.5 - Math.random());
+    const shuffled = [...recipes].sort(() => 0.5 - Math.random());
+    return getImages(shuffled.slice(0,5));
+  }
+
+  const data = setImages();
 
   useEffect(() => {
     // console.log('Switch Image');
     const intervalId = setInterval(() => {
-      // console.log(`Data.length: ${data.length}`)
-      // console.log(`Slide at useEffect: ${slide}`)
       setSlide(prevIndex => (prevIndex + 1) % data.length);
     }, 8000);
     return () => clearInterval(intervalId);
@@ -29,14 +33,10 @@ const Carousel = () => {
   return (
     <div className="carousel">
       {data.map((item, idx) => {
-        // console.log(`Slide at images: ${slide}`)
-        // console.log(`index: ${idx}`);
-        // console.log(`Slide: ${slide}`);
-        // console.log(`image name: ${item.src}`);
         return (
           <img
-            src={require(`../../assets/images/${item.src}`)}
-            alt={item.alt}
+            src={require(`../../assets/images/${item}`)}
+            alt={item}
             key={idx}
             className={slide === idx ? "slide" : "slide slide-hidden"}
           />
