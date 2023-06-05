@@ -24,7 +24,7 @@ public class Recipe {
   private KitchenRegion kitchenRegion;
 
   // Postman: "user": {"id": 4},
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", nullable=false)
   private User user;
 
