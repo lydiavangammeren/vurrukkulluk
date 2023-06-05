@@ -1,6 +1,6 @@
 import React from 'react';
 import Rating from '../../components/Rating/Rating';
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { HiUsers } from 'react-icons/hi';
 import { MdEuro } from 'react-icons/md';
 import { VscFlame } from 'react-icons/vsc';
@@ -10,8 +10,8 @@ const Recipe = ({recipe}) => {
   
   return (
     //Change for BACKEND API !!!
-    <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.id}`)}>
-    {/* <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.slug}`)}> */}
+    // <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.id}`)}>
+    <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.slug}`)}>
       
       <div className='recipe_img'>
       {/* <Link to={`/details/${recipe.id}`}> */}
