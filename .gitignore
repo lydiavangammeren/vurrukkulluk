@@ -1,6 +1,29 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+/atomic_frontend/node_modules
+/atomic_frontend/.pnp
+/atomic_frontend/.pnp.js
+
+# testing
+/atomic_frontend//coverage
+
+# production
+/atomic_frontend//build
+/atomic_frontend/dist
+
+# misc
+/atomic_frontend/.DS_Store
+/atomic_frontend/.env.local
+/atomic_frontend/.env.development.local
+/atomic_frontend/.env.test.local
+/atomic_frontend/.env.production.local
+
+/atomic_frontend/npm-debug.log*
+/atomic_frontend/yarn-debug.log*
+/atomic_frontend/yarn-error.log*
+
+# dependencies
 /frontend/node_modules/*
 /frontend/.pnp
 /frontend/.pnp.js
