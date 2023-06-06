@@ -39,4 +39,5 @@ public class KitchenTypeServiceImpl implements KitchenTypeService {
   public KitchenType getById(int id) {
     return kitchenTypeRepository.findById(id);
   }
+
 }

@@ -13,4 +13,5 @@ public interface KitchenTypeService {
   public List<KitchenType> getAll();
 
   public KitchenType getById(int id);
+
 }
