@@ -10,6 +10,7 @@ export function ContextProvider({children, recipes}){
   const [bannerImages, setBannerImages] = useState([]);
   const [searchValue, setSearchValue]= useState('');
 
+  console.log('Context render');
   // useEffect(() => {
   //   console.log('Set banner Images')
   // }, [bannerImages])

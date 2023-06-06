@@ -34,7 +34,7 @@ public class CommentController {
   @GetMapping()
   public List<CommentDto> getAll() {
     List<Comment> allComments =  commentService.getAllComments();
-    List<CommentDto> commentsDto= allComments.stream().map(this::convertCommentToDto).collect(Collectors.toList());
+    List<CommentDto> commentsDto = allComments.stream().map(this::convertCommentToDto).collect(Collectors.toList());
     return commentsDto;
   }
 

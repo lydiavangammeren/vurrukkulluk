@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "pretty_lilyregular";   /*Can be any text*/
+    src: local("Pretty Lily"),
+      /* url("../src/assets/fonts/pretty_lily-webfont.woff2") format("woff"); */
+      url("../fonts/pretty_lily-webfont.woff2") format("woff");
+}
+
+html {
+
+    /* FONTS */
+    --heading: "pretty_lilyregular";
+    --regular: "Arial";
+
+    /* COLORS */
+    --dark-brown: #402214;
+    --lighter-brown:  #774231;
+    --lightest-brown: #aa4b1b;
+
+    --darker-red: #b31714;
+    --lighter-red: #dc3439;
+
+    --kahki: #fff0d6;
+
+    --darker-orange: #eb8d1f;
+    --lighter-orange: #fca01f;
+
+    --darker-green: #6e8722;
+    --lighter-green: #95b82d;
+
+    --white: #FFF;
+    --black: #000;
+
+}

@@ -5,8 +5,25 @@ import { HiUsers } from 'react-icons/hi';
 import { MdEuro } from 'react-icons/md';
 import { VscFlame } from 'react-icons/vsc';
 
+import { useDatabase } from '../../hooks';
+
 const Recipe = ({recipe}) => {
   const navigate = useNavigate();
+  const [image, imageLoaded] = useDatabase(`image/${recipe.imgid}`);
+  // const [image, imageLoaded] = useDatabase(`image/1`);
+
+  const renderImage = () => {
+    if(imageLoaded){
+      // console.log(`recipe Image: ${image.src}`);
+      return (
+        // <div></div>
+         <img src={require(`../../assets/images/${image.src}`)}
+              alt={image.src}
+              width="100%"
+              height="auto"/>
+      )
+    }
+  }
   
   return (
     //Change for BACKEND API !!!
@@ -14,13 +31,7 @@ const Recipe = ({recipe}) => {
     <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.slug}`)}>
       
       <div className='recipe_img'>
-      {/* <Link to={`/details/${recipe.id}`}> */}
-        {recipe.image && <img src={require(`../../assets/images/${recipe.image}`)}
-                      alt={recipe.image}
-                      width="100%"
-                      height="auto" />
-        }
-      {/* </Link> */}
+        {renderImage()}
       </div>
       <div className='recipe_title_rating'>
       {/* <Link to={`/details/${recipe.id}`}> */}

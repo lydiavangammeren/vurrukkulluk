@@ -13,8 +13,6 @@ public class ArticleServiceImpl implements ArticleService{
     private ArticleRepository articleRepository;
     @Override
     public Article saveArticle(Article article) {
-        System.out.println("saving");
-        System.out.println(article.getName());
         return articleRepository.save(article);
     }
 
