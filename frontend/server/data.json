@@ -1,21 +1,21 @@
 {
   "recipes": [
     {
-      "id": 0,
+      "id": 1,
       "title": "Eggs & Veggies",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
       "image": "EggsAndVeggies.jpg",
       "kitchenType": {
-        "id":0,
+        "id":1,
         "name":"Vegetarisch"
       },
       "kitchenRegion": {
-        "id":0,
+        "id":1,
         "name":"Nederlands"
       },
       "categories":[
         {
-          "id":0,
+          "id":1,
           "name":"Goedkoop"
         }
       ],
@@ -33,7 +33,7 @@
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 3,
             "unit": "broodje",
-            "id": 0
+            "id": 1
           },
           "amount": 1
         },
@@ -44,7 +44,7 @@
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 1,
             "unit": "gram",
-            "id": 0
+            "id": 2
           },
           "amount": 320
         },
@@ -55,7 +55,7 @@
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 1,
             "unit": "ml",
-            "id": 0
+            "id": 3
           },
           "amount": 30
         },
@@ -66,44 +66,35 @@
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 2,
             "unit": "stuks",
-            "id": 0
+            "id": 4
           },
           "amount": 1
         }
       ],
       "preparation": [
         {
-          "id": 0,
+          "id": 1,
           "step": 1,
           "instructions": "Eggs & Veggies ipsum bla bla bla"
         },
         {
-          "id": 1,
+          "id": 2,
           "step": 2,
           "instructions": "Lorem ipsum bla bla bla"
         },
         {
-          "id": 2,
+          "id": 3,
           "step": 3,
           "instructions": "Lorem ipsum bla bla bla"
         }
       ],
       "comments": [
         {
-          "id": 0,
-          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
-          "user": {
-            "id": 0,
-            "name": "Tommy Tuup",
-            "image": "IMG_4420.JPG"
-          }
-        },
-        {
           "id": 1,
           "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
           "user": {
             "id": 1,
-            "name": "Bennie Blind",
+            "name": "Tommy Tuup",
             "image": "IMG_4420.JPG"
           }
         },
@@ -112,7 +103,7 @@
           "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
           "user": {
             "id": 2,
-            "name": "Sammy Suf",
+            "name": "Bennie Blind",
             "image": "IMG_4420.JPG"
           }
         },
@@ -121,6 +112,15 @@
           "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
           "user": {
             "id": 3,
+            "name": "Sammy Suf",
+            "image": "IMG_4420.JPG"
+          }
+        },
+        {
+          "id": 4,
+          "commentText": "Eggs & Veggies ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu.",
+          "user": {
+            "id": 4,
             "name": "Katinka Cool",
             "image": "IMG_4420.JPG"
           }
@@ -128,21 +128,21 @@
       ]
     },
     {
-      "id": 1,
+      "id": 2,
       "title": "Vegan Burger",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
       "image": "VeganBurger.jpg",
       "kitchenType": {
-        "id":0,
+        "id":2,
         "name":"Vegan"
       },
       "kitchenRegion": {
-        "id":1,
+        "id":2,
         "name":"Amerikaans"
       },
       "categories":[
         {
-          "id":0,
+          "id":2,
           "name":"Goedkoop"
         }
       ],
@@ -150,7 +150,7 @@
       "price": 12,
       "calories": 432,
       "avgRating":3,
-      "imgid": 1,
+      "imgid": 2,
       "slug":"vegan-burger",
       "ingredients": [
         {
@@ -277,7 +277,7 @@
       "price": 12,
       "calories": 432,
       "avgRating":3,
-      "imgid": 2,
+      "imgid": 3,
       "slug":"sushi-rolls",
       "ingredients": [
         {
@@ -404,7 +404,7 @@
       "price": 12,
       "calories": 432,
       "avgRating":3,
-      "imgid": 3,
+      "imgid": 4,
       "slug":"pizza-green",
       "ingredients": [
         {
@@ -546,49 +546,49 @@
   "calendar":
   [
     {
-      "id":0,
+      "id":1,
       "title":"Vegetarisch koken", 
       "date": "2023-06-07 14:00:00",
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
     },
     {
-      "id":1,
+      "id":2,
       "title":"Vegetarisch koken", 
       "date": "2023-06-14 14:00:00",
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
     },
     {
-      "id":2,
+      "id":3,
       "title":"Vegetarisch koken", 
       "date": "2023-06-21 14:00:00",
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
     },
     {
-      "id":3,
+      "id":4,
       "title":"Vegetarisch koken", 
       "date": "2023-06-28 14:00:00",
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
     },
     {
-      "id":4,
+      "id":5,
       "title":"Vegetarisch koken", 
       "date": "2023-08-02 14:00:00",
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
     },
     {
-      "id":5,
+      "id":6,
       "title":"Vegetarisch koken", 
       "date": "2023-08-09 14:00:00",
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
     },
     {
-      "id":6,
+      "id":7,
       "title":"Vegetarisch koken", 
       "date": "2023-08-16 14:00:00",
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
     },
     {
-      "id":7,
+      "id":8,
       "title":"Vegetarisch koken", 
       "date": "2023-08-25 14:00:00",
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
@@ -597,19 +597,19 @@
   "image":
   [
     {
-      "id":0,
+      "id":1,
       "src": "EggsAndVeggies.jpg"
     },
     {
-      "id":1,
+      "id":2,
       "src": "VeganBurger.jpg"
     },
     {
-      "id":2,
+      "id":3,
       "src": "SushiRolls.jpg"
     },
     {
-      "id":3,
+      "id":4,
       "src": "PizzaGreen.jpg"
     }
   ]

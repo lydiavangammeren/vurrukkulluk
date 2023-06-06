@@ -58,3 +58,9 @@ INSERT INTO `calendar_item` (`id`, `date`, `description`, `title`) VALUES
 (NULL, '2023-08-16 14:00:00', 'Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee', 'Vegetarisch koken'),
 (NULL, '2023-08-23 14:00:00', 'Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee', 'Vegetarisch koken'),
 (NULL, '2023-08-30 14:00:00', 'Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee', 'Vegetarisch koken');
+
+INSERT INTO `rating` (`id`, `rating`, `recipe_id`, `user_id`) VALUES 
+(NULL, '1', '1', '1'),
+(NULL, '2', '2', '1'),
+(NULL, '3', '3', '1'),
+(NULL, '4', '4', '1');
