@@ -14,7 +14,7 @@ const Recipe = ({recipe}) => {
 
   const renderImage = () => {
     if(imageLoaded){
-      console.log(`recipe Image: ${image.src}`);
+      // console.log(`recipe Image: ${image.src}`);
       return (
         // <div></div>
          <img src={require(`../../assets/images/${image.src}`)}

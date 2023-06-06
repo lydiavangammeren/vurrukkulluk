@@ -8,20 +8,37 @@ import { useLocation } from "react-router-dom";
 const Carousel = () => {
   const [slide, setSlide] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
-  const {recipes} = useAppContext();
+  const {recipes, bannerImages, setBannerImages} = useAppContext();
 
   const getImages = (array) => {
     // console.log('getImages: ' + array);
     return array.map(obj => obj.image);
   }
 
-  const setImages = () => {
+  const setRandomImages = () => {
     // const shuffled = recipes.sort(() => 0.5 - Math.random());
     const shuffled = [...recipes].sort(() => 0.5 - Math.random());
-    return getImages(shuffled.slice(0,5));
+    // return getImages(shuffled.slice(0,5));
+    return (getImages(shuffled.slice(0,5)));
   }
 
-  const data = setImages();
+  const setDetailImage = () => {
+    return bannerImages;
+  }
+
+  const location = useLocation();
+  console.log('Carousel location: ' + location.pathname);
+  // console.log(`random images: ${getImages()}`)
+
+  // const data = location.pathname.substring(0, 7) !== "/details" ? setRandomImages() : setDetailImage();
+  let data = [];
+
+  // useEffect(() => {
+  //   setRandomImages();
+  //   if(location.pathname.substring(0,7) === '/details'){
+  //     data = bannerImages;
+  //   }
+  // }, [bannerImages])
 
   useEffect(() => {
     // console.log('Switch Image');
@@ -31,8 +48,6 @@ const Carousel = () => {
     return () => clearInterval(intervalId);
   });
 
-  const location = useLocation();
-  console.log('Carousel location: ' + location.pathname);
 
   return (
     <div className="carousel">

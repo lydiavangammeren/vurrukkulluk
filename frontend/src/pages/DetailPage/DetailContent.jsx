@@ -19,6 +19,8 @@ const DetailContent = () => {
   // const location = useLocation();
   // console.log('Details location: ' + location.pathname);
 
+  // setBannerImages([details.imgid]);
+
   return (
     <div className='DetailContent'>
       <div className='detailTop'>
