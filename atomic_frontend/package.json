@@ -60,6 +60,7 @@
     "atomic-bomb": "^5.0.0",
     "babel-plugin-named-exports-order": "0.0.2",
     "eslint-plugin-storybook": "^0.6.12",
+    "sass": "^1.62.1",
     "storybook": "7.0.18",
     "webpack": "5.85.0"
   }
