@@ -1,8 +1,12 @@
 package com.lydia.vurrukkulluk.service;
 
-import jdk.jfr.Category;
+import com.lydia.vurrukkulluk.model.KitchenCategory;
 
 public interface KitchenCategoryService {
 
-    Category getCategoryById(int id);
+    KitchenCategory getCategoryById(int id);
+
+    KitchenCategory save(KitchenCategory kitchenCategory);
+
+
 }

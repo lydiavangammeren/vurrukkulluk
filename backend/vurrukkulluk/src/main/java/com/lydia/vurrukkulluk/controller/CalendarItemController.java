@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/calendar")
+@CrossOrigin
 public class CalendarItemController {
 
     @Autowired

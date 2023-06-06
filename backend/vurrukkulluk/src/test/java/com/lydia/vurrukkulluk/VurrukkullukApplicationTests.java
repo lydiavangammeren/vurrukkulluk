@@ -8,6 +8,7 @@ class VurrukkullukApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

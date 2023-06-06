@@ -31,6 +31,7 @@ public class Recipe {
   private String title;
   @Column(unique=true)
   private String slug;
+  @Column(length = 1500)
   private String description;
   private LocalDateTime timeAdded = LocalDateTime.now();
   @ManyToOne(fetch = FetchType.EAGER)
