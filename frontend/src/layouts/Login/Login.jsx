@@ -1,7 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
+  const navigate = useNavigate()
+
+const Dummy = () => {
+  console.log("clicked")
+}  
   return (
     <div className="Login">
       <h1 className="login-header">Login</h1>
@@ -15,10 +21,22 @@ const Login = () => {
           <br/>        
           <input name="wachtwoord" id="wachtwoord" type="password" />
           <div className="login-bottom">
-            <button>Login</button>
+            <button className="login-button">Login</button> 
+          </div>
+        </form>
+          <div className="otherOptions">
+            <div className="forgotpass" onClick={Dummy}>
+              <button className="forgotpass">
+                Wachtwoord vergeten?
+              </button>
+            </div>
+            <div className="register">
+              <button className="register" onClick = { () => navigate(`/register`)}>
+                Registreren
+              </button>
+            </div>
           </div>
           
-        </form>
       </div>
     </div>
   );

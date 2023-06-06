@@ -8,6 +8,7 @@ import DetailContent from "./pages/DetailPage";
 import HomeContent from "./pages/HomePage";
 import ShoppingCart from "./pages/ShoppingCartPage/ShoppingCart";
 import AddRecipePage from "./pages/AddRecipe/AddRecipePage";
+import Register from "./pages/RegisterPage/Register";
 import "./assets/styles/main.css";
 import { useDatabase } from "./hooks"
 import { ContextProvider } from "./contexts";
@@ -39,6 +40,7 @@ function App() {
             />
             <Route path="/shoppingcart" element={<ShoppingCart />} />
             <Route path="/addrecipe" element={<AddRecipePage />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
           </div>
         </section>
