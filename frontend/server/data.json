@@ -23,7 +23,7 @@
       "price": 12,
       "calories": 432,
       "avgRating":3,
-      "imgid": 0,
+      "imgid": 1,
       "slug": "eggs-and-veggies",
       "ingredients": [
         {
@@ -594,7 +594,7 @@
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
     }
   ], 
-  "download":
+  "image":
   [
     {
       "id":0,
