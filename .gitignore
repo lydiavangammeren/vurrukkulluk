@@ -12,6 +12,9 @@
 /atomic_frontend//build
 /atomic_frontend/dist
 
+# generated files 
+/atomic_frontend/src/resources/styles/main.css*
+
 # misc
 /atomic_frontend/.DS_Store
 /atomic_frontend/.env.local

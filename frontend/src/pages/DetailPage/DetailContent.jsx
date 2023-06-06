@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import Details from "./Details";
 import TabWrapper from "./TabWrapper";
 import { useAppContext } from "../../contexts";
@@ -16,6 +16,8 @@ const DetailContent = () => {
   const prepsteps = details?.preparation ?? [];
   const comments = details?.comments ?? [];
 
+  // const location = useLocation();
+  // console.log('Details location: ' + location.pathname);
 
   return (
     <div className='DetailContent'>

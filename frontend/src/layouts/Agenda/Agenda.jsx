@@ -5,7 +5,8 @@ import { useDatabase } from "../../hooks";
 
 const Agenda = () => {
 
-  // const [agendaItems, setAgendaItems] = useState([]);
+  // AGENDA TIJDELIJK UIT VANWEGE DATABASE CONNECTIE
+  // const [ agendaItems, isLoaded ] = [[], true];
   const [ agendaItems, isLoaded ] = useDatabase('calendar');
 
   const currentMonth = useRef(12);

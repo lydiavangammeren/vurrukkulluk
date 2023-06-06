@@ -3,6 +3,7 @@ import "./Carousel.css";
 import Header from "./Header";
 import MainMenu from "./MainMenu";
 import { useAppContext } from "../../contexts";
+import { useLocation } from "react-router-dom";
 
 const Carousel = () => {
   const [slide, setSlide] = useState(0);
@@ -29,6 +30,9 @@ const Carousel = () => {
     }, 8000);
     return () => clearInterval(intervalId);
   });
+
+  const location = useLocation();
+  console.log('Carousel location: ' + location.pathname);
 
   return (
     <div className="carousel">

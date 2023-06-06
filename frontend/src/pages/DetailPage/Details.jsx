@@ -23,7 +23,7 @@ const Details = ({details}) => {
   // const {setBannerImages} = useAppContext();
   // setBannerImages([imgid]);
 
-  const [image, imageLoaded] = useDatabase(`download/${imgid}`);
+  const [image, imageLoaded] = useDatabase(`image/${imgid}`);
 
   const renderImage = () => {
     if(imageLoaded){

@@ -1,0 +1,15 @@
+.Heading {
+
+    font-family: var(--heading);
+    font-weight: normal;
+
+    &[data-object-color='darker-green'] {
+        color: var(--darker-green);
+    }
+    &[data-object-color='white'] {
+        color: var(--white);
+    }
+    &[data-object-color='black'] {
+        color: var(--black);
+    }
+}

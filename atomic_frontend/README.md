@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `yarn start`
+### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,19 +14,19 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn storybook`
+### `npm run storybook`
 
 Runs the storybook interface
 Open [http://localhost:6006] (http://localhost:6006)
 
 The page will reload if you make edits
 
-### `yarn test`
+### `npm test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -41,13 +41,13 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 Use the command [atomic-bomb](https://www.npmjs.com/package/atomic-bomb) to create a new atom, molecule, organism or page
 
 ```bash
-yarn atomic-bomb --type atom --name Label
+npm run atomic-bomb -- --type atom --name Label
 # creates /src/components/atoms/Label
 
-yarn atomic-bomb --name Button,Heading
+npm run atomic-bomb -- --name Button,Heading
 # creates /src/components/atoms/Button and /src/components/atoms/Heading (default type = atom)
 
-yarn atomic-bomb --type molecule --name "Button Bar,Menu Item"
+npm run atomic-bomb -- --type molecule --name "Button Bar","Menu Item"
 # creates /src/components/molecules/ButtonBar and /src/components/molecules/MenuItem
 ```
 
