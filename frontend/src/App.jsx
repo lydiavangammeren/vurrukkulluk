@@ -15,17 +15,22 @@ import { ContextProvider } from "./contexts";
 
 function App() {
   const [recipes, isLoaded] = useDatabase('recipes'); // Get all data from database (Recipes+ingredients+preparation+comments)
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState(() => getImages());
+  
+  // const getImages = () => {
+  //   if(!isLoaded) return [];
+  //   const shuffled = [...recipes].sort(() => 0.5 - Math.random());
+  //   return shuffled.slice(0,5).map(obj => obj.id);
+  // }
 
+  // const images = getImages();
 
   const renderContent = () => {
     if(isLoaded){
-      // console.log('Data fresh from database:')
-      // console.log(recipes)
       return (
         <ContextProvider recipes={recipes} >
         <div className="App">
-        <Header data={images} />
+        <Header />
         <section>
           <div className="side">
             <Agenda />
@@ -33,10 +38,10 @@ function App() {
           </div>
           <div className="pageContainer">
           <Routes>
-            <Route path="/" element={<HomeContent setImages={setImages}/>} />
+            <Route path="/" element={<HomeContent />} />
             <Route
               path="/details/:slug"
-              element={<DetailContent setImages={setImages} />}
+              element={<DetailContent />}
             />
             <Route path="/shoppingcart" element={<ShoppingCart />} />
             <Route path="/addrecipe" element={<AddRecipePage />} />
@@ -48,6 +53,8 @@ function App() {
         </div>
         </ContextProvider>
       )
+    } else {
+      return <p>Loading recipes...</p>
     }
   }
 
