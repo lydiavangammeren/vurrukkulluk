@@ -3,6 +3,7 @@ import com.lydia.vurrukkulluk.dto.CommentCreateDto;
 import com.lydia.vurrukkulluk.dto.CommentDto;
 import com.lydia.vurrukkulluk.dto.UserDto;
 import com.lydia.vurrukkulluk.model.Comment;
+import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.CommentService;
 import org.modelmapper.ModelMapper;

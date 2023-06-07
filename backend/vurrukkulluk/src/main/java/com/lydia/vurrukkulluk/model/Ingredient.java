@@ -8,12 +8,12 @@ public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private long amount;
+    private int amount;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "article_id",nullable = false)
     private Article article;
 
-    @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "recipe_id",nullable = false)
     private Recipe recipe;
 
@@ -27,11 +27,11 @@ public class Ingredient {
         this.id = id;
     }
 
-    public float getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

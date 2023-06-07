@@ -9,4 +9,5 @@ public interface CalendarItemService {
     List<CalendarItem> getAll();
     void save(CalendarItem calendarItem);
 
+    void delete(CalendarItem calendarItem);
 }

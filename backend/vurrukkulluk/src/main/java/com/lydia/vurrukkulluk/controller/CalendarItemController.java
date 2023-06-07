@@ -15,15 +15,25 @@ public class CalendarItemController {
     @Autowired
     CalendarItemService calendarItemService;
 
-    @GetMapping
+    @GetMapping()
     public List<CalendarItem> getAllItems(){
         return calendarItemService.getAll();
     }
 
-    @PostMapping
-    public String saveItem(@RequestBody CalendarItem calendarItem){
+    @PostMapping()
+    public String saveCalendarItem(@RequestBody CalendarItem calendarItem){
         calendarItemService.save(calendarItem);
-        return "save calendar item";
+        return "saved calendar item";
     }
 
+    @PutMapping()
+    public String updateCalendarItem(@RequestBody CalendarItem calendarItem){
+        calendarItemService.save(calendarItem);
+        return "updated calendar item";
+    }
+    @DeleteMapping()
+    public String deleteCalendarItem(@RequestBody CalendarItem calendarItem){
+        calendarItemService.delete(calendarItem);
+        return "deleted calendar item";
+    }
 }

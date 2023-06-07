@@ -3,17 +3,17 @@ package com.lydia.vurrukkulluk.dto;
 import com.lydia.vurrukkulluk.model.Article;
 
 public class IngredientDto {
-    Article article;
+    ArticleDto article;
 
     int amount;
 
     int recipeId;
 
-    public Article getArticle() {
+    public ArticleDto getArticle() {
         return article;
     }
 
-    public void setArticle(Article article) {
+    public void setArticle(ArticleDto article) {
         this.article = article;
     }
 
@@ -23,5 +23,13 @@ public class IngredientDto {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public int getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
     }
 }
