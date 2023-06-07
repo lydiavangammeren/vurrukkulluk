@@ -7,6 +7,8 @@ public class IngredientDto {
 
     int amount;
 
+    int recipeId;
+
     public Article getArticle() {
         return article;
     }
