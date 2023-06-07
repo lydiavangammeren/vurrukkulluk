@@ -4,6 +4,7 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.repository.ImageRepository;
 import com.lydia.vurrukkulluk.service.*;
+import com.lydia.vurrukkulluk.util.UserImageUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -112,7 +113,7 @@ public class TestDataController {
         recipe.setTitle("Vegan Burger");
         recipe.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.");
         String imagePath = "src\\main\\resources\\images\\VeganBurger.jpg";
-        Image image = uploadImageByPath(imagePath);
+        Image image = uploadImageByPath(imagePath,"VeganBurger.jpg");
         recipe.setImage(image);
         recipe.setSlug("vegan-burger");
         recipe.setKitchenType(kitchenTypes.get(2));
@@ -134,6 +135,19 @@ public class TestDataController {
         addPreparationToRecipe(recipes.get(0),"Burger verbranden",1);
         addPreparationToRecipe(recipes.get(0),"Brood",2);
         addPreparationToRecipe(recipes.get(0),"SAus suaucua c jfjen kjsbvkjvjej sk sv skvj bkjcb ksb ksv  svbkej jv dfghjk dfghjk dfghjk sdfghj dfghj dfghj dfghj dfgh.",3);
+
+        Recipe recipe2 = new Recipe();
+        recipe2.setTitle("Vegan Burger N2");
+        recipe2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.");
+        String imagePath2 = "src\\main\\resources\\images\\VeganBurger.jpg";
+        Image image2 = uploadImageByPath(imagePath,"VeganBurger.jpg");
+        recipe2.setImage(image2);
+        recipe2.setSlug("vegan-burger-2");
+        recipe2.setKitchenType(kitchenTypes.get(2));
+        recipe2.setKitchenRegion(kitchenRegions.get(12));
+        recipe2.setPersons(6);
+        recipe2.setUser(users.get(0));
+        recipes.add(recipeService.saveRecipe(recipe2));
 
         return recipes;
     }
@@ -233,7 +247,7 @@ public class TestDataController {
         Article article1 = new Article();
         article1.setName("Vegan Burger Bun");
         String imagePath = "src\\main\\resources\\images\\hamb.jpg";
-        Image image = uploadImageByPath(imagePath);
+        Image image = uploadImageByPath(imagePath,"hamb.jpg");
         article1.setImage(image);
         article1.setUnit("stuks");
         article1.setCalories(250);
@@ -245,7 +259,7 @@ public class TestDataController {
         Article article2 = new Article();
         article2.setName("Vegan Burger");
         String imagePath2 = "src\\main\\resources\\images\\VeganBurgerI.jpg";
-        Image image2 = uploadImageByPath(imagePath);
+        Image image2 = uploadImageByPath(imagePath,"VeganBurgerI.jpg");
         article2.setImage(image2);
         article2.setUnit("g");
         article2.setCalories(469);
@@ -257,7 +271,7 @@ public class TestDataController {
         Article article3 = new Article();
         article3.setName("Vegan Burger Sauce");
         String imagePath3 = "src\\main\\resources\\images\\VeganSauce.jpg";
-        Image image3 = uploadImageByPath(imagePath);
+        Image image3 = uploadImageByPath(imagePath,"VeganSauce.jpg");
         article3.setImage(image3);
         article3.setUnit("ml");
         article3.setCalories(750);
@@ -269,7 +283,7 @@ public class TestDataController {
         Article article4 = new Article();
         article4.setName("Adocado");
         String imagePath4 = "src\\main\\resources\\images\\VeganBurgerI.jpg";
-        Image image4 = uploadImageByPath(imagePath);
+        Image image4 = uploadImageByPath(imagePath,"VeganBurgerI.jpg");
         article4.setImage(image4);
         article4.setUnit("stuks");
         article4.setCalories(300);
@@ -283,7 +297,7 @@ public class TestDataController {
     private List<User> createUsers() {
 
         String imagePath = "src\\main\\resources\\images\\IMG_4420.JPG";
-        Image image = uploadImageByPath(imagePath);
+        Image image = uploadImageByPath(imagePath,"IMG_4420.JPG");
 
         List<User> users = new ArrayList<>();
 
@@ -307,12 +321,12 @@ public class TestDataController {
 
     }
 
-    public Image uploadImageByPath(String imagePath){
+    public Image uploadImageByPath(String imagePath, String name){
         Image image = new Image();
         try {
             image.setType("file");
-            image.setName("IMG_4420.JPG");
-            image.setImageData(Files.readAllBytes(Paths.get(imagePath)));
+            image.setName(name);
+            image.setImageData(UserImageUtil.compressImage(Files.readAllBytes(Paths.get(imagePath))));
             image = imageRepository.save(image);
         } catch ( java.io.IOException e) {
             System.out.println(e);

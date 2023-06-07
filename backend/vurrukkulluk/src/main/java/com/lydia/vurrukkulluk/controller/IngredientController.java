@@ -1,39 +1,40 @@
 package com.lydia.vurrukkulluk.controller;
 
+import com.lydia.vurrukkulluk.dto.IngredientDto;
 import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.Ingredient;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.service.IngredientService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ingredients")
-public class IngredientController implements Serializable {
+public class IngredientController {
 
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     private IngredientService ingredientService;
     public IngredientController(){
 
     }
 
-    // post as : {"amount":?,"article":{ "id":?},"recipe":{"id":?}}
     @PostMapping()
-    public String add(@RequestBody Ingredient ingredient){
-        ingredientService.saveIngredient(ingredient);
+    public String add(@RequestBody IngredientDto ingredientDto){
+        ingredientService.saveIngredient(reverseIngredientFromDto(ingredientDto));
         return "saved";
     }
 
     @GetMapping()
-    public List<Ingredient> getAll(){
-
-        List<Ingredient> res = ingredientService.getAllIngredients();
-
-        return res;
+    public List<IngredientDto> getAll(){
+        return ingredientService.getAllIngredients().stream().map(this::convertIngredientToDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
@@ -42,8 +43,18 @@ public class IngredientController implements Serializable {
     }
 
     @GetMapping("recipe/{id}")
-    public Ingredient getRecpId(@PathVariable int id){
-        return ingredientService.getIngredientById(id);
+    public List<IngredientDto> getRecepId(@PathVariable int id){
+
+        return ingredientService.getIngredientsRecipeId(id).stream().map(this::convertIngredientToDto).collect(Collectors.toList());
     }
+
+    public IngredientDto convertIngredientToDto(Ingredient ingredient){
+        return modelMapper.map(ingredient,IngredientDto.class);
+    }
+
+    public Ingredient reverseIngredientFromDto(IngredientDto ingredientDto){
+        return modelMapper.map(ingredientDto,Ingredient.class);
+    }
+
 
 }
