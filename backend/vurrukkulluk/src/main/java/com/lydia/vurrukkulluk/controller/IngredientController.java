@@ -46,10 +46,9 @@ public class IngredientController {
         return "updated";
     }
 
-    @DeleteMapping()
-    public String delete(@RequestBody IngredientCreateDto ingredientCreateDto){
-        Ingredient ingredient = reverseIngredientFromCreateDto(ingredientCreateDto);
-        ingredientService.delete(ingredient);
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id){
+        ingredientService.deleteById(id);
         return "updated";
     }
 

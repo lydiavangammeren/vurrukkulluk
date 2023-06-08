@@ -6,14 +6,12 @@ import java.util.List;
 
 public interface RatingService {
 
-    public List<Rating> getAllRatings();
+    List<Rating> getAllRatings();
 
-    public List<Rating> getAllRatingsRecipe(int recipeId);
+    List<Rating> getAllRatingsRecipe(int recipeId);
 
-    public void saveRating(Rating rating);
+    void saveRating(Rating rating);
 
-    public float getAvgRatingOfRecipe(int recipeId);
-
-    public void delete(Rating rating);
-
+    float getAvgRatingOfRecipe(int recipeId);
+    void deleteById(int id);
 }

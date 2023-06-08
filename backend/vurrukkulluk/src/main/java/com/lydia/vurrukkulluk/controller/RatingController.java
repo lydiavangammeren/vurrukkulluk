@@ -39,9 +39,9 @@ public class RatingController {
         return "Updated rating";
     }
 
-    @DeleteMapping
-    public String delete(@RequestBody RatingDto ratingDto){
-        ratingService.delete(reverseRatingFromDto(ratingDto));
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id){
+        ratingService.deleteById(id);
         return "Updated rating";
     }
 

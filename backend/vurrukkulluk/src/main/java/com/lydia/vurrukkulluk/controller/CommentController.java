@@ -58,10 +58,9 @@ public class CommentController {
     return "Comment is updated";
   }
 
-  @DeleteMapping()
-  public String delete(@RequestBody CommentCreateDto commentCreateDto) {
-    Comment comment = reverseCommentCreateDto(commentCreateDto);
-    commentService.deleteComment(comment);
+  @DeleteMapping("/{id}")
+  public String delete(@PathVariable int id) {
+    commentService.deleteCommentById(id);
     return "Comment is deleted";
   }
 

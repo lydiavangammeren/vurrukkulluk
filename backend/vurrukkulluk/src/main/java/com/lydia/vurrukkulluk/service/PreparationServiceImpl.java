@@ -27,8 +27,8 @@ public class PreparationServiceImpl implements PreparationService {
     }
 
     @Override
-    public void delete(Preparation preparation) {
-        preparationRepository.delete(preparation);
+    public void deleteById(int id) {
+        preparationRepository.deleteById(id);
     }
 
 }
