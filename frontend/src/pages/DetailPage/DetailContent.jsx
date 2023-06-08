@@ -9,8 +9,8 @@ const DetailContent = () => {
   
   const { slug } = useParams();
   
-  const { recipes, setDetailImage } = useAppContext();
-  const details = recipes.find(recipe => recipe.slug === slug);
+  const { recipes, bannerImages, setBannerImages } = useAppContext();
+  const details = recipes.find(recipe => recipe.slug == slug);
   
   const ingredients = details?.ingredients ?? [];
   const prepsteps = details?.preparation ?? [];
@@ -20,9 +20,11 @@ const DetailContent = () => {
   // console.log('Details location: ' + location.pathname);
 
   // setDetailImage([details.imgid]);
-  useEffect(() => {
-    setDetailImage([details.imgid]);
-  }, [details.imgid]);
+  // useEffect(() => {
+  //   setDetailImage([details.imgid]);
+  // }, [details.imgid]);
+
+  if(bannerImages.length > 1) setBannerImages([details.imageId]);
   
 
   return (

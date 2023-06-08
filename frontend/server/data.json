@@ -598,7 +598,7 @@
   [
     {
       "id":1,
-      "src": "EggsAndVeggies.jpg"
+      "src": "require('../../assets/images/EggsAndVeggies.jpg')"
     },
     {
       "id":2,

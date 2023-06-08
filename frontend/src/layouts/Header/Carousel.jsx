@@ -10,28 +10,32 @@ import useGetImages from "../../hooks/useGetImages";
 const Carousel = () => {
   const [slide, setSlide] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
-  const {recipes, detailImage} = useAppContext();
+  const {recipes, bannerImages} = useAppContext();
 
   const getImages = () => {
     if(location.pathname.substring(0,8) === '/details'){
-      console.log('DETAILPAGE! : ' + detailImage);
-      return detailImage;
+      console.log('DETAILPAGE! : '+ bannerImages);
+      return bannerImages;
     } else {
       console.log('NOT DETAILPAGE!');
-      return getRandomImages();
+      if(bannerImages.length === 1){
+        return getRandomImages();
+      } else {
+        return bannerImages;
+      }
       // return [2, 3];
     }
   }
 
   const getRandomImages = () => {
     const shuffled = [...recipes].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0,5).map(obj => obj.imgid);
+    return shuffled.slice(0,5).map(obj => obj.imageId);
   }
 
   const location = useLocation();
-   
+  // const data = bannerImages;
   const data = getImages();
-  console.log('Data: ' + data);
+  // console.log('Data: ' + data);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -41,16 +45,21 @@ const Carousel = () => {
   });
 
   // Get the images/detailimage from the database.
-  const [images, imagesLoaded] = useGetImages('/image', data);
+  // const [images, imagesLoaded] = useGetImages('/image', data);
+  // const images = getRandomImages();
+  
+
+
 
   return (
     <div className="carousel">
-      {imagesLoaded && images.map((image, index) => {
-        console.log('Carousel image: ' + index);
+      {data.map((image, index) => {
+        console.log('Carousel image: ' + image);
         return (
+          //require(`../../assets/images/${image.src}`)
           <img
-            src={require(`../../assets/images/${image.src}`)}
-            alt={image.src}
+            src={`http://localhost:8080/image/${image}`}
+            // alt={image.src}
             key={index}
             className={slide === index ? "slide" : "slide slide-hidden"}
           />

@@ -12,7 +12,7 @@ const Details = ({details}) => {
 
   const title = details.title;
   const description = details.description;
-  const imgid = details.imgid;
+  const imageId = details.imageId;
   const persons = details.persons;
   const price = details.price;
   const calories = details.calories;
@@ -21,21 +21,22 @@ const Details = ({details}) => {
 
   // const {title, description, image, kitchenRegion, kitchenType, persons, price, calories} = details;
   // const {setBannerImages} = useAppContext();
-  // setBannerImages([imgid]);
+  // setBannerImages([imageId]);
 
-  const [image, imageLoaded] = useDatabase(`image/${imgid}`);
+  // const [image, imageLoaded] = useDatabase(`image/${imgid}`);
 
   const renderImage = () => {
-    if(imageLoaded){
       return (
-         <img src={require(`../../assets/images/${image.src}`)}
-              alt={image.src}
-              width="100%"
-              height="100%" 
-              style={myStyle}/>
+         <img 
+            // src={require(`../../assets/images/${image.src}`)}
+            src={`http://localhost:8080/image/${imageId}`}
+            alt={title}
+            width="100%"
+            height="100%" 
+            style={myStyle}
+          />
       )
     }
-  }
 
   const myStyle = {
     objectFit: "cover",

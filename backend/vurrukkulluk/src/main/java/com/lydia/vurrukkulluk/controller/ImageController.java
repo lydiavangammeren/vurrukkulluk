@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.controller;
 
+import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,8 +34,9 @@ public class ImageController {
   }
   @ResponseStatus(value = HttpStatus.OK)
   @PostMapping()
-  public void uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
-    imageService.uploadImage(file);
+  public int uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
+    Image image = imageService.uploadImage(file);
+    return image.getId();
   }
 
 }

@@ -9,21 +9,24 @@ import { useDatabase } from '../../hooks';
 
 const Recipe = ({recipe}) => {
   const navigate = useNavigate();
-  const [image, imageLoaded] = useDatabase(`image/${recipe.imgid}`);
+  // const [image, imageLoaded] = useDatabase(`image/${recipe.imgid}`);
   // const [image, imageLoaded] = useDatabase(`image/1`);
 
   const renderImage = () => {
-    if(imageLoaded){
+    // if(imageLoaded){
       // console.log(`recipe Image: ${image.src}`);
       return (
         // <div></div>
-         <img src={require(`../../assets/images/${image.src}`)}
-              alt={image.src}
-              width="100%"
-              height="auto"/>
+        <img 
+          // src={require(`../../assets/images/${image.src}`)}
+          src={`http://localhost:8080/image/${recipe.imageId}`}
+          alt={recipe.title}
+          width="100%"
+          height="auto"
+        />
       )
     }
-  }
+  // }
   
   return (
     //Change for BACKEND API !!!
