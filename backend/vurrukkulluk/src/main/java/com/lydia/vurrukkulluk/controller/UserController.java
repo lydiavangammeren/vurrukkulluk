@@ -52,10 +52,9 @@ public class UserController {
     return "User is updated";
   }
 
-  @DeleteMapping()
-  public String delete(@RequestBody UserCreateDto userCreateDto) {
-    User user = reverseUserToCreateDto(userCreateDto);
-    userService.deleteUser(user);
+  @DeleteMapping("/{id}")
+  public String delete(@PathVariable int id) {
+    userService.deleteById(id);
     return "User is deleted";
   }
 

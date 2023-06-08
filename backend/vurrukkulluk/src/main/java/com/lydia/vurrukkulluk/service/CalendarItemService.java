@@ -8,5 +8,5 @@ public interface CalendarItemService {
 
     List<CalendarItem> getAll();
     void save(CalendarItem calendarItem);
-
+    void deleteById(int id);
 }

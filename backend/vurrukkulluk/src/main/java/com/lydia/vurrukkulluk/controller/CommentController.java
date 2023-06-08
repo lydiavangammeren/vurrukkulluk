@@ -3,6 +3,7 @@ import com.lydia.vurrukkulluk.dto.CommentCreateDto;
 import com.lydia.vurrukkulluk.dto.CommentDto;
 import com.lydia.vurrukkulluk.dto.UserDto;
 import com.lydia.vurrukkulluk.model.Comment;
+import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.CommentService;
 import org.modelmapper.ModelMapper;
@@ -57,10 +58,9 @@ public class CommentController {
     return "Comment is updated";
   }
 
-  @DeleteMapping()
-  public String delete(@RequestBody CommentCreateDto commentCreateDto) {
-    Comment comment = reverseCommentCreateDto(commentCreateDto);
-    commentService.deleteComment(comment);
+  @DeleteMapping("/{id}")
+  public String delete(@PathVariable int id) {
+    commentService.deleteCommentById(id);
     return "Comment is deleted";
   }
 

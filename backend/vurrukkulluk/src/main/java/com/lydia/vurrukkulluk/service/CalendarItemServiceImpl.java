@@ -23,4 +23,10 @@ public class CalendarItemServiceImpl implements CalendarItemService{
     public void save(CalendarItem calendarItem) {
         calendarItemRepository.save(calendarItem);
     }
+
+    @Override
+    public void deleteById(int id) {
+        calendarItemRepository.deleteById(id);
+    }
+
 }

@@ -26,11 +26,6 @@ public class KitchenTypeServiceImpl implements KitchenTypeService {
   }
 
   @Override
-  public void deleteKitchenType(KitchenType kitchenType) {
-    kitchenTypeRepository.delete(kitchenType);
-  }
-
-  @Override
   public List<KitchenType> getAll() {
     return kitchenTypeRepository.findAll();
   }

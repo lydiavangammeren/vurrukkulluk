@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.controller;
 
+import com.lydia.vurrukkulluk.dto.ArticleDto;
 import com.lydia.vurrukkulluk.dto.IngredientDto;
 import com.lydia.vurrukkulluk.dto.RecipeShortDto;
 import com.lydia.vurrukkulluk.model.Article;
@@ -54,13 +55,13 @@ class RecipeControllerTest {
 
     @Test
     public void priceAndCalorieCalculationTest(){
-        Article article1 = new Article();
+        ArticleDto article1 = new ArticleDto();
         article1.setCalories(200);
         article1.setPrice(250);
         article1.setUnit("g");
         article1.setAmount(200);
         article1.setId(1);
-        Article article2 = new Article();
+        ArticleDto article2 = new ArticleDto();
         article2.setCalories(1050);
         article2.setPrice(250);
         article2.setUnit("ml");

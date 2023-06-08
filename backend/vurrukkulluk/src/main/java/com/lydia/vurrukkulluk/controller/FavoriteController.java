@@ -49,10 +49,9 @@ public class FavoriteController {
     return "Favorite is updated";
   }
 
-  @DeleteMapping()
-  public String delete(@RequestBody FavoriteDto favoriteDto) {
-    Favorite favorite = reverseFavoriteFromDto(favoriteDto);
-    favoriteService.deleteFavorite(favorite);
+  @DeleteMapping("/{id}")
+  public String delete(@PathVariable int id) {
+    favoriteService.deleteFavoriteById(id);
     return "Favorite is deleted";
   }
 

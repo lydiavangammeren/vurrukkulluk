@@ -2,6 +2,7 @@ package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Rating;
 import com.lydia.vurrukkulluk.repository.RatingRepository;
+import org.springframework.aop.AopInvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,13 +33,19 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public float getAvgRatingOfRecipe(int recipeId) {
-        float avg = ratingRepository.findAvgByRecipeId(recipeId);
+        float avg;
+        try {
+            avg = ratingRepository.findAvgByRecipeId(recipeId);
+        } catch (AopInvocationException e){
+            avg = (float) 0.0;
+        }
+        
         return avg;
     }
 
     @Override
-    public void delete(Rating rating) {
-        ratingRepository.delete(rating);
+    public void deleteById(int id) {
+        ratingRepository.deleteById(id);
     }
 
 }

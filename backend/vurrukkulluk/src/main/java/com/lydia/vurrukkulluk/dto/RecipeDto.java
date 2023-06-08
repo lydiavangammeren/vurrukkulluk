@@ -25,6 +25,8 @@ public class RecipeDto {
     private List<PreparationDto> preparation;
     private float avgRating;
 
+    private int imageId;
+
     public List<IngredientDto> getIngredients() {
         return ingredients;
     }
@@ -127,5 +129,13 @@ public class RecipeDto {
 
     public void setCalories(int calories) {
         this.calories = calories;
+    }
+
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 }

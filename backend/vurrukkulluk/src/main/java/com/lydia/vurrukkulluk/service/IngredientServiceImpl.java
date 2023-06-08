@@ -31,4 +31,9 @@ public class IngredientServiceImpl implements IngredientService{
     public List<Ingredient> getIngredientsRecipeId(int id) {
         return ingredientRepository.findByRecipeId(id);
     }
+
+    @Override
+    public void deleteById(int id) {
+        ingredientRepository.deleteById(id);
+    }
 }

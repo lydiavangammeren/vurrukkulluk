@@ -4,73 +4,65 @@ import Header from "./Header";
 import MainMenu from "./MainMenu";
 import { useAppContext } from "../../contexts";
 import { useLocation } from "react-router-dom";
+import { useDatabase } from "../../hooks";
+import useGetImages from "../../hooks/useGetImages";
 
 const Carousel = () => {
   const [slide, setSlide] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
-  const {recipes, bannerImages, setBannerImages} = useAppContext();
+  const {recipes, detailImage} = useAppContext();
 
-  const getImages = (array) => {
-    // console.log('getImages: ' + array);
-    return array.map(obj => obj.image);
+  const getImages = () => {
+    if(location.pathname.substring(0,8) === '/details'){
+      console.log('DETAILPAGE! : ' + detailImage);
+      return detailImage;
+    } else {
+      console.log('NOT DETAILPAGE!');
+      return getRandomImages();
+      // return [2, 3];
+    }
   }
 
-  const setRandomImages = () => {
-    // const shuffled = recipes.sort(() => 0.5 - Math.random());
+  const getRandomImages = () => {
     const shuffled = [...recipes].sort(() => 0.5 - Math.random());
-    // return getImages(shuffled.slice(0,5));
-    return (getImages(shuffled.slice(0,5)));
-  }
-
-  const setDetailImage = () => {
-    return bannerImages;
+    return shuffled.slice(0,5).map(obj => obj.imgid);
   }
 
   const location = useLocation();
-  console.log('Carousel location: ' + location.pathname);
-  // console.log(`random images: ${getImages()}`)
-
-  // const data = location.pathname.substring(0, 7) !== "/details" ? setRandomImages() : setDetailImage();
-  let data = [];
-
-  // useEffect(() => {
-  //   setRandomImages();
-  //   if(location.pathname.substring(0,7) === '/details'){
-  //     data = bannerImages;
-  //   }
-  // }, [bannerImages])
+   
+  const data = getImages();
+  console.log('Data: ' + data);
 
   useEffect(() => {
-    // console.log('Switch Image');
     const intervalId = setInterval(() => {
       setSlide(prevIndex => (prevIndex + 1) % data.length);
     }, 8000);
     return () => clearInterval(intervalId);
   });
 
+  // Get the images/detailimage from the database.
+  const [images, imagesLoaded] = useGetImages('/image', data);
 
   return (
     <div className="carousel">
-      {data.map((item, idx) => {
+      {imagesLoaded && images.map((image, index) => {
+        console.log('Carousel image: ' + index);
         return (
           <img
-            src={require(`../../assets/images/${item}`)}
-            alt={item}
-            key={idx}
-            className={slide === idx ? "slide" : "slide slide-hidden"}
+            src={require(`../../assets/images/${image.src}`)}
+            alt={image.src}
+            key={index}
+            className={slide === index ? "slide" : "slide slide-hidden"}
           />
-        );
+        )
       })}
-
       <Header setVisible={setMenuVisible} />
-      {/* <MainMenu visible={menuVisible} setVisible={setMenuVisible}/> */}
       <div className={menuVisible ? 'main-menu menu-visible' : 'main-menu menu-gone'} onClick={() =>setMenuVisible(false)}>
         <MainMenu />
       </div>
 
       <span className="indicators">
         {data.map((_, idx) => {
-          // console.log(`Slide at indicators: ${slide}`)
           return (
             <button
               key={idx}

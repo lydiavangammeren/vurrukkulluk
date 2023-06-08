@@ -105,9 +105,9 @@ public class RecipeController {
     return "Recipe is updated";
   }
 
-  @DeleteMapping()
-  public String delete(@RequestBody Recipe recipe) {
-    recipeService.deleteRecipe(recipe);
+  @DeleteMapping("/{id}")
+  public String delete(@PathVariable int id) {
+    recipeService.deleteById(id);
     return "Recipe is deleted";
   }
 
