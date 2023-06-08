@@ -33,9 +33,9 @@ public class KitchenTypeController {
     return "This kitchen type is updated";
   }
 
-  @DeleteMapping()
-  public String delete(@RequestBody KitchenType kitchenType) {
-    kitchenTypeService.deleteKitchenType(kitchenType);
+  @DeleteMapping("/{id}")
+  public String delete(@PathVariable int id) {
+    kitchenTypeService.deleteById(id);
     return "Kitchen type is deleted";
   }
 

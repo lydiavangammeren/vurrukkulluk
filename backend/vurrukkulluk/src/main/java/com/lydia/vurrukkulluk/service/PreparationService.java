@@ -4,11 +4,9 @@ import com.lydia.vurrukkulluk.model.Preparation;
 import java.util.List;
 
 public interface PreparationService {
-    public List<Preparation> getAllPreparations();
+     List<Preparation> getAllPreparations();
 
-    public List<Preparation> getAllPreparationsRecipe(int id);
-    public void savePreparation(Preparation preparation);
-
-    public void delete(Preparation preparation);
-
+     List<Preparation> getAllPreparationsRecipe(int id);
+     void savePreparation(Preparation preparation);
+     void deleteById(int id);
 }

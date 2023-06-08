@@ -31,9 +31,9 @@ public class CalendarItemController {
         calendarItemService.save(calendarItem);
         return "updated calendar item";
     }
-    @DeleteMapping()
-    public String deleteCalendarItem(@RequestBody CalendarItem calendarItem){
-        calendarItemService.delete(calendarItem);
+    @DeleteMapping("/{id}")
+    public String deleteCalendarItem(@PathVariable int id){
+        calendarItemService.deleteById(id);
         return "deleted calendar item";
     }
 }

@@ -33,7 +33,7 @@ public class IngredientServiceImpl implements IngredientService{
     }
 
     @Override
-    public void delete(Ingredient ingredient) {
-        ingredientRepository.delete(ingredient);
+    public void deleteById(int id) {
+        ingredientRepository.deleteById(id);
     }
 }

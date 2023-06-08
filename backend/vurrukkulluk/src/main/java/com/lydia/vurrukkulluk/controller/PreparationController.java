@@ -41,9 +41,9 @@ public class PreparationController {
         return "Preparation updated";
     }
 
-    @DeleteMapping()
-    public String delete(@RequestBody PreparationDto preparationDto){
-        preparationService.delete(reversePreparationFromDto(preparationDto));
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id){
+        preparationService.deleteById(id);
         return "Preparation updated";
     }
 
