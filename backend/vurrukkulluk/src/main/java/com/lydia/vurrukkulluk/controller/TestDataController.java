@@ -381,7 +381,7 @@ public class TestDataController {
         ratingService.saveRating(rating);
    }
 
-   public void addCalendarItem(LocalDateTime dateTime, String description, String title){
+   public void addCalendarItem(LocalDateTime dateTime, String title, String description ){
         CalendarItem calendarItem = new CalendarItem();
         calendarItem.setDate(dateTime);
         calendarItem.setDescription(description);
