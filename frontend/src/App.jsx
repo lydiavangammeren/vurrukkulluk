@@ -15,20 +15,23 @@ import { ContextProvider } from "./contexts";
 
 function App() {
   const [recipes, isLoaded] = useDatabase('recipes'); // Get all data from database (Recipes+ingredients+preparation+comments)
-  // const [images, setImages] = useState(() => getImages());
+  // const [images, imagesLoaded] = useDatabase('image/1');
   
-  // const getImages = () => {
-  //   if(!isLoaded) return [];
-  //   const shuffled = [...recipes].sort(() => 0.5 - Math.random());
-  //   return shuffled.slice(0,5).map(obj => obj.id);
-  // }
+  const getImages = () => {
+    if(!isLoaded) return [];
+    const shuffled = [...recipes].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0,5).map(obj => obj.imageId);
+  }
 
-  // const images = getImages();
+  // const [images, setImages] = useState();
+
+
+  const images = getImages();
 
   const renderContent = () => {
     if(isLoaded){
       return (
-        <ContextProvider recipes={recipes} >
+        <ContextProvider recipes={recipes} images={images}>
         <div className="App">
         <Header />
         <section>
