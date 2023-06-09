@@ -17,60 +17,63 @@ const Register = () => {
 
 
     return(
-        <div className='registerForm'>
-            <h2>Account aanmaken</h2>
+        <div className='registercontainer'>
+            <h2 className='registerheader'>Account aanmaken</h2>
             <form onSubmit={handleSubmit}>
+            <div className='registerformcontainer'>
                 <div className='inputs'>
                     <div className='username'>
-                        <label>Vul hier uw naam in:
+                        <label className='registerlabels'>Vul hier uw naam in:</label>
                             <br/>
                             <input
+                                className='registerfields'
                                 type="text"
                                 name="username"
                                 value={inputs.username || ''}
                                 onChange={handleChange}
                             />
-                        </label>
                     </div>
                 <br/>
                     <div className='email'>
-                        <label>Vul hier uw e-mailadres in:
+                        <label className='registerlabels'>Vul hier uw e-mailadres in:</label>
                             <br/>
                             <input
+                                className='registerfields'
                                 type="email"
                                 name="emailaddress"
                                 value={inputs.emailaddress || ''}
                                 onChange={handleChange}
                             />
-                        </label>
                     </div>
                 <br/>
                     <div className='password'>
-                        <label>Vul hier uw wachtwoord in:
+                        <label className='registerlabels'>Vul hier uw wachtwoord in:</label>
                             <br/>
                             <input
+                                className='registerfields'
                                 type="password"
                                 name="firstpassword"
                                 value={inputs.firstpassword || ''}
                                 onChange={handleChange}
                             />
-                        </label>
                     </div>
                 <br />
                     <div className='secondpassword'>
-                        <label>Herhaal uw wachtwoord:
+                        <label className='registerlabels'>Herhaal uw wachtwoord:</label>
                             <br />
                             <input
+                                className='registerfields'
                                 type="password"
                                 name="secondpassword"
                                 value={inputs.secondpassword || ''}
                                 onChange={handleChange}
                             />
-                        </label>
                     </div>
                 </div>
                 <br/><br/>
-                <input type="submit" value="Registreren" />
+
+                </div>
+                <input type="submit" value="Registreren" className='registerbutton' />
             </form>
         </div>
     )
