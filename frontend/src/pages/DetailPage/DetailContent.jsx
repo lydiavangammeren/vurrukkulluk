@@ -9,7 +9,7 @@ const DetailContent = () => {
   
   const { slug } = useParams();
   
-  const { recipes, bannerImages, setBannerImages } = useAppContext();
+  const { recipes, bannerImages, setDetailImage } = useAppContext();
   const details = recipes.find(recipe => recipe.slug == slug);
   
   const ingredients = details?.ingredients ?? [];
@@ -24,7 +24,7 @@ const DetailContent = () => {
   //   setDetailImage([details.imgid]);
   // }, [details.imgid]);
 
-  if(bannerImages.length > 1) setBannerImages([details.imageId]);
+  setDetailImage([details.imageId]);
   
 
   return (

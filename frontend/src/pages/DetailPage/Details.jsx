@@ -10,6 +10,7 @@ import { useAppContext } from "../../contexts";
 
 const Details = ({details}) => {
 
+  const { baseUrl } = useAppContext();
   const title = details.title;
   const description = details.description;
   const imageId = details.imageId;
@@ -29,7 +30,7 @@ const Details = ({details}) => {
       return (
          <img 
             // src={require(`../../assets/images/${image.src}`)}
-            src={`http://localhost:8080/image/${imageId}`}
+            src={baseUrl + imageId}
             alt={title}
             width="100%"
             height="100%" 

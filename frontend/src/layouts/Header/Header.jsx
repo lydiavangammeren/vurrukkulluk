@@ -11,7 +11,7 @@ const Header = ({setVisible}) => {
     <div className='Header'>
       <div className='header-logo'>
         <Link to={"/"} >
-          <img src={require("../../assets/images/vurrukkulluk-logo.png")}
+          <img src={"/images/vurrukkulluk-logo.png"}
               alt='vurrukkulluk'
           />
         </Link>

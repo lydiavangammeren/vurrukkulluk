@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Eggs & Veggies",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "EggsAndVeggies.jpg",
+      "imageId": "EggsAndVeggies.jpg",
       "kitchenType": {
         "id":1,
         "name":"Vegetarisch"
@@ -29,7 +29,7 @@
         {
           "article": {
             "name": "Vegan Burger Bun",
-            "image": "hamb.jpg",
+            "imageId": "hamb.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 3,
             "unit": "broodje",
@@ -40,7 +40,7 @@
         {
           "article": {
             "name": "Vegan Burger",
-            "image": "VeganBurgerI.jpg",
+            "imageId": "VeganBurgerI.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 1,
             "unit": "gram",
@@ -51,7 +51,7 @@
         {
           "article": {
             "name": "Vegan Burger Sauce",
-            "image": "VeganSauce.jpg",
+            "imageId": "VeganSauce.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 1,
             "unit": "ml",
@@ -62,7 +62,7 @@
         {
           "article": {
             "name": "Avocado",
-            "image": "avocado.jpg",
+            "imageId": "avocado.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 2,
             "unit": "stuks",
@@ -95,7 +95,7 @@
           "user": {
             "id": 1,
             "name": "Tommy Tuup",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -104,7 +104,7 @@
           "user": {
             "id": 2,
             "name": "Bennie Blind",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -113,7 +113,7 @@
           "user": {
             "id": 3,
             "name": "Sammy Suf",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -122,7 +122,7 @@
           "user": {
             "id": 4,
             "name": "Katinka Cool",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         }
       ]
@@ -131,7 +131,7 @@
       "id": 2,
       "title": "Vegan Burger",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "VeganBurger.jpg",
+      "imageId": "VeganBurger.jpg",
       "kitchenType": {
         "id":2,
         "name":"Vegan"
@@ -156,7 +156,7 @@
         {
           "article": {
             "name": "Vegan Burger Bun",
-            "image": "hamb.jpg",
+            "imageId": "hamb.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 3,
             "unit": "broodje",
@@ -167,7 +167,7 @@
         {
           "article": {
             "name": "Vegan Burger",
-            "image": "VeganBurgerI.jpg",
+            "imageId": "VeganBurgerI.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 1,
             "unit": "gram",
@@ -178,7 +178,7 @@
         {
           "article": {
             "name": "Vegan Burger Sauce",
-            "image": "VeganSauce.jpg",
+            "imageId": "VeganSauce.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 1,
             "unit": "ml",
@@ -189,7 +189,7 @@
         {
           "article": {
             "name": "Avocado",
-            "image": "avocado.jpg",
+            "imageId": "avocado.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 2,
             "unit": "stuks",
@@ -222,7 +222,7 @@
           "user": {
             "id": 0,
             "name": "Tommy Tuup",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -231,7 +231,7 @@
           "user": {
             "id": 1,
             "name": "Bennie Blind",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -240,7 +240,7 @@
           "user": {
             "id": 2,
             "name": "Sammy Suf",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -249,7 +249,7 @@
           "user": {
             "id": 3,
             "name": "Katinka Cool",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         }
       ]
@@ -258,7 +258,7 @@
       "id": 3,
       "title": "Sushi Rolls",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "SushiRolls.jpg",
+      "imageId": "SushiRolls.jpg",
       "kitchenType": {
         "id":0,
         "name":"Vis"
@@ -283,7 +283,7 @@
         {
           "article": {
             "name": "Vegan Burger Bun",
-            "image": "hamb.jpg",
+            "imageId": "hamb.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 3,
             "unit": "broodje",
@@ -294,7 +294,7 @@
         {
           "article": {
             "name": "Vegan Burger",
-            "image": "VeganBurgerI.jpg",
+            "imageId": "VeganBurgerI.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 1,
             "unit": "gram",
@@ -305,7 +305,7 @@
         {
           "article": {
             "name": "Vegan Burger Sauce",
-            "image": "VeganSauce.jpg",
+            "imageId": "VeganSauce.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 1,
             "unit": "ml",
@@ -316,7 +316,7 @@
         {
           "article": {
             "name": "Avocado",
-            "image": "avocado.jpg",
+            "imageId": "avocado.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 2,
             "unit": "stuks",
@@ -349,7 +349,7 @@
           "user": {
             "id": 0,
             "name": "Tommy Tuup",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -358,7 +358,7 @@
           "user": {
             "id": 1,
             "name": "Bennie Blind",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -367,7 +367,7 @@
           "user": {
             "id": 2,
             "name": "Sammy Suf",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -376,7 +376,7 @@
           "user": {
             "id": 3,
             "name": "Katinka Cool",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         }
       ]
@@ -385,7 +385,7 @@
       "id": 4,
       "title": "Pizza Green",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.",
-      "image": "PizzaGreen.jpg",
+      "imageId": "PizzaGreen.jpg",
       "kitchenType": {
         "id":0,
         "name":"Vlees"
@@ -410,7 +410,7 @@
         {
           "article": {
             "name": "Vegan Burger Bun",
-            "image": "hamb.jpg",
+            "imageId": "hamb.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 3,
             "unit": "broodje",
@@ -421,7 +421,7 @@
         {
           "article": {
             "name": "Vegan Burger",
-            "image": "VeganBurgerI.jpg",
+            "imageId": "VeganBurgerI.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 1,
             "unit": "gram",
@@ -432,7 +432,7 @@
         {
           "article": {
             "name": "Vegan Burger Sauce",
-            "image": "VeganSauce.jpg",
+            "imageId": "VeganSauce.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 1,
             "unit": "ml",
@@ -443,7 +443,7 @@
         {
           "article": {
             "name": "Avocado",
-            "image": "avocado.jpg",
+            "imageId": "avocado.jpg",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
             "price": 2,
             "unit": "stuks",
@@ -476,7 +476,7 @@
           "user": {
             "id": 0,
             "name": "Tommy Tuup",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -485,7 +485,7 @@
           "user": {
             "id": 1,
             "name": "Bennie Blind",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -494,7 +494,7 @@
           "user": {
             "id": 2,
             "name": "Sammy Suf",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         },
         {
@@ -503,7 +503,7 @@
           "user": {
             "id": 3,
             "name": "Katinka Cool",
-            "image": "IMG_4420.JPG"
+            "imageId": "IMG_4420.JPG"
           }
         }
       ]
@@ -512,7 +512,7 @@
   "products": [
     {
       "id": 1,
-      "image": "hamb.jpg",
+      "imageId": "hamb.jpg",
       "title": "Vegan Burger Bun",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
       "quantity": "4",
@@ -520,7 +520,7 @@
     },
     {
       "id": 2,
-      "image": "VeganBurgerI.jpg",
+      "imageId": "VeganBurgerI.jpg",
       "title": "Vegan Burger",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
       "quantity": "6",
@@ -528,7 +528,7 @@
     },
     {
       "id": 3,
-      "image": "VeganSauce.jpg",
+      "imageId": "VeganSauce.jpg",
       "title": "Vegan Burger Sauce",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
       "quantity": "1",
@@ -536,7 +536,7 @@
     },
     {
       "id": 4,
-      "image": "avocado.jpg",
+      "imageId": "avocado.jpg",
       "title": "Avocado",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
       "quantity": "2",

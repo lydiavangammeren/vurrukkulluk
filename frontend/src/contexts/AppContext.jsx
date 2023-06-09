@@ -7,9 +7,12 @@ export function useAppContext() {
 }
 
 export function ContextProvider({children, recipes, images}){
-  const [bannerImages, setBannerImages] = useState(images);
-  // const [detailImage, setDetailImage] = useState([]);
+  // const [bannerImages, setBannerImages] = useState(images);
+  const bannerImages = images;
+  const [detailImage, setDetailImage] = useState();
   const [searchValue, setSearchValue]= useState('');
+  const baseUrl = "/images/";
+  // const baseUrl = "http://localhost:8080/image/";
 
   // console.log('Context render');
   // useEffect(() => {
@@ -17,7 +20,7 @@ export function ContextProvider({children, recipes, images}){
   // }, [])
 
   return (
-    <AppContext.Provider value={{recipes, searchValue, setSearchValue, bannerImages, setBannerImages}} >
+    <AppContext.Provider value={{recipes, searchValue, setSearchValue, bannerImages, detailImage, setDetailImage, baseUrl}} >
       {children}
     </AppContext.Provider>
   )

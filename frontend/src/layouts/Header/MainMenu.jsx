@@ -6,7 +6,7 @@ const MainMenu = () => {
     // <div className={visible ? 'main-menu menu-visible' : 'main-menu menu-gone'} onClick={setVisible(false)}>
     <>
       <div className='menu-logo'>
-        <img src={require("../../assets/images/vurrukkulluk-logo.png")}
+        <img src={"/images/vurrukkulluk-logo.png"}
               alt='vurrukkulluk'
         />
       </div>

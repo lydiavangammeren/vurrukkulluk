@@ -4,11 +4,12 @@ import {useNavigate} from 'react-router-dom';
 import { HiUsers } from 'react-icons/hi';
 import { MdEuro } from 'react-icons/md';
 import { VscFlame } from 'react-icons/vsc';
-
+import { useAppContext } from '../../contexts';
 import { useDatabase } from '../../hooks';
 
 const Recipe = ({recipe}) => {
   const navigate = useNavigate();
+  const { baseUrl } = useAppContext();
   // const [image, imageLoaded] = useDatabase(`image/${recipe.imgid}`);
   // const [image, imageLoaded] = useDatabase(`image/1`);
 
@@ -19,7 +20,8 @@ const Recipe = ({recipe}) => {
         // <div></div>
         <img 
           // src={require(`../../assets/images/${image.src}`)}
-          src={`http://localhost:8080/image/${recipe.imageId}`}
+          src={baseUrl + recipe.imageId}
+          // src={'/images/EggsAndVeggies.jpg'}
           alt={recipe.title}
           width="100%"
           height="auto"

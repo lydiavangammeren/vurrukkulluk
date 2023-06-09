@@ -10,20 +10,20 @@ import useGetImages from "../../hooks/useGetImages";
 const Carousel = () => {
   const [slide, setSlide] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
-  const {recipes, bannerImages} = useAppContext();
+  const {recipes, bannerImages, detailImage, baseUrl} = useAppContext();
 
   const getImages = () => {
     if(location.pathname.substring(0,8) === '/details'){
-      console.log('DETAILPAGE! : '+ bannerImages);
-      return bannerImages;
+      // console.log('DETAILPAGE! : '+ detailImage);
+      return detailImage ? [detailImage] : [];
     } else {
-      console.log('NOT DETAILPAGE!');
-      if(bannerImages.length === 1){
-        return getRandomImages();
-      } else {
-        return bannerImages;
-      }
-      // return [2, 3];
+      // console.log('NOT DETAILPAGE!');
+      return bannerImages;
+      // if(bannerImages.length === 1){
+      //   return getRandomImages();
+      // } else {
+      //   return bannerImages;
+      // }
     }
   }
 
@@ -41,14 +41,9 @@ const Carousel = () => {
     const intervalId = setInterval(() => {
       setSlide(prevIndex => (prevIndex + 1) % data.length);
     }, 8000);
+    console.log('Carousel UseEffect');
     return () => clearInterval(intervalId);
   });
-
-  // Get the images/detailimage from the database.
-  // const [images, imagesLoaded] = useGetImages('/image', data);
-  // const images = getRandomImages();
-  
-
 
 
   return (
@@ -56,10 +51,8 @@ const Carousel = () => {
       {data.map((image, index) => {
         console.log('Carousel image: ' + image);
         return (
-          //require(`../../assets/images/${image.src}`)
           <img
-            src={`http://localhost:8080/image/${image}`}
-            // alt={image.src}
+            src={baseUrl + image}
             key={index}
             className={slide === index ? "slide" : "slide slide-hidden"}
           />
