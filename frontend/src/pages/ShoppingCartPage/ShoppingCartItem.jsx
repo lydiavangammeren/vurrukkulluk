@@ -4,8 +4,11 @@ import { SC_ACTION } from "./ShoppingCartActions";
 
 import { AiOutlineCheck } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { useAppContext } from "../../contexts";
 
 const ShoppingCartItem = ({product, checked, dispatch}) => {
+  const { baseUrl } = useAppContext();
+
   return (
     <tr
       className={
@@ -14,7 +17,7 @@ const ShoppingCartItem = ({product, checked, dispatch}) => {
     >
       <td className="shoppingcart_img">
         <img
-          src={require("../../assets/images/" + product.image)}
+          src={baseUrl + product.imageId}
           alt={product.image}
           width="100%"
           height="100%"
@@ -22,7 +25,7 @@ const ShoppingCartItem = ({product, checked, dispatch}) => {
       </td>
       <td className="shoppingcart_desc">
         <h2>{product.title}</h2>
-        <p>{product.desc}</p>
+        <p>{product.description}</p>
       </td>
       <td>
         <input className="quantity_value" type="number" value={product.quantity} minValue="0" maxValue="999"

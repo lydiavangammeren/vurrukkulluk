@@ -7,7 +7,7 @@ import Footer from "./layouts/Footer";
 import DetailContent from "./pages/DetailPage";
 import HomeContent from "./pages/HomePage";
 import ShoppingCart from "./pages/ShoppingCartPage/ShoppingCart";
-import AddRecipePage from "./pages/AddRecipe/AddRecipePage";
+import AddRecipe from "./pages/AddRecipePage";
 import Register from "./pages/RegisterPage/Register";
 import "./assets/styles/main.css";
 import { useDatabase } from "./hooks"
@@ -43,7 +43,7 @@ function App() {
               element={<DetailContent />}
             />
             <Route path="/shoppingcart" element={<ShoppingCart />} />
-            <Route path="/addrecipe" element={<AddRecipePage />} />
+            <Route path="/addrecipe" element={<AddRecipe />} />
             <Route path="/register" element={<Register />} />
           </Routes>
           </div>

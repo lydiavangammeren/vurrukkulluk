@@ -4,6 +4,7 @@ import "./ShoppingCart.css";
 import api from "../../lib/recipeAPI";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { SC_ACTION } from "./ShoppingCartActions";
+import { useDatabase } from "../../hooks";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -42,6 +43,8 @@ const ShoppingCart = () => {
   /* video on useReducer: https://www.youtube.com/watch?v=kK_Wqx3RnHk */
   const [state, dispatch] = useReducer(reducer, { products: [], checkedProductIds: [] });
 
+  // const [products, productsLoaded ] = useDatabase('/products');
+  
   useEffect(() => {
     const getData = async () => {
       try {

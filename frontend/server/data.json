@@ -514,23 +514,23 @@
       "id": 1,
       "imageId": "hamb.jpg",
       "title": "Vegan Burger Bun",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      "quantity": "4",
-      "price": 6.5
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "quantity": 1,
+      "price": 3.7
     },
     {
       "id": 2,
       "imageId": "VeganBurgerI.jpg",
       "title": "Vegan Burger",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-      "quantity": "6",
-      "price": 6.5
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "quantity": 4,
+      "price": 5.4
     },
     {
       "id": 3,
       "imageId": "VeganSauce.jpg",
       "title": "Vegan Burger Sauce",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
       "quantity": "1",
       "price": 3
     },
@@ -538,7 +538,7 @@
       "id": 4,
       "imageId": "avocado.jpg",
       "title": "Avocado",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
       "quantity": "2",
       "price": 6.5
     }
@@ -593,24 +593,120 @@
       "date": "2023-08-25 14:00:00",
       "description": "Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee"
     }
-  ], 
-  "image":
+  ],
+  "kitchentypes":
   [
     {
       "id":1,
-      "src": "require('../../assets/images/EggsAndVeggies.jpg')"
+      "name": "Vlees"
     },
     {
       "id":2,
-      "src": "VeganBurger.jpg"
+      "name": "Vis"
     },
     {
       "id":3,
-      "src": "SushiRolls.jpg"
+      "name": "Vegetarisch"
     },
     {
       "id":4,
-      "src": "PizzaGreen.jpg"
+      "name": "Vegan"
+    }
+  ],
+  "kitchenregions":
+  [
+    {
+      "id":1,
+      "name": "Afrikaans"
+    },
+    {
+      "id":2,
+      "name": "Amerikaans"
+    },
+    {
+      "id":3,
+      "name": "Argentijns"
+    },
+    {
+      "id":4,
+      "name": "Australisch"
+    }
+  ],
+  "kitchencategorys":
+  [
+    {
+      "id":1,
+      "name": "Biologisch"
+    },
+    {
+      "id":2,
+      "name": "Glutenvrij"
+    },
+    {
+      "id":3,
+      "name": "Lactosevrij"
+    },
+    {
+      "id":4,
+      "name": "Bevat vlees"
+    },
+    {
+      "id":5,
+      "name": "Bevat vis"
+    },
+    {
+      "id":6,
+      "name": "Bevat schaaldieren"
+    },
+    {
+      "id":7,
+      "name": "Bevat mosterd"
+    },
+    {
+      "id":8,
+      "name": "Bevat ei"
+    }
+  ],
+  "articles": [
+    {
+      "id": 1,
+      "imageId": "hamb.jpg",
+      "name": "Vegan Burger Bun",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "amount": "4",
+      "unit": "stuks",
+      "price": 120,
+      "calories": 250
+    },
+    {
+      "id": 2,
+      "imageId": "VeganBurgerI.jpg",
+      "name": "Vegan Burger",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "amount": "400",
+      "unit": "g",
+      "price": 540,
+      "calories": 469
+    },
+    {
+      "id": 3,
+      "imageId": "VeganSauce.jpg",
+      "name": "Vegan Burger Sauce",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "amount": "250",
+      "unit": "ml",
+      "price": 520,
+      "calories": 750
+    },
+    {
+      "id": 4,
+      "imageId": "avocado.jpg",
+      "name": "Avocado",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
+      "amount": "1",
+      "unit": "stuks",
+      "price": 200,
+      "calories": 300
     }
   ]
 }

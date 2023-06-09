@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./AddRecipePage";
+// import "./AddRecipePage";
 import "./AddRecipePreperation.css";
 
-const AddRecipePreperation = () => {
+const AddRecipePreparation = () => {
   const [Recipe, setRecipe] = useState([{ recipe: "", number: 1 }]);
 
   const handleRecipeChange = (index, event) => {
@@ -60,4 +60,4 @@ const AddRecipePreperation = () => {
   );
 };
 
-export default AddRecipePreperation;
+export default AddRecipePreparation;
