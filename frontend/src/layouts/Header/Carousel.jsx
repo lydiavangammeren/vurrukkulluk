@@ -12,6 +12,7 @@ const Carousel = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const {recipes, bannerImages, detailImage, baseUrl} = useAppContext();
 
+  const location = useLocation();
   const getImages = () => {
     if(location.pathname.substring(0,8) === '/details'){
       return detailImage ? [detailImage] : [];
@@ -19,22 +20,13 @@ const Carousel = () => {
       return bannerImages;
     }
   }
-
-  const getRandomImages = () => {
-    const shuffled = [...recipes].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0,5).map(obj => obj.imageId);
-  }
-
-  const location = useLocation();
-  // const data = bannerImages;
   const data = getImages();
-  // console.log('Data: ' + data);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setSlide(prevIndex => (prevIndex + 1) % data.length);
     }, 8000);
-    console.log('Carousel UseEffect');
+    // console.log('Carousel UseEffect');
     return () => clearInterval(intervalId);
   });
 
@@ -42,7 +34,7 @@ const Carousel = () => {
   return (
     <div className="carousel">
       {data.map((image, index) => {
-        console.log('Carousel image: ' + image);
+        // console.log('Carousel image: ' + image);
         return (
           <img
             src={baseUrl + image}
@@ -57,7 +49,7 @@ const Carousel = () => {
       </div>
 
       <span className="indicators">
-        {data.map((_, idx) => {
+        {data.length > 1 && data.map((_, idx) => {
           return (
             <button
               key={idx}

@@ -27,7 +27,7 @@ function App() {
   const renderContent = () => {
     if(isLoaded){
       return (
-        <ContextProvider recipes={recipes} images={images}>
+        <ContextProvider recipes={recipes} bannerImages={images}>
         <div className="App">
         <Header />
         <section>

@@ -1,18 +1,38 @@
 import React from "react";
+import { useAppContext } from "../../contexts";
 
 const Ingredient = ({ingredient}) => {
   const title = ingredient.article.name;
   const description = ingredient.article.description;
   const image = ingredient?.article?.image ?? '';
+  const imageId = ingredient.article.imageId;
   const quantity = ingredient.amount;
   const unit = ingredient?.article?.unit ?? '';
+  const { baseUrl } = useAppContext();
+
+  const renderImage = () => {
+    return (
+      <img 
+            // src={require(`../../assets/images/${image}`)} 
+            src={baseUrl + imageId}
+            alt={image}
+        />
+
+    )
+    
+  }
   
   return (
     <div className="ingredient">
       <div className="ingredient_img">
-        {image &&
-          <img src={require(`../../assets/images/${image}`)} alt={image}/>
-        }
+        {renderImage()}
+        {/* {image &&
+          <img 
+            // src={require(`../../assets/images/${image}`)} 
+            src={baseUrl + imageId}
+            alt={image}
+          />
+        } */}
       </div>
       <div className='ingredient_info'>
         <h3>{title}</h3>
