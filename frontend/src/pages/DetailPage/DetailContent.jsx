@@ -16,16 +16,10 @@ const DetailContent = () => {
   const prepsteps = details?.preparation ?? [];
   const comments = details?.comments ?? [];
 
-  // const location = useLocation();
-  // console.log('Details location: ' + location.pathname);
+  useEffect(() => {
+    setDetailImage([details.imageId]);
+  }, [details.imageId]);
 
-  // setDetailImage([details.imgid]);
-  // useEffect(() => {
-  //   setDetailImage([details.imgid]);
-  // }, [details.imgid]);
-
-  setDetailImage([details.imageId]);
-  
 
   return (
     <div className='DetailContent'>

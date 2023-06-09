@@ -14,16 +14,9 @@ const Carousel = () => {
 
   const getImages = () => {
     if(location.pathname.substring(0,8) === '/details'){
-      // console.log('DETAILPAGE! : '+ detailImage);
       return detailImage ? [detailImage] : [];
     } else {
-      // console.log('NOT DETAILPAGE!');
       return bannerImages;
-      // if(bannerImages.length === 1){
-      //   return getRandomImages();
-      // } else {
-      //   return bannerImages;
-      // }
     }
   }
 
