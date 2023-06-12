@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDatabase } from '../../hooks';
 import { useAppContext } from '../../contexts';
 import './DetailsForm.css';
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import { SearchResultsList } from '../../components/SearchBar/SearchResultsList';
 
 const DetailsForm = () => {
   const [types, typesLoaded ] = useDatabase('/kitchentypes');
@@ -11,11 +13,38 @@ const DetailsForm = () => {
   const { recipes } = useAppContext();
   const { data, handleChange } = useAddRecipeContext();
 
+  const [searchValue, setSearchValue] = useState('');
+
+
+
+  const filter = () => {
+    if(!searchValue) return [];
+    
+    return categories.filter((category)=> {
+      return (
+        searchValue &&
+        categoriesLoaded && (
+          category.name.toLowerCase().includes(searchValue)
+        )
+      )
+    });
+  }
+
+  const searchResults = filter();
+
+  const findObjectNameById = (id) => {
+    // console.log('Id to find: ' + id);
+    // console.log('to search: ' + JSON.stringify(categories))
+    const foundObject = categories.find((object) => object.id === parseInt(id));
+    // console.log('Found object: ' + JSON.stringify(foundObject))
+    return foundObject ? foundObject.name : 'Object not found';
+  };
+
   const renderContent = () => {
     if(typesLoaded && regionsLoaded && categoriesLoaded){
       return (
         <div className='details_form'>
-          <div className='details_grid_name'>
+          <div className='details_grid_name grid_item'>
             <label htmlFor='name'>Naam</label>
             <input 
               type='text'
@@ -26,7 +55,7 @@ const DetailsForm = () => {
               onChange={handleChange}
             />
           </div>
-          <div className='details_grid_type'>
+          <div className='details_grid_type grid_item'>
             <label htmlFor='type'>Type</label>
             <select 
               id='type'
@@ -41,7 +70,7 @@ const DetailsForm = () => {
               })}
             </select>
           </div>
-          <div className='details_grid_kitchen'>
+          <div className='details_grid_kitchen grid_item'>
             <label htmlFor="region">Keuken</label>
             <select 
               id="region"
@@ -56,11 +85,17 @@ const DetailsForm = () => {
               })}
             </select>
           </div>
-          <div className='details_grid_persons'>
+          <div className='details_grid_persons grid_item'>
             <label htmlFor='persons'>Aantal personen</label>
-            <input type='number' />
+            <input 
+              type='number'
+              id='persons'
+              name='persons'
+              value={data.persons}
+              onChange={handleChange} 
+            />
           </div>
-          <div className='details_grid_image'>
+          <div className='details_grid_image grid_item'>
             <label htmlFor='image'>Afbeelding</label>
             <input 
               type='file' 
@@ -72,33 +107,23 @@ const DetailsForm = () => {
 
             </div>
           </div>
-          <div className='details_grid_categories'>
+          <div className='details_grid_categories grid_item'>
             <label htmlFor='categories'>Categorieën</label>
-            {/* <select 
-              id="categories"
-              name='categories'
-              value={data.categories}
-              onChange={handleChange}
-            >
-              {categories.map(category => {
-                return (
-                  <option value={category.id}>{category.name}</option>
-                )
-              })}
-            </select> */}
-            <input type='text' list='allCategories' />
-            <datalist id='allCategories'>
-              {categories.map(category => {
-                return (
-                  <option value={category.id}>{category.name}</option>
-                )
-              })}
-            </datalist>
-            <div className='category_list'>
 
+            <SearchBar searchValue={searchValue} setSearchValue={setSearchValue}/>
+            {searchResults && searchResults.length > 0 && <SearchResultsList results={searchResults} />}
+
+            <div className='category_list'>
+              {data.categories.map((categoryId) => {
+                // console.log('Print Category: ' + categoryId)
+                
+                return (
+                  <li>{findObjectNameById(categoryId)}</li>
+                )
+              })}
             </div>
           </div>
-          <div className='details_grid_desc'>
+          <div className='details_grid_desc grid_item'>
             <label htmlFor='description'>Beschrijving</label>
             <textarea
               id='description'

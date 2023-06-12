@@ -14,7 +14,7 @@
   'desc  desc  desc    desc       desc       desc';
   gap: 1rem;
 }
-.details_form div{
+.details_form .grid_item{
   display: flex;
   flex-direction: column;
   /* padding: 0.5rem 2rem; */
@@ -54,7 +54,7 @@
 }
 .category_list{
   height: 100%;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .details_grid_desc{

@@ -5,9 +5,9 @@ const AddRecipeContext = createContext({})
 export const AddRecipeProvider = ({ children }) => {
 
     const title = {
-        0: 'Details',
-        1: 'Ingredients',
-        2: 'Preparation'
+      0: 'Details',
+      1: 'Ingredients',
+      2: 'Preparation'
     }
 
     const [page, setPage] = useState(0)
@@ -21,23 +21,36 @@ export const AddRecipeProvider = ({ children }) => {
       categories: [],
       recipeImage: 0,
       ingredients: [],
-      preparation: []
+      preparation: [],
     });
 
 
     const handleChange = e => {
-        const type = e.target.type
+      const type = e.target.type
 
-        const name = e.target.name
+      const name = e.target.name
 
-        const value = type === "checkbox"
-            ? e.target.checked
-            : e.target.value
+      const value = type === "checkbox"
+        ? e.target.checked
+        : e.target.value
 
+      setData(prevData => ({
+        ...prevData,
+        [name]: value
+      }))
+    }
+
+    const addCategory = e => {
+
+      const value = e.target.value
+      console.log('Add Category: ' + value)
+
+      if(!data.categories.find(category => category.id === value)){
         setData(prevData => ({
-            ...prevData,
-            [name]: value
+          ...prevData,
+           categories: [...data.categories, value]
         }))
+      }
     }
 
     // const {
@@ -62,9 +75,9 @@ export const AddRecipeProvider = ({ children }) => {
     const disablePrev = page === 0
 
     const disableNext = page === 2
-        // (page === Object.keys(title).length - 1)
-        // || (page === 0 && !canNextPage1)
-        // || (page === 1 && !canNextPage2)
+    // (page === Object.keys(title).length - 1)
+    // || (page === 0 && !canNextPage1)
+    // || (page === 1 && !canNextPage2)
 
     const prevHide = page === 0 && "remove_button"
 
@@ -73,9 +86,10 @@ export const AddRecipeProvider = ({ children }) => {
     const submitHide = page !== Object.keys(title).length - 1 && "remove_button"
 
     return (
-        <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, disableNext, prevHide, nextHide, submitHide }}>
-            {children}
-        </AddRecipeContext.Provider>
+      <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, 
+                                  disableNext, prevHide, nextHide, submitHide, addCategory }}>
+        {children}
+      </AddRecipeContext.Provider>
     )
 }
 
