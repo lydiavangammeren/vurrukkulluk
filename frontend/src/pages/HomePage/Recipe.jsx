@@ -5,7 +5,7 @@ import { HiUsers } from 'react-icons/hi';
 import { MdEuro } from 'react-icons/md';
 import { VscFlame } from 'react-icons/vsc';
 import { useAppContext } from '../../contexts';
-import { useDatabase } from '../../hooks';
+import Category from '../../components/Category/Category';
 
 const Recipe = ({recipe}) => {
   const navigate = useNavigate();
@@ -38,6 +38,24 @@ const Recipe = ({recipe}) => {
       <div className='recipe_img'>
         {renderImage()}
       </div>
+      
+      <div className='recipe_categories'>
+        {/* {recipe.categories.forEach((category, index) => {
+          console.log('CATEGORY' + index)
+          if(index < 4){
+            console.log('category below 5');
+            <Category name={category.name} />
+          }
+        })} */}
+        {recipe.categories.map((category, index)=> {
+          if(index < 4){
+            return (
+              <Category name={category.name} />
+            )
+          }
+        }) }
+      </div>
+
       <div className='recipe_title_rating'>
       {/* <Link to={`/details/${recipe.id}`}> */}
         <div className='recipe_title'><h2>{recipe.title}</h2></div>

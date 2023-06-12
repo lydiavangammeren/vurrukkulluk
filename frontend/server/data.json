@@ -17,6 +17,26 @@
         {
           "id":1,
           "name":"Goedkoop"
+        },
+        {
+          "id":2,
+          "name":"Bevat schaaldieren"
+        },
+        {
+          "id":3,
+          "name":"Koolhydraatarm"
+        },
+        {
+          "id":4,
+          "name":"Wokgerecht"
+        },
+        {
+          "id":5,
+          "name":"Eenvoudig"
+        },
+        {
+          "id":6,
+          "name":"Bevat ei"
         }
       ],
       "persons": 4,
@@ -632,7 +652,7 @@
       "name": "Australisch"
     }
   ],
-  "kitchencategorys":
+  "kitchencategories":
   [
     {
       "id":1,

@@ -12,6 +12,7 @@ import Register from "./pages/RegisterPage/Register";
 import "./assets/styles/main.css";
 import { useDatabase } from "./hooks"
 import { ContextProvider } from "./contexts";
+import AddRecipeContext from "./contexts/AddRecipeContext";
 
 function App() {
   const [recipes, isLoaded] = useDatabase('recipes'); // Get all data from database (Recipes+ingredients+preparation+comments)

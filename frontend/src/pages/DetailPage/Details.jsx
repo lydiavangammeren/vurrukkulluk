@@ -7,6 +7,7 @@ import {BsHeart} from 'react-icons/bs';
 
 import { useDatabase } from "../../hooks";
 import { useAppContext } from "../../contexts";
+import Category from "../../components/Category/Category";
 
 const Details = ({details}) => {
 
@@ -19,6 +20,7 @@ const Details = ({details}) => {
   const calories = details.calories;
   const kitchenRegion = details?.kitchenRegion?.name ?? '';
   const kitchenType = details?.kitchenType?.name ?? '';
+  const categories = details.categories;
 
   // const {title, description, image, kitchenRegion, kitchenType, persons, price, calories} = details;
   // const {setBannerImages} = useAppContext();
@@ -50,10 +52,21 @@ const Details = ({details}) => {
         {renderImage()}
       </div>
       <div className="details_info">
-        <div className="details_stats">
-          <div className=".icon-align"><HiUsers size={18} color='#b31714'/><span className="setFont">{persons}</span></div>
-          <div className=".icon-align"><MdEuro size={18} color='#b31714'/><span className="setFont">{price}</span></div>
-          <div className=".icon-align"><VscFlame size={18} color='#b31714'/><span className="setFont">{calories}</span></div>
+        <div className="details_top">
+          <div className="details_stats">
+            <div className=".icon-align"><HiUsers size={18} color='#b31714'/><span className="setFont">{persons}</span></div>
+            <div className=".icon-align"><MdEuro size={18} color='#b31714'/><span className="setFont">{price}</span></div>
+            <div className=".icon-align"><VscFlame size={18} color='#b31714'/><span className="setFont">{calories}</span></div>
+          </div>
+          <div className="details_categories">
+            {categories.map((category, index) => {
+              if(index < 4){
+                return (
+                  <Category name={category.name}/>
+                )
+              }
+            })}
+          </div>
         </div>
 
         <div className="title_rating">

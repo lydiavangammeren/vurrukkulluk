@@ -1,0 +1,62 @@
+.details_form{
+  /* max-width: 80%; */
+  /* height: 100%; */
+  display: grid;
+  grid-template-areas:
+  'name name   name    name       name       name'
+  'type type   kitchen kitchen    persons    persons'
+  'image image image   categories categories categories'
+  'image image image   categories categories categories'
+  'image image image   categories categories categories'
+  'desc  desc  desc    desc       desc       desc'
+  'desc  desc  desc    desc       desc       desc'
+  'desc  desc  desc    desc       desc       desc'
+  'desc  desc  desc    desc       desc       desc';
+  gap: 1rem;
+}
+.details_form div{
+  display: flex;
+  flex-direction: column;
+  /* padding: 0.5rem 2rem; */
+
+}
+
+/* .details_form input{
+  width: 100%;
+} */
+
+.details_grid_name{
+  grid-area: name;
+}
+.details_grid_type{
+  grid-area: type;
+}
+
+.details_grid_kitchen{
+  grid-area: kitchen;
+}
+
+.details_grid_persons{
+  grid-area: persons;
+}
+
+.details_grid_image{
+  grid-area: image;
+}
+.image_example{
+  height: 100px;
+  border: solid;
+
+}
+
+.details_grid_categories{
+  grid-area: categories;
+}
+.category_list{
+  height: 100%;
+  background-color: aqua;
+}
+
+.details_grid_desc{
+  grid-area: desc;
+}
