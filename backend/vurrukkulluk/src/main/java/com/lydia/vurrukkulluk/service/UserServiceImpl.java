@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.service;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +23,9 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<User> getUserByEmail(String email) {
-    return userRepository.findByEmail(email);
+  public User getUserByEmail(String email) {
+
+    return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
   }
 
   @Override

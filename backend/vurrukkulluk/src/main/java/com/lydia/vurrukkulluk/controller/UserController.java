@@ -35,8 +35,8 @@ public class UserController {
   }
 
   @GetMapping("email/{email}")
-  public List<UserDto> getName(@PathVariable String email){
-    return userService.getUserByEmail(email).stream().map(this::convertUserToDto).collect(Collectors.toList());
+  public UserDto getName(@PathVariable String email){
+    return convertUserToDto(userService.getUserByEmail(email));
   }
 
 
