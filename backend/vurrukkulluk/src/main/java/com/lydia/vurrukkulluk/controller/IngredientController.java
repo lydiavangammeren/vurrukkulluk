@@ -53,8 +53,8 @@ public class IngredientController {
     }
 
     @GetMapping("/{id}")
-    public Ingredient getId(@PathVariable int id){
-        return ingredientService.getIngredientById(id);
+    public IngredientDto getId(@PathVariable int id){
+        return convertIngredientToDto(ingredientService.getIngredientById(id));
     }
 
     @GetMapping("recipe/{id}")
