@@ -49,12 +49,12 @@ public class IngredientController {
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id){
         ingredientService.deleteById(id);
-        return "updated";
+        return "deleted";
     }
 
     @GetMapping("/{id}")
-    public Ingredient getId(@PathVariable int id){
-        return ingredientService.getIngredientById(id);
+    public IngredientDto getId(@PathVariable int id){
+        return convertIngredientToDto(ingredientService.getIngredientById(id));
     }
 
     @GetMapping("recipe/{id}")

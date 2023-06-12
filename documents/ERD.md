@@ -17,7 +17,6 @@ erDiagram
     rating ||--o{ recipe : Places
     favorite ||--o{ user : Places
     favorite ||--o{ recipe : Places
-    user ||--o{ calendar_item : Places
     image ||--o{ article : Places
     
     user {
@@ -104,7 +103,6 @@ erDiagram
     calendar_item {
         int id PK
         date date
-        int user_id FK
         String discription
     }
 %%{` Fill in the rest of the tables `}%%  

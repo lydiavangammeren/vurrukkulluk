@@ -15,7 +15,7 @@ public class ImageServiceImpl implements ImageService {
   @Autowired
   private ImageRepository imageRepository;
   @Override
-  public Image uploadImage(MultipartFile file) throws IOException {
+  public Image saveImage(MultipartFile file) throws IOException {
     Image image = new Image();
     image.setName(file.getOriginalFilename());
     image.setType(file.getContentType());
@@ -24,8 +24,24 @@ public class ImageServiceImpl implements ImageService {
   }
 
   @Override
-  public byte[] downloadImage(int id) {
+  public byte[] getImageById(int id) {
     Optional<Image> imageData = imageRepository.findById(id);
     return UserImageUtil.decompressImage(imageData.get().getImageData());
+  }
+
+  @Override
+  public Image updateImage(MultipartFile file, int id) throws IOException {
+    Image image = new Image();
+    image.setId(id);
+    image.setName(file.getOriginalFilename());
+    image.setType(file.getContentType());
+    image.setImageData(UserImageUtil.compressImage(file.getBytes()));
+    return imageRepository.save(image);
+
+  }
+
+  @Override
+  public void deleteImage(int id) {
+    imageRepository.deleteById(id);
   }
 }
