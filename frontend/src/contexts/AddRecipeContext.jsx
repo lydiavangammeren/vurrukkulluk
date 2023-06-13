@@ -40,10 +40,26 @@ export const AddRecipeProvider = ({ children }) => {
       }))
     }
 
-    const addCategory = e => {
+    const addItem = e => {
+      const name = e.target.name
+      let value;
+      switch(name){
+        case 'categories':
+          value = [...data.categories, e.target.value]
+      }
 
-      const value = e.target.value
-      console.log('Add Category: ' + value)
+      
+
+      setData(prevData => ({
+        ...prevData,
+        [name]: value
+      }))
+    }
+
+    const addCategory = (value) => {
+
+      // const value = e.target.value
+      // console.log('Add Category: ' + value)
 
       if(!data.categories.find(category => category.id === value)){
         setData(prevData => ({
@@ -51,6 +67,15 @@ export const AddRecipeProvider = ({ children }) => {
            categories: [...data.categories, value]
         }))
       }
+    }
+
+    const removeCategory = e => {
+      const id = e.target.value;
+      // console.log('To Remove: ' + id)
+      setData(prevData => ({
+        ...prevData,
+         categories: data.categories.filter((c) => c !== id)
+      }))
     }
 
     // const {
@@ -87,7 +112,7 @@ export const AddRecipeProvider = ({ children }) => {
 
     return (
       <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, 
-                                  disableNext, prevHide, nextHide, submitHide, addCategory }}>
+                                  disableNext, prevHide, nextHide, submitHide, addCategory, removeCategory }}>
         {children}
       </AddRecipeContext.Provider>
     )

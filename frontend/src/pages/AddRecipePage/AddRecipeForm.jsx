@@ -25,7 +25,7 @@ function reducer(state, action){
 // handleChange : https://www.youtube.com/watch?v=FGM6FQmdX8I
 const AddRecipeForm = () => {
   const [state, dispatch] = useReducer(reducer, {});
-  const [articles, articlesLoaded] = useDatabase('articles');
+  // const [articles, articlesLoaded] = useDatabase('articles');
   // const [data, setData] = useState({
   //   name:'',
   //   description:'',
@@ -73,7 +73,7 @@ const AddRecipeForm = () => {
   }
 
   const renderContent = () => {
-    if(articlesLoaded){
+    // if(articlesLoaded){
       return (
         <div className='addRecipe_form'>
           <h1>Voeg uw recept toe</h1>
@@ -112,7 +112,7 @@ const AddRecipeForm = () => {
         //   <FormInputs />
         // </div>
       )
-    }
+    // }
   }
 
   return (

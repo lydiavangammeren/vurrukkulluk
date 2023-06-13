@@ -1,5 +1,5 @@
 import "./SearchResult.css";
-import useAddRecipeContext from "../../hooks/useAddRecipeContext";
+import useAddRecipeContext from "../../../hooks/useAddRecipeContext";
 
 export const SearchResult = ({ title, id }) => {
   const { addCategory } = useAddRecipeContext();
