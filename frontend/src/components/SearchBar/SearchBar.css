@@ -1,17 +1,17 @@
-.search_categories {
+.searchbar_wrapper {
   /* width: 80%;
   height: 2.5rem; */
   border: solid 1px;
-  /* border-radius: 20px;
-  padding: 0 15px;
-  box-shadow: 0px 0px 8px #ddd;
-  background-color: white; */
+  /* border-radius: 20px; */
+  padding: 0 5px;
+  /* box-shadow: 0px 0px 8px #ddd; */
+  background-color: white;
   display: flex;
   /* flex-direction: row; */
   /* align-items: center; */
 }
 
-.search_categories input {
+.searchbar_wrapper input {
   background-color: transparent;
   border: none;
   height: 100%;
@@ -20,6 +20,6 @@
   margin-left: 5px;
 }
 
-.search_categories input:focus {
+.searchbar_wrapper input:focus {
   outline: none;
 }

@@ -3,18 +3,33 @@ import { useDatabase } from '../../hooks';
 import { useAppContext } from '../../contexts';
 import './DetailsForm.css';
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import { SearchResultsList } from '../../components/SearchBar/SearchResultsList';
+// import SearchBar from '../../components/SearchBar/SearchBar';
+// import { SearchResultsList } from '../../components/SearchBar/SearchResultsList';
+import { SearchBar, SearchResultsList} from "./SearchCategories";
 
 const DetailsForm = () => {
   const [types, typesLoaded ] = useDatabase('/kitchentypes');
   const [regions, regionsLoaded] = useDatabase('/kitchenregions');
   const [categories, categoriesLoaded] = useDatabase('/kitchencategories');
   const { recipes } = useAppContext();
-  const { data, handleChange } = useAddRecipeContext();
+  const { data, handleChange, removeCategory } = useAddRecipeContext();
 
   const [searchValue, setSearchValue] = useState('');
 
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setSelectedImage(reader.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
 
 
   const filter = () => {
@@ -98,27 +113,34 @@ const DetailsForm = () => {
           <div className='details_grid_image grid_item'>
             <label htmlFor='image'>Afbeelding</label>
             <input 
-              type='file' 
+              type='file'
+              accept='image/*'
               id='recipeImage' 
               name='recipeImage'
-                         
+              onChange={handleImageUpload}
             />
             <div className='image_example'>
-
+              {selectedImage && 
+                <img src={selectedImage} alt='Uploaded'/>
+              }
             </div>
           </div>
           <div className='details_grid_categories grid_item'>
             <label htmlFor='categories'>Categorieën</label>
 
             <SearchBar searchValue={searchValue} setSearchValue={setSearchValue}/>
-            {searchResults && searchResults.length > 0 && <SearchResultsList results={searchResults} />}
+            {searchResults && searchResults.length > 0 && <SearchResultsList results={searchResults} setSearchValue={setSearchValue}/>}
 
             <div className='category_list'>
               {data.categories.map((categoryId) => {
                 // console.log('Print Category: ' + categoryId)
                 
                 return (
-                  <li>{findObjectNameById(categoryId)}</li>
+                  // <li>{findObjectNameById(categoryId)}</li>
+                  <div className='category_item'>
+                    <span>{findObjectNameById(categoryId)}</span>
+                    <button value={categoryId} onClick={removeCategory}>X</button>
+                  </div>
                 )
               })}
             </div>
@@ -128,7 +150,7 @@ const DetailsForm = () => {
             <textarea
               id='description'
               name='description'
-              placeholder=''
+              rows={15}
               value={data.description}
               onChange={handleChange}
             />

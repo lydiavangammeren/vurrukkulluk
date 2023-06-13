@@ -685,6 +685,58 @@
     {
       "id":8,
       "name": "Bevat ei"
+    },
+    {
+      "id":9,
+      "name": "Vegan"
+    },
+    {
+      "id":10,
+      "name": "Eenvoudig"
+    },
+    {
+      "id":11,
+      "name": "Snel"
+    },
+    {
+      "id":12,
+      "name": "Goedkoop"
+    },
+    {
+      "id":13,
+      "name": "Keto"
+    },
+    {
+      "id":14,
+      "name": "Diët"
+    },
+    {
+      "id":15,
+      "name": "Koolhydraatarm"
+    },
+    {
+      "id":16,
+      "name": "Feestelijk"
+    },
+    {
+      "id":17,
+      "name": "Bakken"
+    },
+    {
+      "id":18,
+      "name": "Koekjes"
+    },
+    {
+      "id":19,
+      "name": "Salade"
+    },
+    {
+      "id":20,
+      "name": "Ovenschotel"
+    },
+    {
+      "id":21,
+      "name": "Wokgerecht"
     }
   ],
   "articles": [

@@ -42,19 +42,36 @@
 
 .details_grid_image{
   grid-area: image;
+  max-width: 30rem;
 }
 .image_example{
-  height: 100px;
+  min-height: 20rem;
+  max-height: 20rem;
+  max-width: 30rem;
+  min-width: 30rem;
   border: solid;
 
+}
+.image_example img{
+  height: 100%;
+  width: auto;
 }
 
 .details_grid_categories{
   grid-area: categories;
+  min-width: 30rem;
 }
 .category_list{
   height: 100%;
   /* background-color: aqua; */
+}
+.category_item{
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 5px;
+}
+.category_item :hover{
+  background-color: darkgrey;
 }
 
 .details_grid_desc{

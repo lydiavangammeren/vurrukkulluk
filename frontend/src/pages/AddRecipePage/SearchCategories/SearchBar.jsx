@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {FaSearch} from 'react-icons/fa';
 import "./SearchBar.css";
 
@@ -9,7 +9,7 @@ const SearchBar = ({searchValue, setSearchValue}) => {
   }
 
   return (
-      <div className="searchbar_wrapper">
+      <div className="search_categories">
       <FaSearch color="#b31714" size={16} id="search-icon" />
       <input
         placeholder="Zoeken"

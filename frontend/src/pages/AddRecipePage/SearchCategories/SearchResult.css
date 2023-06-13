@@ -1,0 +1,9 @@
+.category_result {
+  padding: 5px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.category_result:hover {
+  background-color: #efefef;
+}
