@@ -4,6 +4,7 @@ import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,12 +19,47 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
+
+    private static final String[] AUTH_WHITELIST_ALL = {
+            // -- Swagger UI v3
+            "/v3/api-docs/**",
+            "v3/api-docs/**",
+            "/swagger-ui/**",
+            "swagger-ui/**",
+            // CSA Controllers
+            "/csa/api/token",
+            // Vurrukkulluk
+
+
+    };
+    private static final String[] AUTH_WHITELIST_GET = {
+            "/recipes/**",
+            "/users/**",
+            "/ratings/**",
+            "/image/{id}",
+            "/preparations/**",
+            "/kitchentypes",
+            "/ingredients/**",
+            "/favorites/**",
+            "/comments/**",
+            "/calendar",
+            "/articles/**"
+
+
+    };
+    private static final String[] AUTH_WHITELIST_POST = {
+            "/auth/**",
+            "/testdata"
+    };
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/**")
+                .requestMatchers(AUTH_WHITELIST_ALL).permitAll()
+                .requestMatchers(HttpMethod.GET,AUTH_WHITELIST_GET)
+                .permitAll()
+                .requestMatchers(HttpMethod.POST,AUTH_WHITELIST_POST)
                 .permitAll()
                 .anyRequest()
                 .authenticated()

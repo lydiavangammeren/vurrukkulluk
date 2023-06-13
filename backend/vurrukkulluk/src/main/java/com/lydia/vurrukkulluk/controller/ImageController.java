@@ -2,6 +2,7 @@ package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.service.ImageService;
+import com.lydia.vurrukkulluk.util.UserImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Objects;
 
 // POST: In Postman, make a HTTP POST request to upload image to the URL http://localhost:8080/image.
 // In order to send the image, inside the HTTP body select form-data, enter image as Key
