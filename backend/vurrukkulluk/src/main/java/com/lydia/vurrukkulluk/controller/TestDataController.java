@@ -4,9 +4,12 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.repository.ImageRepository;
 import com.lydia.vurrukkulluk.service.*;
+import com.lydia.vurrukkulluk.util.Role;
 import com.lydia.vurrukkulluk.util.UserImageUtil;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/testdata")
 @CrossOrigin
+@RequiredArgsConstructor
 public class TestDataController {
 
     @Autowired
@@ -54,6 +58,8 @@ public class TestDataController {
     private UserService userService;
     @Autowired
     private ModelMapper modelMapper;
+
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping()
     public String createTestData(){
@@ -304,7 +310,8 @@ public class TestDataController {
         user1.setEmail("test@test.com");
         user1.setName("Tess Ter");
         user1.setImage(image);
-        user1.setPassword("test123");
+        user1.setPassword(passwordEncoder.encode("test123"));
+        user1.setRole(Role.USER);
         userService.saveUser(user1);
         users.add(user1);
 
@@ -312,7 +319,8 @@ public class TestDataController {
         user2.setEmail("tt@tt.com");
         user2.setName("To van Test");
         user2.setImage(image);
-        user2.setPassword("test1234");
+        user2.setPassword(passwordEncoder.encode("test1234"));
+        user2.setRole(Role.USER);
         userService.saveUser(user2);
         users.add(user2);
 

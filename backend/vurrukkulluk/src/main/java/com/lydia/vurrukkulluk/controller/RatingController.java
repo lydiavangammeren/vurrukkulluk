@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.dto.RatingDto;
 import com.lydia.vurrukkulluk.model.Rating;
 import com.lydia.vurrukkulluk.service.RatingService;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,9 @@ public class RatingController {
     private RatingService ratingService;
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private SecurityUtil securityUtil;
     public  RatingController(){
 
     }
@@ -41,8 +45,14 @@ public class RatingController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id){
-        ratingService.deleteById(id);
-        return "Updated rating";
+        Rating rating = ratingService.getRatingById(id);
+
+        if (securityUtil.isIdOfAuthorizedUser(rating.getUser().getId())){
+            ratingService.deleteById(id);
+            return "Updated rating";
+        }
+
+        return "Not yours";
     }
 
 

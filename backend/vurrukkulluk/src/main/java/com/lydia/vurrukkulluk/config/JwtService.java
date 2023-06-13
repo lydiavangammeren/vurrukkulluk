@@ -35,12 +35,15 @@ public class JwtService {
             Map<String, Object> extraClaims,
             UserDetails userDetails
     ) {
+
+        Date now = new Date(System.currentTimeMillis());
+        Date expdate = new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24 * 3));
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24 * 3))
+                .setIssuedAt(now)
+                .setExpiration(expdate)
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

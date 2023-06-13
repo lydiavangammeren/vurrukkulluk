@@ -17,6 +17,11 @@ public class RatingServiceImpl implements RatingService {
 
 
     @Override
+    public Rating getRatingById(int id) {
+        return ratingRepository.getReferenceById(id);
+    }
+
+    @Override
     public List<Rating> getAllRatings() {
         return ratingRepository.findAll();
     }

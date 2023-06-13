@@ -4,10 +4,13 @@ import com.lydia.vurrukkulluk.dto.UserCreateDto;
 import com.lydia.vurrukkulluk.dto.UserDto;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.UserService;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
 
+import javax.security.auth.login.AccountException;
+import javax.security.sasl.AuthenticationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,12 @@ public class UserController {
 
   @Autowired
   private ModelMapper modelMapper;
+
+  @Autowired
+  private SecurityUtil securityUtil;
+
+  public UserController() {
+  }
 
   @PostMapping()
   public String add(@RequestBody UserCreateDto userCreateDto) {
@@ -54,8 +63,14 @@ public class UserController {
 
   @DeleteMapping("/{id}")
   public String delete(@PathVariable int id) {
-    userService.deleteById(id);
-    return "User is deleted";
+
+    if (securityUtil.isIdOfAuthorizedUser(id) || securityUtil.isAdmin()){
+      userService.deleteById(id);
+      return "User is deleted";
+    }
+
+    return "Not yours";
+
   }
 
 

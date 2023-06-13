@@ -27,8 +27,9 @@ public class SecurityConfig {
             "/swagger-ui/**",
             "swagger-ui/**",
             // CSA Controllers
-            "/csa/api/token",
+            "/csa/api/token"
             // Vurrukkulluk
+
 
 
     };
@@ -48,7 +49,6 @@ public class SecurityConfig {
 
     };
     private static final String[] AUTH_WHITELIST_POST = {
-            "/auth/**",
             "/testdata"
     };
     @Bean
@@ -56,10 +56,13 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(AUTH_WHITELIST_ALL).permitAll()
+                .requestMatchers(AUTH_WHITELIST_ALL)
+                .permitAll()
                 .requestMatchers(HttpMethod.GET,AUTH_WHITELIST_GET)
                 .permitAll()
                 .requestMatchers(HttpMethod.POST,AUTH_WHITELIST_POST)
+                .permitAll()
+                .requestMatchers("/auth/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
