@@ -8,8 +8,8 @@ public class RecipeDto {
 
     private int id;
     private String title;
+    private String slug;
 
-    private  String slug;
     private String description;
     private int persons;
     private int price;
@@ -140,11 +140,11 @@ public class RecipeDto {
         this.imageId = imageId;
     }
 
-    public String getSlug() {
-        return slug;
-    }
+  public String getSlug() {
+    return slug;
+  }
 
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
 }

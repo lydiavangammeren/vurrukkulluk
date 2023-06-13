@@ -20,4 +20,9 @@ public class KitchenCategoriesLinkServiceImpl implements KitchenCategoriesLinkSe
     public List<KitchenCategoriesLink> getKCLinkByRecipeId(int id) {
         return kitchenCategoriesLinkRepository.findByRecipeId(id);
     }
+
+  @Override
+  public void deleteById(int id) {
+    kitchenCategoriesLinkRepository.deleteById(id);
+  }
 }

@@ -102,6 +102,10 @@ public class TestDataController {
         addComment(recipes.get(0),"bah!!!!!", users.get(1));
         addComment(recipes.get(0),"Lekker!!!!!", users.get(0));
         addComment(recipes.get(0),"Nou nee, niet echt ... :(", users.get(1));
+      addComment(recipes.get(1),"Jammie!", users.get(0));
+      addComment(recipes.get(1),"Duurt veel te lang om te maken", users.get(1));
+      addComment(recipes.get(1),"Valt wel mee, toch?", users.get(0));
+      addComment(recipes.get(1),"Ik heb 3 uur in de keuken gestaan!", users.get(1));
     }
 
     private List<Recipe> createRecipe(List<User> users, List<Article> articles, List<KitchenRegion> kitchenRegions, List<KitchenType> kitchenTypes, List<KitchenCategory> kitchenCategories) {

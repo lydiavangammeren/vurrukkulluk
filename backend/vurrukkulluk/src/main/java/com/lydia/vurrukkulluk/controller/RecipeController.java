@@ -44,7 +44,7 @@ public class RecipeController {
   private ModelMapper modelMapper;
 
   @PostMapping()
-  public String add(@RequestBody RecipeCreateDto recipeCreateDto) {
+  public Recipe add(@RequestBody RecipeCreateDto recipeCreateDto) {
     Recipe recipe = new Recipe();
     recipe.setTitle(recipeCreateDto.getTitle());
     recipe.setDescription(recipeCreateDto.getDescription());
@@ -76,7 +76,7 @@ public class RecipeController {
       kitchenCategoriesLinkService.saveKCLink(link);
     });
 
-    return "New recipe is added";
+    return recipe; //"New recipe is added";
   }
 
   @GetMapping()
@@ -107,6 +107,10 @@ public class RecipeController {
 
   @DeleteMapping("/{id}")
   public String delete(@PathVariable int id) {
+    ingredientService.getIngredientsRecipeId(id).stream().forEach(ingredient -> ingredientService.deleteById(ingredient.getId()));
+    commentService.getAllCommentsOfRecipe(id).stream().forEach(comment -> commentService.deleteCommentById(comment.getId()));
+    kitchenCategoriesLinkService.getKCLinkByRecipeId(id).stream().forEach(kitchenCategoriesLink -> kitchenCategoriesLinkService.deleteById(kitchenCategoriesLink.getId()));
+    preparationService.getAllPreparationsRecipe(id).stream().forEach(preparation -> preparationService.deleteById(preparation.getId()));
     recipeService.deleteById(id);
     return "Recipe is deleted";
   }
