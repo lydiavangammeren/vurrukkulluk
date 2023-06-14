@@ -184,10 +184,6 @@ public class RecipeController {
     return modelMapper.map(comment,CommentDto.class);
   }
 
-  public RecipeShortDto covertRecipeToShortDto(Recipe recipe){
-    return modelMapper.map(recipe, RecipeShortDto.class);
-  }
-
   public IngredientDto convertIngredientToDto(Ingredient ingredient){
     return modelMapper.map(ingredient,IngredientDto.class);
   }

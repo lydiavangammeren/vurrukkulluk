@@ -1,8 +1,6 @@
 package com.lydia.vurrukkulluk.controller;
 
-import com.lydia.vurrukkulluk.dto.ArticleDto;
 import com.lydia.vurrukkulluk.dto.FavoriteDto;
-import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.Favorite;
 import com.lydia.vurrukkulluk.service.FavoriteService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;

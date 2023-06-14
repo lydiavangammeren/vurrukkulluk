@@ -1,9 +1,7 @@
 package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.dto.ArticleDto;
-import com.lydia.vurrukkulluk.dto.UserDto;
 import com.lydia.vurrukkulluk.model.Article;
-import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.ArticleService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.modelmapper.ModelMapper;
