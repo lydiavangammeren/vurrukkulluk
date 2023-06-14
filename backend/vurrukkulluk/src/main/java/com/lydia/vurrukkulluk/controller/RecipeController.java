@@ -41,6 +41,8 @@ public class RecipeController {
   @Autowired
   private UserService userService;
   @Autowired
+  private ImageService imageService;
+  @Autowired
   private ModelMapper modelMapper;
 
   @PostMapping()
@@ -111,6 +113,8 @@ public class RecipeController {
     commentService.getAllCommentsOfRecipe(id).stream().forEach(comment -> commentService.deleteCommentById(comment.getId()));
     kitchenCategoriesLinkService.getKCLinkByRecipeId(id).stream().forEach(kitchenCategoriesLink -> kitchenCategoriesLinkService.deleteById(kitchenCategoriesLink.getId()));
     preparationService.getAllPreparationsRecipe(id).stream().forEach(preparation -> preparationService.deleteById(preparation.getId()));
+    ratingService.getAllRatingsRecipe(id).stream().forEach(rating -> ratingService.deleteById(rating.getId()));
+    //imageService.getImagesRecipeId(id).stream().forEach(image -> imageService.deleteImage(image.getId()));
     recipeService.deleteById(id);
     return "Recipe is deleted";
   }

@@ -1,6 +1,7 @@
 package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Favorite;
+import com.lydia.vurrukkulluk.model.Ingredient;
 import com.lydia.vurrukkulluk.repository.FavoriteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,4 +37,8 @@ public class FavoriteServiceImpl implements FavoriteService {
     favoriteRepository.deleteById(id);
   }
 
+  @Override
+  public List<Favorite> getFavoritesUserId(int id) {
+    return favoriteRepository.findByUserId(id);
+  }
 }
