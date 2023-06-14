@@ -27,7 +27,12 @@ public class RecipeServiceImpl implements RecipeService {
     recipeRepository.delete(recipe);
   }
 
-  @Override
+    @Override
+    public Recipe getRecipeById(int id) {
+        return recipeRepository.getReferenceById(id);
+    }
+
+    @Override
   public List<Recipe> getAllRecipes() {
     return recipeRepository.findAll();
   }

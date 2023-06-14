@@ -5,6 +5,7 @@ import com.lydia.vurrukkulluk.dto.FavoriteDto;
 import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.Favorite;
 import com.lydia.vurrukkulluk.service.FavoriteService;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +19,19 @@ import java.util.stream.Collectors;
 public class FavoriteController {
   @Autowired
   private FavoriteService favoriteService;
-
   @Autowired
   private ModelMapper modelMapper;
+  @Autowired
+  private SecurityUtil securityUtil;
 
   public FavoriteController() {
   }
 
   @PostMapping()
   public String add(@RequestBody FavoriteDto favoriteDto) {
+    if (!securityUtil.isAuthorizedUserOrAdmin(favoriteDto.getUserId())){
+      return "not authorized";
+    }
     Favorite favorite = reverseFavoriteFromDto(favoriteDto);
     favoriteService.saveFavorite(favorite);
     return "New favorite is added";
@@ -44,6 +49,9 @@ public class FavoriteController {
 
   @PutMapping()
   public String update(@RequestBody FavoriteDto favoriteDto) {
+    if (!securityUtil.isAuthorizedUserOrAdmin(favoriteDto.getUserId())){
+      return "not authorized";
+    }
     Favorite favorite = reverseFavoriteFromDto(favoriteDto);
     favoriteService.saveFavorite(favorite);
     return "Favorite is updated";
@@ -51,6 +59,9 @@ public class FavoriteController {
 
   @DeleteMapping("/{id}")
   public String delete(@PathVariable int id) {
+    if (!securityUtil.isAuthorizedUserOrAdmin(favoriteService.getFavoriteById(id).getUser().getId())){
+      return "not authorized";
+    }
     favoriteService.deleteFavoriteById(id);
     return "Favorite is deleted";
   }

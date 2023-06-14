@@ -29,4 +29,9 @@ public class SecurityUtil {
         User AuthUser = getAuthorizedUser();
         return AuthUser.getRole() == Role.ADMIN;
     }
+
+    public boolean isAuthorizedUserOrAdmin(int userId){
+        return isAdmin() || isIdOfAuthorizedUser(userId);
+    }
+
 }

@@ -54,8 +54,11 @@ public class UserController {
     return  convertUserToDto(userService.getUserById(id));
   }
 
-  @PutMapping()
-  public String update(@RequestBody UserCreateDto userCreateDto) {
+  @PutMapping("/{id}")
+  public String update(@RequestBody UserCreateDto userCreateDto,@PathVariable int id) {
+    if (!securityUtil.isAuthorizedUserOrAdmin(id)){
+      return "not authorized";
+    }
     User user = reverseUserToCreateDto(userCreateDto);
     userService.saveUser(user);
     return "User is updated";
@@ -64,13 +67,11 @@ public class UserController {
   @DeleteMapping("/{id}")
   public String delete(@PathVariable int id) {
 
-    if (securityUtil.isIdOfAuthorizedUser(id) || securityUtil.isAdmin()){
-      userService.deleteById(id);
-      return "User is deleted";
+    if (!securityUtil.isAuthorizedUserOrAdmin(id)){
+      return "not authorized";
     }
-
-    return "Not yours";
-
+    userService.deleteById(id);
+    return "User is deleted";
   }
 
 

@@ -6,6 +6,7 @@ import com.lydia.vurrukkulluk.model.Comment;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.CommentService;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +23,20 @@ public class CommentController {
   @Autowired
   private ModelMapper modelMapper;
 
+  @Autowired
+  private SecurityUtil securityUtil;
   public CommentController() {
   }
 
   @PostMapping()
   public String add(@RequestBody CommentCreateDto commentCreateDto) {
+    if (!securityUtil.isIdOfAuthorizedUser(commentCreateDto.getUserId())){
+      return "not authorized";
+    }
     Comment comment = reverseCommentCreateDto(commentCreateDto);
     commentService.saveComment(comment);
     return "New comment is added";
+
   }
 
   @GetMapping()
@@ -53,6 +60,9 @@ public class CommentController {
 
   @PutMapping()
   public String update(@RequestBody CommentCreateDto commentCreateDto) {
+    if (!securityUtil.isIdOfAuthorizedUser(commentCreateDto.getUserId())){
+      return "not authorized";
+    }
     Comment comment = reverseCommentCreateDto(commentCreateDto);
     commentService.saveComment(comment);
     return "Comment is updated";
@@ -60,6 +70,9 @@ public class CommentController {
 
   @DeleteMapping("/{id}")
   public String delete(@PathVariable int id) {
+    if (!securityUtil.isAuthorizedUserOrAdmin(commentService.getCommentById(id).getUser().getId())){
+      return "not authorized";
+    }
     commentService.deleteCommentById(id);
     return "Comment is deleted";
   }

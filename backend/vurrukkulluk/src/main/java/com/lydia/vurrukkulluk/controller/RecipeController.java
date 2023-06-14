@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.dto.*;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,10 +43,18 @@ public class RecipeController {
   private UserService userService;
   @Autowired
   private ModelMapper modelMapper;
+  @Autowired
+  private SecurityUtil securityUtil;
 
   @PostMapping()
   public String add(@RequestBody RecipeCreateDto recipeCreateDto) {
+    User user = userService.getUserById(recipeCreateDto.getUserId());
+    if (!securityUtil.isIdOfAuthorizedUser(user.getId())){
+      return "not authorized";
+    }
+    //recipe creation
     Recipe recipe = new Recipe();
+    recipe.setUser(user);
     recipe.setTitle(recipeCreateDto.getTitle());
     recipe.setDescription(recipeCreateDto.getDescription());
     recipe.setSlug(recipeCreateDto.getSlug());
@@ -53,10 +62,9 @@ public class RecipeController {
     recipe.setKitchenType(kitchenType);
     KitchenRegion kitchenRegion = kitchenRegionService.getById(recipeCreateDto.getKitchenRegionId());
     recipe.setKitchenRegion(kitchenRegion);
-    User user = userService.getUserById(recipeCreateDto.getUserId());
-    recipe.setUser(user);
     recipeService.saveRecipe(recipe);
 
+    //ingredient creation
     recipeCreateDto.getIngredients().forEach((ingredientCreateDto) ->{
       Ingredient ingredient = new Ingredient();
       ingredient.setAmount(ingredientCreateDto.getAmount());
@@ -67,6 +75,7 @@ public class RecipeController {
       ingredientService.saveIngredient(ingredient);
     });
 
+    //category link creation
     recipeCreateDto.getCategoryIds().forEach((categoryId) ->{
       KitchenCategoriesLink link = new KitchenCategoriesLink();
       KitchenCategory kitchenCategory = new KitchenCategory();
@@ -99,16 +108,25 @@ public class RecipeController {
     return recipeDto;
   }
 
-  @PutMapping()
-  public String update(@RequestBody Recipe recipe) {
+  @PutMapping("/{id}")
+  public String update(@RequestBody Recipe recipe, @PathVariable int id) {
+    if (!securityUtil.isAuthorizedUserOrAdmin(recipeService.getRecipeById(id).getUser().getId())) {
+      return "not authorized";
+    }
     recipeService.updateRecipe(recipe);
     return "Recipe is updated";
+
   }
 
   @DeleteMapping("/{id}")
   public String delete(@PathVariable int id) {
+
+    if (!securityUtil.isAuthorizedUserOrAdmin(recipeService.getRecipeById(id).getUser().getId())) {
+      return "not authorized";
+    }
     recipeService.deleteById(id);
     return "Recipe is deleted";
+
   }
 
   public int calculateCurrentPrice(List<IngredientDto> ingredients){

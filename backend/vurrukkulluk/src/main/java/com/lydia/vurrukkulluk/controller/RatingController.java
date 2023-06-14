@@ -45,14 +45,16 @@ public class RatingController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id){
-        Rating rating = ratingService.getRatingById(id);
 
-        if (securityUtil.isIdOfAuthorizedUser(rating.getUser().getId())){
-            ratingService.deleteById(id);
-            return "Updated rating";
+        if (!securityUtil.isAuthorizedUserOrAdmin(ratingService.getRatingById(id).getUser().getId())){
+            return "not authorized";
         }
 
-        return "Not yours";
+        ratingService.deleteById(id);
+        return "Updated rating";
+
+
+
     }
 
 

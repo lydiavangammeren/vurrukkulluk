@@ -2,6 +2,7 @@ package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.service.ImageService;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import com.lydia.vurrukkulluk.util.UserImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,8 @@ public class ImageController {
 
   @Autowired
   private ImageService imageService;
+  @Autowired
+  private SecurityUtil securityUtil;
 
   @GetMapping("/{id}")
   public ResponseEntity<byte[]> downloadImage(@PathVariable int id) {
