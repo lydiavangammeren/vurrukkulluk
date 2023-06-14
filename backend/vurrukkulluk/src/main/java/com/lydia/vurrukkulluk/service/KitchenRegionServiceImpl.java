@@ -1,9 +1,12 @@
 package com.lydia.vurrukkulluk.service;
 
+import com.lydia.vurrukkulluk.model.KitchenCategory;
 import com.lydia.vurrukkulluk.model.KitchenRegion;
 import com.lydia.vurrukkulluk.repository.KitchenRegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class KitchenRegionServiceImpl implements KitchenRegionService{
@@ -20,4 +23,9 @@ public class KitchenRegionServiceImpl implements KitchenRegionService{
     public KitchenRegion getById(int id) {
         return kitchenRegionRepository.findById(id);
     }
+
+  @Override
+  public List<KitchenRegion> getAllRegions() {
+    return kitchenRegionRepository.findAll();
+  }
 }

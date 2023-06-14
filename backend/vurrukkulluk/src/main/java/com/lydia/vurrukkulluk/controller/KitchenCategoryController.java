@@ -20,9 +20,6 @@ public class KitchenCategoryController {
   @Autowired
   private KitchenCategoryService kitchenCategoryService;
 
-  @Autowired
-  private ModelMapper modelMapper;
-
   public KitchenCategoryController(){
 
   }
