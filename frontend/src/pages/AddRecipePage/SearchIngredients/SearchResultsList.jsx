@@ -1,11 +1,11 @@
 import "./SearchResultsList.css";
 import { SearchResult } from "./SearchResult";
 
-export const SearchResultsList = ({ results }) => {
+export const SearchResultsList = ({ results, setSearchValue }) => {
   return (
-    <div className="ingredients_list">
+    <div className="ingredients_results">
       {results.map((result, id) => {
-        return <SearchResult title={result.name} id={result.id} key={id} />;
+        return <SearchResult result={result} key={id} setSearchValue={setSearchValue}/>;
       })}
     </div>
   );

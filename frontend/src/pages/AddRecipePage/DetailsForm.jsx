@@ -10,9 +10,9 @@ import { SearchBar, SearchResultsList} from "./SearchCategories";
 const DetailsForm = () => {
   const [types, typesLoaded ] = useDatabase('/kitchentypes');
   const [regions, regionsLoaded] = useDatabase('/kitchenregions');
-  const [categories, categoriesLoaded] = useDatabase('/kitchencategories');
+  const [categories, categoriesLoaded] = useDatabase('/categories');
   const { recipes } = useAppContext();
-  const { data, handleChange, removeCategory } = useAddRecipeContext();
+  const { data, handleChange, removeItem, removeCategory } = useAddRecipeContext();
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -139,7 +139,7 @@ const DetailsForm = () => {
                   // <li>{findObjectNameById(categoryId)}</li>
                   <div className='category_item'>
                     <span>{findObjectNameById(categoryId)}</span>
-                    <button value={categoryId} onClick={removeCategory}>X</button>
+                    <button value={categoryId} name='categories' onClick={removeItem}>X</button>
                   </div>
                 )
               })}
