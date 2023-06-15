@@ -16,11 +16,12 @@ const IngredientsForm = () => {
   //     a.name.toLowerCase().includes(searchValue)
   //   )
   // })
-  useEffect(() => {
-    console.log('articles changed:')
-    console.log(JSON.stringify(articles))
-  }, [articles])
+  // useEffect(() => {
+  //   console.log('articles changed:')
+  //   console.log(JSON.stringify(articles))
+  // }, [articles])
 
+  // const searchResults = () =>{
   const filter = () => {
     // console.log('Articles: ' + JSON.stringify(articles))
     // console.log('Loaded: ' + articlesLoaded)
@@ -65,13 +66,13 @@ const IngredientsForm = () => {
           const article = findObjectById(ingredient.articleId)
           return (
             <div className='ingredient_item'>
-              <span>Ingredient: {article.name}</span>
+              <span>Ingredient: {article?.name}</span>
               <div>
                 <label htmlFor='quantity'>Hoeveelheid:</label>
                 <input type='number'
                   value={ingredient.amount}
-                  />
-                  <span>{article.unit}</span>
+                />
+                <span>{article?.unit}</span>
               </div>
             </div>
           )

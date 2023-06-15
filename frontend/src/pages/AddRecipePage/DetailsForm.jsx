@@ -80,7 +80,7 @@ const DetailsForm = () => {
             >
               {types.map(type => {
                 return (
-                  <option value={type.id}>{type.name}</option>
+                  <option value={type.id} key={type.id}>{type.name}</option>
                 )
               })}
             </select>
@@ -95,7 +95,7 @@ const DetailsForm = () => {
             >
               {regions.map(region => {
                 return (
-                  <option value={region.id}>{region.name}</option>
+                  <option value={region.id} key={region.id}>{region.name}</option>
                 )
               })}
             </select>
@@ -137,7 +137,7 @@ const DetailsForm = () => {
                 
                 return (
                   // <li>{findObjectNameById(categoryId)}</li>
-                  <div className='category_item'>
+                  <div className='category_item' key={categoryId}>
                     <span>{findObjectNameById(categoryId)}</span>
                     <button value={categoryId} name='categories' onClick={removeItem}>X</button>
                   </div>

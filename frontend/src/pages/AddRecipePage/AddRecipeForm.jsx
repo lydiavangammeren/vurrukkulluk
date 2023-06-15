@@ -69,6 +69,7 @@ const AddRecipeForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log('Handle Submit')
     console.log(JSON.stringify(data))
   }
 

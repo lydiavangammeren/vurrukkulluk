@@ -14,8 +14,6 @@ export const AddRecipeProvider = ({ children }) => {
 
     const [data, setData] = useState({
       name:'',
-      imageId: 0,
-      slug: '',
       description:'',
       type: 0,
       region: 0,
@@ -58,7 +56,7 @@ export const AddRecipeProvider = ({ children }) => {
         ...prevData,
         [propertyName]: updatedValue,
       }));
-    };
+    }; 
 
     const removeItem = (e) => {
       const name = e.target.name;
@@ -69,6 +67,17 @@ export const AddRecipeProvider = ({ children }) => {
          [propertyName]: [...data[propertyName]].filter((id) => id !== value)
       }))
     }
+
+    const changeItem  = (name, value) => {
+    
+      const propertyName = propertyMap[name];
+      const updatedValue = [...data[propertyName], value];
+    
+      setData((prevData) => ({
+        ...prevData,
+        [propertyName]: updatedValue,
+      }));
+    };
 
     const canSubmit = [...Object.values(data)].every(Boolean) && page === Object.keys(title).length - 1
 
