@@ -21,7 +21,7 @@ public class RecipeDto {
     private int calories;
     private KitchenType kitchenType;
     private KitchenRegion kitchenRegion;
-    private List<KitchenCategory> categories;
+    private List<KitchenCategoryDto> categories;
     private List<CommentDto> comments;
     private List<IngredientDto> ingredients;
     private List<PreparationDto> preparation;

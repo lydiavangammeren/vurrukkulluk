@@ -1,6 +1,7 @@
 package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Article;
+import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,13 @@ public class ArticleServiceImpl implements ArticleService{
     @Override
     public void deleteArticleById(int id) {
         articleRepository.deleteById(id);
+    }
+
+    @Override
+    public void setImageInRecipe(int id, Image image) {
+        var article = getArticleById(id);
+        article.setImage(image);
+        saveArticle(article);
     }
 
 

@@ -4,14 +4,12 @@ import com.lydia.vurrukkulluk.dto.*;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
-import io.swagger.annotations.ApiParam;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @RestController
@@ -100,20 +98,19 @@ public class RecipeController {
   @GetMapping()
   public List<RecipeDto> get() {
     List<Recipe> allRecipes = recipeService.getAllRecipes();
-    List<RecipeDto> allRecipesShort = allRecipes.stream().map(this::convertRecipeToDto).collect(Collectors.toList());
+    List<RecipeDto> allRecipesDto = allRecipes.stream().map(this::fillRecipeDto).collect(Collectors.toList());
 
-    allRecipesShort.forEach(this::fillRecipeDto);
+    /*
+    System.out.println("in here");
+    allRecipesDto.forEach(this::fillRecipeDto);*/
 
-    return allRecipesShort;
+    return allRecipesDto;
   }
 
   @GetMapping("/{slug}")
   public RecipeDto getTitle(@PathVariable String slug){
     Recipe recipe = recipeService.getRecipeBySlug(slug);
-    RecipeDto recipeDto = convertRecipeToDto(recipe);
-
-    fillRecipeDto(recipeDto);
-
+    RecipeDto recipeDto = fillRecipeDto(recipe);
     return recipeDto;
   }
 
@@ -165,32 +162,49 @@ public class RecipeController {
             .reduce(0, (a, b) -> a+b);
   }
 
-  public RecipeDto fillRecipeDto(RecipeDto recipeDto){
+  public RecipeDto fillRecipeDto(Recipe recipe){
 
-    List<Comment> comments = commentService.getAllCommentsOfRecipe(recipeDto.getId());
-    List<CommentDto> commentsDto= comments.stream().map(this::convertCommentToDto).collect(Collectors.toList());
-    recipeDto.setComments(commentsDto);
+    RecipeDto recipeDto = convertRecipeToDto(recipe);
+    fillRecipeDtoComments(recipeDto);
+    fillRecipeDtoIngrients(recipeDto);
+    fillRecipeDtoPreparations(recipeDto);
+    fillRecipeDtoKitchenCategories(recipeDto);
+    fillRecipeDtoAvgRating(recipeDto);
 
+    return recipeDto;
+  }
+
+  private void fillRecipeDtoAvgRating(RecipeDto recipeDto) {
+    recipeDto.setAvgRating(ratingService.getAvgRatingOfRecipe(recipeDto.getId()));
+  }
+
+  private void fillRecipeDtoPreparations(RecipeDto recipeDto) {
+    List<Preparation> preparationsSteps = preparationService.getAllPreparationsRecipe(recipeDto.getId());
+    List<PreparationDto> preparationsStepsDto = preparationsSteps.stream().map(this::convertPreparationToDto).collect(Collectors.toList());
+    recipeDto.setPreparation(preparationsStepsDto);
+  }
+
+  private void fillRecipeDtoKitchenCategories(RecipeDto recipeDto) {
+    List<KitchenCategoryDto> kitchenCategories = new ArrayList<>();
+    List<KitchenCategoriesLink> kitchenCategoriesLinks = kitchenCategoriesLinkService.getKCLinkByRecipeId(recipeDto.getId());
+    kitchenCategoriesLinks.forEach((link) -> {
+      kitchenCategories.add(convertCategoryToDto(link.getKitchenCategory()));
+    });
+    recipeDto.setCategories(kitchenCategories);
+  }
+
+  private void fillRecipeDtoIngrients(RecipeDto recipeDto) {
     List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(recipeDto.getId());
     List<IngredientDto> ingredientsDto = ingredients.stream().map(this::convertIngredientToDto).collect(Collectors.toList());
     recipeDto.setIngredients(ingredientsDto);
     recipeDto.setPrice(calculateCurrentPrice(ingredientsDto));
     recipeDto.setCalories(calculateCalories(ingredientsDto));
+  }
 
-    List<KitchenCategory> kitchenCategories = new ArrayList<>();
-    List<KitchenCategoriesLink> kitchenCategoriesLinks = kitchenCategoriesLinkService.getKCLinkByRecipeId(recipeDto.getId());
-    kitchenCategoriesLinks.forEach((link) -> {
-      kitchenCategories.add(link.getKitchenCategory());
-    });
-    recipeDto.setCategories(kitchenCategories);
-
-    List<Preparation> preparationsSteps = preparationService.getAllPreparationsRecipe(recipeDto.getId());
-    List<PreparationDto> preparationsStepsDto = preparationsSteps.stream().map(this::convertPreparationToDto).collect(Collectors.toList());
-    recipeDto.setPreparation(preparationsStepsDto);
-
-    recipeDto.setAvgRating(ratingService.getAvgRatingOfRecipe(recipeDto.getId()));
-
-    return recipeDto;
+  private void fillRecipeDtoComments(RecipeDto recipeDto) {
+    List<Comment> comments = commentService.getAllCommentsOfRecipe(recipeDto.getId());
+    List<CommentDto> commentsDto= comments.stream().map(this::convertCommentToDto).collect(Collectors.toList());
+    recipeDto.setComments(commentsDto);
   }
 
   public RecipeDto convertRecipeToDto(Recipe recipe){
@@ -207,6 +221,10 @@ public class RecipeController {
 
   public PreparationDto convertPreparationToDto(Preparation preparation){
     return modelMapper.map(preparation,PreparationDto.class);
+  }
+
+  public KitchenCategoryDto convertCategoryToDto(KitchenCategory kitchenCategory){
+    return modelMapper.map(kitchenCategory,KitchenCategoryDto.class);
   }
 
   public Recipe revertCreateRecipeDto(RecipeCreateDto recipeCreateDto){

@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.service;
 
+import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,12 @@ public class UserServiceImpl implements UserService {
   @Override
   public void deleteUser(User user) {
       userRepository.delete(user);
+  }
+
+  @Override
+  public void setImageInUser(int id, Image image) {
+    var user = getUserById(id);
+    user.setImage(image);
+    saveUser(user);
   }
 }

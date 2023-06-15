@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.service;
 
+import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,12 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public void setImageInRecipe(int id, Recipe recipe, Image image) {
+        recipe.setImage(image);
+        saveRecipe(recipe);
+    }
+
+    @Override
   public List<Recipe> getAllRecipes() {
     return recipeRepository.findAll();
   }
@@ -42,15 +49,13 @@ public class RecipeServiceImpl implements RecipeService {
     return recipeRepository.findByTitle(title);
   }
 
-@Override
-public Recipe getRecipeBySlug(String slug) {
+    @Override
+    public Recipe getRecipeBySlug(String slug) {
     return recipeRepository.findBySlug(slug);
 }
 
 @Override
-public Recipe getRecipeById(int id) {return recipeRepository.getById(id);}
-    @Override
-  public void updateRecipe(Recipe recipe) {
+public void updateRecipe(Recipe recipe) {
     recipeRepository.save(recipe);
   }
 }
