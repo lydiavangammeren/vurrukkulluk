@@ -2,19 +2,12 @@ package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.dto.ArticleDto;
 import com.lydia.vurrukkulluk.dto.IngredientDto;
-import com.lydia.vurrukkulluk.dto.RecipeShortDto;
-import com.lydia.vurrukkulluk.model.Article;
-import com.lydia.vurrukkulluk.model.Ingredient;
-import com.lydia.vurrukkulluk.model.KitchenType;
-import com.lydia.vurrukkulluk.model.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,31 +20,6 @@ class RecipeControllerTest {
         recipeController = new RecipeController();
     }
 
-    @Test
-    public void convertToRecipeShortDTO(){
-        Recipe recipe = new Recipe();
-        recipe.setId(1);
-        recipe.setSlug("123456789");
-        recipe.setDescription("lalalala");
-        KitchenType type = new KitchenType();
-        type.setName("vegan");
-        type.setId(4);
-        recipe.setKitchenType(type);
-
-        RecipeShortDto recipeShortDto = covertRecipeToShortDto(recipe);
-
-        assertEquals(recipe.getId(),recipeShortDto.getId());
-        assertEquals(recipe.getDescription(),recipeShortDto.getDescription());
-        assertEquals(recipe.getKitchenType().getName(),recipeShortDto.getKitchenType().getName());
-
-        List<Recipe> recipes = new ArrayList<>();
-        recipes.add(recipe);
-        recipes.add(recipe);
-        recipes.add(recipe);
-
-        List<RecipeShortDto> recipesShort = recipes.stream().map(this::covertRecipeToShortDto).collect(Collectors.toList());
-        assertEquals(recipes.get(1).getDescription(),recipesShort.get(1).getDescription());
-    }
 
     @Test
     public void priceAndCalorieCalculationTest(){
@@ -94,9 +62,5 @@ class RecipeControllerTest {
         assertEquals(totalCal,recipeController.calculateCalories(ingredients));
         long seconds4 = System.currentTimeMillis();
         System.out.println(seconds2 - seconds1);
-    }
-
-    public RecipeShortDto covertRecipeToShortDto(Recipe recipe){
-        return modelMapper.map(recipe, RecipeShortDto.class);
     }
 }

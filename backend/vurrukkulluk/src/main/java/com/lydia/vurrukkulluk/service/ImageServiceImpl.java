@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -46,7 +47,4 @@ public class ImageServiceImpl implements ImageService {
     imageRepository.deleteById(id);
   }
 
-//  public List<Image> getImagesRecipeId(int id){
-//    return imageRepository.findAllByRecipeId(id);
-//  }
 }

@@ -1,10 +1,9 @@
 package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.dto.ArticleDto;
-import com.lydia.vurrukkulluk.dto.UserDto;
 import com.lydia.vurrukkulluk.model.Article;
-import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.ArticleService;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +22,9 @@ public class ArticleController {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private SecurityUtil securityUtil;
 
     public ArticleController(){
 
@@ -47,14 +49,23 @@ public class ArticleController {
 
     @PatchMapping("/{id}")
     public String update(@RequestBody Article article){
+        if (!securityUtil.isAdmin()) {
+            return "not authorized";
+        }
         articleService.updateArticle(article);
         return "article updated";
+
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id){
+
+        if (!securityUtil.isAdmin()){
+            return "not authorized";
+        }
         articleService.deleteArticleById(id);
         return "article updated";
+
     }
 
     public ArticleDto convertArticleToDto(Article article){

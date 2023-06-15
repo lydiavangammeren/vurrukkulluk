@@ -5,10 +5,13 @@ import com.lydia.vurrukkulluk.dto.UserDto;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.FavoriteService;
 import com.lydia.vurrukkulluk.service.UserService;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
 
+import javax.security.auth.login.AccountException;
+import javax.security.sasl.AuthenticationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +28,12 @@ public class UserController {
   @Autowired
   private ModelMapper modelMapper;
 
+  @Autowired
+  private SecurityUtil securityUtil;
+
+  public UserController() {
+  }
+
   @PostMapping()
   public String add(@RequestBody UserCreateDto userCreateDto) {
     User user = reverseUserToCreateDto(userCreateDto);
@@ -39,8 +48,8 @@ public class UserController {
   }
 
   @GetMapping("email/{email}")
-  public List<UserDto> getName(@PathVariable String email){
-    return userService.getUserByEmail(email).stream().map(this::convertUserToDto).collect(Collectors.toList());
+  public UserDto getName(@PathVariable String email){
+    return convertUserToDto(userService.getUserByEmail(email));
   }
 
 
@@ -49,8 +58,11 @@ public class UserController {
     return  convertUserToDto(userService.getUserById(id));
   }
 
-  @PutMapping()
-  public String update(@RequestBody UserCreateDto userCreateDto) {
+  @PutMapping("/{id}")
+  public String update(@RequestBody UserCreateDto userCreateDto,@PathVariable int id) {
+    if (!securityUtil.isAuthorizedUserOrAdmin(id)){
+      return "not authorized";
+    }
     User user = reverseUserToCreateDto(userCreateDto);
     userService.saveUser(user);
     return "User is updated";
@@ -58,6 +70,10 @@ public class UserController {
 
   @DeleteMapping("/{id}")
   public String delete(@PathVariable int id) {
+
+    if (!securityUtil.isAuthorizedUserOrAdmin(id)){
+      return "not authorized";
+    }
     favoriteService.getFavoritesUserId(id).stream().forEach(favorite -> favoriteService.deleteFavoriteById(favorite.getId()));
     userService.deleteById(id);
     return "User is deleted";

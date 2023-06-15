@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.dto.PreparationDto;
 import com.lydia.vurrukkulluk.model.Preparation;
 import com.lydia.vurrukkulluk.service.PreparationService;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import net.bytebuddy.asm.Advice;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class PreparationController {
     private PreparationService preparationService;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private SecurityUtil securityUtil;
     public PreparationController(){
 
     }
@@ -37,12 +40,18 @@ public class PreparationController {
 
     @PutMapping()
     public String put(@RequestBody PreparationDto preparationDto){
+        if (!securityUtil.isAdmin()){
+            return "not authorized";
+        }
         preparationService.savePreparation(reversePreparationFromDto(preparationDto));
         return "Preparation updated";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id){
+        if (!securityUtil.isAdmin()){
+            return "not authorized";
+        }
         preparationService.deleteById(id);
         return "Preparation updated";
     }

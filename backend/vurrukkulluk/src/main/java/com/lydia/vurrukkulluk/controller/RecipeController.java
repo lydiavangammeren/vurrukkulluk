@@ -3,6 +3,8 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.dto.*;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
+import io.swagger.annotations.ApiParam;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,41 +46,55 @@ public class RecipeController {
   private ImageService imageService;
   @Autowired
   private ModelMapper modelMapper;
+  @Autowired
+  private SecurityUtil securityUtil;
 
   @PostMapping()
-  public Recipe add(@RequestBody RecipeCreateDto recipeCreateDto) {
-    Recipe recipe = new Recipe();
-    recipe.setTitle(recipeCreateDto.getTitle());
-    recipe.setDescription(recipeCreateDto.getDescription());
-    recipe.setSlug(recipeCreateDto.getSlug());
-    KitchenType kitchenType = kitchenTypeService.getById(recipeCreateDto.getKitchenTypeId());
-    recipe.setKitchenType(kitchenType);
-    KitchenRegion kitchenRegion = kitchenRegionService.getById(recipeCreateDto.getKitchenRegionId());
-    recipe.setKitchenRegion(kitchenRegion);
+  public String add(@RequestBody RecipeCreateDto recipeCreateDto) {
     User user = userService.getUserById(recipeCreateDto.getUserId());
-    recipe.setUser(user);
-    recipeService.saveRecipe(recipe);
+    if (!securityUtil.isIdOfAuthorizedUser(user.getId())){
+      return "not authorized";
+    }
+    //recipe creation
+    Recipe recipe = revertCreateRecipeDto(recipeCreateDto);
+    recipe.setId(0);
+    recipe = recipeService.saveRecipe(recipe);
 
-    recipeCreateDto.getIngredients().forEach((ingredientCreateDto) ->{
+
+    //ingredient creation
+    Recipe finalRecipe = recipe;
+    recipeCreateDto.getIngredients().forEach(ingredientInRecipeDto ->{
       Ingredient ingredient = new Ingredient();
-      ingredient.setAmount(ingredientCreateDto.getAmount());
+      ingredient.setAmount(ingredientInRecipeDto.getAmount());
       Article article = new Article();
-      article.setId(ingredientCreateDto.getArticleId());
+      article.setId(ingredientInRecipeDto.getArticleId());
       ingredient.setArticle(article);
-      ingredient.setRecipe(recipe);
+      ingredient.setRecipe(finalRecipe);
       ingredientService.saveIngredient(ingredient);
     });
 
+    //preparation creation
+    Recipe finalRecipe1 = recipe;
+    recipeCreateDto.getPreparations().forEach(preparationInRecipeDto -> {
+      Preparation preparation = new Preparation();
+      preparation.setInstructions(preparationInRecipeDto.getInstructions());
+      preparation.setStep(preparationInRecipeDto.getStep());
+      preparation.setRecipe(finalRecipe1);
+      preparationService.savePreparation(preparation);
+    });
+
+    //category link creation
+    Recipe finalRecipe2 = recipe;
     recipeCreateDto.getCategoryIds().forEach((categoryId) ->{
       KitchenCategoriesLink link = new KitchenCategoriesLink();
       KitchenCategory kitchenCategory = new KitchenCategory();
       kitchenCategory.setId(categoryId);
       link.setKitchenCategory(kitchenCategory);
-      link.setRecipe(recipe);
+      link.setRecipe(finalRecipe2);
       kitchenCategoriesLinkService.saveKCLink(link);
     });
 
-    return recipe; //"New recipe is added";
+    return "New recipe is added with id" ;
   }
 
   @GetMapping()
@@ -101,22 +117,32 @@ public class RecipeController {
     return recipeDto;
   }
 
-  @PutMapping()
-  public String update(@RequestBody Recipe recipe) {
+  @PutMapping("/{id}")
+  public String update(@RequestBody Recipe recipe, @PathVariable int id) {
+    if (!securityUtil.isAuthorizedUserOrAdmin(recipeService.getRecipeById(id).getUser().getId())) {
+      return "not authorized";
+    }
     recipeService.updateRecipe(recipe);
     return "Recipe is updated";
+
   }
 
   @DeleteMapping("/{id}")
   public String delete(@PathVariable int id) {
+
+    if (!securityUtil.isAuthorizedUserOrAdmin(recipeService.getRecipeById(id).getUser().getId())) {
+      return "not authorized";
+    }
     ingredientService.getIngredientsRecipeId(id).stream().forEach(ingredient -> ingredientService.deleteById(ingredient.getId()));
     commentService.getAllCommentsOfRecipe(id).stream().forEach(comment -> commentService.deleteCommentById(comment.getId()));
     kitchenCategoriesLinkService.getKCLinkByRecipeId(id).stream().forEach(kitchenCategoriesLink -> kitchenCategoriesLinkService.deleteById(kitchenCategoriesLink.getId()));
     preparationService.getAllPreparationsRecipe(id).stream().forEach(preparation -> preparationService.deleteById(preparation.getId()));
     ratingService.getAllRatingsRecipe(id).stream().forEach(rating -> ratingService.deleteById(rating.getId()));
-    //imageService.getImagesRecipeId(id).stream().forEach(image -> imageService.deleteImage(image.getId()));
+    Image image = recipeService.getRecipeById(id).getImage();
+    imageService.deleteImage(image.getId());
     recipeService.deleteById(id);
     return "Recipe is deleted";
+
   }
 
   public int calculateCurrentPrice(List<IngredientDto> ingredients){
@@ -174,9 +200,6 @@ public class RecipeController {
     return modelMapper.map(comment,CommentDto.class);
   }
 
-  public RecipeShortDto covertRecipeToShortDto(Recipe recipe){
-    return modelMapper.map(recipe, RecipeShortDto.class);
-  }
 
   public IngredientDto convertIngredientToDto(Ingredient ingredient){
     return modelMapper.map(ingredient,IngredientDto.class);
@@ -186,4 +209,7 @@ public class RecipeController {
     return modelMapper.map(preparation,PreparationDto.class);
   }
 
+  public Recipe revertCreateRecipeDto(RecipeCreateDto recipeCreateDto){
+    return modelMapper.map(recipeCreateDto,Recipe.class);
+  }
 }

@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCreateDto {
-    private int id;
-    private String name;
-    private String password;
-    private String email;
-    private int imageId;
+public class IngredientInRecipeDto {
+    int articleId;
+    int amount;
 }
