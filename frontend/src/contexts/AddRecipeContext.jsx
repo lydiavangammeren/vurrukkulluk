@@ -14,6 +14,8 @@ export const AddRecipeProvider = ({ children }) => {
 
     const [data, setData] = useState({
       name:'',
+      imageId: 0,
+      slug: '',
       description:'',
       type: 0,
       region: 0,
@@ -22,8 +24,8 @@ export const AddRecipeProvider = ({ children }) => {
       recipeImage: 0,
       ingredients: [],
       preparation: [],
+      amount: ''
     });
-
 
     const handleChange = e => {
       const type = e.target.type
@@ -40,69 +42,40 @@ export const AddRecipeProvider = ({ children }) => {
       }))
     }
 
-    const addItem = e => {
-      const name = e.target.name
-      let value;
-      switch(name){
-        case 'categories':
-          value = [...data.categories, e.target.value]
-      }
+    const propertyMap = {
+      categories: 'categories',
+      ingredients: 'ingredients',
+      preparation: 'preparation',
+    };
 
-      
+    const addItem = (e) => {
+      const name = e.target.name;
+      const value = e.target.value;
+    
+      const propertyName = propertyMap[name];
+      const updatedValue = [...data[propertyName], value];
+    
+      setData((prevData) => ({
+        ...prevData,
+        [propertyName]: updatedValue,
+      }));
+    };
 
+    const removeItem = (e) => {
+      const name = e.target.name;
+      const value = e.target.value;
+      const propertyName = propertyMap[name];
       setData(prevData => ({
         ...prevData,
-        [name]: value
+         [propertyName]: [...data[propertyName]].filter((id) => id !== value)
       }))
     }
-
-    const addCategory = (value) => {
-
-      // const value = e.target.value
-      // console.log('Add Category: ' + value)
-
-      if(!data.categories.find(category => category.id === value)){
-        setData(prevData => ({
-          ...prevData,
-           categories: [...data.categories, value]
-        }))
-      }
-    }
-
-    const removeCategory = e => {
-      const id = e.target.value;
-      // console.log('To Remove: ' + id)
-      setData(prevData => ({
-        ...prevData,
-         categories: data.categories.filter((c) => c !== id)
-      }))
-    }
-
-    // const {
-    //     billAddress2,
-    //     sameAsBilling,
-    //     shipAddress2,
-    //     optInNews,
-    //     ...requiredInputs } = data
 
     const canSubmit = [...Object.values(data)].every(Boolean) && page === Object.keys(title).length - 1
-
-    // const canNextPage1 = Object.keys(data)
-    //     .filter(key => key.startsWith('bill') && key !== 'billAddress2')
-    //     .map(key => data[key])
-    //     .every(Boolean)
-
-    // const canNextPage2 = Object.keys(data)
-    //     .filter(key => key.startsWith('ship') && key !== 'shipAddress2')
-    //     .map(key => data[key])
-    //     .every(Boolean)
 
     const disablePrev = page === 0
 
     const disableNext = page === 2
-    // (page === Object.keys(title).length - 1)
-    // || (page === 0 && !canNextPage1)
-    // || (page === 1 && !canNextPage2)
 
     const prevHide = page === 0 && "remove_button"
 
@@ -112,7 +85,7 @@ export const AddRecipeProvider = ({ children }) => {
 
     return (
       <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, 
-                                  disableNext, prevHide, nextHide, submitHide, addCategory, removeCategory }}>
+                                  disableNext, prevHide, nextHide, submitHide, addItem, removeItem }}>
         {children}
       </AddRecipeContext.Provider>
     )

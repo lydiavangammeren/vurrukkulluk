@@ -1,9 +1,29 @@
-.search-result {
+.ingredient_result {
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
+  border: solid 1px #efefef;
+  /* background-color: #efefef; */
+}
+.ingredient_result h3,h5{
+  margin: 0;
+
+}
+.result_image {
+  width: 80px;
+  height: 80px;
+}
+.result_image img{
+  width: 100%;
+  height: 100%;
+}
+.result_content{
+  /* flex-grow: stretch; */
+}
+.result_info{
+  display: flex;
 }
 
-.search-result:hover {
-  background-color: #efefef;
+.add_ingredient{
+  width: 80px;
 }

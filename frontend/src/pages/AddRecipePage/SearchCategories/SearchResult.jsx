@@ -2,13 +2,10 @@ import "./SearchResult.css";
 import useAddRecipeContext from "../../../hooks/useAddRecipeContext";
 
 export const SearchResult = ({ title, id, setSearchValue }) => {
-  const { addCategory } = useAddRecipeContext();
+  const { addItem } = useAddRecipeContext();
 
   const handleAdd = e => {
-    const value = e.target.value;
-
-    addCategory(value);
-
+    addItem(e);
     setSearchValue('');
   }
 

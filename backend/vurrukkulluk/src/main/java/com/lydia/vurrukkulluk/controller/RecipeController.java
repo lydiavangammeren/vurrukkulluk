@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.dto.*;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,10 +45,18 @@ public class RecipeController {
   private ImageService imageService;
   @Autowired
   private ModelMapper modelMapper;
+  @Autowired
+  private SecurityUtil securityUtil;
 
   @PostMapping()
-  public Recipe add(@RequestBody RecipeCreateDto recipeCreateDto) {
+  public String add(@RequestBody RecipeCreateDto recipeCreateDto) {
+    User user = userService.getUserById(recipeCreateDto.getUserId());
+    if (!securityUtil.isIdOfAuthorizedUser(user.getId())){
+      return "not authorized";
+    }
+    //recipe creation
     Recipe recipe = new Recipe();
+    recipe.setUser(user);
     recipe.setTitle(recipeCreateDto.getTitle());
     recipe.setDescription(recipeCreateDto.getDescription());
     recipe.setSlug(recipeCreateDto.getSlug());
@@ -59,6 +68,7 @@ public class RecipeController {
     recipe.setUser(user);
     recipeService.saveRecipe(recipe);
 
+    //ingredient creation
     recipeCreateDto.getIngredients().forEach((ingredientCreateDto) ->{
       Ingredient ingredient = new Ingredient();
       ingredient.setAmount(ingredientCreateDto.getAmount());
@@ -69,6 +79,7 @@ public class RecipeController {
       ingredientService.saveIngredient(ingredient);
     });
 
+    //category link creation
     recipeCreateDto.getCategoryIds().forEach((categoryId) ->{
       KitchenCategoriesLink link = new KitchenCategoriesLink();
       KitchenCategory kitchenCategory = new KitchenCategory();
@@ -78,7 +89,7 @@ public class RecipeController {
       kitchenCategoriesLinkService.saveKCLink(link);
     });
 
-    return recipe; //"New recipe is added";
+    return "New recipe is added";
   }
 
   @GetMapping()
@@ -101,23 +112,32 @@ public class RecipeController {
     return recipeDto;
   }
 
-  @PutMapping()
-  public String update(@RequestBody Recipe recipe) {
+  @PutMapping("/{id}")
+  public String update(@RequestBody Recipe recipe, @PathVariable int id) {
+    if (!securityUtil.isAuthorizedUserOrAdmin(recipeService.getRecipeById(id).getUser().getId())) {
+      return "not authorized";
+    }
     recipeService.updateRecipe(recipe);
     return "Recipe is updated";
+
   }
 
   @DeleteMapping("/{id}")
   public String delete(@PathVariable int id) {
-    ingredientService.getIngredientsRecipeId(id).forEach(ingredient -> ingredientService.deleteById(ingredient.getId()));
-    commentService.getAllCommentsOfRecipe(id).forEach(comment -> commentService.deleteCommentById(comment.getId()));
-    kitchenCategoriesLinkService.getKCLinkByRecipeId(id).forEach(kitchenCategoriesLink -> kitchenCategoriesLinkService.deleteById(kitchenCategoriesLink.getId()));
-    preparationService.getAllPreparationsRecipe(id).forEach(preparation -> preparationService.deleteById(preparation.getId()));
-    ratingService.getAllRatingsRecipe(id).forEach(rating -> ratingService.deleteById(rating.getId()));
+
+    if (!securityUtil.isAuthorizedUserOrAdmin(recipeService.getRecipeById(id).getUser().getId())) {
+      return "not authorized";
+    }
+    ingredientService.getIngredientsRecipeId(id).stream().forEach(ingredient -> ingredientService.deleteById(ingredient.getId()));
+    commentService.getAllCommentsOfRecipe(id).stream().forEach(comment -> commentService.deleteCommentById(comment.getId()));
+    kitchenCategoriesLinkService.getKCLinkByRecipeId(id).stream().forEach(kitchenCategoriesLink -> kitchenCategoriesLinkService.deleteById(kitchenCategoriesLink.getId()));
+    preparationService.getAllPreparationsRecipe(id).stream().forEach(preparation -> preparationService.deleteById(preparation.getId()));
+    ratingService.getAllRatingsRecipe(id).stream().forEach(rating -> ratingService.deleteById(rating.getId()));
     Image image = recipeService.getRecipeById(id).getImage();
     imageService.deleteImage(image.getId());
     recipeService.deleteById(id);
     return "Recipe is deleted";
+
   }
 
   public int calculateCurrentPrice(List<IngredientDto> ingredients){

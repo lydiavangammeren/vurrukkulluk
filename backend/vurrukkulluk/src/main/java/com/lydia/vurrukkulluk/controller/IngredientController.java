@@ -6,6 +6,7 @@ import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.Ingredient;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.service.IngredientService;
+import com.lydia.vurrukkulluk.util.SecurityUtil;
 import io.swagger.models.auth.In;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class IngredientController {
     private ModelMapper modelMapper;
     @Autowired
     private IngredientService ingredientService;
+    @Autowired
+    private SecurityUtil securityUtil;
     public IngredientController(){
 
     }
@@ -34,6 +37,10 @@ public class IngredientController {
     }
     @PostMapping()
     public String add(@RequestBody IngredientCreateDto ingredientCreateDto){
+        if (!securityUtil.isIdOfAuthorizedUser(
+                ingredientService.getIngredientById(ingredientCreateDto.getRecipeId()).getRecipe().getUser().getId())){
+            return "not authorized";
+        }
         Ingredient ingredient = reverseIngredientFromCreateDto(ingredientCreateDto);
         ingredientService.saveIngredient(ingredient);
         return "saved";
@@ -41,6 +48,10 @@ public class IngredientController {
 
     @PutMapping()
     public String update(@RequestBody IngredientCreateDto ingredientCreateDto){
+        if (!securityUtil.isIdOfAuthorizedUser(
+                ingredientService.getIngredientById(ingredientCreateDto.getRecipeId()).getRecipe().getUser().getId())){
+            return "not authorized";
+        }
         Ingredient ingredient = reverseIngredientFromCreateDto(ingredientCreateDto);
         ingredientService.saveIngredient(ingredient);
         return "updated";
@@ -48,6 +59,10 @@ public class IngredientController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id){
+        if (!securityUtil.isAuthorizedUserOrAdmin(
+                ingredientService.getIngredientById(id).getRecipe().getUser().getId())){
+            return "not authorized";
+        }
         ingredientService.deleteById(id);
         return "deleted";
     }

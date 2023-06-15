@@ -17,13 +17,16 @@ const IngredientsForm = () => {
   //     a.name.toLowerCase().includes(searchValue)
   //   )
   // })
+  useEffect(() => {
+    console.log('articles changed:')
+    console.log(JSON.stringify(articles))
+  }, [articles])
 
   const filter = () => {
     // console.log('Articles: ' + JSON.stringify(articles))
     // console.log('Loaded: ' + articlesLoaded)
     if(!searchValue || !articlesLoaded) return [];
-    // console.log('Articles after Loaded: ' + JSON.stringify(articles))
-    return articles.filter((article)=> {
+    const filtered = articles.filter((article)=> {
       return (
         searchValue &&
         articlesLoaded && (
@@ -31,9 +34,18 @@ const IngredientsForm = () => {
         )
       )
     });
+    return filtered;
   }
 
   const searchResults = filter();
+
+  const findObjectNameById = (id) => {
+    if(articlesLoaded){
+      console.log('Articles: ' +  JSON.stringify(articles))
+      const foundObject = articles.find((object) => object.id === parseInt(id));
+      return foundObject ? foundObject.name : 'Object not found';
+    }
+  }
 
   return (
     <div>
@@ -42,13 +54,17 @@ const IngredientsForm = () => {
       <SearchResultsList results={searchResults} setSearchValue={setSearchValue}/>}
 
       <div className='ingredient_list'>
-        {data.ingredients.map((ingredient) => {
-          // console.log('Print Category: ' + categoryId)
-
+        {data.ingredients.map((ingredientId) => {
           return (
-            // <li>{findObjectNameById(categoryId)}</li>
             <div className='ingredient_item'>
-              <span>Ingredient: {ingredient.articleId}</span>
+              <span>Ingredient: {findObjectNameById(ingredientId)}</span>
+              <div>
+                <label htmlFor='quantity'>Hoeveelheid:</label>
+                <input type='number'
+                  value={4}
+                  />
+                  <span>{}</span>
+              </div>
             </div>
           )
         })}

@@ -9,8 +9,8 @@ const useDatabase = (url) => {
     const getData = async () => {
       try{
         const response = await api.get(url);
-        console.log('Data from database:')
-        console.log(JSON.stringify(response.data))
+        // console.log('Data from database:')
+        // console.log(JSON.stringify(response.data))
         setData(response.data);
         setLoaded(true);
       } catch(err){
