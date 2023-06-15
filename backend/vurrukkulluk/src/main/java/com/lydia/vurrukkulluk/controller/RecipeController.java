@@ -109,12 +109,13 @@ public class RecipeController {
 
   @DeleteMapping("/{id}")
   public String delete(@PathVariable int id) {
-    ingredientService.getIngredientsRecipeId(id).stream().forEach(ingredient -> ingredientService.deleteById(ingredient.getId()));
-    commentService.getAllCommentsOfRecipe(id).stream().forEach(comment -> commentService.deleteCommentById(comment.getId()));
-    kitchenCategoriesLinkService.getKCLinkByRecipeId(id).stream().forEach(kitchenCategoriesLink -> kitchenCategoriesLinkService.deleteById(kitchenCategoriesLink.getId()));
-    preparationService.getAllPreparationsRecipe(id).stream().forEach(preparation -> preparationService.deleteById(preparation.getId()));
-    ratingService.getAllRatingsRecipe(id).stream().forEach(rating -> ratingService.deleteById(rating.getId()));
-    //imageService.getImagesRecipeId(id).stream().forEach(image -> imageService.deleteImage(image.getId()));
+    ingredientService.getIngredientsRecipeId(id).forEach(ingredient -> ingredientService.deleteById(ingredient.getId()));
+    commentService.getAllCommentsOfRecipe(id).forEach(comment -> commentService.deleteCommentById(comment.getId()));
+    kitchenCategoriesLinkService.getKCLinkByRecipeId(id).forEach(kitchenCategoriesLink -> kitchenCategoriesLinkService.deleteById(kitchenCategoriesLink.getId()));
+    preparationService.getAllPreparationsRecipe(id).forEach(preparation -> preparationService.deleteById(preparation.getId()));
+    ratingService.getAllRatingsRecipe(id).forEach(rating -> ratingService.deleteById(rating.getId()));
+    Image image = recipeService.getRecipeById(id).getImage();
+    imageService.deleteImage(image.getId());
     recipeService.deleteById(id);
     return "Recipe is deleted";
   }

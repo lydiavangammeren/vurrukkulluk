@@ -42,6 +42,8 @@ public Recipe getRecipeBySlug(String slug) {
     return recipeRepository.findBySlug(slug);
 }
 
+@Override
+public Recipe getRecipeById(int id) {return recipeRepository.getById(id);}
     @Override
   public void updateRecipe(Recipe recipe) {
     recipeRepository.save(recipe);
