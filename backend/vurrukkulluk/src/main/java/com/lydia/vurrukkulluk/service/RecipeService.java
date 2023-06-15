@@ -14,8 +14,6 @@ public interface RecipeService {
   void updateRecipe(Recipe recipe);
   void deleteById(int id);
   void deleteRecipe(Recipe recipe);
-  public Recipe getRecipeById(int id);
-
   Recipe getRecipeById(int id);
 
 }
