@@ -42,6 +42,8 @@ public class RecipeController {
   @Autowired
   private UserService userService;
   @Autowired
+  private ImageService imageService;
+  @Autowired
   private ModelMapper modelMapper;
   @Autowired
   private SecurityUtil securityUtil;
@@ -85,7 +87,7 @@ public class RecipeController {
       kitchenCategoriesLinkService.saveKCLink(link);
     });
 
-    return "New recipe is added";
+    return recipe; //"New recipe is added";
   }
 
   @GetMapping()
@@ -124,6 +126,12 @@ public class RecipeController {
     if (!securityUtil.isAuthorizedUserOrAdmin(recipeService.getRecipeById(id).getUser().getId())) {
       return "not authorized";
     }
+    ingredientService.getIngredientsRecipeId(id).stream().forEach(ingredient -> ingredientService.deleteById(ingredient.getId()));
+    commentService.getAllCommentsOfRecipe(id).stream().forEach(comment -> commentService.deleteCommentById(comment.getId()));
+    kitchenCategoriesLinkService.getKCLinkByRecipeId(id).stream().forEach(kitchenCategoriesLink -> kitchenCategoriesLinkService.deleteById(kitchenCategoriesLink.getId()));
+    preparationService.getAllPreparationsRecipe(id).stream().forEach(preparation -> preparationService.deleteById(preparation.getId()));
+    ratingService.getAllRatingsRecipe(id).stream().forEach(rating -> ratingService.deleteById(rating.getId()));
+    //imageService.getImagesRecipeId(id).stream().forEach(image -> imageService.deleteImage(image.getId()));
     recipeService.deleteById(id);
     return "Recipe is deleted";
 

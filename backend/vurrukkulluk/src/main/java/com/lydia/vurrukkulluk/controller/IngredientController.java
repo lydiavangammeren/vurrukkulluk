@@ -64,7 +64,7 @@ public class IngredientController {
             return "not authorized";
         }
         ingredientService.deleteById(id);
-        return "updated";
+        return "deleted";
     }
 
     @GetMapping("/{id}")

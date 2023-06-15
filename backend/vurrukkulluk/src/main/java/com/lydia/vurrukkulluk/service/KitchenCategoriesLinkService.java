@@ -9,4 +9,7 @@ public interface KitchenCategoriesLinkService {
     void saveKCLink(KitchenCategoriesLink kitchenCategoriesLink);
 
     List<KitchenCategoriesLink> getKCLinkByRecipeId(int id);
+
+  public void deleteById(int id);
+
 }

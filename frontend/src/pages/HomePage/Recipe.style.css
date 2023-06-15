@@ -21,8 +21,15 @@
 .recipe_img img{
   max-height: 15em;
 }
+.recipe_categories{
+  height: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0.5rem 5%;
+}
 .recipe_title_rating{
-  height: 7.4rem;
+  /* height: 7.4rem; */
   max-height: 20%;
   display: flex;
   justify-content: space-between;

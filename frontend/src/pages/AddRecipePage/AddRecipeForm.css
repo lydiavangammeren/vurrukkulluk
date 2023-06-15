@@ -1,0 +1,31 @@
+.addRecipe_form{
+  max-width: 68rem;
+  padding: 0 4rem;
+}
+.addRecipe_form h1{
+  font-family: var(--heading);
+  color: var(--darker-green);
+  margin: 0 0 1rem 0;
+  /* font-size: 60; */
+}
+
+.button_bar{
+  display: flex;
+  justify-content: space-between;
+}
+
+.formButton {
+  color: var(--white);
+  font-family: var(--heading);
+  font-size: 30px;
+  background-color: var(--darker-red);
+  border: none;
+  border-radius: 15px;
+}
+/* .formButton :disabled{
+  background-color: grey;
+} */
+
+.remove_button{
+  display: none;
+}

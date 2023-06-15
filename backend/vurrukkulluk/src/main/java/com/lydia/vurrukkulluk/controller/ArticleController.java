@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/articles")
+@CrossOrigin
 public class ArticleController {
 
     @Autowired

@@ -1,0 +1,10 @@
+.category{
+  height: 45%;
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  border: solid 1px;
+  border-radius: 25px;
+  background-color: var(--kahki);
+  padding: 1px 5px;
+}

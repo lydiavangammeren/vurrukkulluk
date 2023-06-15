@@ -14,7 +14,7 @@ public class RecipeDto {
 
     private int id;
     private String title;
-    private  String slug;
+    private String slug;
     private String description;
     private int persons;
     private int price;

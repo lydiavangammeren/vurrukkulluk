@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.dto.UserCreateDto;
 import com.lydia.vurrukkulluk.dto.UserDto;
 import com.lydia.vurrukkulluk.model.User;
+import com.lydia.vurrukkulluk.service.FavoriteService;
 import com.lydia.vurrukkulluk.service.UserService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 public class UserController {
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private FavoriteService favoriteService;
 
   @Autowired
   private ModelMapper modelMapper;
@@ -70,6 +74,7 @@ public class UserController {
     if (!securityUtil.isAuthorizedUserOrAdmin(id)){
       return "not authorized";
     }
+    favoriteService.getFavoritesUserId(id).stream().forEach(favorite -> favoriteService.deleteFavoriteById(favorite.getId()));
     userService.deleteById(id);
     return "User is deleted";
   }

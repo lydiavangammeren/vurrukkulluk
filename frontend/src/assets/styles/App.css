@@ -56,12 +56,13 @@ h1, h2, h3, #button {
 
 h1 {
   font-size: 60px;
-  color: var(--white)
+  color: var(--white);
 }
 
-h2 {  
+h2 {
   font-size: 34px;
-  color: var(--darker-green)
+  color: var(--darker-green);
+  margin: 0;
 }
 
 h3 {
