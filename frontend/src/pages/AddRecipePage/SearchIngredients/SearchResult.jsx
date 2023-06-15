@@ -26,7 +26,12 @@ export const SearchResult = ({ result, setSearchValue }) => {
   }
 
   const handleAdd = e => {
-    addItem(e);
+    const name = e.target.name
+    const value = {
+      articleId: e.target.value,
+      amount: quantity
+    }
+    addItem(name, value);
     setSearchValue('');
   }
 

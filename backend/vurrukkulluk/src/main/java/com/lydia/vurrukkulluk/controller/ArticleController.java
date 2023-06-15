@@ -2,7 +2,9 @@ package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.dto.ArticleDto;
 import com.lydia.vurrukkulluk.model.Article;
+import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.service.ArticleService;
+import com.lydia.vurrukkulluk.service.ImageService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
+
+  @Autowired
+  private ImageService imageService;
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -63,8 +69,10 @@ public class ArticleController {
         if (!securityUtil.isAdmin()){
             return "not authorized";
         }
-        articleService.deleteArticleById(id);
-        return "article updated";
+      Image image = articleService.getArticleById(id).getImage();
+      imageService.deleteImage(image.getId());
+      articleService.deleteArticleById(id);
+      return "article updated";
 
     }
 

@@ -7,8 +7,7 @@ const IngredientsForm = () => {
 
   const [ articles, articlesLoaded ] = useDatabase('/articles');
 
-  const { data, handleChange } = useAddRecipeContext();
-
+  const { data, handleChange } = useAddRecipeContext();                                                                                                 
   const [searchValue, setSearchValue] = useState('');
 
   // const searchResults = articles.filter((a)=>{
@@ -39,11 +38,19 @@ const IngredientsForm = () => {
 
   const searchResults = filter();
 
-  const findObjectNameById = (id) => {
+  // const findObjectNameById = (id) => {
+  //   if(articlesLoaded){
+  //     console.log('Articles: ' +  JSON.stringify(articles))
+  //     const foundObject = articles.find((object) => object.id === parseInt(id));
+  //     return foundObject ? foundObject.name : 'Object not found';
+  //   }
+  // }
+
+  const findObjectById = (id) => {
     if(articlesLoaded){
       console.log('Articles: ' +  JSON.stringify(articles))
       const foundObject = articles.find((object) => object.id === parseInt(id));
-      return foundObject ? foundObject.name : 'Object not found';
+      return foundObject ? foundObject : {name:'Object not found'};
     }
   }
 
@@ -54,16 +61,17 @@ const IngredientsForm = () => {
       <SearchResultsList results={searchResults} setSearchValue={setSearchValue}/>}
 
       <div className='ingredient_list'>
-        {data.ingredients.map((ingredientId) => {
+        {data.ingredients.map((ingredient) => {
+          const article = findObjectById(ingredient.articleId)
           return (
             <div className='ingredient_item'>
-              <span>Ingredient: {findObjectNameById(ingredientId)}</span>
+              <span>Ingredient: {article.name}</span>
               <div>
                 <label htmlFor='quantity'>Hoeveelheid:</label>
                 <input type='number'
-                  value={4}
+                  value={ingredient.amount}
                   />
-                  <span>{}</span>
+                  <span>{article.unit}</span>
               </div>
             </div>
           )
