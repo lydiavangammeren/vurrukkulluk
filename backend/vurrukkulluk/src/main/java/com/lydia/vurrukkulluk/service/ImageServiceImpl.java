@@ -47,7 +47,4 @@ public class ImageServiceImpl implements ImageService {
     imageRepository.deleteById(id);
   }
 
-//  public List<Image> getImagesRecipeId(int id){
-//    return imageRepository.findAllByRecipeId(id);
-//  }
 }

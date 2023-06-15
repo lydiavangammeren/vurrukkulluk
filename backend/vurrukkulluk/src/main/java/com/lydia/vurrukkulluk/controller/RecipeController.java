@@ -57,6 +57,7 @@ public class RecipeController {
     }
     //recipe creation
     Recipe recipe = revertCreateRecipeDto(recipeCreateDto);
+    recipe.setId(0);
     recipe = recipeService.saveRecipe(recipe);
 
 
@@ -137,7 +138,8 @@ public class RecipeController {
     kitchenCategoriesLinkService.getKCLinkByRecipeId(id).stream().forEach(kitchenCategoriesLink -> kitchenCategoriesLinkService.deleteById(kitchenCategoriesLink.getId()));
     preparationService.getAllPreparationsRecipe(id).stream().forEach(preparation -> preparationService.deleteById(preparation.getId()));
     ratingService.getAllRatingsRecipe(id).stream().forEach(rating -> ratingService.deleteById(rating.getId()));
-    //imageService.getImagesRecipeId(id).stream().forEach(image -> imageService.deleteImage(image.getId()));
+    Image image = recipeService.getRecipeById(id).getImage();
+    imageService.deleteImage(image.getId());
     recipeService.deleteById(id);
     return "Recipe is deleted";
 
@@ -197,6 +199,7 @@ public class RecipeController {
   public CommentDto convertCommentToDto(Comment comment){
     return modelMapper.map(comment,CommentDto.class);
   }
+
 
   public IngredientDto convertIngredientToDto(Ingredient ingredient){
     return modelMapper.map(ingredient,IngredientDto.class);

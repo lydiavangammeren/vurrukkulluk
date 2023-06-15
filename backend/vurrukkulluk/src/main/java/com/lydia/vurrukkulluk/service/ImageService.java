@@ -12,5 +12,5 @@ public interface ImageService {
   public byte[] getImageById(int id);
   public Image updateImage(MultipartFile file, int id) throws IOException;
   public void deleteImage(int id);
-  //public List<Image> getImagesRecipeId(int id);
+
 }
