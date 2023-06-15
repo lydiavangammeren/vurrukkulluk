@@ -2,7 +2,11 @@ package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.dto.RatingDto;
 import com.lydia.vurrukkulluk.model.Image;
+import com.lydia.vurrukkulluk.model.Recipe;
+import com.lydia.vurrukkulluk.service.ArticleService;
 import com.lydia.vurrukkulluk.service.ImageService;
+import com.lydia.vurrukkulluk.service.RecipeService;
+import com.lydia.vurrukkulluk.service.UserService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
 import com.lydia.vurrukkulluk.util.UserImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +40,13 @@ public class ImageController {
   @Autowired
   private SecurityUtil securityUtil;
 
+  @Autowired
+  private UserService userService;
+  @Autowired
+  private RecipeService recipeService;
+  @Autowired
+  private ArticleService articleService;
+
   @GetMapping("/{id}")
   public ResponseEntity<byte[]> getImage(@PathVariable int id) {
     byte[] image = imageService.getImageById(id);
@@ -43,9 +54,26 @@ public class ImageController {
   }
   @ResponseStatus(value = HttpStatus.OK)
   @PostMapping()
-  public int add(@RequestParam("image") MultipartFile file) throws IOException {
+  public String add(@RequestParam("image") MultipartFile file, @RequestParam String type, @RequestParam int id) throws IOException {
     Image image = imageService.saveImage(file);
-    return image.getId();
+    switch (type) {
+      case "user" -> {
+        if (!securityUtil.isAuthorizedUserOrAdmin(id)) {return "not authorized";}
+        userService.setImageInUser(id,image);
+      }
+      case "recipe" -> {
+        Recipe recipe = recipeService.getRecipeById(id);
+        if (!securityUtil.isAuthorizedUserOrAdmin(recipe.getUser().getId())){return "not authorized";}
+        recipeService.setImageInRecipe(id,recipe,image);
+      }
+      case "article" -> {
+        if (!securityUtil.isAdmin()) {return "not authorized";}
+        articleService.setImageInRecipe(id,image);
+
+      }
+    }
+
+    return "Saved image with id: " + id;
   }
 
   @PutMapping("/{id}")

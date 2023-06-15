@@ -14,4 +14,5 @@ public interface ArticleService {
 
     public void deleteArticleById(int id);
 
+    void setImageInRecipe(int id, Image image);
 }
