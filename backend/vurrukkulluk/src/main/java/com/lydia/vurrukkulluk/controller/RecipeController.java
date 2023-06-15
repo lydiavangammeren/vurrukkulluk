@@ -64,7 +64,6 @@ public class RecipeController {
     recipe.setKitchenType(kitchenType);
     KitchenRegion kitchenRegion = kitchenRegionService.getById(recipeCreateDto.getKitchenRegionId());
     recipe.setKitchenRegion(kitchenRegion);
-    User user = userService.getUserById(recipeCreateDto.getUserId());
     recipe.setUser(user);
     recipeService.saveRecipe(recipe);
 
@@ -195,9 +194,6 @@ public class RecipeController {
     return modelMapper.map(comment,CommentDto.class);
   }
 
-  public RecipeShortDto covertRecipeToShortDto(Recipe recipe){
-    return modelMapper.map(recipe, RecipeShortDto.class);
-  }
 
   public IngredientDto convertIngredientToDto(Ingredient ingredient){
     return modelMapper.map(ingredient,IngredientDto.class);
