@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IngredientInRecipeDto {
-    int articleId;
-    int amount;
+public class PreparationInRecipeDto {
+    private int step;
+    private String instructions;
 }

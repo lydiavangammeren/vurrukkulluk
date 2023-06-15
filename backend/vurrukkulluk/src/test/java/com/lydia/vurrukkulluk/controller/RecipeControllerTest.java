@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.controller;
 
+import com.lydia.vurrukkulluk.dto.ArticleDto;
 import com.lydia.vurrukkulluk.dto.IngredientDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
