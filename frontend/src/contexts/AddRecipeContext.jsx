@@ -21,10 +21,9 @@ export const AddRecipeProvider = ({ children }) => {
       region: 0,
       persons: 0,
       categories: [],
-      recipeImage: 0,
+      // recipeImage: 0,
       ingredients: [],
-      preparation: [],
-      amount: ''
+      preparation: []
     });
 
     const handleChange = e => {
@@ -48,9 +47,9 @@ export const AddRecipeProvider = ({ children }) => {
       preparation: 'preparation',
     };
 
-    const addItem = (e) => {
-      const name = e.target.name;
-      const value = e.target.value;
+    const addItem = (name, value) => {
+      // const name = e.target.name;
+      // const value = e.target.value;
     
       const propertyName = propertyMap[name];
       const updatedValue = [...data[propertyName], value];
