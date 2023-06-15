@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.dto.*;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import io.swagger.annotations.ApiParam;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -55,40 +56,45 @@ public class RecipeController {
       return "not authorized";
     }
     //recipe creation
-    Recipe recipe = new Recipe();
-    recipe.setUser(user);
-    recipe.setTitle(recipeCreateDto.getTitle());
-    recipe.setDescription(recipeCreateDto.getDescription());
-    recipe.setSlug(recipeCreateDto.getSlug());
-    KitchenType kitchenType = kitchenTypeService.getById(recipeCreateDto.getKitchenTypeId());
-    recipe.setKitchenType(kitchenType);
-    KitchenRegion kitchenRegion = kitchenRegionService.getById(recipeCreateDto.getKitchenRegionId());
-    recipe.setKitchenRegion(kitchenRegion);
-    recipe.setUser(user);
-    recipeService.saveRecipe(recipe);
+    Recipe recipe = revertCreateRecipeDto(recipeCreateDto);
+    recipe.setId(0);
+    recipe = recipeService.saveRecipe(recipe);
+
 
     //ingredient creation
-    recipeCreateDto.getIngredients().forEach((ingredientCreateDto) ->{
+    Recipe finalRecipe = recipe;
+    recipeCreateDto.getIngredients().forEach(ingredientInRecipeDto ->{
       Ingredient ingredient = new Ingredient();
-      ingredient.setAmount(ingredientCreateDto.getAmount());
+      ingredient.setAmount(ingredientInRecipeDto.getAmount());
       Article article = new Article();
-      article.setId(ingredientCreateDto.getArticleId());
+      article.setId(ingredientInRecipeDto.getArticleId());
       ingredient.setArticle(article);
-      ingredient.setRecipe(recipe);
+      ingredient.setRecipe(finalRecipe);
       ingredientService.saveIngredient(ingredient);
     });
 
+    //preparation creation
+    Recipe finalRecipe1 = recipe;
+    recipeCreateDto.getPreparations().forEach(preparationInRecipeDto -> {
+      Preparation preparation = new Preparation();
+      preparation.setInstructions(preparationInRecipeDto.getInstructions());
+      preparation.setStep(preparationInRecipeDto.getStep());
+      preparation.setRecipe(finalRecipe1);
+      preparationService.savePreparation(preparation);
+    });
+
     //category link creation
+    Recipe finalRecipe2 = recipe;
     recipeCreateDto.getCategoryIds().forEach((categoryId) ->{
       KitchenCategoriesLink link = new KitchenCategoriesLink();
       KitchenCategory kitchenCategory = new KitchenCategory();
       kitchenCategory.setId(categoryId);
       link.setKitchenCategory(kitchenCategory);
-      link.setRecipe(recipe);
+      link.setRecipe(finalRecipe2);
       kitchenCategoriesLinkService.saveKCLink(link);
     });
 
-    return "New recipe is added";
+    return "New recipe is added with id" ;
   }
 
   @GetMapping()
@@ -203,4 +209,7 @@ public class RecipeController {
     return modelMapper.map(preparation,PreparationDto.class);
   }
 
+  public Recipe revertCreateRecipeDto(RecipeCreateDto recipeCreateDto){
+    return modelMapper.map(recipeCreateDto,Recipe.class);
+  }
 }

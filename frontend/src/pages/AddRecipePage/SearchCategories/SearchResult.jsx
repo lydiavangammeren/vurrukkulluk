@@ -5,7 +5,9 @@ export const SearchResult = ({ title, id, setSearchValue }) => {
   const { addItem } = useAddRecipeContext();
 
   const handleAdd = e => {
-    addItem(e);
+    const name = e.target.name
+    const value = e.target.value
+    addItem(name, value);
     setSearchValue('');
   }
 
