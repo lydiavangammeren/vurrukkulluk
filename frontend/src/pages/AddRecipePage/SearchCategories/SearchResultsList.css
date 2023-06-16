@@ -1,14 +1,15 @@
 .categories_results {
 
-  width: 100%;
+  width: 30rem;
   background-color: white;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 8px #ddd;
   /* border-radius: 10px; */
-  /* margin-top: 1rem; */
-  height: 320px;
+  margin-top: 2.5rem;
+  max-height: 320px;
   overflow-y: auto;
+  position: absolute;
 }
 .categories_results a {
   text-decoration: none;

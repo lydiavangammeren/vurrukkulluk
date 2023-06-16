@@ -13,6 +13,7 @@ const FormInputs = () => {
         2: <PreparationForm />
     }
 
+
     const content = (
         <div className="form_inputs">
             {display[page]}

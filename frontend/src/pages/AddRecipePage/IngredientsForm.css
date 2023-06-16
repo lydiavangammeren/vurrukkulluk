@@ -1,0 +1,9 @@
+.ingredient_list{
+  padding: 2rem 0;
+  
+  height: 30rem;
+}
+.ingredient_list h3 { 
+  color: var(--darker-green);
+  margin-top: 0;
+}
