@@ -24,4 +24,17 @@ public class AuthenticationController {
     ){
         return ResponseEntity.ok(service.authenticate(request));
     }
+    @PostMapping("/OTP/request")
+    public void OTPrequest(
+            @RequestBody AuthenticationRequest request
+    ){
+        String email = request.getEmail();
+        service.requestOTP(email);
+    }
+    @PostMapping("/OTP/authenticate")
+    public ResponseEntity<AuthenticationResponse> otpAuthent(
+            @RequestBody AuthenticationRequest request
+    ){
+        return ResponseEntity.ok(service.authenticateOTP(request));
+    }
 }
