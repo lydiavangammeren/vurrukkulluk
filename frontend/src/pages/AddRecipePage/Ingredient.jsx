@@ -3,15 +3,13 @@ import useAddRecipeContext from '../../hooks/useAddRecipeContext'
 import { useAppContext } from '../../contexts';
 import { RiDeleteBinLine } from "react-icons/ri";
 
-import "./Ingredient.css"
-
 const Ingredient = ({article, ingredient}) => {
 
   const { baseUrl } = useAppContext();
   const { updateIngredientQuantity, removeItem, removeIngredient } = useAddRecipeContext();
 
   const updateQuantity = (e) => {
-    const id = e.target.value
+    const id = e.target.id
     const quantity = e.target.value
 
     updateIngredientQuantity(id, quantity)
@@ -40,8 +38,9 @@ const Ingredient = ({article, ingredient}) => {
           </div>
         </div>
         <div className='ingredient_item_buttons'>
-          <button onClick={removeIngredient} name='ingredients' value={article?.id} className='delete_button'>
-            <RiDeleteBinLine color='red' size={24}/>
+          <button type='button' onClick={removeIngredient} name='ingredients' value={article?.id} className='delete_button'>
+            Verwijder
+            {/* <RiDeleteBinLine color='red' size={24}/> */}
           </button>
         </div>
     </div>

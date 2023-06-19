@@ -19,30 +19,20 @@ export const AddRecipeProvider = ({ children }) => {
       region: 0,
       persons: 0,
       categories: [],
-      ingredients: [
-        // { id: 1, quantity: 4 },
-        // { id: 2, quantity: 250 },
-        // { id: 3, quantity: 100 }
-      ],
-      preparation: [
-        // { step: 1, instructions: "Lorem ipsum ..." },
-        // { step: 2, instructions: "Lorem ipsum ..." },
-        // { step: 3, instructions: "Lorem ipsum ..." }
-      ]
+      ingredients: [],
+      preparation: []
     });
+
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const handleChange = e => {
       const type = e.target.type
-
       const name = e.target.name
 
-      // const value = type === "checkbox"
-      //   ? e.target.checked
-      //   : e.target.value
+      const value = type === "checkbox"
+        ? e.target.checked
+        : e.target.value
 
-      const value = e.target.value
-
-      if(name === "")
       setData(prevData => ({
         ...prevData,
         [name]: value
@@ -88,7 +78,7 @@ export const AddRecipeProvider = ({ children }) => {
       const value = e.target.value;
       console.log('name: ' + name)
       console.log('value: ' + value)
-      const propertyName = propertyMap[name];
+      // const propertyName = propertyMap[name];
       setData(prevData => ({
         ...prevData,
          ingredients: [...data.ingredients].filter((property) => property.articleId !== value)
@@ -98,7 +88,7 @@ export const AddRecipeProvider = ({ children }) => {
     const updatePreparationInstructions = (stepNumber, newInstructions) => {
       setData(prevData => {
         const updatedPreparation = prevData.preparation.map(step => {
-          if (step.step === stepNumber) {
+          if (step.step == stepNumber) {
             return { ...step, instructions: newInstructions };
           }
           return step;
@@ -108,11 +98,55 @@ export const AddRecipeProvider = ({ children }) => {
       });
     };
 
+    const updatePreparationSteps = () => {
+      setData(prevData => {
+        const updatedPreparation = prevData.preparation.map((step, index) => {
+          step.step = index + 1;
+          return step;
+        });
+        console.log('update steps')
+        return { ...prevData, preparation: updatedPreparation };
+      });
+    }
+
+    const removeStep = (e) => {
+      const name = e.target.name;
+      const value = e.target.value;
+      console.log('name: ' + name)
+      console.log('value: ' + value)
+      // const propertyName = propertyMap[name];
+      // setData(prevData => ({
+      //   ...prevData,
+      //   preparation: [...data.preparation].filter((step) => step.step != value)
+      // }))
+      removeAndUpdateSteps(value)
+      
+      // updatePreparationSteps();
+    }
+
+    const removeAndUpdateSteps = (index) => {
+      // const index = e.target.value
+      setData(prevData => {
+        // Create a copy of the previous state
+        const newData = { ...prevData };
+    
+        if (index >= 0 && index < newData.preparation.length) {
+          newData.preparation.splice(index, 1); // Remove the object at the specified index
+          // newData.preparation.filter((step)=> step.step != index)
+    
+          // Update the "step" property of each object
+          for (let i = 0; i < newData.preparation.length; i++) {
+            newData.preparation[i].step = i + 1;
+          }
+        }
+    
+        return newData; // Return the updated state
+      });
+    }
+
     // ===============================================================
 
     const addItem = (name, value) => {
-      // const name = e.target.name;
-      // const value = e.target.value;
     
       const propertyName = propertyMap[name];
       const updatedValue = [...data[propertyName], value];
@@ -158,7 +192,8 @@ export const AddRecipeProvider = ({ children }) => {
 
     return (
       <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, 
-                                  disableNext, prevHide, nextHide, submitHide, addItem, removeItem, updateIngredientQuantity, removeIngredient }}>
+                                  disableNext, prevHide, nextHide, submitHide, addItem, removeItem, updateIngredientQuantity, 
+                                  removeIngredient, selectedImage, setSelectedImage, updatePreparationInstructions, removeStep }}>
         {children}
       </AddRecipeContext.Provider>
     )
