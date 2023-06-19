@@ -3,7 +3,6 @@ import useAddRecipeContext from '../../hooks/useAddRecipeContext'
 import { SearchBar, SearchResultsList } from './SearchIngredients';
 import { useDatabase } from '../../hooks';
 import Ingredient from './Ingredient';
-import "./IngredientsForm.css"
 
 const IngredientsForm = () => {
 
@@ -44,7 +43,8 @@ const IngredientsForm = () => {
 
       <div className='ingredient_list'>
         <h3>Toegevoegde ingrediënten</h3>
-        {data.ingredients.map((ingredient) => {
+        {data.ingredients && articlesLoaded &&
+        data.ingredients.map((ingredient) => {
           const article = findObjectById(ingredient.articleId)
           return (
             <Ingredient 

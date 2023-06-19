@@ -6,5 +6,8 @@
 
 @import "../../pages/HomePage/index.css";
 @import "../../pages/DetailPage/index.css";
+/* @import "../../pages/RegisterPage/index.css"; */
+@import "../../pages/AddRecipePage/index.css"; /* !!! */
+/* @import "../../pages/ShoppingCartPage/index.css"; */
 
 @import "../../components/index.css";

@@ -1,0 +1,20 @@
+.prepstep_list_item{
+  display: flex;
+  width: 42rem;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.prepstep_list_item textarea{
+  flex-basis: 28rem;
+}
+
+.remove_step_button{
+  border-radius: 10px;
+  border: none;
+  background-color: var(--darker-red);
+  color: white;
+  font-family: var(--heading);
+  font-size: x-large;
+  width: 6rem;
+}
+
