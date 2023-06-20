@@ -1,8 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Register.css';
+import usePostData from '../../hooks/usePostData';
 
 const Register = () => {
-    const [inputs, setInputs] = useState({})
+    const [inputs, setInputs] = useState({
+        name: '',
+        email: '',
+        firstpassword: '',
+        secondpassword: ''
+    })
+
+    const [data, isLoaded, postData] = usePostData();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -12,8 +20,35 @@ const Register = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(inputs);
+        // console.log(inputs);
+
+        const body = {
+            name: inputs.name,
+            email: inputs.email,
+            password: inputs.firstpassword
+        }
+
+        console.log('Body: ', body)
+        postData('/auth/register', body);
     }
+
+    useEffect(()=>{
+        if(!isLoaded) return;
+
+        switch(data.status){
+        case 200:
+            console.log('Register success ' , data.payLoad.token)
+            localStorage.setItem('user', data.payLoad.token);
+            break;
+        case 403:
+            console.log('Register incorrect')
+            break;
+        default:
+            console.log('Iets anders ' , data.status)
+            console.log('Payload ' , data.payLoad)
+        }
+
+    },[data, isLoaded])
 
 
     return(
@@ -28,8 +63,8 @@ const Register = () => {
                             <input
                                 className='registerfields'
                                 type="text"
-                                name="username"
-                                value={inputs.username || ''}
+                                name="name"
+                                value={inputs.name}
                                 onChange={handleChange}
                             />
                     </div>
@@ -40,8 +75,8 @@ const Register = () => {
                             <input
                                 className='registerfields'
                                 type="email"
-                                name="emailaddress"
-                                value={inputs.emailaddress || ''}
+                                name="email"
+                                value={inputs.email}
                                 onChange={handleChange}
                             />
                     </div>
@@ -53,7 +88,7 @@ const Register = () => {
                                 className='registerfields'
                                 type="password"
                                 name="firstpassword"
-                                value={inputs.firstpassword || ''}
+                                value={inputs.firstpassword}
                                 onChange={handleChange}
                             />
                     </div>
@@ -65,7 +100,7 @@ const Register = () => {
                                 className='registerfields'
                                 type="password"
                                 name="secondpassword"
-                                value={inputs.secondpassword || ''}
+                                value={inputs.secondpassword}
                                 onChange={handleChange}
                             />
                     </div>
@@ -73,7 +108,7 @@ const Register = () => {
                 <br/><br/>
 
                 </div>
-                <input type="submit" value="Registreren" className='registerbutton' />
+                <button type="submit" className='registerbutton'>Registreren</button>
             </form>
         </div>
     )

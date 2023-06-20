@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../lib/recipeAPI";
+import usePostData from "../../hooks/usePostData";
 
 const Login = () => {
 
@@ -11,7 +12,8 @@ const Login = () => {
 
   const [user, setUser] = useState('');
   const [ pwd, setPwd ] = useState('');
-  const [ errMsg, setErrMsg ] = useState('');
+
+  const [data, isLoaded, postData] = usePostData();
 
 
   const forgotPassword = () => {
@@ -30,35 +32,54 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Welkom ' + user)
-    
-    try{
-      const response = await api.post('/auth/authenticate', 
-          JSON.stringify({user, pwd}),
-          {
-            headers: {'Content-Type': 'application/json' },
-            withCredentials: true
-          }
-          );
-          console.log(JSON.stringify(response?.data));
+    // console.log('Welkom ' + user)
+    postData('/auth/authenticate', {email: user, password: pwd})
 
-          setUser('');
-          setPwd('');
+    // try{
+    //   const response = await api.post('/auth/authenticate', 
+    //       JSON.stringify({email: user, password: pwd}),
+    //       {
+    //         headers: {'Content-Type': 'application/json' }
+    //       }
+    //       );
+    //       console.log(JSON.stringify(response?.data));
+    //       localStorage.setItem('user', response.data);
+          
+    //       alert('Welcome ' + user)
+    //       setUser('');
+    //       setPwd('');
 
-    } catch(err) {
-      console.log('Error in authenticate: ')
-      console.log(err?.response);
-      // if (!err?.response) {
-      //   setErrMsg('No Server Response');
-      // } else if (err.response?.status === 400) {
-      //     setErrMsg('Missing Username or Password');
-      // } else if (err.response?.status === 401) {
-      //     setErrMsg('Unauthorized');
-      // } else {
-      //     setErrMsg('Login Failed');
-      // }
-    }
+    // } catch(err) {
+    //   console.log('Error in authenticate: ')
+    //   console.log(err?.response);
+    //   // if (!err?.response) {
+    //   //   setErrMsg('No Server Response');
+    //   // } else if (err.response?.status === 400) {
+    //   //     setErrMsg('Missing Username or Password');
+    //   // } else if (err.response?.status === 401) {
+    //   //     setErrMsg('Unauthorized');
+    //   // } else {
+    //   //     setErrMsg('Login Failed');
+    //   // }
+    // }
   }
+
+  useEffect(() => {
+    if(!isLoaded) return;
+
+    switch(data.status){
+      case 200:
+        console.log('Inlog success ' , data.payLoad)
+        localStorage.setItem('user', data.payLoad.token);
+        break;
+      case 403:
+        console.log('Login incorrect')
+        break;
+      default:
+        console.log('Iets anders ' , data.status)
+        console.log('Payload ' , data.payLoad)
+    }
+  }, [data, isLoaded])
 
   return (
     <div className="Login">
