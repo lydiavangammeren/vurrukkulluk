@@ -55,4 +55,11 @@ public class UserServiceImpl implements UserService {
     user.setImage(image);
     saveUser(user);
   }
+
+  @Override
+  public void setNewPassword(String email, String password) {
+    User user = getUserByEmail(email);
+    user.setPassword(password);
+    userRepository.save(user);
+  }
 }

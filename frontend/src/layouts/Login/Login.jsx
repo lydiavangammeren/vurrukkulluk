@@ -2,66 +2,46 @@ import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../lib/recipeAPI";
 import usePostData from "../../hooks/usePostData";
+import { useAppContext } from "../../contexts/AppContext";
+import { login } from "../../hooks/useAuthService";
 
 const Login = () => {
 
   const navigate = useNavigate()
-  // const [credentials, setCredentials] = useState({email: '', password: ''});
-  // const userRef = useRef();
-  // const errRef = useRef();
+  const { user, setUser } = useAppContext();
 
-  const [user, setUser] = useState('');
+  const [userName, setUserName] = useState('');
   const [ pwd, setPwd ] = useState('');
+
+  const [input, setInput] = useState({email: '', password: ''})
 
   const [data, isLoaded, postData] = usePostData();
 
+  const handleChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+
+    setInput(prev => ({
+      ...prev,
+      [name]:value
+    }))
+  }
 
   const forgotPassword = () => {
     console.log("Send email to reset password")
   }  
 
-  // const handleChange = e => {
-  //   const name = e.target.name
-  //   const value = e.target.value
-
-  //   setCredentials(prev => ({
-  //     ...prev,
-  //     [name]: value
-  //   }))
-  // }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log('Welkom ' + user)
-    postData('/auth/authenticate', {email: user, password: pwd})
 
-    // try{
-    //   const response = await api.post('/auth/authenticate', 
-    //       JSON.stringify({email: user, password: pwd}),
-    //       {
-    //         headers: {'Content-Type': 'application/json' }
-    //       }
-    //       );
-    //       console.log(JSON.stringify(response?.data));
-    //       localStorage.setItem('user', response.data);
-          
-    //       alert('Welcome ' + user)
-    //       setUser('');
-    //       setPwd('');
+    // postData('/auth/authenticate', input)
+    login(input.email, input.password);
 
-    // } catch(err) {
-    //   console.log('Error in authenticate: ')
-    //   console.log(err?.response);
-    //   // if (!err?.response) {
-    //   //   setErrMsg('No Server Response');
-    //   // } else if (err.response?.status === 400) {
-    //   //     setErrMsg('Missing Username or Password');
-    //   // } else if (err.response?.status === 401) {
-    //   //     setErrMsg('Unauthorized');
-    //   // } else {
-    //   //     setErrMsg('Login Failed');
-    //   // }
-    // }
+  }
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    setInput({email: '', password: ''})
   }
 
   useEffect(() => {
@@ -70,7 +50,12 @@ const Login = () => {
     switch(data.status){
       case 200:
         console.log('Inlog success ' , data.payLoad)
-        localStorage.setItem('user', data.payLoad.token);
+        localStorage.setItem('user', JSON.stringify({token: data.payLoad.token, email: input.email}));
+        // alert('Welkom ' + userName)
+        // setUser(input.email)
+        // setUserName('');
+        // setPwd('');
+        setInput(prev=> ({...prev, password: ''})) // Om de component te re-renderen
         break;
       case 403:
         console.log('Login incorrect')
@@ -81,8 +66,9 @@ const Login = () => {
     }
   }, [data, isLoaded])
 
-  return (
-    <div className="Login">
+  const loginForm = () => {
+    return (
+      <div className="Login">
       <h1 className="login-header">Login</h1>
       <div className="form-container">
         <form className="form" onSubmit={handleSubmit}>
@@ -92,9 +78,8 @@ const Login = () => {
             name="email" 
             id="email" 
             type="email" 
-            // ref={userRef}
-            value={user}
-            onChange={(e)=>{setUser(e.target.value)}}
+            value={input.email}
+            onChange={handleChange}
             />
           <br/><br/>
           <label className="label" htmlFor="password">Wachtwoord </label>  
@@ -103,8 +88,8 @@ const Login = () => {
             name="password" 
             id="password" 
             type="password" 
-            value={pwd}
-            onChange={(e)=>{setPwd(e.target.value)}}
+            value={input.password}
+            onChange={handleChange}
             />
           <div className="login-bottom">
             <button className="login-button">Login</button> 
@@ -125,6 +110,26 @@ const Login = () => {
           
       </div>
     </div>
+    )
+  }
+
+  const userDisplay = () => {
+    console.log("localStorage: " , JSON.parse(localStorage.getItem('user')).email)
+    return (
+      <div className="Login">
+        <h1>Welkom</h1>
+        <h2>{JSON.parse(localStorage.getItem('user')).email}</h2>
+        <button onClick={logout}>Log uit</button>
+      </div>
+    )
+  }
+
+
+  return (
+    localStorage.getItem('user') === null ?
+    loginForm() : userDisplay()
+    
+    // loginForm()
   );
 };
 

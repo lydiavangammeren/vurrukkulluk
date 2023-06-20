@@ -14,7 +14,8 @@ export function ContextProvider({children, recipes, bannerImages}){
   const baseUrl = "http://localhost:8080/image/";
 
   return (
-    <AppContext.Provider value={{recipes, searchValue, setSearchValue, bannerImages, detailImage, setDetailImage, baseUrl}} >
+    <AppContext.Provider value={{recipes, searchValue, setSearchValue, bannerImages, detailImage, setDetailImage, 
+      baseUrl}} >
       {children}
     </AppContext.Provider>
   )
