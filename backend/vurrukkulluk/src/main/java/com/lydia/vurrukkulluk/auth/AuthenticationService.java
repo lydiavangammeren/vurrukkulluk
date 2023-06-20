@@ -42,12 +42,12 @@ public class AuthenticationService {
 
       var user = new User();
       user.setName(request.getName());
-      var userInDatabase = repository.findByEmail(request.getEmail()).orElse(null);
-      if (userInDatabase == null) {
-        user.setEmail(request.getEmail());
-      } else {
+      repository.findByEmail(request.getEmail()).ifPresentOrElse((value) -> {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email is already in use");
-      }
+      }, () -> {
+        user.setEmail(request.getEmail());
+      });
+
 
 
         if(passwordValidation(request.getPassword())) {
