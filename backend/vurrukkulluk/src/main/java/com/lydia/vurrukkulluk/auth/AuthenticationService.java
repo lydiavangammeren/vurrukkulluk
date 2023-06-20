@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.auth;
 import com.lydia.vurrukkulluk.config.JwtService;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.repository.UserRepository;
+import com.lydia.vurrukkulluk.util.MailSendService;
 import com.lydia.vurrukkulluk.util.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +27,8 @@ public class AuthenticationService {
     private final JwtService jwtService;
 
     private final AuthenticationManager authenticationManager;
+
+    private final MailSendService mailSendService;
 
     public AuthenticationResponse register(RegisterRequest request) {
 
@@ -61,9 +64,9 @@ public class AuthenticationService {
         user.setRole(Role.USER);
         repository.save(user);
 
-        System.out.println(OTP);
-        // TODO SEND EMAIL
-
+        if (!mailSendService.sendOTPMail(OTP,user)){
+            System.out.printf("OTP for user %s : %s%n",user.getEmail(),OTP);
+        };
     }
 
     private String generateOTP() {
