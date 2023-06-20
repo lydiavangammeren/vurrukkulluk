@@ -62,7 +62,7 @@ const Details = ({details}) => {
             {categories.map((category, index) => {
               if(index < 4){
                 return (
-                  <Category name={category.name}/>
+                  <Category name={category.name} key={index}/>
                 )
               }
             })}

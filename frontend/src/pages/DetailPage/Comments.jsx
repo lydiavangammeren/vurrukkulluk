@@ -8,6 +8,7 @@ const Comments = ({comments}) => {
       {comments && comments.map((comment, index) => (
         <Comment comment={comment} key={index} />
       ))}
+      
     </div>
   );
 };

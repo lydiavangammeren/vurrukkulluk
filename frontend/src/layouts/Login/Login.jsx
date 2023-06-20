@@ -3,15 +3,16 @@ import { useNavigate } from "react-router-dom";
 import api from "../../lib/recipeAPI";
 import usePostData from "../../hooks/usePostData";
 import { useAppContext } from "../../contexts/AppContext";
-import { login } from "../../hooks/useAuthService";
+import jwtDecode from "jwt-decode";
+// import { login, logout } from "../../hooks/useAuthService";
 
 const Login = () => {
 
   const navigate = useNavigate()
-  const { user, setUser } = useAppContext();
+  // const { user, setUser } = useAppContext();
 
-  const [userName, setUserName] = useState('');
-  const [ pwd, setPwd ] = useState('');
+  // const [userName, setUserName] = useState('');
+  // const [ pwd, setPwd ] = useState('');
 
   const [input, setInput] = useState({email: '', password: ''})
 
@@ -34,9 +35,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // postData('/auth/authenticate', input)
-    login(input.email, input.password);
-
+    postData('/auth/authenticate', input)
+    // const response = login(input.email, input.password);
+    // console.log('Response: ', response)
+    setInput({email: '', password: ''})
   }
 
   const logout = () => {
@@ -49,8 +51,14 @@ const Login = () => {
 
     switch(data.status){
       case 200:
-        console.log('Inlog success ' , data.payLoad)
-        localStorage.setItem('user', JSON.stringify({token: data.payLoad.token, email: input.email}));
+        const tokenData = jwtDecode(data.payLoad.token)
+        const user = {
+          token: data.payLoad.token,
+          id: tokenData.userId,
+          email: tokenData.sub
+        }
+        console.log('Inlog success ' , user)
+        localStorage.setItem('user', JSON.stringify(user));
         // alert('Welkom ' + userName)
         // setUser(input.email)
         // setUserName('');
@@ -128,8 +136,6 @@ const Login = () => {
   return (
     localStorage.getItem('user') === null ?
     loginForm() : userDisplay()
-    
-    // loginForm()
   );
 };
 

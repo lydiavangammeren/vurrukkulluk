@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Register.css';
 import usePostData from '../../hooks/usePostData';
+import jwtDecode from 'jwt-decode';
 
 const Register = () => {
     const [inputs, setInputs] = useState({
@@ -37,8 +38,14 @@ const Register = () => {
 
         switch(data.status){
         case 200:
-            console.log('Register success ' , data.payLoad.token)
-            localStorage.setItem('user', JSON.stringify({token: data.payLoad.token, email: inputs.email}));
+            const tokenData = jwtDecode(data.payLoad.token)
+            const user = {
+                token: data.payLoad.token,
+                id: tokenData.userId,
+                email: tokenData.sub
+            }
+            console.log('Register success ' , user)
+            localStorage.setItem('user', JSON.stringify(user));
             break;
         case 403:
             console.log('Register incorrect')
