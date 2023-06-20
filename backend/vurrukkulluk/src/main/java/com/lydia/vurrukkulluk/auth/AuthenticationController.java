@@ -1,13 +1,14 @@
 package com.lydia.vurrukkulluk.auth;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ValidationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
@@ -17,7 +18,9 @@ public class AuthenticationController {
 
   private final AuthenticationService service;
 
-  @ApiOperation(value = "Register a new user", notes = "password should be between 8-32 and contain letter, digit and special character")
+  //@ApiOperation(value = "Register a new user", notes = "password should be between 8-32 and contain letter, digit and special character")
+  @Operation(summary = "Register a new user", description = "password should be between 8-32 and contain letter, digit and special character")
+//  @ApiResponse(responseCode = "404", description = "foo")
   @PostMapping("/register")
   public ResponseEntity<?> register(
     @RequestBody RegisterRequest request
