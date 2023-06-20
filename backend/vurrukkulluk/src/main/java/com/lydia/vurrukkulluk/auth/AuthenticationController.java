@@ -23,6 +23,7 @@ public class AuthenticationController {
     @RequestBody RegisterRequest request
   ) {
     try {
+
     return ResponseEntity.ok(service.register(request));}
     catch (ResponseStatusException e) {
       return ResponseEntity.badRequest()

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -39,9 +40,16 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
 
-        var user = new User();
-        user.setName(request.getName());
+      var user = new User();
+      user.setName(request.getName());
+      repository.findByEmail(request.getEmail()).ifPresentOrElse((value) -> {
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email is already in use");
+      }, () -> {
         user.setEmail(request.getEmail());
+      });
+
+
+
         if(passwordValidation(request.getPassword())) {
           user.setPassword(passwordEncoder.encode(request.getPassword()));
         } else {

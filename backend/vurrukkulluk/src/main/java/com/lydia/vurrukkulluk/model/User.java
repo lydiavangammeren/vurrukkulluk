@@ -29,11 +29,12 @@ public class User implements UserDetails {
   @Size(min = 2, max = 32, message = "Name must be between 2 and 32 characters long")
   private String name;
   private String password;
+  private String OTP;
+  private Date OTPExpire;
+  @Column(unique=true)
   @Email
   @NotEmpty(message = "Email may not be empty")
   @NotNull
-  private String OTP;
-  private Date OTPExpire;
   private String email;
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "image_id",nullable = true)
