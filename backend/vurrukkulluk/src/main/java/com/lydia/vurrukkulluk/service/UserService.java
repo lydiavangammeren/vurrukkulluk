@@ -19,4 +19,6 @@ public interface UserService {
   public void deleteUser(User user);
 
   void setImageInUser(int id, Image image);
+
+  void setNewPassword(String email,String password);
 }

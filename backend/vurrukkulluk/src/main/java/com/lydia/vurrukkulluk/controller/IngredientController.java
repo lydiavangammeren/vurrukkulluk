@@ -7,7 +7,6 @@ import com.lydia.vurrukkulluk.model.Ingredient;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.service.IngredientService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
-import io.swagger.models.auth.In;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,12 +1,11 @@
 package com.lydia.vurrukkulluk.auth;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import com.lydia.vurrukkulluk.service.UserServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ValidationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -15,10 +14,10 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 @CrossOrigin
 public class AuthenticationController {
-
+  private final UserServiceImpl userService;
   private final AuthenticationService service;
-
-  @ApiOperation(value = "Register a new user", notes = "password should be between 8-32 and contain letter, digit and special character")
+  private final PasswordEncoder passwordEncoder;
+  @Operation(summary = "Register a new user", description = "password should be between 8-32 and contain letter, digit and special character")
   @PostMapping("/register")
   public ResponseEntity<?> register(
     @RequestBody RegisterRequest request
@@ -35,8 +34,6 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authent(
             @RequestBody AuthenticationRequest request
     ){
-        System.out.println(request.getEmail());
-        System.out.println(request.getPassword());
         return ResponseEntity.ok(service.authenticate(request));
     }
     @PostMapping("/OTP/request")
@@ -48,8 +45,11 @@ public class AuthenticationController {
     }
     @PostMapping("/OTP/authenticate")
     public ResponseEntity<AuthenticationResponse> otpAuthent(
-            @RequestBody AuthenticationRequest request
+            @RequestBody AuthenticationRequestOTP request
     ){
-        return ResponseEntity.ok(service.authenticateOTP(request));
+      AuthenticationResponse response = service.authenticateOTP(request);
+
+      userService.setNewPassword(request.getEmail(),passwordEncoder.encode(request.getNewPassword()));
+        return ResponseEntity.ok(response);
     }
 }
