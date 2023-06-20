@@ -5,13 +5,16 @@ const usePostData = () => {
   const [data, setData] = useState({status: 0, payLoad: undefined});
   const [isLoaded, setLoaded] = useState(false);
 
+  // const token = localStorage.getItem('user') === null ? '' : JSON.parse(localStorage.getItem('user')).token
+
     const postData = async (url, body) => {
       setLoaded(false)
       try{
         const response = await api.post(url,
           JSON.stringify(body),
           {
-            headers: {'Content-Type': 'application/json' }
+            headers: {'Content-Type': 'application/json' },
+            
           }
         );
 

@@ -38,7 +38,7 @@ const Register = () => {
         switch(data.status){
         case 200:
             console.log('Register success ' , data.payLoad.token)
-            localStorage.setItem('user', data.payLoad.token);
+            localStorage.setItem('user', JSON.stringify({token: data.payLoad.token, email: inputs.email}));
             break;
         case 403:
             console.log('Register incorrect')
