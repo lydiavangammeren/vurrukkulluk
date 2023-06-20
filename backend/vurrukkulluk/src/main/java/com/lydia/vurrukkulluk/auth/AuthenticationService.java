@@ -13,6 +13,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,7 +53,9 @@ public class AuthenticationService {
 
         user.setRole(Role.USER);
         repository.save(user);
-        var jwt = jwtService.generateToken(user);
+        Map<String,Object> userIdCLaim = new HashMap<>();
+        userIdCLaim.put("userId", user.getId());
+        var jwt = jwtService.generateToken(userIdCLaim,user);
         return new AuthenticationResponse(jwt);
     }
 
@@ -63,7 +68,9 @@ public class AuthenticationService {
         );
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
-        var jwt = jwtService.generateToken(user);
+        Map<String,Object> userIdCLaim = new HashMap<>();
+        userIdCLaim.put("userId", user.getId());
+        var jwt = jwtService.generateToken(userIdCLaim,user);
         return new AuthenticationResponse(jwt);
     }
 
@@ -109,7 +116,7 @@ public class AuthenticationService {
         return String.format("%1$" + length + "s", input).replace(' ', '0');
     }
 
-    public AuthenticationResponse authenticateOTP(AuthenticationRequest request){
+    public AuthenticationResponse authenticateOTP(AuthenticationRequestOTP request){
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         if (new Date(System.currentTimeMillis()).before(user.getOTPExpire())) {
@@ -123,7 +130,9 @@ public class AuthenticationService {
         user.setOTP(null);
         user.setOTPExpire(null);
         repository.save(user);
-        var jwt = jwtService.generateToken(user);
+        Map<String,Object> userIdCLaim = new HashMap<>();
+        userIdCLaim.put("userId", user.getId());
+        var jwt = jwtService.generateToken(userIdCLaim,user);
         return new AuthenticationResponse(jwt);
     }
 
