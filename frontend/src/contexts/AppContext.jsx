@@ -9,8 +9,9 @@ export function useAppContext() {
 export function ContextProvider({children, recipes, bannerImages}){
   const [detailImage, setDetailImage] = useState();
   const [searchValue, setSearchValue]= useState('');
-  const baseUrl = "/images/";
-  // const baseUrl = "http://localhost:8080/image/";
+  // const [user, setUser] = useState(null);
+  // const baseUrl = "/images/";
+  const baseUrl = "http://localhost:8080/image/";
 
   return (
     <AppContext.Provider value={{recipes, searchValue, setSearchValue, bannerImages, detailImage, setDetailImage, baseUrl}} >

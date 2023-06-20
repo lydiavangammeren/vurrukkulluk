@@ -1,0 +1,33 @@
+.add_preparation{
+  display: flex;
+  width: 42em;
+  justify-content: space-between;
+}
+.add_preparation textarea{
+  flex-basis: 28rem;
+}
+
+.step_number{
+  border-radius: 50%;
+  min-width: 6rem;
+  min-height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lighter-orange);
+}
+
+.add_step_button{
+  border-radius: 10px;
+  border: none;
+  background-color: var(--darker-red);
+  color: white;
+  font-family: var(--heading);
+  font-size: x-large;
+  width: 6rem;
+}
+
+.prepstep_list{
+  height: 26rem;
+  overflow: auto;
+}

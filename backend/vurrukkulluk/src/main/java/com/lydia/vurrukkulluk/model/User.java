@@ -12,7 +12,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -30,6 +32,8 @@ public class User implements UserDetails {
   @Email
   @NotEmpty(message = "Email may not be empty")
   @NotNull
+  private String OTP;
+  private Date OTPExpire;
   private String email;
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "image_id",nullable = true)

@@ -1,13 +1,14 @@
 .ingredients_results {
-  width: 100%;
+  width: 60rem;
   background-color: white;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 8px #ddd;
   /* border-radius: 10px; */
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   max-height: 300px;
   overflow-y: auto;
+  position: absolute;
 }
 .ingredients_results a {
   text-decoration: none;

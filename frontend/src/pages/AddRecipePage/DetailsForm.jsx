@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import { useDatabase } from '../../hooks';
 import { useAppContext } from '../../contexts';
-import './DetailsForm.css';
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
-// import SearchBar from '../../components/SearchBar/SearchBar';
-// import { SearchResultsList } from '../../components/SearchBar/SearchResultsList';
 import { SearchBar, SearchResultsList} from "./SearchCategories";
 
 const DetailsForm = () => {
@@ -12,18 +9,21 @@ const DetailsForm = () => {
   const [regions, regionsLoaded] = useDatabase('/kitchenregions');
   const [categories, categoriesLoaded] = useDatabase('/categories');
   const { recipes } = useAppContext();
-  const { data, handleChange, removeItem, removeCategory } = useAddRecipeContext();
+  const { data, handleChange, removeItem, removeCategory, selectedImage, setSelectedImage } = useAddRecipeContext();
 
   const [searchValue, setSearchValue] = useState('');
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  // const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
+    // setImage(file)
+
     const reader = new FileReader();
 
     reader.onload = () => {
       setSelectedImage(reader.result);
+      // setImage(reader.result);
     };
 
     if (file) {
@@ -80,7 +80,7 @@ const DetailsForm = () => {
             >
               {types.map(type => {
                 return (
-                  <option value={type.id}>{type.name}</option>
+                  <option value={type.id} key={type.id}>{type.name}</option>
                 )
               })}
             </select>
@@ -95,7 +95,7 @@ const DetailsForm = () => {
             >
               {regions.map(region => {
                 return (
-                  <option value={region.id}>{region.name}</option>
+                  <option value={region.id} key={region.id}>{region.name}</option>
                 )
               })}
             </select>
@@ -117,6 +117,7 @@ const DetailsForm = () => {
               accept='image/*'
               id='recipeImage' 
               name='recipeImage'
+              // value={image}
               onChange={handleImageUpload}
             />
             <div className='image_example'>
@@ -129,7 +130,8 @@ const DetailsForm = () => {
             <label htmlFor='categories'>Categorieën</label>
 
             <SearchBar searchValue={searchValue} setSearchValue={setSearchValue}/>
-            {searchResults && searchResults.length > 0 && <SearchResultsList results={searchResults} setSearchValue={setSearchValue}/>}
+            {searchResults && searchResults.length > 0 && 
+            <SearchResultsList results={searchResults} setSearchValue={setSearchValue}/>}
 
             <div className='category_list'>
               {data.categories.map((categoryId) => {
@@ -137,7 +139,7 @@ const DetailsForm = () => {
                 
                 return (
                   // <li>{findObjectNameById(categoryId)}</li>
-                  <div className='category_item'>
+                  <div className='category_item' key={categoryId}>
                     <span>{findObjectNameById(categoryId)}</span>
                     <button value={categoryId} name='categories' onClick={removeItem}>X</button>
                   </div>

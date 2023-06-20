@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useAppContext } from "../../../contexts";
 
 export const SearchResult = ({ result, setSearchValue }) => {
-  const { baseUrl } = useAppContext();
+  const { handleChange, baseUrl } = useAppContext();
   const { addItem } = useAddRecipeContext();
   const { id, name, unit, amount, calories, price, imageId} = result;
   const [quantity, setQuantity] = useState(1);
@@ -21,7 +21,7 @@ export const SearchResult = ({ result, setSearchValue }) => {
   // const decrement = () => {
   //   setQuantity(prev => prev - 1)
   // }
-  const handleChangeAmount = (e) => {
+  const handleChangeQuantity = (e) => {
     setQuantity(e.target.value)
   }
 
@@ -29,11 +29,13 @@ export const SearchResult = ({ result, setSearchValue }) => {
     const name = e.target.name
     const value = {
       articleId: e.target.value,
-      amount: quantity
+      quantity: quantity
     }
     addItem(name, value);
     setSearchValue('');
   }
+
+
 
   return (
       <div className="ingredient_result">
@@ -64,7 +66,7 @@ export const SearchResult = ({ result, setSearchValue }) => {
           {/* <button onClick={decrement}>-</button> */}
           <label>Hoeveelheid:</label>
           <div>
-            <input type="number" value={quantity} onChange={handleChangeAmount}/>
+            <input type="number" value={quantity} onChange={handleChangeQuantity}/>
             {unit}
           </div>
           {/* <button onClick={increment}>+</button> */}

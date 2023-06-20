@@ -1,6 +1,7 @@
 .addRecipe_form{
   max-width: 68rem;
   padding: 0 4rem;
+  /* box-shadow: 5px 10px 10px #888888; */
 }
 .addRecipe_form h1{
   font-family: var(--heading);

@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.service;
 
+import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.Recipe;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public interface RecipeService {
   void deleteRecipe(Recipe recipe);
   Recipe getRecipeById(int id);
 
+  void setImageInRecipe(int id, Recipe recipe,Image image);
 }

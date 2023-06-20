@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.service;
 
+import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.model.User;
 
@@ -16,4 +17,6 @@ public interface UserService {
   public void updateUser(User user);
   public void deleteById(int id);
   public void deleteUser(User user);
+
+  void setImageInUser(int id, Image image);
 }

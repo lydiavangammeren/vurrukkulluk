@@ -1,42 +1,11 @@
 import React, { useReducer, useState } from 'react'
-import FormInputs from './FormInputs';
-// import DetailsForm from "./DetailsForm";
-// import IngredientsForm from "./IngredientsForm";
-// import PreparationForm from "./PreparationForm";
-// import AddRecipePreparation from '../AddRecipeOLD/AddRecipePreperation';
-import { useDatabase } from '../../hooks';
-import {AddRecipeProvider} from '../../contexts/AddRecipeContext';
+import DetailsForm from "./DetailsForm"
+import IngredientsForm from "./IngredientsForm"
+import PreparationForm from "./PreparationForm"
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
-import "./AddRecipeForm.css";
 
-const ACTIONS = {
-
-}
-
-function reducer(state, action){
-  switch(action.type){
-    case '':
-      return;
-    default:
-      return state;
-  }
-}
-
-// handleChange : https://www.youtube.com/watch?v=FGM6FQmdX8I
 const AddRecipeForm = () => {
-  const [state, dispatch] = useReducer(reducer, {});
-  // const [articles, articlesLoaded] = useDatabase('articles');
-  // const [data, setData] = useState({
-  //   name:'',
-  //   description:'',
-  //   type: 0,
-  //   region: 0,
-  //   persons: 0,
-  //   categorys: [],
-  //   image: 0,
-  //   ingredients: [],
-  //   preparation: []
-  // });
+  
   const {
     page,
     setPage,
@@ -49,19 +18,6 @@ const AddRecipeForm = () => {
     nextHide,
     submitHide
   } = useAddRecipeContext();
-  
-  
-
-  // const handleChange = e => {
-  //   // const type = e.target.type;
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-
-  //   setData(prevData => ({
-  //     ...prevData, 
-  //     [name]: value
-  //   }))
-  // }
 
   const handlePrev = () => setPage(prev => prev - 1)
 
@@ -69,7 +25,14 @@ const AddRecipeForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log('Handle Submit')
     console.log(JSON.stringify(data))
+  }
+
+  const display = {
+    0: <DetailsForm />,
+    1: <IngredientsForm />,
+    2: <PreparationForm />
   }
 
   const renderContent = () => {
@@ -82,35 +45,23 @@ const AddRecipeForm = () => {
           
           <h2>{title[page]}</h2>
 
-          <FormInputs />
+          <div className="form_inputs">
+            {display[page]}
+          </div>
 
           <div className="button_bar">
-
             <div>
               <button type="submit" className={`formButton`} disabled={!canSubmit}>Submit</button>
             </div>
 
             <div className=''>
-              <button type="button" className={`formButton ${prevHide}`} onClick={handlePrev} disabled={disablePrev}>Prev</button>
-              <button type="button" className={`formButton ${nextHide}`} onClick={handleNext} disabled={disableNext}>Next</button>
+              <button type="button" className={`formButton ${prevHide}`} onClick={handlePrev} disabled={disablePrev}>Terug</button>
+              <button type="button" className={`formButton ${nextHide}`} onClick={handleNext} disabled={disableNext}>Volgende</button>
             </div>
-
           </div>
           
         </form>
         </div>
-
-
-        // <div>
-          
-        //   {/* <form onSubmit={handleSubmit}>
-        //     <DetailsForm data={data} handleChange={handleChange}/>
-        //     <IngredientsForm articles={articles} />
-        //     <PreparationForm />
-        //     <button>Voeg toe</button>
-        //   </form> */}
-        //   <FormInputs />
-        // </div>
       )
     // }
   }
