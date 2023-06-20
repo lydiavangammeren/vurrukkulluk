@@ -25,7 +25,7 @@ padding-left: 37%;
     height: 2em!important;
 }
 
-input[type=submit] {
+.registerbutton {
     color: var(--white);
   font-family: var(--heading);
   font-size: 30px;
