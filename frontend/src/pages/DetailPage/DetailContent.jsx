@@ -30,7 +30,8 @@ const DetailContent = () => {
         {ingredients && prepsteps && comments && 
           <TabWrapper ingredients={ingredients}
             prepsteps={prepsteps}
-            comments={comments}/>
+            comments={comments}
+            recipeId={details.id}/>
         }
       </div>
     </div>

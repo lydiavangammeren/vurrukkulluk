@@ -1,24 +1,24 @@
 import {useState} from 'react'
 import api from "../lib/recipeAPI";
 
-const usePostData = () => {
+const usePostImage = () => {
   const [data, setData] = useState({status: 0, payLoad: undefined});
   const [isLoaded, setLoaded] = useState(false);
 
   const token = localStorage.getItem('user') === null ? '' : 'Bearer ' + JSON.parse(localStorage.getItem('user')).token
 
   const headers = {
-    'Content-Type': 'application/json',
+    'Content-Type': 'multipart/form-data',
     'Authorization': token 
   }
 
-  const postData = async (url, body) => {
+  const postImage = async (url, image) => {
     setLoaded(false)
     console.log('Token : ' + token)
     
     try{
       const response = await api.post(url,
-        JSON.stringify(body),
+        image,
         {
           headers: headers
           // headers: {'Content-Type': 'application/json', Authorization: token }
@@ -43,7 +43,7 @@ const usePostData = () => {
     }
   }
 
-  return [data, isLoaded, postData];
+  return [data, isLoaded, postImage];
 }
 
-export default usePostData
+export default usePostImage

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import usePostData from '../../hooks/usePostData';
 import jwtDecode from 'jwt-decode';
@@ -12,6 +13,8 @@ const Register = () => {
     })
 
     const [data, isLoaded, postData] = usePostData();
+
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -30,11 +33,14 @@ const Register = () => {
         }
 
         console.log('Body: ', body)
-        postData('/auth/register', body);
+        postData('/auth/register', body)
+
+
     }
 
     useEffect(()=>{
         if(!isLoaded) return;
+        console.log('Register data status: ', data.status)
 
         switch(data.status){
         case 200:
@@ -46,6 +52,7 @@ const Register = () => {
             }
             console.log('Register success ' , user)
             localStorage.setItem('user', JSON.stringify(user));
+            navigate("/");
             break;
         case 403:
             console.log('Register incorrect')
