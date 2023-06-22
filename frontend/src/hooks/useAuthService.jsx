@@ -3,19 +3,21 @@ import jwt from "jwt-decode";
 
 // export const useAuthService = () => {
 export const login = async (username, password) => {
-    return api
-      .post("/auth/authenticate", {
-        email: username,
-        password: password
-      })
-      .then(response => {
-        if (response.data.token) {
-          const user = jwt(response.data.token)
-          localStorage.setItem("user", JSON.stringify(user));
-        }
+    // return api
+    //   .post("/auth/authenticate", {
+    //     email: username,
+    //     password: password
+    //   })
+    //   .then(response => {
+    //     if (response.data.token) {
+    //       const user = jwt(response.data.token)
+    //       localStorage.setItem("user", JSON.stringify(user));
+    //     }
 
-        return response.data;
-      });
+    //     return response.data;
+    //   });
+
+    
   }
 
 export const logout = () => {
@@ -30,9 +32,9 @@ export const register = async (username, email, password) => {
     });
   }
 
-export const getUserByEmail = async (email) => {
-    return api.get(`/user/email/${email}`)
-  }
+// export const getUserByEmail = async (email) => {
+//     return api.get(`/user/email/${email}`)
+//   }
 
 export const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem('user'));;

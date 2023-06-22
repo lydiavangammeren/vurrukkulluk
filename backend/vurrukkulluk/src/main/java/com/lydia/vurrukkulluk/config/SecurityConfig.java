@@ -40,6 +40,8 @@ public class SecurityConfig {
             "/image/{id}",
             "/preparations/**",
             "/kitchentypes",
+            "/kitchenregions",
+            "/categories",
             "/ingredients/**",
             "/favorites/**",
             "/comments/**",

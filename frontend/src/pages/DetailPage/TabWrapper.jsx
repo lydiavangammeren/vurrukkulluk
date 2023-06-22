@@ -6,7 +6,7 @@ import Ingredients from "./Ingredients";
 import Preparation from "./Preparation";
 import Comments from "./Comments";
 
-const TabWrapper = ({ingredients, prepsteps, comments}) => {
+const TabWrapper = ({ingredients, prepsteps, comments, recipeId}) => {
 
   return (
     <>
@@ -18,7 +18,7 @@ const TabWrapper = ({ingredients, prepsteps, comments}) => {
           <Preparation prepsteps={prepsteps} />
         </div>
         <div label="Opmerkingen">
-          <Comments comments={comments}/>
+          <Comments comments={comments} recipeId={recipeId}/>
         </div>
       </Tabs>
     </>

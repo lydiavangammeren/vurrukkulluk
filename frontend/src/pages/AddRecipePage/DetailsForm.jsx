@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDatabase } from '../../hooks';
-import { useAppContext } from '../../contexts';
+// import { useAppContext } from '../../contexts';
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
 import { SearchBar, SearchResultsList} from "./SearchCategories";
 
@@ -8,8 +8,8 @@ const DetailsForm = () => {
   const [types, typesLoaded ] = useDatabase('/kitchentypes');
   const [regions, regionsLoaded] = useDatabase('/kitchenregions');
   const [categories, categoriesLoaded] = useDatabase('/categories');
-  const { recipes } = useAppContext();
-  const { data, handleChange, removeItem, removeCategory, selectedImage, setSelectedImage } = useAddRecipeContext();
+  // const { recipes } = useAppContext();
+  const { data, handleChange, removeItem, selectedImage, setSelectedImage } = useAddRecipeContext();
 
   const [searchValue, setSearchValue] = useState('');
 
