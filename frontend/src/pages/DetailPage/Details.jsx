@@ -8,6 +8,7 @@ import {BsHeart} from 'react-icons/bs';
 import { useDatabase } from "../../hooks";
 import { useAppContext } from "../../contexts";
 import Category from "../../components/Category/Category";
+import usePostData from "../../hooks/usePostData";
 
 const Details = ({details}) => {
 
@@ -21,6 +22,8 @@ const Details = ({details}) => {
   const kitchenRegion = details?.kitchenRegion?.name ?? '';
   const kitchenType = details?.kitchenType?.name ?? '';
   const categories = details.categories;
+
+  const [data, isLoaded, postData] = usePostData()
 
   // const {title, description, image, kitchenRegion, kitchenType, persons, price, calories} = details;
   // const {setBannerImages} = useAppContext();
@@ -92,7 +95,10 @@ const Details = ({details}) => {
         </div>
         <div className="details_buttons">
           <button className="ListButton">Op Lijst</button>
-          <button className="FavouriteButton"><BsHeart size={30} color='#b31714' /></button>
+          <button
+          className="FavouriteButton"
+          onClick={() => {postData('/favorites', {userId: 1, recipeId: 1 })}}
+          ><BsHeart size={30} color='#b31714' /></button>
         </div>
       </div>
     </div>

@@ -33,6 +33,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/image")
+@CrossOrigin
 public class ImageController {
 
   @Autowired

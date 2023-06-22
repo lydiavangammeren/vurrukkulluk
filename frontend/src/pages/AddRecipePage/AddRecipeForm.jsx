@@ -29,9 +29,9 @@ const AddRecipeForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log('Handle Submit --> Add Recipe')
-    console.log(JSON.stringify(data))
+    console.log(JSON.stringify(selectedImage))
 
-    postImage('/image', selectedImage)
+    postImage('/image', {image: selectedImage})
   }
 
   const display = {

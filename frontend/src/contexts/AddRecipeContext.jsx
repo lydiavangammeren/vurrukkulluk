@@ -178,7 +178,8 @@ export const AddRecipeProvider = ({ children }) => {
       }));
     };
 
-    const canSubmit = [...Object.values(data)].every(Boolean) && page === Object.keys(title).length - 1
+    // const canSubmit = [...Object.values(data)].every(Boolean) && page === Object.keys(title).length - 1
+    const canSubmit = true;
 
     const disablePrev = page === 0
 
