@@ -4,10 +4,12 @@ import IngredientsForm from "./IngredientsForm"
 import PreparationForm from "./PreparationForm"
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
 import usePostImage from '../../hooks/usePostImage';
+import usePostData from '../../hooks/usePostData';
 
 const AddRecipeForm = () => {
   
-  const [image, isLoaded, postImage] = usePostImage();
+  const [image, imageLoaded, postImage] = usePostImage();
+  // const [recipe, recipeLoaded, postRecipe] = usePostData();
   const {
     page,
     setPage,
@@ -31,7 +33,7 @@ const AddRecipeForm = () => {
     console.log('Handle Submit --> Add Recipe')
     console.log(JSON.stringify(selectedImage))
 
-    postImage('/image', {image: selectedImage})
+    // postImage('/image', {image: selectedImage})
   }
 
   const display = {
