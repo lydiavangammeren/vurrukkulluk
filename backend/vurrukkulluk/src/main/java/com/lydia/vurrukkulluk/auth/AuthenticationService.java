@@ -55,7 +55,7 @@ public class AuthenticationService {
         } else {
           throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
             "password must be between 8-32 characters and must at least contain" +
-              " a letter, a digit and a special character");
+              " an uppercase and lowercase letter, a digit and a special character");
 
         }
 
@@ -84,13 +84,15 @@ public class AuthenticationService {
 
     private boolean passwordValidation(String password) {
       if (password.length() >= 8 && (password.length() < 33)) {
-        Pattern letter = Pattern.compile("[a-zA-z]");
+        Pattern uppercase = Pattern.compile("[A-Z]");
+        Pattern lowercase = Pattern.compile("[a-z]");
         Pattern digit = Pattern.compile("[0-9]");
         Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-        Matcher hasLetter = letter.matcher(password);
+        Matcher hasUppercase = uppercase.matcher(password);
+        Matcher hasLowercase = lowercase.matcher(password);
         Matcher hasDigit = digit.matcher(password);
         Matcher hasSpecial = special.matcher(password);
-        return hasLetter.find() && hasDigit.find() && hasSpecial.find();
+        return hasUppercase.find() && hasLowercase.find() && hasDigit.find() && hasSpecial.find();
 
       } else {
         return false;

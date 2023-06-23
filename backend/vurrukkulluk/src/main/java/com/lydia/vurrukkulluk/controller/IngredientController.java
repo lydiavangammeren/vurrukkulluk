@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ingredients")
+@CrossOrigin
 public class IngredientController {
 
     @Autowired
