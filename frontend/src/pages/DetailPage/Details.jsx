@@ -61,7 +61,7 @@ const Details = ({details}) => {
             <div className=".icon-align"><MdEuro size={18} color='#b31714'/><span className="setFont">{price}</span></div>
             <div className=".icon-align"><VscFlame size={18} color='#b31714'/><span className="setFont">{calories}</span></div>
           </div>
-          <div className="details_categories">
+          {/* <div className="details_categories">
             {categories.map((category, index) => {
               if(index < 4){
                 return (
@@ -69,7 +69,7 @@ const Details = ({details}) => {
                 )
               }
             })}
-          </div>
+          </div> */}
         </div>
 
         <div className="title_rating">
@@ -92,6 +92,13 @@ const Details = ({details}) => {
           <div className="details_desc_inner">
             <span>{description}</span>
           </div>
+        </div>
+        <div className="details_categories">
+          {categories.map((category, index) => {
+            return (
+              <Category name={category.name} key={index}/>
+            )
+          })}
         </div>
         <div className="details_buttons">
           <button className="ListButton">Op Lijst</button>
