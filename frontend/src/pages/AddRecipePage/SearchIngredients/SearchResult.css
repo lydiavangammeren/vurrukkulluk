@@ -1,4 +1,5 @@
 .ingredient_result {
+  height: 102px;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
@@ -6,8 +7,12 @@
   /* background-color: #efefef; */
 }
 .ingredient_result h3,h5{
+  font-size: 2rem;
   margin: 0;
-
+}
+.ingredient_result input{
+  width: 3.5rem;
+  margin-right: .3rem;
 }
 .result_image {
   width: 80px;
@@ -18,7 +23,10 @@
   height: 100%;
 }
 .result_content{
-  /* flex-grow: stretch; */
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .result_info{
   display: flex;
@@ -26,4 +34,13 @@
 
 .add_ingredient{
   width: 80px;
+  color: var(--white);
+  font-family: var(--heading);
+  font-size: 30px;
+  background-color: var(--darker-red);
+  border: none;
+  border-radius: 15px;
+}
+.add_ingredient:hover{
+  background-color: var(--lighter-red);
 }

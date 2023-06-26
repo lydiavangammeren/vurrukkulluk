@@ -26,10 +26,10 @@ const Ingredient = ({article, ingredient}) => {
 
           <div className="ingredient_item_quantity">
             {/* <div> */}
-              <label htmlFor='quantity'>Hoeveelheid:</label>
+              <label htmlFor='amount'>Hoeveelheid:</label>
               <input type='number'
-                value={ingredient.quantity}
-                name='quantity'
+                value={ingredient.amount}
+                name='amount'
                 id={article?.id}
                 onChange={updateQuantity}
               />

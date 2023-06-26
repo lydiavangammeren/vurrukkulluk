@@ -1,4 +1,4 @@
-import "./SearchResult.css";
+// import "./SearchResult.css";
 import useAddRecipeContext from "../../../hooks/useAddRecipeContext";
 import { useState, useEffect } from "react";
 import { useAppContext } from "../../../contexts";
@@ -9,7 +9,7 @@ export const SearchResult = ({ result, setSearchValue }) => {
   const { id, name, unit, amount, calories, price, imageId} = result;
   const [quantity, setQuantity] = useState(1);
 
-  const [] = useState();
+  // const [] = useState();
 
   useEffect(()=>{
     setQuantity(amount)
@@ -29,7 +29,7 @@ export const SearchResult = ({ result, setSearchValue }) => {
     const name = e.target.name
     const value = {
       articleId: e.target.value,
-      quantity: quantity
+      amount: quantity
     }
     addItem(name, value);
     setSearchValue('');
@@ -47,7 +47,7 @@ export const SearchResult = ({ result, setSearchValue }) => {
         </div>
         <div className="result_content">
           <h3 className="pretty greenFont">{name}</h3>
-          <div className="result_info">
+          {/* <div className="result_info">
             <div>
               <h5>Inhoud:</h5>
               <span>{`${amount} ${unit}`}</span>
@@ -60,16 +60,19 @@ export const SearchResult = ({ result, setSearchValue }) => {
               <h5>Prijs:</h5>
               <span>{price}</span>
             </div>
-          </div>
-        </div>
-        <div>
-          {/* <button onClick={decrement}>-</button> */}
-          <label>Hoeveelheid:</label>
+          </div> */}
           <div>
-            <input type="number" value={quantity} onChange={handleChangeQuantity}/>
+            <label>Hoeveelheid:</label>
+            <input 
+              type="number" 
+              value={quantity} 
+              onChange={handleChangeQuantity}
+              step={unit === "stuks" ? 1 : 25}
+              min={0}
+              />
             {unit}
+
           </div>
-          {/* <button onClick={increment}>+</button> */}
         </div>
         
         <button onClick={handleAdd} value={id} name="ingredients" className="add_ingredient">{`Add`}</button>

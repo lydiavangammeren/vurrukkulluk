@@ -38,7 +38,7 @@ const IngredientsForm = () => {
   return (
     <div>
       <SearchBar searchValue={searchValue} setSearchValue={setSearchValue}/>
-      {searchResults && searchResults.length > 0 && 
+      {searchResults && searchValue.length > 0 &&
       <SearchResultsList results={searchResults} setSearchValue={setSearchValue}/>}
 
       <div className='ingredient_list'>
@@ -50,6 +50,7 @@ const IngredientsForm = () => {
             <Ingredient 
               article={article}
               ingredient={ingredient}
+              key={ingredient.articleId}
             />
           )
         })}
