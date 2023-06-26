@@ -4,6 +4,7 @@ import api from "../lib/recipeAPI";
 const usePostImage = () => {
   const [data, setData] = useState({status: 0, payLoad: undefined});
   const [isLoaded, setLoaded] = useState(false);
+  // const url = '/images';
 
   const token = localStorage.getItem('user') === null ? '' : 'Bearer ' + JSON.parse(localStorage.getItem('user')).token
 

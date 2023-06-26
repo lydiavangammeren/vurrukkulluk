@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import useAddRecipeContext from '../../../hooks/useAddRecipeContext';
 import usePostData from '../../../hooks/usePostData';
 import usePostImage from '../../../hooks/usePostImage';
@@ -8,7 +8,7 @@ export const AddNewArticle = () => {
   const { data, addItem } = useAddRecipeContext();
   const [article, articleLoaded, postArticle ] = usePostData();
   const [image, imageLoaded, postImage] = usePostImage();
-  
+
   const [articleData, setArticleData] = useState({
     imageSrc: '',
     imageFile: null,
@@ -42,10 +42,29 @@ export const AddNewArticle = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(articleData);
+    
+
+    const body = {
+      name: articleData.name,
+      description: '',
+      price: 0,
+      calories: 0,
+      unit: articleData.unit,
+      amount: articleData.amount,
+      // available: false
+      imageId: 1,
+      // id: 0
+    }
+
+    console.log(body);
+    postArticle('/articles', body)
   }
 
-
+  useEffect(() => {
+    if(articleLoaded){
+      postImage('/images?type=article&id=' + article.payLoad, articleData.imageFile)
+    }
+  }, [articleLoaded])
 
   return (
     <div className="add_article">
@@ -58,9 +77,9 @@ export const AddNewArticle = () => {
             id='image'
             onChange={handleImageUpload}/>
           <div className='article_img_example'>
-            {data.imageSrc && 
+            {articleData.imageSrc && 
               <img 
-                src={data.imageSrc} 
+                src={articleData.imageSrc} 
                 alt='Uploaded'
               />
             }

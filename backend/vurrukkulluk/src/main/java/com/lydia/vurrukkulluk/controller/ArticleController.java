@@ -40,7 +40,8 @@ public class ArticleController {
     public String add(@RequestBody ArticleDto articleDto){
         Article article = reverseArticleFromDto(articleDto);
         articleService.saveArticle(article);
-        return "new ingredient added";
+//        return "new ingredient added";
+        return "" + article.getId();
     }
 
     @GetMapping()

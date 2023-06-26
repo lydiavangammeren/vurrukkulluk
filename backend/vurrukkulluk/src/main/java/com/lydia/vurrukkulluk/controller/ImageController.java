@@ -68,7 +68,7 @@ public class ImageController {
         recipeService.setImageInRecipe(id,recipe,image);
       }
       case "article" -> {
-        if (!securityUtil.isAdmin()) {return "not authorized";}
+//        if (!securityUtil.isAdmin()) {return "not authorized";}
         articleService.setImageInRecipe(id,image);
 
       }
