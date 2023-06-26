@@ -17,13 +17,13 @@ export const AddRecipeProvider = ({ children }) => {
       description: '',
       type: 0,
       region: 0,
-      persons: 0,
+      persons: 4,
       categories: [],
       ingredients: [],
       preparation: []
     });
 
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState({file: null, src: null});
 
     const handleChange = e => {
       const type = e.target.type
@@ -64,7 +64,7 @@ export const AddRecipeProvider = ({ children }) => {
       setData(prevData => {
         const updatedIngredients = prevData.ingredients.map(ingredient => {
           if (ingredient.articleId == ingredientId) {
-            return { ...ingredient, quantity: newQuantity };
+            return { ...ingredient, amount: newQuantity };
           }
           return ingredient;
         });
@@ -167,19 +167,24 @@ export const AddRecipeProvider = ({ children }) => {
       }))
     }
 
-    const changeItem  = (name, value) => {
+    // const changeItem  = (name, value) => {
     
-      const propertyName = propertyMap[name];
-      const updatedValue = [...data[propertyName], value];
+    //   const propertyName = propertyMap[name];
+    //   const updatedValue = [...data[propertyName], value];
     
-      setData((prevData) => ({
-        ...prevData,
-        [propertyName]: updatedValue,
-      }));
-    };
+    //   setData((prevData) => ({
+    //     ...prevData,
+    //     [propertyName]: updatedValue,
+    //   }));
+    // };
 
-    // const canSubmit = [...Object.values(data)].every(Boolean) && page === Object.keys(title).length - 1
-    const canSubmit = true;
+    // const canSubmit = [...Object.values(data)].every(Boolean)
+    // const canSubmit = true;
+    const canSubmit = () => {
+      if(![...Object.values(data)].every(Boolean)) return false;
+      if(data.ingredients.length > 1 || data.preparation.length < 1) return false;
+      return true;
+    }
 
     const disablePrev = page === 0
 
@@ -189,7 +194,7 @@ export const AddRecipeProvider = ({ children }) => {
 
     const nextHide = page === Object.keys(title).length - 1 && "remove_button"
 
-    const submitHide = page !== Object.keys(title).length - 1 && "remove_button"
+    const submitHide = !canSubmit() && "remove_button"
 
     return (
       <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, 

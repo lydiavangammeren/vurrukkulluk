@@ -10,9 +10,18 @@
   /* font-size: 60; */
 }
 
-.button_bar{
+.title_button_bar{
   display: flex;
   justify-content: space-between;
+}
+/* .next_prev{
+  width: 12rem;
+  display: flex;
+  justify-content: space-between;
+} */
+.button_bar{
+  display: flex;
+  justify-content: flex-end;
 }
 
 .formButton {
@@ -22,10 +31,11 @@
   background-color: var(--darker-red);
   border: none;
   border-radius: 15px;
+  padding: 0px 8px;
 }
-/* .formButton :disabled{
-  background-color: grey;
-} */
+.formButton:hover{
+  background-color: var(--lighter-red);
+}
 
 .remove_button{
   display: none;

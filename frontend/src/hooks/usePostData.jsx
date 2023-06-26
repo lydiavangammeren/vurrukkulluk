@@ -15,6 +15,8 @@ const usePostData = () => {
   const postData = async (url, body) => {
     setLoaded(false)
     console.log('Token : ' + token)
+
+    console.log('Body: ' , JSON.stringify(body))
     
     try{
       const response = await api.post(url,

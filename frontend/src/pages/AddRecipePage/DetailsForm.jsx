@@ -22,8 +22,11 @@ const DetailsForm = () => {
     const reader = new FileReader();
 
     reader.onload = () => {
-      setSelectedImage(reader.result);
-      // setImage(reader.result);
+      console.log('Image: ', reader.result)
+      
+      // setSelectedImage(reader.result);
+      setSelectedImage({file: file, src: reader.result});
+      
     };
 
     if (file) {
@@ -78,6 +81,7 @@ const DetailsForm = () => {
               value={(data.type)}
               onChange={handleChange}
             >
+              <option value={0}>Kies een type</option>
               {types.map(type => {
                 return (
                   <option value={type.id} key={type.id}>{type.name}</option>
@@ -93,6 +97,7 @@ const DetailsForm = () => {
               value={data.region}
               onChange={handleChange}
             >
+              <option value={0}>Kies een regio</option>
               {regions.map(region => {
                 return (
                   <option value={region.id} key={region.id}>{region.name}</option>
@@ -107,7 +112,8 @@ const DetailsForm = () => {
               id='persons'
               name='persons'
               value={data.persons}
-              onChange={handleChange} 
+              onChange={handleChange}
+              
             />
           </div>
           <div className='details_grid_image grid_item'>
@@ -122,7 +128,7 @@ const DetailsForm = () => {
             />
             <div className='image_example'>
               {selectedImage && 
-                <img src={selectedImage} alt='Uploaded'/>
+                <img src={selectedImage.src} alt='Uploaded'/>
               }
             </div>
           </div>
