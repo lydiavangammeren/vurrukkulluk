@@ -20,5 +20,5 @@ public class RecipeCreateDto {
     private List<Integer> categoryIds;
     private List<IngredientInRecipeDto> ingredients;
     private List<PreparationInRecipeDto> preparations;
-    //private int id = 0;
+    private int id = 0; // Deze stond uit, maar moest aan staan om te kunnen posten - 25-06-2023
 }

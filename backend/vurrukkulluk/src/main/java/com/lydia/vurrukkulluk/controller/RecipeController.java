@@ -92,7 +92,8 @@ public class RecipeController {
       kitchenCategoriesLinkService.saveKCLink(link);
     });
 
-    return "New recipe is added with id" ;
+//    return "New recipe is added with id " + recipe.getId() ;
+    return "" + recipe.getId();
   }
 
   @GetMapping()
