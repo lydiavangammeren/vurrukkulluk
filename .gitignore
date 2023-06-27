@@ -27,26 +27,26 @@
 /atomic_frontend/yarn-error.log*
 
 # dependencies
-/frontend/node_modules/*
-/frontend/.pnp
-/frontend/.pnp.js
+/backend/vurrukkulluk/src/main/frontend/node_modules/*
+/backend/vurrukkulluk/src/main/frontend/.pnp
+/backend/vurrukkulluk/src/main/frontend/.pnp.js
 
 # testing
-/frontend/coverage
+/backend/vurrukkulluk/src/main/frontend/coverage
 
 # production
-/frontend/build
+/backend/vurrukkulluk/src/main/frontend/build/
 
 # misc
-/frontend/.DS_Store
-/frontend/.env.local
-/frontend/.env.development.local
-/frontend/.env.test.local
-/frontend/.env.production.local
+/backend/vurrukkulluk/src/main/frontend/.DS_Store
+/backend/vurrukkulluk/src/main/frontend/.env.local
+/backend/vurrukkulluk/src/main/frontend/.env.development.local
+/backend/vurrukkulluk/src/main/frontend/.env.test.local
+/backend/vurrukkulluk/src/main/frontend/.env.production.local
 
-/frontend/npm-debug.log*
-/frontend/yarn-debug.log*
-/frontend/yarn-error.log*
+/backend/vurrukkulluk/src/main/frontend/npm-debug.log*
+/backend/vurrukkulluk/src/main/frontend/yarn-debug.log*
+/backend/vurrukkulluk/src/main/frontend/yarn-error.log*
 
 /backend/HELP.md
 /backend/target/
@@ -81,3 +81,5 @@
 
 ### VS Code ###
 .vscode/
+
+/backend/vurrukkulluk/node/

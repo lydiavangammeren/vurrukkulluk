@@ -34,24 +34,29 @@ public class SecurityConfig {
 
     };
     private static final String[] AUTH_WHITELIST_GET = {
-            "/recipes/**",
-            "/users/**",
-            "/ratings/**",
-            "/image/{id}",
-            "/preparations/**",
-            "/kitchentypes",
-            "/kitchenregions",
-            "/categories",
-            "/ingredients/**",
-            "/favorites/**",
-            "/comments/**",
-            "/calendar",
-            "/articles/**"
+           "/",
+            "/static/**",
+            "/images/**",
+            "/index.html",
+            "/manifest.json",
+            "api/recipes/**",
+            "api/users/**",
+            "api/ratings/**",
+            "api/image/{id}",
+            "api/preparations/**",
+            "api/kitchentypes",
+            "api/kitchenregions",
+            "api/categories",
+            "api/ingredients/**",
+            "api/favorites/**",
+            "api/comments/**",
+            "api/calendar",
+            "api/articles/**"
 
 
     };
     private static final String[] AUTH_WHITELIST_POST = {
-            "/testdata"
+            "api/testdata"
     };
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -64,7 +69,7 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers(HttpMethod.POST,AUTH_WHITELIST_POST)
                 .permitAll()
-                .requestMatchers("/auth/**")
+                .requestMatchers("/api/auth/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/kitchenregions")
+@RequestMapping("api/kitchenregions")
 @CrossOrigin
 public class KitchenRegionController {
   @Autowired

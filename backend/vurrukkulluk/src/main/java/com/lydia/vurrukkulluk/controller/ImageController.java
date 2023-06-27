@@ -32,7 +32,7 @@ import java.util.Objects;
 
 
 @RestController
-@RequestMapping("/image")
+@RequestMapping("api/image")
 @CrossOrigin
 public class ImageController {
 

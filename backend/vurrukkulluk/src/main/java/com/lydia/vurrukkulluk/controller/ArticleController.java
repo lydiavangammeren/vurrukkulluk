@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/articles")
+@RequestMapping("api/articles")
 @CrossOrigin
 public class ArticleController {
 

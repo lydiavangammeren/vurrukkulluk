@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/ratings")
+@RequestMapping("api/ratings")
 @CrossOrigin
 public class RatingController {
 

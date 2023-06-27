@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/ingredients")
+@RequestMapping("api/ingredients")
 @CrossOrigin
 public class IngredientController {
 

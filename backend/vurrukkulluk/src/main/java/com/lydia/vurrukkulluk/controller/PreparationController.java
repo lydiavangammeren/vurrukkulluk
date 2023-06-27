@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/preparations")
+@RequestMapping("api/preparations")
 @CrossOrigin
 public class PreparationController {
 

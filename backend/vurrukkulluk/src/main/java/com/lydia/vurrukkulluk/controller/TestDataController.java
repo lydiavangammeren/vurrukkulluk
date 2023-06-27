@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/testdata")
+@RequestMapping("api/testdata")
 @CrossOrigin
 @RequiredArgsConstructor
 public class TestDataController {

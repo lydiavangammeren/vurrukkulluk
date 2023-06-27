@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/calendar")
+@RequestMapping("api/calendar")
 @CrossOrigin
 public class CalendarItemController {
 

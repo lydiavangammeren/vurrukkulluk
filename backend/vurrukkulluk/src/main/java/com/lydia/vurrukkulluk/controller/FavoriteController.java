@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/favorites")
+@RequestMapping("api/favorites")
 @CrossOrigin
 public class FavoriteController {
   @Autowired
