@@ -93,7 +93,7 @@ public class RecipeController {
     });
 
 //    return "New recipe is added with id " + recipe.getId() ;
-    return "" + recipe.getId();
+    return String.valueOf(recipe.getId());
   }
 
   @GetMapping()

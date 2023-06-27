@@ -20,7 +20,8 @@ export const AddRecipeProvider = ({ children }) => {
       persons: 4,
       categories: [],
       ingredients: [],
-      preparation: []
+      preparation: [],
+      instructions: ''
     });
 
     const [selectedImage, setSelectedImage] = useState({file: null, src: null});
@@ -28,6 +29,7 @@ export const AddRecipeProvider = ({ children }) => {
     const handleChange = e => {
       const type = e.target.type
       const name = e.target.name
+      console.log('type: ' + type)
 
       const value = type === "checkbox"
         ? e.target.checked

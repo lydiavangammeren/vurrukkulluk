@@ -15,6 +15,7 @@ const SearchBar = ({searchValue, setSearchValue}) => {
         placeholder="Zoeken"
         value={searchValue}
         onChange={(e) => handleChange(e.target.value)}
+        autoFocus
       />
     </div>
   );
