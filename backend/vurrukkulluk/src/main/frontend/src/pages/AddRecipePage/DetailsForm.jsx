@@ -3,6 +3,8 @@ import { useDatabase } from '../../hooks';
 // import { useAppContext } from '../../contexts';
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
 import { SearchBar, SearchResultsList} from "./SearchCategories";
+// import useImageResizer from '../../hooks/useImageResizer';
+
 
 const DetailsForm = () => {
   const [types, typesLoaded ] = useDatabase('/kitchentypes');
@@ -10,6 +12,7 @@ const DetailsForm = () => {
   const [categories, categoriesLoaded] = useDatabase('/categories');
   // const { recipes } = useAppContext();
   const { data, handleChange, removeItem, selectedImage, setSelectedImage } = useAddRecipeContext();
+  // const [image, imageResized, resize] = useImageResizer()
 
   const [searchValue, setSearchValue] = useState('');
 
