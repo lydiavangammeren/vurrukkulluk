@@ -33,9 +33,11 @@ export async function canvasPreview(
   canvas.width = Math.floor(crop.width * scaleX * pixelRatio)
   canvas.height = Math.floor(crop.height * scaleY * pixelRatio)
 
-  console.log('canvaswidth: ', canvas.width)
   // canvas.width = 1680;
   // canvas.height = 630;
+
+  console.log('canvaswidth: ', canvas.width)
+  console.log('canvasheight: ', canvas.height)
 
   // ctx.scale(pixelRatio, pixelRatio)
   // ctx.imageSmoothingQuality = 'high'
@@ -47,11 +49,11 @@ export async function canvasPreview(
 
   const rotateRads = rotate * TO_RADIANS
 
-  // const centerX = image.naturalWidth / 2
-  // const centerY = image.naturalHeight / 2
+  const centerX = image.naturalWidth / 2
+  const centerY = image.naturalHeight / 2
 
-  const centerX = image.height / 2
-  const centerY = image.width / 2
+  // const centerX = image.height / 2
+  // const centerY = image.width / 2
 
   // const resizeX = (image.naturalHeight/image.naturalWidth) * 1680;
 
@@ -87,6 +89,8 @@ export async function canvasPreview(
     0,
     image.naturalWidth,
     image.naturalHeight,
+    // 1680,
+    // 630
   )
 
   console.log('context', ctx)

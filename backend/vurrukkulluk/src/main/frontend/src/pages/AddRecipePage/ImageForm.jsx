@@ -1,9 +1,7 @@
-import React, { useRef, useState } from 'react';
-import "react-image-crop/dist/ReactCrop.css";
-import ImageCrop from './ImageCrop/ImageCrop';
+import React from 'react'
+import ImageCrop from './ImageCrop/ImageCrop'
 
 const ImageForm = () => {
-
 
   return (
     <div className='ImageForm'>

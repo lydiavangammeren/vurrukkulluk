@@ -6,8 +6,9 @@ export const AddRecipeProvider = ({ children }) => {
 
     const title = {
       0: 'Details',
-      1: 'Ingredients',
-      2: 'Preparation'
+      1: 'Image Selection',
+      2: 'Ingredients',
+      3: 'Preparation'
     }
 
     const [page, setPage] = useState(0)
@@ -190,7 +191,7 @@ export const AddRecipeProvider = ({ children }) => {
 
     const disablePrev = page === 0
 
-    const disableNext = page === 2
+    const disableNext = page === 3
 
     const prevHide = page === 0 && "remove_button"
 

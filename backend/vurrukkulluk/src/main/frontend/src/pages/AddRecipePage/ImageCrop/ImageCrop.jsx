@@ -1,16 +1,15 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import ReactCrop, {
   centerCrop,
-  makeAspectCrop,
-  Crop,
-  PixelCrop,
+  makeAspectCrop
 } from 'react-image-crop'
 import { canvasPreview } from './canvasPreview'
 import { useDebounceEffect } from './useDebounceEffect'
 
 import 'react-image-crop/dist/ReactCrop.css'
 import './ImageCrop.css';
+import useImageResizer from '../../../hooks/useImageResizer'
 
 // This is to demonstate how to make and center a % aspect crop
 // which is a bit trickier so we use some helper functions.
@@ -46,6 +45,8 @@ const ImageCrop = () => {
   const [rotate, setRotate] = useState(0)
   const [aspect, setAspect] = useState(8 / 3)
 
+  const [resizedImage, isResized, resize, urlToFile] = useImageResizer()
+
   function onSelectFile(e) {
     if (e.target.files && e.target.files.length > 0) {
       setCrop(undefined) // Makes crop preview update between images.
@@ -65,9 +66,14 @@ const ImageCrop = () => {
   }
 
   function onDownloadCropClick() {
+    // console.log(previewCanvasRef.current.canvas.toDataURL())
+
     if (!previewCanvasRef.current) {
       throw new Error('Crop canvas does not exist')
     }
+    console.log('current: ', previewCanvasRef.current)
+    // const imageUrl = previewCanvasRef.current.toDataUrl('image/jpeg', 98);
+    // console.log('download: ', imageUrl)
 
     previewCanvasRef.current.toBlob((blob) => {
       if (!blob) {
@@ -77,15 +83,25 @@ const ImageCrop = () => {
         URL.revokeObjectURL(blobUrlRef.current)
       }
       blobUrlRef.current = URL.createObjectURL(blob)
-      const canvas = blobUrlRef.current;
+      const canvas = previewCanvasRef.current.toDataURL('image/jpeg', 90)
 
-      console.log('canvas: ', canvas.current)
+      console.log('canvas: ', canvas)
+
+      resize(canvas)
+      // urlToFile(canvas);
 
 
-      // hiddenAnchorRef.current.href = blobUrlRef.current
-      // hiddenAnchorRef.current.click()
+
+    //   hiddenAnchorRef.current.href = blobUrlRef.current
+    //   hiddenAnchorRef.current.click()
     })
   }
+
+  useEffect(() => {
+    if(isResized){
+      console.log('resized: ', resizedImage)
+    }
+  }, [isResized, resizedImage])
 
   useDebounceEffect(
     async () => {
@@ -106,21 +122,12 @@ const ImageCrop = () => {
       }
     },
     100,
-    [completedCrop, scale, rotate],
+    [completedCrop, scale, rotate]
   )
 
-  // function handleToggleAspectClick() {
-  //   if (aspect) {
-  //     setAspect(undefined)
-  //   } else if (imgRef.current) {
-  //     const { width, height } = imgRef.current
-  //     setAspect(8 / 3)
-  //     setCrop(centerAspectCrop(width, height, 8 / 3))
-  //   }
-  // }
 
   return (
-    <div className="ImageCrop">
+    <div className="ImageDemo">
       <div className="Crop-Controls">
         <input type="file" accept="image/*" onChange={onSelectFile} />
         <div>
@@ -146,11 +153,6 @@ const ImageCrop = () => {
             }
           />
         </div>
-        {/* <div>
-          <button onClick={handleToggleAspectClick}>
-            Toggle aspect {aspect ? 'off' : 'on'}
-          </button>
-        </div> */}
       </div>
       {!!imgSrc && (
         <ReactCrop
@@ -177,8 +179,10 @@ const ImageCrop = () => {
               style={{
                 border: '1px solid black',
                 objectFit: 'contain',
-                width: completedCrop.width,
-                height: completedCrop.height,
+                // width: completedCrop.width,
+                // height: completedCrop.height,
+                width: 640,
+                height: 240
               }}
             />
           </div>
@@ -196,6 +200,8 @@ const ImageCrop = () => {
               Hidden download
             </a>
           </div>
+          {}
+
         </>
       )}
     </div>

@@ -7,31 +7,33 @@ const useImageResizer = () => {
   const [data, setData] = useState(null);
   const [isResized, setResized] = useState(false);
 
-  // const resizeFile = (file) =>
-  //   new Promise((resolve) => {
-  //     Resizer.imageFileResizer(
-  //       file,
-  //       1680, // max width
-  //       640, // max height
-  //       "JPEG",
-  //       90,
-  //       0,
-  //       (uri) => {
-  //         resolve(uri);
-  //       },
-  //       "base64"
-  //     );
-  // });
+  const resizeFile = (file) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        1680, // max width
+        640, // max height
+        "JPEG",
+        90,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "base64"
+      );
+  });
 
-  // const resize = async (file) => {
-  //   try{
-  //     const image = await resizeFile(file);
-  //     setData(image);
-  //     setResized(true);
-  //   } catch(err){
-  //     console.log(err);
-  //   }
-  // }
+  const resize = async (dataUrl) => {
+    const file = urlToFile(dataUrl)
+    try{
+      const image = await resizeFile(file);
+      setData(urlToFile(image));
+      setResized(true);
+      // console.log('image resized: ', data)
+    } catch(err){
+      console.log(err);
+    }
+  }
 
   const urlToFile = (url) => {
     const arr = url.split(",")
@@ -47,13 +49,18 @@ const useImageResizer = () => {
       dataArr[n] = dataStr.charCodeAt(n)
     }
 
-    const file = new File([dataArr], dataStr.substring(20, 25)+'.jpg', {type: mime})
+    const file = new File([dataArr], 'newImage.jpg', {type: mime})
 
     console.log(file);
+    // setData(file);
+    // setResized(true);
+    // resize(file)
+
+    return file;
 
   }
 
-  return [data, isResized, urlToFile]
+  return [data, isResized, resize, urlToFile]
 }
 
 export default useImageResizer

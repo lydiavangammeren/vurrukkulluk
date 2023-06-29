@@ -16,6 +16,11 @@ const DetailsForm = () => {
 
   const [searchValue, setSearchValue] = useState('');
 
+  const modal = document.querySelector("[data-modal]")
+  // const closeButton = document.querySelector("[data-close-modal]")
+
+  // closeButton.addEventListener("click", () => {modal.close()})
+
   // const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageUpload = (event) => {
@@ -28,6 +33,7 @@ const DetailsForm = () => {
       console.log('Image: ', reader.result)
       
       // setSelectedImage(reader.result);
+      modal.showModal();
       setSelectedImage({file: file, src: reader.result});
       
     };
@@ -166,6 +172,11 @@ const DetailsForm = () => {
               onChange={handleChange}
             />
           </div>
+          {/* Modal om te image te croppen: */}
+          <dialog data-modal>
+            <img src={selectedImage.src} alt='alt'/>
+            <button onClick={() =>{modal.close()}} >Sluiten</button>
+          </dialog>
         </div>
       )
     }

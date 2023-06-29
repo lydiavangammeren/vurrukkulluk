@@ -2,19 +2,14 @@ import React, { useState, useRef, useEffect } from 'react'
 
 import ReactCrop, {
   centerCrop,
-  makeAspectCrop,
-  Crop,
-  PixelCrop,
+  makeAspectCrop
 } from 'react-image-crop'
 import { canvasPreview } from './canvasPreview'
 import { useDebounceEffect } from './useDebounceEffect'
 
 import 'react-image-crop/dist/ReactCrop.css'
-import './CropDemo.css';
-import useImageResizer from '../../hooks/useImageResizer'
-import usePostImage from "../../hooks/usePostImage"
-
-
+import './ImageCrop.css';
+import useImageResizer from '../../../hooks/useImageResizer'
 
 // This is to demonstate how to make and center a % aspect crop
 // which is a bit trickier so we use some helper functions.
@@ -38,7 +33,15 @@ function centerAspectCrop(
   )
 }
 
-const CropDemo = () => {
+
+
+const ImageCrop = ({
+  src,
+  preview,
+  max_target_width,
+  min_target_width,
+  setImage
+}) => {
   const [imgSrc, setImgSrc] = useState('')
   const previewCanvasRef = useRef(null)
   const imgRef = useRef(null)
@@ -50,9 +53,7 @@ const CropDemo = () => {
   const [rotate, setRotate] = useState(0)
   const [aspect, setAspect] = useState(8 / 3)
 
-  const [bestand, geladen, resize] = useImageResizer()
-
-  const [pImage, pImageLoaded, postImage] = usePostImage();
+  const [resizedImage, isResized, resize, urlToFile] = useImageResizer()
 
   function onSelectFile(e) {
     if (e.target.files && e.target.files.length > 0) {
@@ -105,11 +106,10 @@ const CropDemo = () => {
   }
 
   useEffect(() => {
-    if(geladen){
-      console.log('resized: ', bestand)
-      postImage('/image?type=recipe&id=2', {image: bestand})
+    if(isResized){
+      console.log('resized: ', resizedImage)
     }
-  }, [geladen, bestand])
+  }, [isResized, resizedImage])
 
   useDebounceEffect(
     async () => {
@@ -133,15 +133,6 @@ const CropDemo = () => {
     [completedCrop, scale, rotate]
   )
 
-  // function handleToggleAspectClick() {
-  //   if (aspect) {
-  //     setAspect(undefined)
-  //   } else if (imgRef.current) {
-  //     const { width, height } = imgRef.current
-  //     setAspect(8 / 3)
-  //     setCrop(centerAspectCrop(width, height, 8 / 3))
-  //   }
-  // }
 
   return (
     <div className="ImageDemo">
@@ -170,11 +161,6 @@ const CropDemo = () => {
             }
           />
         </div>
-        {/* <div>
-          <button onClick={handleToggleAspectClick}>
-            Toggle aspect {aspect ? 'off' : 'on'}
-          </button>
-        </div> */}
       </div>
       {!!imgSrc && (
         <ReactCrop
@@ -200,34 +186,21 @@ const CropDemo = () => {
               ref={previewCanvasRef}
               style={{
                 border: '1px solid black',
-                objectFit: 'cover',
+                objectFit: 'contain',
                 // width: completedCrop.width,
                 // height: completedCrop.height,
-                width: 320,
-                height: 240,
+                width: 320, // aspect ratio for detailspage
+                height: 240
               }}
             />
           </div>
           <div>
-            <button onClick={onDownloadCropClick}>Download Crop</button>
-            <a
-              ref={hiddenAnchorRef}
-              download
-              style={{
-                position: 'absolute',
-                top: '-200vh',
-                visibility: 'hidden',
-              }}
-            >
-              Hidden download
-            </a>
+            <button onClick={onDownloadCropClick}>Klaar</button>
           </div>
-          {}
-
         </>
       )}
     </div>
   )
 }
 
-export default CropDemo
+export default ImageCrop
