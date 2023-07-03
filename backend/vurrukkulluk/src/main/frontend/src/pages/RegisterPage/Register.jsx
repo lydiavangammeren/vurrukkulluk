@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import usePostData from '../../hooks/usePostData';
 import jwtDecode from 'jwt-decode';
+import {BsCheckSquare, BsXSquare} from "react-icons/bs";
+
+const USER_REGEX = /^[A-z][A-z0-9-_]{1,23}$/;
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,32}$/;
 
 const Register = () => {
     const [inputs, setInputs] = useState({
@@ -11,6 +16,11 @@ const Register = () => {
         firstpassword: '',
         secondpassword: ''
     })
+
+    const [validName, setValidName] = useState(false);
+    const [validEmail, setValidEmail] = useState(false);
+    const [validPwd, setValidPwd] = useState(false);
+    const [validMatch, setValidMatch] = useState(false);
 
     const [data, isLoaded, postData] = usePostData();
 
@@ -25,6 +35,8 @@ const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         // console.log(inputs);
+        const v1 = "";
+
 
         const body = {
             name: inputs.name,
@@ -64,6 +76,22 @@ const Register = () => {
 
     },[data, isLoaded])
 
+    useEffect(() => {
+        const check = USER_REGEX.test(inputs.name);
+        setValidName(check);
+    }, [inputs.name])
+
+    useEffect(() => {
+        const check = EMAIL_REGEX.test(inputs.email);
+        setValidEmail(check);
+    }, [inputs.email])
+
+    useEffect(() => {
+        setValidPwd(PWD_REGEX.test(inputs.firstpassword));
+        setValidMatch(inputs.firstpassword === inputs.secondpassword);
+    }, [inputs.firstpassword, inputs.secondpassword])
+
+    const canSubmit = validName && validEmail && validPwd && validMatch;
 
     return(
         <div className='registercontainer'>
@@ -72,19 +100,28 @@ const Register = () => {
             <div className='registerformcontainer'>
                 <div className='inputs'>
                     <div className='username'>
-                        <label className='registerlabels'>Vul hier uw naam in:</label>
-                            <br/>
-                            <input
-                                className='registerfields'
-                                type="text"
-                                name="name"
-                                value={inputs.name}
-                                onChange={handleChange}
-                            />
+                        <label className='registerlabels'>
+                            Vul hier uw naam in:  
+                            <BsCheckSquare color='green' className={validName? "valid" : "hide"}/>
+                            <BsXSquare color='red' className={validName || !inputs.name? "hide" : "invalid"}/>
+                        </label>
+                        <br/>
+                        <input
+                            className='registerfields'
+                            type="text"
+                            name="name"
+                            value={inputs.name}
+                            onChange={handleChange}
+                            autoFocus
+                        />
                     </div>
                 <br/>
                     <div className='email'>
-                        <label className='registerlabels'>Vul hier uw e-mailadres in:</label>
+                        <label className='registerlabels'>
+                            Vul hier uw e-mailadres in:
+                            <BsCheckSquare color='green' className={validEmail? "valid" : "hide"}/>
+                            <BsXSquare color='red' className={validEmail || !inputs.email? "hide" : "invalid"}/>
+                        </label>
                             <br/>
                             <input
                                 className='registerfields'
@@ -96,7 +133,11 @@ const Register = () => {
                     </div>
                 <br/>
                     <div className='password'>
-                        <label className='registerlabels'>Vul hier uw wachtwoord in:</label>
+                        <label className='registerlabels'>
+                            Vul hier uw wachtwoord in:
+                            <BsCheckSquare color='green' className={validPwd? "valid" : "hide"}/>
+                            <BsXSquare color='red' className={validPwd || !inputs.firstpassword? "hide" : "invalid"}/>
+                        </label>
                             <br/>
                             <input
                                 className='registerfields'
@@ -108,7 +149,11 @@ const Register = () => {
                     </div>
                 <br />
                     <div className='secondpassword'>
-                        <label className='registerlabels'>Herhaal uw wachtwoord:</label>
+                        <label className='registerlabels'>
+                            Herhaal uw wachtwoord:
+                            <BsCheckSquare color='green' className={validMatch && inputs.secondpassword? "valid" : "hide"}/>
+                            <BsXSquare color='red' className={validMatch || !inputs.secondpassword? "hide" : "invalid"}/>
+                        </label>
                             <br />
                             <input
                                 className='registerfields'
@@ -122,7 +167,7 @@ const Register = () => {
                 <br/><br/>
 
                 </div>
-                <button type="submit" className='registerbutton'>Registreren</button>
+                <button type="submit" className='registerbutton' disabled={!canSubmit}>Registreren</button>
             </form>
         </div>
     )

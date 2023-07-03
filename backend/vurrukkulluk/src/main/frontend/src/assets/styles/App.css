@@ -95,3 +95,6 @@ section{
   height: 80rem;
 }
 
+.hide{
+  display: none;
+}

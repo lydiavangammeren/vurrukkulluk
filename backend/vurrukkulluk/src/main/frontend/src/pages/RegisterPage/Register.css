@@ -12,21 +12,21 @@
 }
 
 .registerformcontainer {
-padding-right: 37%;
-padding-left: 37%;
+  padding-right: 37%;
+  padding-left: 37%;
 }
 
 .registerheader {
-    text-align: center!important;
+  text-align: center!important;
 }
 
 .registerfields {
-    width: 95%!important;
-    height: 2em!important;
+  width: 95%!important;
+  height: 2em!important;
 }
 
 .registerbutton {
-    color: var(--white);
+  color: var(--white);
   font-family: var(--heading);
   font-size: 30px;
   background-color: var(--darker-red);
@@ -34,11 +34,21 @@ padding-left: 37%;
   border-radius: 25px;
   width: 5em;
 }
+.registerbutton:disabled{
+  background-color: #888888;
+}
 
 .registerlabels {
     float: left;
     padding-left: 2%;
 }
 
+.valid {
+  /* color: limegreen; */
+  margin-left: 0.25rem;
+}
 
-
+.invalid {
+  /* color: red; */
+  margin-left: 0.25rem;
+}
