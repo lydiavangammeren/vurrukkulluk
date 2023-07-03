@@ -19,7 +19,7 @@ const useImageResizer = () => {
         (uri) => {
           resolve(uri);
         },
-        "base64"
+        "file"
       );
   });
 
@@ -27,9 +27,10 @@ const useImageResizer = () => {
     const file = urlToFile(dataUrl)
     try{
       const image = await resizeFile(file);
-      setData(urlToFile(image));
+      // setData(urlToFile(image));
+      setData(image)
       setResized(true);
-      // console.log('image resized: ', data)
+      console.log('image resized: ', data)
     } catch(err){
       console.log(err);
     }

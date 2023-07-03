@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useDatabase } from '../../hooks';
 // import { useAppContext } from '../../contexts';
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
 import { SearchBar, SearchResultsList} from "./SearchCategories";
+import ImageCrop from '../../components/ImageCrop/ImageCrop';
 // import useImageResizer from '../../hooks/useImageResizer';
 
 
@@ -11,12 +12,13 @@ const DetailsForm = () => {
   const [regions, regionsLoaded] = useDatabase('/kitchenregions');
   const [categories, categoriesLoaded] = useDatabase('/categories');
   // const { recipes } = useAppContext();
+  const modalRef = useRef();
   const { data, handleChange, removeItem, selectedImage, setSelectedImage } = useAddRecipeContext();
   // const [image, imageResized, resize] = useImageResizer()
 
   const [searchValue, setSearchValue] = useState('');
 
-  const modal = document.querySelector("[data-modal]")
+  // const modal = document.querySelector("[data-modal]")
   // const closeButton = document.querySelector("[data-close-modal]")
 
   // closeButton.addEventListener("click", () => {modal.close()})
@@ -28,13 +30,14 @@ const DetailsForm = () => {
     // setImage(file)
 
     const reader = new FileReader();
+    console.log('reader: ', reader)
 
     reader.onload = () => {
       console.log('Image: ', reader.result)
       
       // setSelectedImage(reader.result);
-      modal.showModal();
       setSelectedImage({file: file, src: reader.result});
+      modalRef.current.showModal();
       
     };
 
@@ -173,9 +176,20 @@ const DetailsForm = () => {
             />
           </div>
           {/* Modal om te image te croppen: */}
-          <dialog data-modal>
-            <img src={selectedImage.src} alt='alt'/>
-            <button onClick={() =>{modal.close()}} >Sluiten</button>
+          <dialog data-modal ref={modalRef}>
+            <ImageCrop 
+              selectedImage={selectedImage}
+              aspect={ 8 / 3}
+              preview_width={320}
+              preview_heigth={240}
+              max_target_width={10000}
+              min_target_width={480}
+              setImage={setSelectedImage}
+              modalRef={modalRef}
+            />
+
+            {/* <img src={selectedImage.src} alt='alt' style={{width: '100%'}}/> */}
+            {/* <button type='button' onClick={() =>{modalRef.current.close()}}>Sluiten</button> */}
           </dialog>
         </div>
       )

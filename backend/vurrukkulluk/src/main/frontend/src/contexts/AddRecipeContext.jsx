@@ -6,9 +6,8 @@ export const AddRecipeProvider = ({ children }) => {
 
     const title = {
       0: 'Details',
-      1: 'Image Selection',
-      2: 'Ingredients',
-      3: 'Preparation'
+      1: 'Ingredients',
+      2: 'Preparation'
     }
 
     const [page, setPage] = useState(0)
@@ -182,22 +181,22 @@ export const AddRecipeProvider = ({ children }) => {
     // };
 
     // const canSubmit = [...Object.values(data)].every(Boolean)
-    // const canSubmit = true;
-    const canSubmit = () => {
-      if(![...Object.values(data)].every(Boolean)) return false;
-      if(data.ingredients.length > 1 || data.preparation.length < 1) return false;
-      return true;
-    }
+    const canSubmit = true
+    // const canSubmit = () => {
+    //   if(![...Object.values(data)].every(Boolean)) return false;
+    //   if(data.ingredients.length > 1 || data.preparation.length < 1) return false;
+    //   return true;
+    // }
 
     const disablePrev = page === 0
 
-    const disableNext = page === 3
+    const disableNext = page === 2
 
     const prevHide = page === 0 && "remove_button"
 
     const nextHide = page === Object.keys(title).length - 1 && "remove_button"
 
-    const submitHide = !canSubmit() && "remove_button"
+    const submitHide = !canSubmit && "remove_button"
 
     return (
       <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, 

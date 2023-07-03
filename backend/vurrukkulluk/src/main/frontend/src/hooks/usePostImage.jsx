@@ -16,6 +16,7 @@ const usePostImage = () => {
   const postImage = async (url, image) => {
     setLoaded(false)
     console.log('Token : ' + token)
+    console.log('image to upload: ', image)
     
     try{
       const response = await api.post(url,

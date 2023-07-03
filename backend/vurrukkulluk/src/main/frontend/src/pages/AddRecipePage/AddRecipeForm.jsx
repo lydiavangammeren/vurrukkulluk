@@ -5,9 +5,12 @@ import PreparationForm from "./PreparationForm"
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
 import usePostImage from '../../hooks/usePostImage';
 import usePostData from '../../hooks/usePostData';
-import ImageForm from './ImageForm';
+// import ImageForm from './ImageForm';
+import useImageResizer from '../../hooks/useImageResizer';
+import { useNavigate } from 'react-router-dom';
 
 const AddRecipeForm = () => {
+  const navigate = useNavigate();
   var slugify = require('slugify');
   const [image, imageLoaded, postImage] = usePostImage();
   const [recipe, recipeLoaded, postRecipe] = usePostData();
@@ -24,6 +27,7 @@ const AddRecipeForm = () => {
     submitHide,
     selectedImage
   } = useAddRecipeContext();
+  const [resizedImage, isResized, resize, urlToFile] = useImageResizer()
 
   const handlePrev = () => setPage(prev => prev - 1)
 
@@ -31,7 +35,7 @@ const AddRecipeForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('Handle Submit --> Add Recipe')
+    console.log('Handle Submit --> Add Recipe ', e)
     // console.log(JSON.stringify(selectedImage))
 
     const body = {
@@ -48,26 +52,43 @@ const AddRecipeForm = () => {
       "preparations": data.preparation
     }
 
-    // console.log(body)
+    console.log(body)
     postRecipe('/recipes', body)
 
-    // console.log('image upload: ', selectedImage.file)
-    // postImage('/image?type=recipe&id=4', {image: selectedImage.file})
+    resize(selectedImage.src);
   }
 
+  // useEffect(() => {
+  //   if(recipeLoaded){
+  //     resize(selectedImage.src);
+  //   }
+  // }, [recipeLoaded, recipe])
+
+  // useEffect(() => {
+  //   if(isResized){
+  //     postImage('/image?type=recipe&id=' + recipe.payLoad, {image: resizedImage})
+  //   }
+  // }, [isResized, resizedImage])
+
   useEffect(() => {
-    if(recipeLoaded){
-      console.log(recipe.payLoad)
-      // console.log('postImage(selectedImage)')
-      postImage('/image?type=recipe&id=' + recipe.payLoad, {image: selectedImage.file})
+    if(recipeLoaded && isResized){
+      // console.log(recipe.payLoad)
+      // console.log('postImage(selectedImage)', resizedImage)
+      postImage('/image?type=recipe&id=' + recipe.payLoad, {image: resizedImage})
     }
-  }, [recipeLoaded, recipe, imageLoaded])
+  }, [recipeLoaded, isResized])
+
+  useEffect(()=>{
+    if(!imageLoaded) return;
+    console.log('image status: ', image.status)
+    console.log('uploaded image: ', resizedImage)
+    // navigate(0) // To refetch all recipes, including the one just added.
+  }, [imageLoaded])
 
   const display = {
     0: <DetailsForm />,
-    1: <ImageForm />,
-    2: <IngredientsForm />,
-    3: <PreparationForm />
+    1: <IngredientsForm />,
+    2: <PreparationForm />
   }
 
   const renderContent = () => {
@@ -92,7 +113,7 @@ const AddRecipeForm = () => {
           </div>
 
           <div className="button_bar">
-            <button type="submit" className={`formButton ${submitHide}`} disabled={!canSubmit}>Submit</button>
+            <button className={`formButton ${submitHide}`} disabled={!canSubmit}>Submit</button>
           </div>
           
         </form>

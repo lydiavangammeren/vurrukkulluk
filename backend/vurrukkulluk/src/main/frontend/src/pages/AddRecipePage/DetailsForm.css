@@ -45,18 +45,23 @@
   max-width: 30rem;
 }
 .image_example{
-  min-height: 20rem;
+  /* min-height: 20rem;
   max-height: 20rem;
   max-width: 30rem;
   min-width: 30rem;
-  border: solid;
-
+  border: solid; */
+  width: 100%;
 }
 .image_example img{
-  height: 100%;
-  width: auto;
+  /* height: 100%;
+  width: auto; */
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
 }
-
+dialog{
+  width: 64%;
+}
 .details_grid_categories{
   grid-area: categories;
   min-width: 30rem;

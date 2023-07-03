@@ -1,4 +1,18 @@
 .ImageCrop{
-  width: 50%;
-  object-fit: contain;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Crop-Controls{
+  display: flex;
+  flex-direction: column;
+  height: 3rem;
+}
+
+.preview_image{
+  display: flex;
+  flex-direction: column;
+}
+.preview_image h2{
+  margin-bottom: 3rem;
 }
