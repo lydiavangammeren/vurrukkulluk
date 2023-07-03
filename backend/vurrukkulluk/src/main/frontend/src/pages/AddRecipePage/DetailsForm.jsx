@@ -1,11 +1,13 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useDatabase } from '../../hooks';
 // import { useAppContext } from '../../contexts';
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
 import { SearchBar, SearchResultsList} from "./SearchCategories";
 import ImageCrop from '../../components/ImageCrop/ImageCrop';
 // import useImageResizer from '../../hooks/useImageResizer';
+import {BsCheckSquare, BsXSquare} from "react-icons/bs";
 
+const NAME_REGEX = /^[A-z][A-z0-9-_]{1,23}$/;
 
 const DetailsForm = () => {
   const [types, typesLoaded ] = useDatabase('/kitchentypes');
@@ -14,38 +16,26 @@ const DetailsForm = () => {
   // const { recipes } = useAppContext();
   const modalRef = useRef();
   const { data, handleChange, removeItem, selectedImage, setSelectedImage } = useAddRecipeContext();
-  // const [image, imageResized, resize] = useImageResizer()
-
   const [searchValue, setSearchValue] = useState('');
 
-  // const modal = document.querySelector("[data-modal]")
-  // const closeButton = document.querySelector("[data-close-modal]")
-
-  // closeButton.addEventListener("click", () => {modal.close()})
-
-  // const [selectedImage, setSelectedImage] = useState(null);
+  const [validName, setValidName] = useState(false)
+  const [validType, setValidType] = useState(false)
+  const [validRegion, setValidRegion] = useState(false)
+  const [validPersons, setValidPersons] = useState(false)
+  const [validImage, setValidImage] = useState(false)
+  const [validDescription, setValidDescription] = useState(false)
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
-    // setImage(file)
-
     const reader = new FileReader();
-    console.log('reader: ', reader)
-
     reader.onload = () => {
-      console.log('Image: ', reader.result)
-      
-      // setSelectedImage(reader.result);
       setSelectedImage({file: file, src: reader.result});
       modalRef.current.showModal();
-      
     };
-
     if (file) {
       reader.readAsDataURL(file);
     }
   };
-
 
   const filter = () => {
     if(!searchValue) return [];
@@ -63,19 +53,49 @@ const DetailsForm = () => {
   const searchResults = filter();
 
   const findObjectNameById = (id) => {
-    // console.log('Id to find: ' + id);
-    // console.log('to search: ' + JSON.stringify(categories))
     const foundObject = categories.find((object) => object.id === parseInt(id));
-    // console.log('Found object: ' + JSON.stringify(foundObject))
     return foundObject ? foundObject.name : 'Object not found';
   };
+
+  useEffect(() => {
+    setValidName(NAME_REGEX.test(data.name))
+  }, [data.name])
+
+  useEffect(() => {
+    const check = types?.filter(type => type.id == data.type).length > 0
+    setValidType(check)
+  }, [data.type])
+
+  useEffect(() => {
+    const check = regions?.filter(region => region.id == data.region).length > 0
+    setValidRegion(check);
+  }, [data.region])
+
+  useEffect(()=> {
+    const check = data.persons > 0
+    setValidPersons(check)
+  }, [data.persons])
+
+  useEffect(() => {
+    if(selectedImage.src){
+      setValidImage(true)
+    }
+  }, [selectedImage])
+
+  useEffect(() => {
+    setValidDescription(NAME_REGEX.test(data.description))
+  }, [data.description])
 
   const renderContent = () => {
     if(typesLoaded && regionsLoaded && categoriesLoaded){
       return (
         <div className='details_form'>
           <div className='details_grid_name grid_item'>
-            <label htmlFor='name'>Naam</label>
+            <label htmlFor='name'>
+              Naam
+              <BsCheckSquare color='green' className={validName? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validName || !data.name? "hide" : "invalid"}/>
+            </label>
             <input 
               type='text'
               id='name'
@@ -86,7 +106,11 @@ const DetailsForm = () => {
             />
           </div>
           <div className='details_grid_type grid_item'>
-            <label htmlFor='type'>Type</label>
+            <label htmlFor='type'>
+              Type
+              <BsCheckSquare color='green' className={validType? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validType ? "hide" : "invalid"}/>
+            </label>
             <select 
               id='type'
               name='type'
@@ -102,7 +126,11 @@ const DetailsForm = () => {
             </select>
           </div>
           <div className='details_grid_kitchen grid_item'>
-            <label htmlFor="region">Keuken</label>
+            <label htmlFor="region">
+              Keuken
+              <BsCheckSquare color='green' className={validRegion ? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validRegion ? "hide" : "invalid"}/>
+            </label>
             <select 
               id="region"
               name='region'
@@ -118,18 +146,26 @@ const DetailsForm = () => {
             </select>
           </div>
           <div className='details_grid_persons grid_item'>
-            <label htmlFor='persons'>Aantal personen</label>
+            <label htmlFor='persons'>
+              Aantal personen
+              <BsCheckSquare color='green' className={validPersons ? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validPersons ? "hide" : "invalid"}/>
+            </label>
             <input 
               type='number'
               id='persons'
               name='persons'
               value={data.persons}
               onChange={handleChange}
-              
+              min={1}
             />
           </div>
           <div className='details_grid_image grid_item'>
-            <label htmlFor='image'>Afbeelding</label>
+            <label htmlFor='image'>
+              Afbeelding
+              <BsCheckSquare color='green' className={validImage ? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validImage ? "hide" : "invalid"}/>
+            </label>
             <input 
               type='file'
               accept='image/*'
@@ -166,7 +202,11 @@ const DetailsForm = () => {
             </div>
           </div>
           <div className='details_grid_desc grid_item'>
-            <label htmlFor='description'>Beschrijving</label>
+            <label htmlFor='description'>
+              Beschrijving
+              <BsCheckSquare color='green' className={validDescription ? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validDescription || !data.description ? "hide" : "invalid"}/>
+            </label>
             <textarea
               id='description'
               name='description'
@@ -187,16 +227,11 @@ const DetailsForm = () => {
               setImage={setSelectedImage}
               modalRef={modalRef}
             />
-
-            {/* <img src={selectedImage.src} alt='alt' style={{width: '100%'}}/> */}
-            {/* <button type='button' onClick={() =>{modalRef.current.close()}}>Sluiten</button> */}
           </dialog>
         </div>
       )
     }
   }
-
-
 
   return (
     renderContent()
