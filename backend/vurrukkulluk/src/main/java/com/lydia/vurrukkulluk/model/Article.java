@@ -27,6 +27,8 @@ public class Article {
 
     private int amount;
 
+    private boolean isAvailable;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id",nullable = true)
     private Image image;
