@@ -8,6 +8,9 @@ import "./assets/styles/main.css";
 import { useDatabase } from "./hooks"
 import { ContextProvider } from "./contexts";
 import Layout from "./layouts";
+// import ImageResize from "./pages/testPage/ImageResize";
+// import ImgDropAndCrop from "./pages/testPage/ImgDropAndCrop";
+import CropDemo from "./pages/testPage/CropDemo";
 
 function App() {
   const [recipes, isLoaded] = useDatabase('recipes'); // Get all data from database (Recipes+ingredients+preparation+comments)
@@ -34,6 +37,7 @@ function App() {
               <Route path="/shoppingcart" element={<ShoppingCart />} />
               <Route path="/addrecipe" element={<AddRecipe />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/test" element={<CropDemo />} />
             </Routes>
           </Layout>
         </ContextProvider>

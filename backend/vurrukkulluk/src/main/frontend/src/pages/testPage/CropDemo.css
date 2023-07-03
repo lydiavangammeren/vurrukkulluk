@@ -1,0 +1,11 @@
+.demo_image{
+  width: 40rem;
+  object-fit: contain;
+}
+.prev_image{
+  width: 40rem;
+}
+.prev_image img{
+  object-fit: cover;
+  object-position: 50%;
+}

@@ -3,6 +3,8 @@ import { useDatabase } from '../../hooks';
 // import { useAppContext } from '../../contexts';
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
 import { SearchBar, SearchResultsList} from "./SearchCategories";
+// import useImageResizer from '../../hooks/useImageResizer';
+
 
 const DetailsForm = () => {
   const [types, typesLoaded ] = useDatabase('/kitchentypes');
@@ -10,8 +12,14 @@ const DetailsForm = () => {
   const [categories, categoriesLoaded] = useDatabase('/categories');
   // const { recipes } = useAppContext();
   const { data, handleChange, removeItem, selectedImage, setSelectedImage } = useAddRecipeContext();
+  // const [image, imageResized, resize] = useImageResizer()
 
   const [searchValue, setSearchValue] = useState('');
+
+  const modal = document.querySelector("[data-modal]")
+  // const closeButton = document.querySelector("[data-close-modal]")
+
+  // closeButton.addEventListener("click", () => {modal.close()})
 
   // const [selectedImage, setSelectedImage] = useState(null);
 
@@ -25,6 +33,7 @@ const DetailsForm = () => {
       console.log('Image: ', reader.result)
       
       // setSelectedImage(reader.result);
+      modal.showModal();
       setSelectedImage({file: file, src: reader.result});
       
     };
@@ -163,6 +172,11 @@ const DetailsForm = () => {
               onChange={handleChange}
             />
           </div>
+          {/* Modal om te image te croppen: */}
+          <dialog data-modal>
+            <img src={selectedImage.src} alt='alt'/>
+            <button onClick={() =>{modal.close()}} >Sluiten</button>
+          </dialog>
         </div>
       )
     }

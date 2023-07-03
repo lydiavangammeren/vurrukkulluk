@@ -5,6 +5,7 @@ import PreparationForm from "./PreparationForm"
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
 import usePostImage from '../../hooks/usePostImage';
 import usePostData from '../../hooks/usePostData';
+import ImageForm from './ImageForm';
 
 const AddRecipeForm = () => {
   var slugify = require('slugify');
@@ -64,8 +65,9 @@ const AddRecipeForm = () => {
 
   const display = {
     0: <DetailsForm />,
-    1: <IngredientsForm />,
-    2: <PreparationForm />
+    1: <ImageForm />,
+    2: <IngredientsForm />,
+    3: <PreparationForm />
   }
 
   const renderContent = () => {
