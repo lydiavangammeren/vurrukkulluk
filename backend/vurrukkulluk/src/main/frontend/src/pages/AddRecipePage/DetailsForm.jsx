@@ -83,7 +83,7 @@ const DetailsForm = () => {
   }, [selectedImage])
 
   useEffect(() => {
-    setValidDescription(NAME_REGEX.test(data.description))
+    setValidDescription(data.description.length > 3)
   }, [data.description])
 
   const renderContent = () => {
@@ -108,7 +108,7 @@ const DetailsForm = () => {
           <div className='details_grid_type grid_item'>
             <label htmlFor='type'>
               Type
-              <BsCheckSquare color='green' className={validType? "valid" : "hide"}/>
+              <BsCheckSquare color='green' className={validType && data.type != 0 ? "valid" : "hide"}/>
               <BsXSquare color='red' className={validType ? "hide" : "invalid"}/>
             </label>
             <select 

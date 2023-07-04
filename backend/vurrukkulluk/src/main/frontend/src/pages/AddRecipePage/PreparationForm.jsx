@@ -4,23 +4,20 @@ import PrepStep from './PrepStep';
 
 const PreparationForm = () => {
 
-  const { data, setData, handleChange, addItem} = useAddRecipeContext();
+  const { data, setData, handleChange, addItem, instructions, setInstructions} = useAddRecipeContext();
   const [ nextStep, setNextStep] = useState(1);
   // const instructionsRef = useRef();
-  const [ instructions, setInstructions ] = useState('');
+  // const [ instructions, setInstructions ] = useState('');
   // const [ canEdit, setCanEdit ] = useState(false);
 
   const handleAdd = e => {
     const name = 'preparation';
     const value = {
       step: data.preparation.length + 1,
-      instructions: data.instructions
+      instructions: instructions
     }
     addItem(name, value)
-    setData(prevData => ({
-      ...prevData,
-      instructions: ''
-    }))
+    setInstructions('');
   }
 
   const handleEnter = (e) => {
@@ -55,8 +52,8 @@ const PreparationForm = () => {
         <textarea
           name='instructions'
           placeholder=''
-          value={data.instructions}
-          onChange={handleChange}
+          value={instructions}
+          onChange={e => setInstructions(e.target.value)}
           autoFocus
           onKeyDown={handleEnter}
         />

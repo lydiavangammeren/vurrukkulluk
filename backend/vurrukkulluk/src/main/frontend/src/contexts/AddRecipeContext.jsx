@@ -20,9 +20,10 @@ export const AddRecipeProvider = ({ children }) => {
       persons: 4,
       categories: [],
       ingredients: [],
-      preparation: [],
-      instructions: ''
+      preparation: []
     });
+
+    const [instructions, setInstructions] = useState('')
 
     const [selectedImage, setSelectedImage] = useState({file: null, src: null});
 
@@ -181,12 +182,12 @@ export const AddRecipeProvider = ({ children }) => {
     // };
 
     // const canSubmit = [...Object.values(data)].every(Boolean)
-    const canSubmit = true
-    // const canSubmit = () => {
-    //   if(![...Object.values(data)].every(Boolean)) return false;
-    //   if(data.ingredients.length > 1 || data.preparation.length < 1) return false;
-    //   return true;
-    // }
+    // const canSubmit = true
+    const canSubmit = () => {
+      if(![...Object.values(data)].every(Boolean)) return false;
+      if(data.ingredients.length > 1 || data.preparation.length < 1) return false;
+      return true;
+    }
 
     const disablePrev = page === 0
 
@@ -196,12 +197,13 @@ export const AddRecipeProvider = ({ children }) => {
 
     const nextHide = page === Object.keys(title).length - 1 && "remove_button"
 
-    const submitHide = !canSubmit && "remove_button"
+    const submitHide = !canSubmit() && "remove_button"
 
     return (
       <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, 
                                   disableNext, prevHide, nextHide, submitHide, addItem, removeItem, updateIngredientQuantity, 
-                                  removeIngredient, selectedImage, setSelectedImage, updatePreparationInstructions, removeStep }}>
+                                  removeIngredient, selectedImage, setSelectedImage, updatePreparationInstructions, removeStep,
+                                  instructions, setInstructions }}>
         {children}
       </AddRecipeContext.Provider>
     )

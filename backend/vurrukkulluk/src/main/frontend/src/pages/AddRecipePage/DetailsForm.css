@@ -21,6 +21,10 @@
 
 }
 
+.details_form label{
+  margin-bottom: 0.25rem;
+}
+
 /* .details_form input{
   width: 100%;
 } */
