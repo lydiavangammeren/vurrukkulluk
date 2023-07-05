@@ -4,6 +4,7 @@ import HomeContent from "./pages/HomePage";
 import ShoppingCart from "./pages/ShoppingCartPage/ShoppingCart";
 import AddRecipe from "./pages/AddRecipePage";
 import Register from "./pages/RegisterPage/Register";
+// import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import "./assets/styles/main.css";
 import { useDatabase } from "./hooks"
 import { ContextProvider } from "./contexts";

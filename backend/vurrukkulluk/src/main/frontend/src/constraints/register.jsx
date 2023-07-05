@@ -4,7 +4,7 @@ export const constraints = {
       message: "mag niet leeg zijn"
     },
     length: {
-      minimum: 2,
+      minimum: 6,
       message: "ten minste 2 letters"
     },
     format: {

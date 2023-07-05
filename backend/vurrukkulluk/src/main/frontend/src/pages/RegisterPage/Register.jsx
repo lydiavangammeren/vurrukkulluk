@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import usePostData from '../../hooks/usePostData';
@@ -22,6 +22,7 @@ const Register = () => {
 
     const [userFocus, setUserFocus] = useState(false)
     const [validName, setValidName] = useState(false);
+    const [nameInfo, setNameInfo] = useState(false)
 
     const [emailFocus, setEmailFocus] = useState(false)
     const [validEmail, setValidEmail] = useState(false);
@@ -37,6 +38,8 @@ const Register = () => {
     const [data, isLoaded, postData] = usePostData();
 
     const navigate = useNavigate();
+
+    // const infoRef = useRef();
 
     const handleChange = (event) => {
 
@@ -60,9 +63,8 @@ const Register = () => {
             password: inputs.firstpassword
         }
 
-        console.log('Body: ', body)
+        // console.log('Body: ', body)
         // postData('/auth/register', body)
-
     }
 
     useEffect(()=>{
@@ -109,6 +111,9 @@ const Register = () => {
     // const canSubmit = validName && validEmail && validPwd && validMatch;
     const canSubmit = true;
 
+    const dialog = document.querySelector("dialog");
+    console.log(dialog);
+
     return(
         <div className='registercontainer'>
             <h2 className='registerheader'>Account aanmaken</h2>
@@ -135,10 +140,16 @@ const Register = () => {
                             required
                             autoComplete='off'
                         />
+                        <FaInfoCircle onMouseOver={() => setNameInfo(true)} onMouseLeave={() => setNameInfo(false)}/>
+                        {/* <dialog className='infoDialog' ref={infoRef}>
+                            <FaInfoCircle/>
+                            2 tot 32 karakters.<br />
+                            Alleen letters toegestaan.
+                        </dialog> */}
                         {/* <p className={errors?.name? "instructions" : "offscreen"}>
                             {errors?.name}
                         </p> */}
-                        <p className={userFocus && inputs.name && !validName ? "instructions" : "offscreen"}>
+                        <p className={(userFocus && inputs.name && !validName) || nameInfo ? "instructions" : "offscreen"}>
                             <FaInfoCircle/>
                             2 tot 32 karakters.<br />
                             Alleen letters toegestaan.

@@ -136,6 +136,7 @@ const DetailsForm = () => {
               name='region'
               value={data.region}
               onChange={handleChange}
+              // onBlur={() => alert('BLUR!!')}
             >
               <option value={0}>Kies een regio</option>
               {regions.map(region => {
@@ -216,7 +217,7 @@ const DetailsForm = () => {
             />
           </div>
           {/* Modal om te image te croppen: */}
-          <dialog data-modal ref={modalRef}>
+          <dialog className='cropModal' data-modal ref={modalRef}>
             <ImageCrop 
               selectedImage={selectedImage}
               aspect={ 8 / 3}
