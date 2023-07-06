@@ -43,20 +43,27 @@ const Register = () => {
 
     const handleChange = (event) => {
 
+        // console.log(event)
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
     }
 
+    var form = document.querySelector(".registerForm");
+    // console.log(form)
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        // console.log(inputs);
+        console.log(form);
 
-        setErrors(validate(inputs, constraints))
-        console.log(errors);
+        const errors2 = validate(form, constraints)
+        console.log(errors2);
+        setErrors(errors2);
 
-        if(!errors) return;
-
+        if(!errors2) 
+        {
+            return;
+        }
         const body = {
             name: inputs.name,
             email: inputs.email,
@@ -65,6 +72,16 @@ const Register = () => {
 
         // console.log('Body: ', body)
         // postData('/auth/register', body)
+    }
+
+    const validateInput = (e) => {
+        const name = e.target.name;
+        const validationErrors = validate(form, constraints);
+        if(validationErrors[name]){
+            setErrors(values => ({...values, [name]: validationErrors[name]}))
+        } else{
+            setErrors(values => ({...values, [name]: ""}))
+        }
     }
 
     useEffect(()=>{
@@ -93,52 +110,54 @@ const Register = () => {
 
     },[data, isLoaded])
 
-    useEffect(() => {
-        const check = USER_REGEX.test(inputs.name);
-        setValidName(check);
-    }, [inputs.name])
+    // useEffect(() => {
+    //     const check = USER_REGEX.test(inputs.name);
+    //     setValidName(check);
+    // }, [inputs.name])
 
-    useEffect(() => {
-        const check = EMAIL_REGEX.test(inputs.email);
-        setValidEmail(check);
-    }, [inputs.email])
+    // useEffect(() => {
+    //     const check = EMAIL_REGEX.test(inputs.email);
+    //     setValidEmail(check);
+    // }, [inputs.email])
 
-    useEffect(() => {
-        setValidPwd(PWD_REGEX.test(inputs.firstpassword));
-        setValidMatch(inputs.firstpassword === inputs.secondpassword);
-    }, [inputs.firstpassword, inputs.secondpassword])
+    // useEffect(() => {
+    //     setValidPwd(PWD_REGEX.test(inputs.firstpassword));
+    //     setValidMatch(inputs.firstpassword === inputs.secondpassword);
+    // }, [inputs.firstpassword, inputs.secondpassword])
 
     // const canSubmit = validName && validEmail && validPwd && validMatch;
     const canSubmit = true;
 
-    const dialog = document.querySelector("dialog");
-    console.log(dialog);
+    // const dialog = document.querySelector("dialog");
+    // console.log(dialog);
 
     return(
         <div className='registercontainer'>
             <h2 className='registerheader'>Account aanmaken</h2>
-            <form onSubmit={handleSubmit}>
+            <form className='registerForm' onSubmit={handleSubmit} noValidate>
             <div className='registerformcontainer'>
                 <div className='inputs'>
                     <div className='username'>
                         <label className='registerlabels'>
                             Vul hier uw naam in:  
-                            <BsCheckSquare color='green' className={validName? "valid" : "hide"}/>
-                            <BsXSquare color='red' className={validName || !inputs.name? "hide" : "invalid"}/>
+                            {/* <BsCheckSquare color='green' className={validName? "valid" : "hide"}/>
+                            <BsXSquare color='red' className={validName || !inputs.name? "hide" : "invalid"}/> */}
                         </label>
                         <br/>
                         <input
-                            className={`registerfields ${validName ? "" : "error"}`}
+                            // className={`registerfields ${validName ? "" : "error"}`}
+                            className='registerfields'
                             type="text"
                             name="name"
-                            value={inputs.name}
-                            onChange={handleChange}
+                            // value={inputs.name}
+                            // onChange={handleChange}
                             autoFocus
                             onFocus={() => setUserFocus(true)}
-                            onBlur={() => setUserFocus(false)}
-                            // onBlur={() => validate}
+                            // onBlur={() => setUserFocus(false)}
+                            onBlur={(e) => validateInput(e)}
                             required
                             autoComplete='off'
+                            
                         />
                         <FaInfoCircle onMouseOver={() => setNameInfo(true)} onMouseLeave={() => setNameInfo(false)}/>
                         {/* <dialog className='infoDialog' ref={infoRef}>
@@ -149,83 +168,87 @@ const Register = () => {
                         {/* <p className={errors?.name? "instructions" : "offscreen"}>
                             {errors?.name}
                         </p> */}
+                        {errors.name && errors.name.map(error => {
+                            return <li className='error-message'>{error}</li>
+                        })}
                         <p className={(userFocus && inputs.name && !validName) || nameInfo ? "instructions" : "offscreen"}>
                             <FaInfoCircle/>
                             2 tot 32 karakters.<br />
                             Alleen letters toegestaan.
                         </p>
+
                     </div>
                 <br/>
                     <div className='email'>
                         <label className='registerlabels'>
                             Vul hier uw e-mailadres in:
-                            <BsCheckSquare color='green' className={validEmail? "valid" : "hide"}/>
-                            <BsXSquare color='red' className={validEmail || !inputs.email? "hide" : "invalid"}/>
+                            {/* <BsCheckSquare color='green' className={validEmail? "valid" : "hide"}/>
+                            <BsXSquare color='red' className={validEmail || !inputs.email? "hide" : "invalid"}/> */}
                         </label>
                         <br/>
                         <input
                             className='registerfields'
                             type="email"
                             name="email"
-                            value={inputs.email}
-                            onChange={handleChange}
+                            // value={inputs.email}
+                            // onChange={handleChange}
                             // required
                             onFocus={() => setEmailFocus(true)}
                             onBlur={() => setEmailFocus(false)}
                             autoComplete='off'
                         />
-                        <p className={emailFocus && !validEmail ? "instructions" : "offscreen"}>
+                        {/* <p className={emailFocus && !validEmail ? "instructions" : "offscreen"}>
                             <FaInfoCircle />
                             Moet een email adres zijn.
-                        </p>
+                        </p> */}
                     </div>
                 <br/>
                     <div className='password'>
                         <label className='registerlabels'>
                             Vul hier uw wachtwoord in:
-                            <BsCheckSquare color='green' className={validPwd? "valid" : "hide"}/>
-                            <BsXSquare color='red' className={validPwd || !inputs.firstpassword? "hide" : "invalid"}/>
+                            {/* <BsCheckSquare color='green' className={validPwd? "valid" : "hide"}/>
+                            <BsXSquare color='red' className={validPwd || !inputs.firstpassword? "hide" : "invalid"}/> */}
                         </label>
                         <br/>
                         <input
                             className='registerfields'
                             type="password"
                             name="firstpassword"
-                            value={inputs.firstpassword}
-                            onChange={handleChange}
+                            // value={inputs.firstpassword}
+                            // onChange={handleChange}
                             required
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
                         />
-                        <p className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
+                        {/* <p className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
                             <FaInfoCircle />
                             8 tot 32 karakters.<br />
                             Moet een hoofdletter, een kleine letter,<br />
                             een nummer en een speciaal karakter bevatten.
-                        </p>
+                        </p> */}
                     </div>
                 <br />
                     <div className='secondpassword'>
                         <label className='registerlabels'>
                             Herhaal uw wachtwoord:
-                            <BsCheckSquare color='green' className={validMatch && inputs.secondpassword? "valid" : "hide"}/>
-                            <BsXSquare color='red' className={validMatch || !inputs.secondpassword? "hide" : "invalid"}/>
+                            {/* <BsCheckSquare color='green' className={validMatch && inputs.secondpassword? "valid" : "hide"}/>
+                            <BsXSquare color='red' className={validMatch || !inputs.secondpassword? "hide" : "invalid"}/> */}
                         </label>
                         <br />
                         <input
                             className='registerfields'
                             type="password"
                             name="secondpassword"
-                            value={inputs.secondpassword}
-                            onChange={handleChange}
+                            // value={inputs.secondpassword}
+                            // onChange={handleChange}
                             required
                             onFocus={() => setMatchFocus(true)}
                             onBlur={() => setMatchFocus(false)}
                         />
-                        <p className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
+                        {/* <p className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
                             <FaInfoCircle />
                             Moet gelijk zijn aan het eerste wachtwoord.
-                        </p>
+                        </p> */}
                     </div>
                 </div>
                 <br/><br/>

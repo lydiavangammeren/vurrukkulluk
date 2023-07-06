@@ -3,8 +3,8 @@ import DetailContent from "./pages/DetailPage";
 import HomeContent from "./pages/HomePage";
 import ShoppingCart from "./pages/ShoppingCartPage/ShoppingCart";
 import AddRecipe from "./pages/AddRecipePage";
-import Register from "./pages/RegisterPage/Register";
-// import RegisterPage from "./pages/RegisterPage/RegisterPage";
+// import Register from "./pages/RegisterPage/Register";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import "./assets/styles/main.css";
 import { useDatabase } from "./hooks"
 import { ContextProvider } from "./contexts";
@@ -37,7 +37,7 @@ function App() {
               />
               <Route path="/shoppingcart" element={<ShoppingCart />} />
               <Route path="/addrecipe" element={<AddRecipe />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<RegisterPage />} />
               <Route path="/test" element={<CropDemo />} />
             </Routes>
           </Layout>

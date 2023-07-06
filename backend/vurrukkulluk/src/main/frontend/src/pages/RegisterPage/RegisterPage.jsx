@@ -1,105 +1,125 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
+import validate from 'validate.js';
+import { constraints } from '../../constraints/register';
+import "./RegisterPage.css"
 
 const RegisterPage = () => {
+  const [inputs, setInputs] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [errors, setErrors] = useState({});
-  
-    const validateForm = () => {
-      let isValid = true;
-      const newErrors = {};
-  
-      if (name.trim() === '') {
-        newErrors.name = 'Name is required';
-        isValid = false;
-      }
-  
-      if (email.trim() === '') {
-        newErrors.email = 'Email is required';
-        isValid = false;
-      } else if (!/\S+@\S+\.\S+/.test(email)) {
-        newErrors.email = 'Email is invalid';
-        isValid = false;
-      }
-  
-      if (password.trim() === '') {
-        newErrors.password = 'Password is required';
-        isValid = false;
-      } else if (password.length < 6) {
-        newErrors.password = 'Password should be at least 6 characters';
-        isValid = false;
-      }
-  
-      if (confirmPassword.trim() === '') {
-        newErrors.confirmPassword = 'Confirm Password is required';
-        isValid = false;
-      } else if (confirmPassword !== password) {
-        newErrors.confirmPassword = 'Passwords do not match';
-        isValid = false;
-      }
-  
-      setErrors(newErrors);
-      return isValid;
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (validateForm()) {
-        // Handle registration logic
-        console.log('Registration successful');
-      }
-    };
-  
-    return (
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
+  const [errors, setErrors] = useState({});
+
+  const formRef = useRef();
+  const form = document.querySelector(".registerForm")
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}))
+  }
+
+  const validateInput = (e) => {
+    const name = e.target.name;
+    console.log('inputs: ', inputs)
+    const validationErrors = validate(inputs, constraints);
+    console.log(validationErrors)
+    if(validationErrors[name]){
+      setErrors(values => ({...values, [name]: validationErrors[name]}))
+    } else{
+      setErrors(values => ({...values, [name]: ""}))
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('form: ', form)
+    console.log('ref: ', formRef)
+    console.log('inputs: ', inputs)
+
+    const test = {
+      naam: '',
+      email: '',
+      wachtwoord: '',
+      herhaalWachtwoord: ''
+    }
+    var formErrors = validate(test, constraints)
+    setErrors(formErrors)
+  };
+
+  return (
+    <div className='registerContainer'>
+      <h2 className='registerheader'>Account aanmaken</h2>
+      <form className='registerForm' onSubmit={handleSubmit} ref={formRef}>
+        <div className='form-group'>
+          <label htmlFor="name">Naam:</label>
           <input
             type="text"
             id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            onChange={handleChange}
+            value={inputs.name}
+            onBlur={(e) => validateInput(e)}
           />
-          {errors.name && <p className="error">{errors.name}</p>}
+          {errors.name && errors.name.map((error) => {
+              return <li className="error-message">{error}</li>
+            })
+          }
         </div>
-        <div>
+        <div className='form-group'>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            onChange={handleChange}
+            value={inputs.email}
+            onBlur={(e) => validateInput(e)}
           />
-          {errors.email && <p className="error">{errors.email}</p>}
+          {errors.email && errors.email.map((error) => {
+              return <li className="error-message">{error}</li>
+            })
+          }
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className='form-group'>
+          <label htmlFor="password">wachtwoord:</label>
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name='password'
+            onChange={handleChange}
+            value={inputs.password}
+            onBlur={(e) => validateInput(e)}
           />
-          {errors.password && <p className="error">{errors.password}</p>}
+          {errors.password && errors.password.map((error) => {
+              return <li className="error-message">{error}</li>
+            })
+          }
         </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
+        <div className='form-group'>
+          <label htmlFor="confirmPassword">Herhaal wachtwoord:</label>
           <input
             type="password"
             id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            name="confirmPassword"
+            onChange={handleChange}
+            value={inputs.confirmPassword}
+            onBlur={(e) => validateInput(e)}
           />
-          {errors.confirmPassword && (
-            <p className="error">{errors.confirmPassword}</p>
-          )}
+          {errors.confirmPassword && errors.confirmPassword.map((error) => {
+              return <li className="error-message">{error}</li>
+            })
+          }
         </div>
-        <button type="submit">Register</button>
+        <div className='registerButtonBar'>
+          <button className='registerButton' type="submit">Registreer</button>
+        </div>
       </form>
-    );
-  };
+    </div>
+  );
+};
 
 export default RegisterPage

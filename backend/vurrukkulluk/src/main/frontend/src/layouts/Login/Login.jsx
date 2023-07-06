@@ -14,7 +14,7 @@ const Login = () => {
   // const [userName, setUserName] = useState('');
   // const [ pwd, setPwd ] = useState('');
 
-  const [input, setInput] = useState({email: '', password: ''})
+  const [input, setInput] = useState({email: '', loginPassword: ''})
 
   const [data, isLoaded, postData] = usePostData();
 
@@ -35,7 +35,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    postData('/auth/authenticate', input)
+    const body = {
+      email: input.email,
+      password: input.loginPassword
+    }
+
+    postData('/auth/authenticate', body)
     // const response = login(input.email, input.password);
     // console.log('Response: ', response)
     setInput({email: '', password: ''})
@@ -90,13 +95,13 @@ const Login = () => {
             onChange={handleChange}
             />
           <br/><br/>
-          <label className="label" htmlFor="password">Wachtwoord </label>  
+          <label className="label" htmlFor="loginPassword">Wachtwoord </label>  
           <br/>        
           <input 
-            name="password" 
-            id="password" 
+            name="loginPassword" 
+            id="loginPassword" 
             type="password" 
-            value={input.password}
+            value={input.loginPassword}
             onChange={handleChange}
             />
           <div className="login-bottom">

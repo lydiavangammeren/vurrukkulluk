@@ -1,0 +1,36 @@
+.registerContainer{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+.registerForm{
+  width: 40%;
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.registerButtonBar{
+  display: flex;
+  justify-content: center;
+}
+
+.registerButton{
+  color: var(--white);
+  font-family: var(--heading);
+  font-size: 30px;
+  background-color: var(--darker-red);
+  border: none;
+  border-radius: 25px;
+  width: 5em;
+}
+
+.error-message{
+  /* list-style-type: none; */
+  list-style-position: inside;
+  color: red;
+}
