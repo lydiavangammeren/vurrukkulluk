@@ -12,6 +12,7 @@ import Layout from "./layouts";
 // import ImageResize from "./pages/testPage/ImageResize";
 // import ImgDropAndCrop from "./pages/testPage/ImgDropAndCrop";
 import CropDemo from "./pages/testPage/CropDemo";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [recipes, isLoaded] = useDatabase('recipes'); // Get all data from database (Recipes+ingredients+preparation+comments)
@@ -28,6 +29,7 @@ function App() {
     if(isLoaded){
       return (
         <ContextProvider recipes={recipes} bannerImages={images}>
+          <ScrollToTop />
           <Layout >
             <Routes>
               <Route path="/" element={<HomeContent />} />

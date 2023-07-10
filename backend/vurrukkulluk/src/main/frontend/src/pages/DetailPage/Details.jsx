@@ -27,7 +27,7 @@ const Details = ({details}) => {
   const ingredients = details?.ingredients ?? [];
 
   const [data, isLoaded, postData] = usePostData()
-  const [shoppingList, setShoppingList] = useLocalStorage('shoppinglist', {products: []});
+  // const [shoppingList, setShoppingList] = useLocalStorage('shoppinglist', {products: []});
 
   // const {title, description, image, kitchenRegion, kitchenType, persons, price, calories} = details;
   // const {setBannerImages} = useAppContext();
@@ -38,11 +38,16 @@ const Details = ({details}) => {
   const addToList = () => {
     console.log('click', ingredients)
     ingredients.map(ingredient => {
-      setShoppingList(prev => [...prev, ingredient.article.id])
+      console.log('ingredients: ', ingredient.article.id)
+      
+    //   setShoppingList(prev => [...prev, ingredient.article.id])
     })
-    console.log('shoppinglist: ', shoppingList)
+    // console.log('shoppinglist: ', shoppingList)
   }
 
+  useEffect(() => {
+    localStorage.removeItem('shoppinglist');
+  }, [])
   const renderImage = () => {
       return (
          <img 

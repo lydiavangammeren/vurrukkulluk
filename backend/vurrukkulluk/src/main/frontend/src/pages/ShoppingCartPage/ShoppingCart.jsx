@@ -6,6 +6,8 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { SC_ACTION } from "./ShoppingCartActions";
 import { useDatabase } from "../../hooks";
 
+import useLocalStorage from "../../hooks/useLocalStorage";
+
 function reducer(state, action) {
   switch (action.type) {
     case SC_ACTION.POPULATE_LIST:
@@ -44,6 +46,7 @@ const ShoppingCart = () => {
   const [state, dispatch] = useReducer(reducer, { products: [], checkedProductIds: [] });
 
   // const [products, productsLoaded ] = useDatabase('/products');
+  const [products, setProducts] = useLocalStorage('shoppinglist');
   
   useEffect(() => {
     const getData = async () => {
