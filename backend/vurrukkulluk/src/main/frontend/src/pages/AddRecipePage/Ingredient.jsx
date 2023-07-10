@@ -26,7 +26,7 @@ const Ingredient = ({article, ingredient}) => {
 
           <div className="ingredient_item_quantity">
             {/* <div> */}
-              <label htmlFor='amount'>Hoeveelheid:</label>
+              <label htmlFor='amount'>Hoeveelheid: </label>
               <input type='number'
                 value={ingredient.amount}
                 name='amount'
@@ -39,8 +39,8 @@ const Ingredient = ({article, ingredient}) => {
         </div>
         <div className='ingredient_item_buttons'>
           <button type='button' onClick={removeIngredient} name='ingredients' value={article?.id} className='delete_button'>
-            Verwijder
-            {/* <RiDeleteBinLine color='red' size={24}/> */}
+            {/* Verwijder */}
+            <RiDeleteBinLine color='red' size={24}/>
           </button>
         </div>
     </div>

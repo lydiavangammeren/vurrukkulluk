@@ -14,11 +14,21 @@
 }
 
 .ingredient_item input[type=number]{
-  width: 3.2rem;
-
+  width: 3.4rem;
+  margin-right: 0.5rem;
+  margin-left: 0.4rem;
 }
 
 .ingredient_item_quantity{
   display: flex;
   
+}
+.ingredient_item_quantity label{
+  font-size: large;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.delete_button{
+  border: none;
+  background-color: transparent;
 }
