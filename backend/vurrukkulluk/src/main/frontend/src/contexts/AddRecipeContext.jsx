@@ -27,6 +27,8 @@ export const AddRecipeProvider = ({ children }) => {
 
     const [selectedImage, setSelectedImage] = useState({file: null, src: null});
 
+    const [errors, setErrors ] = useState({});
+
     const handleChange = e => {
       const type = e.target.type
       const name = e.target.name
@@ -185,7 +187,8 @@ export const AddRecipeProvider = ({ children }) => {
     // const canSubmit = true
     const canSubmit = () => {
       if(![...Object.values(data)].every(Boolean)) return false;
-      if(data.ingredients.length > 1 || data.preparation.length < 1) return false;
+      if(data.ingredients.length < 2 || data.preparation.length < 2) return false;
+      if(selectedImage.file === null) return false;
       return true;
     }
 
@@ -203,7 +206,7 @@ export const AddRecipeProvider = ({ children }) => {
       <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, 
                                   disableNext, prevHide, nextHide, submitHide, addItem, removeItem, updateIngredientQuantity, 
                                   removeIngredient, selectedImage, setSelectedImage, updatePreparationInstructions, removeStep,
-                                  instructions, setInstructions }}>
+                                  instructions, setInstructions, errors, setErrors }}>
         {children}
       </AddRecipeContext.Provider>
     )

@@ -5,13 +5,16 @@
   align-items: center;
 }
 .registerForm{
-  width: 40%;
+  width: 30%;
 }
 
 .form-group{
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+}
+.form-group input{
+  height: 2em;
 }
 
 .registerButtonBar{
@@ -33,4 +36,8 @@
   /* list-style-type: none; */
   list-style-position: inside;
   color: red;
+}
+
+.infoBlock{
+  position: relative;
 }

@@ -5,9 +5,17 @@ import useAddRecipeContext from '../../hooks/useAddRecipeContext';
 import { SearchBar, SearchResultsList} from "./SearchCategories";
 import ImageCrop from '../../components/ImageCrop/ImageCrop';
 // import useImageResizer from '../../hooks/useImageResizer';
-import {BsCheckSquare, BsXSquare} from "react-icons/bs";
+// import {BsCheckSquare, BsXSquare} from "react-icons/bs";
+import validate from 'validate.js';
+import { constraints } from '../../constraints/recipeDetails';
 
-const NAME_REGEX = /^[A-z][A-z0-9-_]{1,23}$/;
+// const NAME_REGEX = /^[A-z][A-z0-9-_]{1,23}$/;
+
+validate.validators.optionPicked = function(value, options, key, attributes) {
+  if(value == 0){
+    return "^Maak een keuze"
+  }
+}
 
 const DetailsForm = () => {
   const [types, typesLoaded ] = useDatabase('/kitchentypes');
@@ -15,15 +23,38 @@ const DetailsForm = () => {
   const [categories, categoriesLoaded] = useDatabase('/categories');
   // const { recipes } = useAppContext();
   const modalRef = useRef();
-  const { data, handleChange, removeItem, selectedImage, setSelectedImage } = useAddRecipeContext();
+  const { data, handleChange, removeItem, selectedImage, setSelectedImage, errors, setErrors } = useAddRecipeContext();
   const [searchValue, setSearchValue] = useState('');
 
-  const [validName, setValidName] = useState(false)
-  const [validType, setValidType] = useState(false)
-  const [validRegion, setValidRegion] = useState(false)
-  const [validPersons, setValidPersons] = useState(false)
-  const [validImage, setValidImage] = useState(false)
-  const [validDescription, setValidDescription] = useState(false)
+  // const [errors, setErrors] = useState({});
+
+  const validateInput = (e) => {
+    const name = e.target.name;
+
+    let validationErrors = validate(data, constraints);
+
+    if(validationErrors && validationErrors[name]){
+      setErrors(values => ({...values, [name]: validationErrors[name]}))
+    } else{
+      setErrors(values => ({...values, [name]: ""}))
+    }
+
+    // try {
+    //   // console.log('to Validate: ', data)
+    //   let response = await validate.async(data, constraints);
+    //   // console.log('validation Succes: ', response)
+    //   setErrors({})
+    //   // console.log('errors state on succes: ', errors)
+    // } catch(err){
+    //   console.log('validation Errors: ', err)
+    //   // setErrors(err)
+    //   if(err[name]){
+    //     setErrors(values => ({...values, [name]: err[name]}))
+    //   } else{
+    //     setErrors(values => ({...values, [name]: ""}))
+    //   }
+    // }
+  }
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -57,34 +88,6 @@ const DetailsForm = () => {
     return foundObject ? foundObject.name : 'Object not found';
   };
 
-  useEffect(() => {
-    setValidName(NAME_REGEX.test(data.name))
-  }, [data.name])
-
-  useEffect(() => {
-    const check = types?.filter(type => type.id == data.type).length > 0
-    setValidType(check)
-  }, [data.type])
-
-  useEffect(() => {
-    const check = regions?.filter(region => region.id == data.region).length > 0
-    setValidRegion(check);
-  }, [data.region])
-
-  useEffect(()=> {
-    const check = data.persons > 0
-    setValidPersons(check)
-  }, [data.persons])
-
-  useEffect(() => {
-    if(selectedImage.src){
-      setValidImage(true)
-    }
-  }, [selectedImage])
-
-  useEffect(() => {
-    setValidDescription(data.description.length > 3)
-  }, [data.description])
 
   const renderContent = () => {
     if(typesLoaded && regionsLoaded && categoriesLoaded){
@@ -93,8 +96,8 @@ const DetailsForm = () => {
           <div className='details_grid_name grid_item'>
             <label htmlFor='name'>
               Naam
-              <BsCheckSquare color='green' className={validName? "valid" : "hide"}/>
-              <BsXSquare color='red' className={validName || !data.name? "hide" : "invalid"}/>
+              {/* <BsCheckSquare color='green' className={validName? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validName || !data.name? "hide" : "invalid"}/> */}
             </label>
             <input 
               type='text'
@@ -103,19 +106,24 @@ const DetailsForm = () => {
               placeholder=''
               value={data.name}
               onChange={handleChange}
+              onBlur={(e) => validateInput(e)}
             />
+            {errors.name && errors.name.map((error, index) => {
+              return <li className="error-message" key={index}>{error}</li>
+            })}
           </div>
           <div className='details_grid_type grid_item'>
             <label htmlFor='type'>
               Type
-              <BsCheckSquare color='green' className={validType && data.type != 0 ? "valid" : "hide"}/>
-              <BsXSquare color='red' className={validType ? "hide" : "invalid"}/>
+              {/* <BsCheckSquare color='green' className={validType && data.type != 0 ? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validType ? "hide" : "invalid"}/> */}
             </label>
             <select 
               id='type'
               name='type'
               value={(data.type)}
               onChange={handleChange}
+              onBlur={(e) => validateInput(e)}
             >
               <option value={0}>Kies een type</option>
               {types.map(type => {
@@ -124,19 +132,22 @@ const DetailsForm = () => {
                 )
               })}
             </select>
+            {errors.type && errors.type.map((error, index) => {
+              return <li className="error-message" key={index}>{error}</li>
+            })}
           </div>
           <div className='details_grid_kitchen grid_item'>
             <label htmlFor="region">
               Keuken
-              <BsCheckSquare color='green' className={validRegion ? "valid" : "hide"}/>
-              <BsXSquare color='red' className={validRegion ? "hide" : "invalid"}/>
+              {/* <BsCheckSquare color='green' className={validRegion ? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validRegion ? "hide" : "invalid"}/> */}
             </label>
             <select 
               id="region"
               name='region'
               value={data.region}
               onChange={handleChange}
-              // onBlur={() => alert('BLUR!!')}
+              onBlur={(e) => validateInput(e)}
             >
               <option value={0}>Kies een regio</option>
               {regions.map(region => {
@@ -145,12 +156,15 @@ const DetailsForm = () => {
                 )
               })}
             </select>
+            {errors.region && errors.region.map((error, index) => {
+              return <li className="error-message" key={index}>{error}</li>
+            })}
           </div>
           <div className='details_grid_persons grid_item'>
             <label htmlFor='persons'>
               Aantal personen
-              <BsCheckSquare color='green' className={validPersons ? "valid" : "hide"}/>
-              <BsXSquare color='red' className={validPersons ? "hide" : "invalid"}/>
+              {/* <BsCheckSquare color='green' className={validPersons ? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validPersons ? "hide" : "invalid"}/> */}
             </label>
             <input 
               type='number'
@@ -159,13 +173,17 @@ const DetailsForm = () => {
               value={data.persons}
               onChange={handleChange}
               min={1}
+              onBlur={(e) => validateInput(e)}
             />
+            {errors.persons && errors.persons.map((error, index) => {
+              return <li className="error-message" key={index}>{error}</li>
+            })}
           </div>
           <div className='details_grid_image grid_item'>
             <label htmlFor='image'>
               Afbeelding
-              <BsCheckSquare color='green' className={validImage ? "valid" : "hide"}/>
-              <BsXSquare color='red' className={validImage ? "hide" : "invalid"}/>
+              {/* <BsCheckSquare color='green' className={validImage ? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validImage ? "hide" : "invalid"}/> */}
             </label>
             <input 
               type='file'
@@ -176,8 +194,10 @@ const DetailsForm = () => {
               onChange={handleImageUpload}
             />
             <div className='image_example'>
-              {selectedImage && 
-                <img src={selectedImage.src} alt='Uploaded'/>
+              {selectedImage.src !== null ? 
+                
+                <img src={selectedImage.src} alt='Uploaded'/> :
+                <img src="/images/plate.jpg" />
               }
             </div>
           </div>
@@ -205,8 +225,8 @@ const DetailsForm = () => {
           <div className='details_grid_desc grid_item'>
             <label htmlFor='description'>
               Beschrijving
-              <BsCheckSquare color='green' className={validDescription ? "valid" : "hide"}/>
-              <BsXSquare color='red' className={validDescription || !data.description ? "hide" : "invalid"}/>
+              {/* <BsCheckSquare color='green' className={validDescription ? "valid" : "hide"}/>
+              <BsXSquare color='red' className={validDescription || !data.description ? "hide" : "invalid"}/> */}
             </label>
             <textarea
               id='description'
@@ -214,7 +234,11 @@ const DetailsForm = () => {
               rows={15}
               value={data.description}
               onChange={handleChange}
+              onBlur={(e) => validateInput(e)}
             />
+            {errors.description && errors.description.map((error, index) => {
+              return <li className="error-message" key={index}>{error}</li>
+            })}
           </div>
           {/* Modal om te image te croppen: */}
           <dialog className='cropModal' data-modal ref={modalRef}>

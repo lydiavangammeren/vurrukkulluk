@@ -1,6 +1,7 @@
 export const constraints = {
   name: {
     presence: {
+      allowEmpty: false,
       message: "^Naam mag niet leeg zijn"
     },
     length: {
@@ -15,14 +16,17 @@ export const constraints = {
   },
   email: {
     presence: {
+      allowEmpty: false,
       message: "mag niet leeg zijn"
     },
     email: {
       message: "^'%{value}' is geen valide email adres"
-    }
+    },
+    alreadyExists: true
   },
   password: {
     presence: {
+      allowEmpty: false,
       message: "^Wachtwoord mag niet leeg zijn"
     },
     length: {
@@ -38,7 +42,7 @@ export const constraints = {
   }, 
   confirmPassword: {
     equality: {
-      attribute: "wachtwoord",
+      attribute: "password",
       message: "^Moet gelijk zijn aan het wachtwoord"
     }
   }

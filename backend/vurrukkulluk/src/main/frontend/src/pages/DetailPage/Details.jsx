@@ -9,6 +9,7 @@ import { useDatabase } from "../../hooks";
 import { useAppContext } from "../../contexts";
 import Category from "../../components/Category/Category";
 import usePostData from "../../hooks/usePostData";
+import useLocalStorage from "../../hooks/useLocalStorage"
 
 const Details = ({details}) => {
 
@@ -23,13 +24,24 @@ const Details = ({details}) => {
   const kitchenType = details?.kitchenType?.name ?? '';
   const categories = details.categories;
 
+  const ingredients = details?.ingredients ?? [];
+
   const [data, isLoaded, postData] = usePostData()
+  const [shoppingList, setShoppingList] = useLocalStorage('shoppinglist', {products: []});
 
   // const {title, description, image, kitchenRegion, kitchenType, persons, price, calories} = details;
   // const {setBannerImages} = useAppContext();
   // setBannerImages([imageId]);
 
   // const [image, imageLoaded] = useDatabase(`image/${imgid}`);
+
+  const addToList = () => {
+    console.log('click', ingredients)
+    ingredients.map(ingredient => {
+      setShoppingList(prev => [...prev, ingredient.article.id])
+    })
+    console.log('shoppinglist: ', shoppingList)
+  }
 
   const renderImage = () => {
       return (
@@ -101,7 +113,7 @@ const Details = ({details}) => {
           })}
         </div>
         <div className="details_buttons">
-          <button className="ListButton">Op Lijst</button>
+          <button className="ListButton" onClick={addToList}>Op Lijst</button>
           <button
           className="FavouriteButton"
           onClick={() => {postData('/favorites', {userId: 1, recipeId: 1 })}}
