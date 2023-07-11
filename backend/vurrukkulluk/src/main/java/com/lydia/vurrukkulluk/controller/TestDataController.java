@@ -158,6 +158,11 @@ public class TestDataController {
         recipe2.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe2));
 
+        addIngredientToRecipe(recipes.get(1),0, articles,5);
+        addIngredientToRecipe(recipes.get(1),1, articles,220);
+        addIngredientToRecipe(recipes.get(1),2, articles,10);
+        addIngredientToRecipe(recipes.get(1),3, articles,30);
+
         return recipes;
     }
 
