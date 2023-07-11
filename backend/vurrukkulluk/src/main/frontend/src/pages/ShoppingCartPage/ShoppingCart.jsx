@@ -4,7 +4,7 @@ import "./ShoppingCart.css";
 import api from "../../lib/recipeAPI";
 import { RiDeleteBinLine } from "react-icons/ri";
 // import { SC_ACTION } from "./ShoppingCartActions";
-// import { useDatabase } from "../../hooks";
+import { useDatabase } from "../../hooks";
 
 // import useLocalStorage from "../../hooks/useLocalStorage";
 import { useShopContext, SL_ACTION } from "../../contexts";
@@ -45,32 +45,24 @@ import { useShopContext, SL_ACTION } from "../../contexts";
 const ShoppingCart = () => {
   /* video on useReducer: https://www.youtube.com/watch?v=kK_Wqx3RnHk */
   // const [state, dispatch] = useReducer(reducer, { products: [], checkedProductIds: [] });
-  const {products, recepiesIds, checkedProductIds, deletedProductIds, dispatch} = useShopContext();
-
+  const {products, recipeIds, checkedProductIds, deletedProductIds, dispatch} = useShopContext();
+  const [articles, articlesLoaded ] = useDatabase('/articles');
+  
   useEffect(() => {
     dispatch({type: SL_ACTION.REFRESH_LIST});
-   }, [products, recepiesIds, dispatch] )
+   }, [products, recipeIds, dispatch] )
 
-  // const [products, productsLoaded ] = useDatabase('/products');
-  
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const response = await api.get("/products");
-  //       dispatch({ type: SC_ACTION.POPULATE_LIST, payload:{ products: response.data }});
-  //     } catch (err) {
-  //       if (err.response) {
-  //         //Not in the 200 response range
-  //         console.log(err.response.data);
-  //         console.log(err.response.status);
-  //         console.log(err.response.headers);
-  //       } else {
-  //         console.log(`Error: ${err.message}`);
-  //       }
-  //     }
-  //   };
-  //   getData();
-  // }, []);
+
+  // const fullProducts = products.map((key, value)=> {
+  //   return {
+  //     article: articles.filter((article) => article.id === key),
+  //     amount: value
+  //   }
+  // })
+  // console.log(fullProducts)
+  // const currentProducts = fullProducts.filter(
+  //   (product)=> !deletedProductIds.includes(product.article.id)
+  // )
   const currentProducts = products.filter(
     (product)=> !deletedProductIds.includes(product.article.id)
   )

@@ -1,4 +1,5 @@
-import { createContext, useContext, useReducer, useCallback} from "react"
+import { createContext, useContext, useReducer, useCallback, useEffect} from "react"
+import api from "../lib/recipeAPI"
 
 export const SL_ACTION = {
   POPULATE_LIST: 'populate-list',
@@ -70,18 +71,19 @@ function reducer(state, action) {
     case SL_ACTION.POPULATE_LIST:
       return { ...state, products: action.payload.products}
 
-    case SL_ACTION.REFRESH_LIST:
-      if (state.products.length === 0 && state.recepiesIds.length !== 0) {
-        console.log("getting products for recipies: ", state.recepiesIds);
-        // async backend call . then(
-         return {...state, products:tempProducts}
-         // )
-      }
-      return state;
+    // case SL_ACTION.REFRESH_LIST:
+    //   if (state.products.length === 0 && state.recipesIds.length !== 0) {
+    //     console.log("getting products for recipies: ", state.recipesIds);
+        
+    //     // async backend call . then(
+    //     return {...state, products:tempProducts}
+    //      // )
+    //   }
+    //   return state;
 
     case SL_ACTION.ADD_RECIPE:
       return { ...state, products: [],
-               recepiesIds: [...state.recepiesIds, action.payload.recipeId],
+               recipeIds: [...state.recipeIds, action.payload.recipeId],
                deletedProductIds: state.deletedProductIds.filter(id => !action.payload.articleIds.includes(id)),
                checkedProductIds: state.checkedProductIds.filter(id => !action.payload.articleIds.includes(id))
             }
@@ -118,17 +120,26 @@ function reducer(state, action) {
 
 export function ShopContextProvider({children}){
 
-  const [state, localDispatch] = useReducer(reducer, { products: [], recepiesIds: [], checkedProductIds: [], deletedProductIds: [] });
+  const [state, localDispatch] = useReducer(reducer, { products: [], recipeIds: [], checkedProductIds: [], deletedProductIds: [] });
   
-  const dispatch = useCallback(async (action) => {
+  const dispatch = async (action) => {
     console.log('custom action: ', action)
     switch (action.type) {
       case SL_ACTION.REFRESH_LIST:
         console.log('state: ', state)
-      if (state.products.length === 0 && state.recepiesIds.length !== 0) {
-        console.log("getting products for recipies: ", state.recepiesIds);
+      if (state.products.length === 0 && state.recipeIds.length !== 0) {
+        console.log("getting products for recipies: ", state.recipeIds);
         // async backend call . then(
-        localDispatch({type:SL_ACTION.POPULATE_LIST, payload: {products:tempProducts}});
+        api.post("/cart", {recipeIds: state.recipeIds})
+        .then((value) => {
+          console.log('response: ', value)
+          localDispatch({type:SL_ACTION.POPULATE_LIST, payload: {products:tempProducts}});
+        })
+        .catch((err) =>
+          console.log('catch: ', err)
+        )
+
+        // localDispatch({type:SL_ACTION.POPULATE_LIST, payload: {products:tempProducts}});
          // )
       }
       break;
@@ -136,8 +147,12 @@ export function ShopContextProvider({children}){
         localDispatch(action);
         break;
     }
-  },[])
-  
+  }
+
+  useEffect(()=> {
+    console.log('current state: ', state)
+  },[state])
+
   return (
     <ShoppingListContext.Provider value={{...state, dispatch}} >
       {children}

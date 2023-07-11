@@ -12,21 +12,21 @@ const IngredientsForm = () => {
   const { data, handleChange, updateIngredientQuantity } = useAddRecipeContext();                                                                                                 
   const [searchValue, setSearchValue] = useState('');
   
-  // const filter = () => {
-  //   if(!searchValue || !articlesLoaded) return [];
-  //   const filtered = articles.filter((article)=> {
-  //     return (
-  //       searchValue &&
-  //       articlesLoaded && (
-  //         article.name.toLowerCase().includes(searchValue)
-  //       )
-  //     )
-  //   });
-  //   console.log(filtered)
-  //   return filtered;
-  // }
-  // const searchResults = filter();
-  const searchResults = search(searchValue, articles);
+  const filter = () => {
+    if(!searchValue || !articlesLoaded) return [];
+    const filtered = articles.filter((article)=> {
+      return (
+        searchValue &&
+        articlesLoaded && (
+          article.name.toLowerCase().includes(searchValue)
+        )
+      )
+    });
+    console.log(filtered)
+    return filtered;
+  }
+  const searchResults = filter();
+  // const searchResults = search(searchValue, articles);
 
   const findObjectById = (id) => {
     if(articlesLoaded){
