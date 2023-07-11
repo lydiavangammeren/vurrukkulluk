@@ -7,7 +7,7 @@ import AddRecipe from "./pages/AddRecipePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import "./assets/styles/main.css";
 import { useDatabase } from "./hooks"
-import { ContextProvider } from "./contexts";
+import { ContextProvider, ShopContextProvider } from "./contexts";
 import Layout from "./layouts";
 // import ImageResize from "./pages/testPage/ImageResize";
 // import ImgDropAndCrop from "./pages/testPage/ImgDropAndCrop";
@@ -29,6 +29,7 @@ function App() {
     if(isLoaded){
       return (
         <ContextProvider recipes={recipes} bannerImages={images}>
+          <ShopContextProvider >
           <ScrollToTop />
           <Layout >
             <Routes>
@@ -43,6 +44,7 @@ function App() {
               <Route path="/test" element={<CropDemo />} />
             </Routes>
           </Layout>
+          </ShopContextProvider>
         </ContextProvider>
       )
     } else {

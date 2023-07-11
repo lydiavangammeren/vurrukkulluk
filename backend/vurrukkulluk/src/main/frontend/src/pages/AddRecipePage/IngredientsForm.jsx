@@ -3,6 +3,7 @@ import useAddRecipeContext from '../../hooks/useAddRecipeContext'
 import { SearchBar, SearchResultsList } from './SearchIngredients';
 import { useDatabase } from '../../hooks';
 import Ingredient from './Ingredient';
+import { search } from './SearchIngredients/search';
 
 const IngredientsForm = () => {
 
@@ -11,19 +12,21 @@ const IngredientsForm = () => {
   const { data, handleChange, updateIngredientQuantity } = useAddRecipeContext();                                                                                                 
   const [searchValue, setSearchValue] = useState('');
   
-  const filter = () => {
-    if(!searchValue || !articlesLoaded) return [];
-    const filtered = articles.filter((article)=> {
-      return (
-        searchValue &&
-        articlesLoaded && (
-          article.name.toLowerCase().includes(searchValue)
-        )
-      )
-    });
-    return filtered;
-  }
-  const searchResults = filter();
+  // const filter = () => {
+  //   if(!searchValue || !articlesLoaded) return [];
+  //   const filtered = articles.filter((article)=> {
+  //     return (
+  //       searchValue &&
+  //       articlesLoaded && (
+  //         article.name.toLowerCase().includes(searchValue)
+  //       )
+  //     )
+  //   });
+  //   console.log(filtered)
+  //   return filtered;
+  // }
+  // const searchResults = filter();
+  const searchResults = search(searchValue, articles);
 
   const findObjectById = (id) => {
     if(articlesLoaded){
