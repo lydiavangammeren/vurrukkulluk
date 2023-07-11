@@ -56,7 +56,8 @@ public class SecurityConfig {
 
     };
     private static final String[] AUTH_WHITELIST_POST = {
-            "api/testdata"
+            "api/testdata",
+            "api/cart"
     };
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
