@@ -43,7 +43,8 @@ public class ShoppingCartController {
         for (int i: recipesIds.getRecipeIds()) {
             List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(i);
             for (Ingredient ingredient: ingredients){
-                Integer key = ingredient.getArticleUnits().getArticle().getId();
+                Integer key = ingredient.getArticleUnit().getArticle().getId();
+
                 if (totalArticlesAmount.containsKey(key)){
                     totalArticlesAmount.put(key, totalArticlesAmount.get(key) + ingredient.getAmount());
                 } else {
