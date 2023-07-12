@@ -6,7 +6,7 @@ import { VscFlame } from 'react-icons/vsc';
 import {BsHeart} from 'react-icons/bs';
 
 import { useDatabase } from "../../hooks";
-import { useAppContext } from "../../contexts";
+import { useAppContext, useShopContext, SL_ACTION } from "../../contexts";
 import Category from "../../components/Category/Category";
 import usePostData from "../../hooks/usePostData";
 import useLocalStorage from "../../hooks/useLocalStorage"
@@ -27,8 +27,8 @@ const Details = ({details}) => {
   const ingredients = details?.ingredients ?? [];
 
   const [data, isLoaded, postData] = usePostData()
-  // const [shoppingList, setShoppingList] = useLocalStorage('shoppinglist', {products: []});
-
+  // const [shoppingList, setShoppingList] = useLocalStorage('shoppinglist', { products: [], recepies: [], checked: [], deleted: []});
+  const {dispatch } = useShopContext();
   // const {title, description, image, kitchenRegion, kitchenType, persons, price, calories} = details;
   // const {setBannerImages} = useAppContext();
   // setBannerImages([imageId]);
@@ -37,17 +37,21 @@ const Details = ({details}) => {
 
   const addToList = () => {
     console.log('click', ingredients)
-    ingredients.map(ingredient => {
-      console.log('ingredients: ', ingredient.article.id)
+    dispatch({type: SL_ACTION.ADD_RECIPE, payload: {recipeId: details.id, 
+      articleIds: ingredients.map(ingredient => (ingredient.article.id))
+    }})
+    // ingredients.map(ingredient => {
+    //   console.log('ingredients: ', ingredient.article.id)
       
-    //   setShoppingList(prev => [...prev, ingredient.article.id])
-    })
+    //   // setShoppingList(prev => ({...prev, products: [...prev.products, ingredient.article.id]}))
+    // })
     // console.log('shoppinglist: ', shoppingList)
   }
 
-  useEffect(() => {
-    localStorage.removeItem('shoppinglist');
-  }, [])
+  // useEffect(() => {
+  //   localStorage.removeItem('shoppinglist');
+  // }, [])
+
   const renderImage = () => {
       return (
          <img 

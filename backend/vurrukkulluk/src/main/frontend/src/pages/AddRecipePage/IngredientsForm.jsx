@@ -3,6 +3,7 @@ import useAddRecipeContext from '../../hooks/useAddRecipeContext'
 import { SearchBar, SearchResultsList } from './SearchIngredients';
 import { useDatabase } from '../../hooks';
 import Ingredient from './Ingredient';
+import { search } from './SearchIngredients/search';
 
 const IngredientsForm = () => {
 
@@ -21,9 +22,11 @@ const IngredientsForm = () => {
         )
       )
     });
+    console.log(filtered)
     return filtered;
   }
   const searchResults = filter();
+  // const searchResults = search(searchValue, articles);
 
   const findObjectById = (id) => {
     if(articlesLoaded){
