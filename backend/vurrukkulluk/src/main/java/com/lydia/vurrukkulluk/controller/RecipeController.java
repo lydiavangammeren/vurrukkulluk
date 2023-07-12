@@ -66,7 +66,7 @@ public class RecipeController {
       ingredient.setAmount(ingredientInRecipeDto.getAmount());
       Article article = new Article();
       article.setId(ingredientInRecipeDto.getArticleId());
-      ingredient.setArticle(article);
+      //ingredient.setArticle(article);
       ingredient.setRecipe(finalRecipe);
       ingredientService.saveIngredient(ingredient);
     });

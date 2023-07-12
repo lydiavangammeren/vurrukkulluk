@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.repository.ImageRepository;
+import com.lydia.vurrukkulluk.repository.UnitRepository;
 import com.lydia.vurrukkulluk.service.*;
 import com.lydia.vurrukkulluk.util.Role;
 import com.lydia.vurrukkulluk.util.UserImageUtil;
@@ -54,6 +55,12 @@ public class TestDataController {
     private KitchenCategoriesLinkService kitchenCategoriesLinkService;
     @Autowired
     private KitchenCategoryService kitchenCategoryService;
+
+    @Autowired
+    private UnitService unitService;
+    @Autowired
+    private ArticleUnitService articleUnitService;
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -65,7 +72,9 @@ public class TestDataController {
     public String createTestData(){
 
         List<User> users = createUsers();
+        List<Unit> units = createUnits();
         List<Article> articles = createArticles();
+        List<ArticleUnit> articleUnits = createArticleUnits(units,articles);
         List<KitchenRegion> kitchenRegions = createKitchenRegion();
         List<KitchenType> kitchenTypes = createKitchenType();
         List<KitchenCategory> kitchenCategories = createKitchenCategory();
@@ -77,6 +86,43 @@ public class TestDataController {
 
 
         return "testdata made";
+    }
+
+    private List<ArticleUnit> createArticleUnits(List<Unit> units, List<Article> articles) {
+
+        List<ArticleUnit> articleUnits = new ArrayList<>();
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(1),1.0,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(0),1000.0,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(0),0.001,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(6),0.4,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(4),1000,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(3),1,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(5),10,units.get(1)));
+        return articleUnits;
+    }
+
+    private ArticleUnit addArticleUnit(Article article, Unit unit, double i, Unit unit1) {
+         ArticleUnit articleUnit= new ArticleUnit();
+
+        return articleUnit;
+    }
+
+    private List<Unit> createUnits() {
+
+        String[] unitNames = {"kg","g","mg","l","ml","cl","mespunt","snufje","theelepel","stuks"};
+        List<Unit> units = new ArrayList<>();
+
+        for (String name:unitNames) {
+            units.add(addUnit(name));
+        }
+        return units;
+    }
+
+    private Unit addUnit(String unitName) {
+        Unit unit = new Unit();
+        unit.setName(unitName);
+        unitService.save(unit);
+        return unit;
     }
 
     private void createCalendar() {
@@ -354,7 +400,7 @@ public class TestDataController {
     public void addIngredientToRecipe(Recipe recipe, int articleId, List<Article> articles, int amount){
         Ingredient ingredient = new Ingredient();
         ingredient.setRecipe(recipe);
-        ingredient.setArticle(articles.get(articleId));
+        //ingredient.setArticle(articles.get(articleId));
         ingredient.setAmount(amount);
         ingredientService.saveIngredient(ingredient);
     }
