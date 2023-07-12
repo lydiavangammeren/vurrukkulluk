@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.repository.ImageRepository;
+import com.lydia.vurrukkulluk.repository.RatingRepository;
 import com.lydia.vurrukkulluk.repository.UnitRepository;
 import com.lydia.vurrukkulluk.service.*;
 import com.lydia.vurrukkulluk.util.Role;
@@ -75,6 +76,10 @@ public class TestDataController {
         List<Unit> units = createUnits();
         List<Article> articles = createArticles();
         List<ArticleUnit> articleUnits = createArticleUnits(units,articles);
+
+        String res = articleUnitService.getDefaultUnitFromArticleId(articles.get(0).getId());
+        System.out.println(res);
+
         List<KitchenRegion> kitchenRegions = createKitchenRegion();
         List<KitchenType> kitchenTypes = createKitchenType();
         List<KitchenCategory> kitchenCategories = createKitchenCategory();
@@ -83,7 +88,6 @@ public class TestDataController {
         createFavorites(users, recipes);
         createRatings(users, recipes);
         createCalendar();
-
 
         return "testdata made";
     }
@@ -96,14 +100,18 @@ public class TestDataController {
         articleUnits.add(addArticleUnit(articles.get(0),units.get(0),0.001,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(6),0.4,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(1),units.get(4),1000,units.get(4)));
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(3),1,units.get(1)));
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(5),10,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(3),1,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(5),10,units.get(4)));
         return articleUnits;
     }
 
-    private ArticleUnit addArticleUnit(Article article, Unit unit, double i, Unit unit1) {
-         ArticleUnit articleUnit= new ArticleUnit();
-
+    private ArticleUnit addArticleUnit(Article article, Unit unit, double i, Unit defUnit) {
+        ArticleUnit articleUnit= new ArticleUnit();
+        articleUnit.setArticle(article);
+        articleUnit.setUnit(unit);
+        articleUnit.setAmount(i);
+        articleUnit.setDefUnit(defUnit);
+        articleUnitService.save(articleUnit);
         return articleUnit;
     }
 
@@ -400,7 +408,9 @@ public class TestDataController {
     public void addIngredientToRecipe(Recipe recipe, int articleId, List<Article> articles, int amount){
         Ingredient ingredient = new Ingredient();
         ingredient.setRecipe(recipe);
-        //ingredient.setArticle(articles.get(articleId));
+        ArticleUnit a = new ArticleUnit();
+        a.setId(1);
+        ingredient.setArticleUnit(a);
         ingredient.setAmount(amount);
         ingredientService.saveIngredient(ingredient);
     }

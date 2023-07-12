@@ -7,5 +7,6 @@ public interface ArticleUnitService {
 
 
     ArticleUnit save(ArticleUnit articleUnit);
+    String getDefaultUnitFromArticleId(int articleId);
 
 }

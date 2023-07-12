@@ -23,8 +23,8 @@ public class ArticleUnit {
     private double amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "conversion_unit",nullable = false)
-    private Unit convUnit;
+    @JoinColumn(name = "default_unit",nullable = false)
+    private Unit defUnit;
 
 
 }
