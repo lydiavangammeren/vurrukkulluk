@@ -2,6 +2,7 @@ package com.lydia.vurrukkulluk.controller;
 
 
 import com.lydia.vurrukkulluk.model.*;
+import com.lydia.vurrukkulluk.repository.ArticleUnitRepository;
 import com.lydia.vurrukkulluk.repository.ImageRepository;
 import com.lydia.vurrukkulluk.repository.RatingRepository;
 import com.lydia.vurrukkulluk.repository.UnitRepository;
@@ -69,21 +70,21 @@ public class TestDataController {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final ArticleUnitRepository articleUnitRepository;
     @PostMapping()
     public String createTestData(){
+
+
+
 
         List<User> users = createUsers();
         List<Unit> units = createUnits();
         List<Article> articles = createArticles();
         List<ArticleUnit> articleUnits = createArticleUnits(units,articles);
-
-        String res = articleUnitService.getDefaultUnitFromArticleId(articles.get(0).getId());
-        System.out.println(res);
-
         List<KitchenRegion> kitchenRegions = createKitchenRegion();
         List<KitchenType> kitchenTypes = createKitchenType();
         List<KitchenCategory> kitchenCategories = createKitchenCategory();
-        List<Recipe> recipes = createRecipe(users, articles, kitchenRegions, kitchenTypes, kitchenCategories);
+        List<Recipe> recipes = createRecipe(users, articleUnits, kitchenRegions, kitchenTypes, kitchenCategories);
         createComments(users, recipes);
         createFavorites(users, recipes);
         createRatings(users, recipes);
@@ -102,6 +103,9 @@ public class TestDataController {
         articleUnits.add(addArticleUnit(articles.get(1),units.get(4),1000,units.get(4)));
         articleUnits.add(addArticleUnit(articles.get(1),units.get(3),1,units.get(4)));
         articleUnits.add(addArticleUnit(articles.get(1),units.get(5),10,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(2),units.get(4),1,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(3),units.get(4),1,units.get(4)));
+
         return articleUnits;
     }
 
@@ -162,13 +166,13 @@ public class TestDataController {
         addComment(recipes.get(0),"bah!!!!!", users.get(1));
         addComment(recipes.get(0),"Lekker!!!!!", users.get(0));
         addComment(recipes.get(0),"Nou nee, niet echt ... :(", users.get(1));
-      addComment(recipes.get(1),"Jammie!", users.get(0));
-      addComment(recipes.get(1),"Duurt veel te lang om te maken", users.get(1));
-      addComment(recipes.get(1),"Valt wel mee, toch?", users.get(0));
-      addComment(recipes.get(1),"Ik heb 3 uur in de keuken gestaan!", users.get(1));
+        addComment(recipes.get(1),"Jammie!", users.get(0));
+        addComment(recipes.get(1),"Duurt veel te lang om te maken", users.get(1));
+        addComment(recipes.get(1),"Valt wel mee, toch?", users.get(0));
+        addComment(recipes.get(1),"Ik heb 3 uur in de keuken gestaan!", users.get(1));
     }
 
-    private List<Recipe> createRecipe(List<User> users, List<Article> articles, List<KitchenRegion> kitchenRegions, List<KitchenType> kitchenTypes, List<KitchenCategory> kitchenCategories) {
+    private List<Recipe> createRecipe(List<User> users, List<ArticleUnit> articleUnits, List<KitchenRegion> kitchenRegions, List<KitchenType> kitchenTypes, List<KitchenCategory> kitchenCategories) {
 
         List<Recipe> recipes = new ArrayList<>();
 
@@ -185,10 +189,10 @@ public class TestDataController {
         recipe.setUser(users.get(1));
         recipes.add(recipeService.saveRecipe(recipe));
 
-        addIngredientToRecipe(recipes.get(0),0, articles,2);
-        addIngredientToRecipe(recipes.get(0),1, articles,320);
-        addIngredientToRecipe(recipes.get(0),2, articles,30);
-        addIngredientToRecipe(recipes.get(0),3, articles,20);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(0),7);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(1),320);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(6),13);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(7),304);
 
         addCategoryToRecipe(recipes.get(0), 0,kitchenCategories);
         addCategoryToRecipe(recipes.get(0), 7,kitchenCategories);
@@ -212,10 +216,10 @@ public class TestDataController {
         recipe2.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe2));
 
-        addIngredientToRecipe(recipes.get(1),0, articles,5);
-        addIngredientToRecipe(recipes.get(1),1, articles,220);
-        addIngredientToRecipe(recipes.get(1),2, articles,10);
-        addIngredientToRecipe(recipes.get(1),3, articles,30);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(0),5);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(1),220);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(2),10);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(3),30);
 
         return recipes;
     }
@@ -405,12 +409,10 @@ public class TestDataController {
         return image;
     }
 
-    public void addIngredientToRecipe(Recipe recipe, int articleId, List<Article> articles, int amount){
+    public void addIngredientToRecipe(Recipe recipe, ArticleUnit aU, int amount){
         Ingredient ingredient = new Ingredient();
         ingredient.setRecipe(recipe);
-        ArticleUnit a = new ArticleUnit();
-        a.setId(1);
-        ingredient.setArticleUnit(a);
+        ingredient.setArticleUnit(aU);
         ingredient.setAmount(amount);
         ingredientService.saveIngredient(ingredient);
     }

@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ArticleUnitRepository extends JpaRepository<ArticleUnit,Integer> {
 
-    @Query("SELECT au.defUnit FROM ArticleUnit au WHERE au.article.id=?1 GROUP BY au.article.id")
-    Unit getDefaultUnitFromArticleId(int articleId);
+    @Query("SELECT au FROM ArticleUnit au WHERE au.article.id=?1 and au.defUnit=au.unit")
+    ArticleUnit getDefaultUnitArticleFromArticleId(int articleId);
 }

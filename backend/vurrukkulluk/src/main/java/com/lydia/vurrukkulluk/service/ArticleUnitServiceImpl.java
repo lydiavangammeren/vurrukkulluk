@@ -1,6 +1,7 @@
 package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.ArticleUnit;
+import com.lydia.vurrukkulluk.model.Unit;
 import com.lydia.vurrukkulluk.repository.ArticleUnitRepository;
 import com.lydia.vurrukkulluk.repository.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,12 @@ public class ArticleUnitServiceImpl implements ArticleUnitService{
     }
 
     @Override
-    public String getDefaultUnitFromArticleId(int articleId) {
+    public Unit getDefaultUnitFromArticleId(int articleId) {
+        return getDefaultUnitArticleFromArticleId(articleId).getUnit();
+    }
 
-
-        return articleUnitRepository.getDefaultUnitFromArticleId(articleId).getName();
+    @Override
+    public ArticleUnit getDefaultUnitArticleFromArticleId(int articleId) {
+        return articleUnitRepository.getDefaultUnitArticleFromArticleId(articleId);
     }
 }

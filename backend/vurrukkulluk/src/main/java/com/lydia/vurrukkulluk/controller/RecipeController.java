@@ -42,6 +42,10 @@ public class RecipeController {
   private UserService userService;
   @Autowired
   private ImageService imageService;
+
+  @Autowired
+  private ArticleUnitService articleUnitService;
+
   @Autowired
   private ModelMapper modelMapper;
   @Autowired
@@ -99,20 +103,14 @@ public class RecipeController {
   @GetMapping()
   public List<RecipeDto> get() {
     List<Recipe> allRecipes = recipeService.getAllRecipes();
-    List<RecipeDto> allRecipesDto = allRecipes.stream().map(this::fillRecipeDto).collect(Collectors.toList());
 
-    /*
-    System.out.println("in here");
-    allRecipesDto.forEach(this::fillRecipeDto);*/
-
-    return allRecipesDto;
+    return allRecipes.stream().map(this::fillRecipeDto).collect(Collectors.toList());
   }
 
   @GetMapping("/{slug}")
   public RecipeDto getTitle(@PathVariable String slug){
     Recipe recipe = recipeService.getRecipeBySlug(slug);
-    RecipeDto recipeDto = fillRecipeDto(recipe);
-    return recipeDto;
+    return fillRecipeDto(recipe);
   }
 
   @PutMapping("/{id}")
@@ -146,21 +144,29 @@ public class RecipeController {
   public int calculateCurrentPrice(List<IngredientDto> ingredients){
 
     return ingredients.stream().map(ingredientDto -> {
-        int amount = ingredientDto.getAmount();
+
+        double amount = amountInDefaultValue(ingredientDto);
+
         int articlePrice = ingredientDto.getArticle().getPrice();
         int articleAmount = ingredientDto.getArticle().getAmount();
-        return (amount * articlePrice)/ articleAmount;})
+        return ((int) (amount * articlePrice))/ articleAmount;})
             .reduce(0, (a, b) -> a+b);
   }
 
   public int calculateCalories(List<IngredientDto> ingredients) {
 
     return ingredients.stream().map(ingredientDto -> {
-              int amount = ingredientDto.getAmount();
+              double amount = amountInDefaultValue(ingredientDto);
               int articleCalories = ingredientDto.getArticle().getCalories();
               int articleAmount = ingredientDto.getArticle().getAmount();
-              return (amount * articleCalories)/ articleAmount;})
+              return ((int) (amount * articleCalories))/ articleAmount;})
             .reduce(0, (a, b) -> a+b);
+  }
+
+  private double amountInDefaultValue(IngredientDto ingredientDto) {
+    double amount = ingredientDto.getAmount();
+    amount = amount * ingredientDto.getArticleUnit().getAmount();
+    return amount;
   }
 
   public RecipeDto fillRecipeDto(Recipe recipe){

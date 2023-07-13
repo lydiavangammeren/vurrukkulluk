@@ -11,5 +11,5 @@ import java.util.HashMap;
 @NoArgsConstructor
 public class ShoppingCartDto {
     HashMap<Integer,Integer>  ArticlesToBuy;
-    HashMap<Integer,Integer> ArticlesAmount;
+    HashMap<Integer,Double> ArticlesAmount;
 }

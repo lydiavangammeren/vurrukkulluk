@@ -28,7 +28,7 @@ public class ShoppingCartController {
     @PostMapping
     public ShoppingCartDto getCart(@RequestBody ShoppingCartPostDto recipesIds){
 
-        HashMap<Integer,Integer> totalArticlesAmount = getTotalArticlesAmount(recipesIds);
+        HashMap<Integer,Double> totalArticlesAmount = getTotalArticlesAmount(recipesIds);
 
         HashMap<Integer,Integer> cart = getTotalArticlesToBuy(totalArticlesAmount);
 
@@ -38,8 +38,8 @@ public class ShoppingCartController {
         return result;
     }
 
-    private HashMap<Integer,Integer> getTotalArticlesAmount(ShoppingCartPostDto recipesIds){
-        HashMap<Integer,Integer> totalArticlesAmount = new HashMap<>();
+    private HashMap<Integer,Double> getTotalArticlesAmount(ShoppingCartPostDto recipesIds){
+        HashMap<Integer,Double> totalArticlesAmount = new HashMap<>();
         for (int i: recipesIds.getRecipeIds()) {
             List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(i);
             for (Ingredient ingredient: ingredients){
@@ -55,12 +55,13 @@ public class ShoppingCartController {
         return totalArticlesAmount;
     }
 
-    private HashMap<Integer,Integer> getTotalArticlesToBuy( HashMap<Integer,Integer> totalArticlesAmount){
+    private HashMap<Integer,Integer> getTotalArticlesToBuy( HashMap<Integer,Double> totalArticlesAmount){
         HashMap<Integer,Integer> cart = new HashMap<>();
         for ( Integer articleId: totalArticlesAmount.keySet()) {
             Article article = articleService.getArticleById(articleId);
             Integer articleAmount = article.getAmount();
-            cart.put(articleId,divideAndRoundUp(totalArticlesAmount.get(articleId), articleAmount));
+            int totalRoundedDown = (int) totalArticlesAmount.get(articleId).floatValue();
+            cart.put(articleId,divideAndRoundUp(totalRoundedDown, articleAmount));
         }
         return cart;
     }
