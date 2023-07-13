@@ -74,9 +74,6 @@ public class TestDataController {
     @PostMapping()
     public String createTestData(){
 
-
-
-
         List<User> users = createUsers();
         List<Unit> units = createUnits();
         List<Article> articles = createArticles();
@@ -321,7 +318,6 @@ public class TestDataController {
         String imagePath = "src\\main\\resources\\images\\hamb.jpg";
         Image image = uploadImageByPath(imagePath,"hamb.jpg");
         article1.setImage(image);
-        article1.setUnit("stuks");
         article1.setCalories(250);
         article1.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article1.setPrice(120);
@@ -333,7 +329,6 @@ public class TestDataController {
         String imagePath2 = "src\\main\\resources\\images\\VeganBurgerI.jpg";
         Image image2 = uploadImageByPath(imagePath,"VeganBurgerI.jpg");
         article2.setImage(image2);
-        article2.setUnit("g");
         article2.setCalories(469);
         article2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article2.setPrice(540);
@@ -345,7 +340,6 @@ public class TestDataController {
         String imagePath3 = "src\\main\\resources\\images\\VeganSauce.jpg";
         Image image3 = uploadImageByPath(imagePath,"VeganSauce.jpg");
         article3.setImage(image3);
-        article3.setUnit("ml");
         article3.setCalories(750);
         article3.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article3.setPrice(520);
@@ -357,7 +351,6 @@ public class TestDataController {
         String imagePath4 = "src\\main\\resources\\images\\VeganBurgerI.jpg";
         Image image4 = uploadImageByPath(imagePath,"VeganBurgerI.jpg");
         article4.setImage(image4);
-        article4.setUnit("stuks");
         article4.setCalories(300);
         article4.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article4.setPrice(200);

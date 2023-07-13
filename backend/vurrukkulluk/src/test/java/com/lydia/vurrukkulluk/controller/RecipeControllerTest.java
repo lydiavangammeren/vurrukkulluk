@@ -100,23 +100,16 @@ class RecipeControllerTest {
         int totalPriceSimple = (400 * 250) / 200 + (320 * 250) / 200;
         int totalCalSimple   = (400 * 200) / 200 + (320 * 200) / 200;
 
-        // 4.340 * 25000 = 1085
         int totalPriceComp = (5000 * 25000) / 100 + (int)(4.340 * 25000) / 100 ;
         int totalCalComp = (5000 * 1050) / 100 + (int)(4.340 * 1050) / 100;
 
         int totalPriceAll= totalPriceComp + totalPriceSimple;
         int totalCalAll = totalCalComp + totalCalSimple;
 
-        System.out.println(totalPriceSimple);
-        System.out.println(totalCalSimple);
-
-        System.out.println(totalPriceComp);
-        System.out.println(totalCalComp);
 
         assertEquals(totalPriceSimple,recipeController.calculateCurrentPrice(ingredients1));
         assertEquals(totalCalSimple,recipeController.calculateCalories(ingredients1));
 
-        System.out.println(recipeController.calculateCurrentPrice(ingredients2));
         assertEquals(totalPriceComp,recipeController.calculateCurrentPrice(ingredients2));
         assertEquals(totalCalComp,recipeController.calculateCalories(ingredients2));
 
