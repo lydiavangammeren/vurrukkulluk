@@ -3,12 +3,14 @@ package com.lydia.vurrukkulluk.service;
 import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.repository.ArticleRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ArticleServiceImpl implements ArticleService{
     @Autowired
     private ArticleRepository articleRepository;
@@ -43,7 +45,7 @@ public class ArticleServiceImpl implements ArticleService{
     }
 
     @Override
-    public void setImageInRecipe(int id, Image image) {
+    public void setImageInArticle(int id, Image image) {
         var article = getArticleById(id);
         article.setImage(image);
         saveArticle(article);

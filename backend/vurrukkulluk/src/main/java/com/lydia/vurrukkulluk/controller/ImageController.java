@@ -69,7 +69,7 @@ public class ImageController {
       }
       case "article" -> {
 //        if (!securityUtil.isAdmin()) {return "not authorized";}
-        articleService.setImageInRecipe(id,image);
+        articleService.setImageInArticle(id,image);
 
       }
     }
