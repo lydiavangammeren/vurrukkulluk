@@ -20,7 +20,7 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public Rating getRatingById(int id) {
-        return ratingRepository.getReferenceById(id);
+        return ratingRepository.findById(id).get();
     }
 
     @Override
@@ -34,25 +34,19 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public void saveRating(Rating rating) {
-        ratingRepository.save(rating);
-    }
-
+    public Rating saveRating(Rating rating) { return ratingRepository.save(rating); }
     @Override
     public float getAvgRatingOfRecipe(int recipeId) {
         float avg;
         try {
             avg = ratingRepository.findAvgByRecipeId(recipeId);
         } catch (AopInvocationException e){
-            avg = (float) 0.0;
+            avg = 0.0F;
         }
-        
         return avg;
     }
-
     @Override
     public void deleteById(int id) {
         ratingRepository.deleteById(id);
     }
-
 }

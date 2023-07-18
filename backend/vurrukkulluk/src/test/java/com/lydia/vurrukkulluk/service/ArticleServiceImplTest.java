@@ -82,7 +82,7 @@ class ArticleServiceImplTest {
     void updateArticle() {
 
         when(repository.save(article)).thenReturn(article);
-        assertEquals(article,articleService.saveArticle(article));
+        assertEquals(article,articleService.updateArticle(article));
         verify(repository).save(article);
     }
 

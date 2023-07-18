@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,6 +53,20 @@ class UserTest {
         assertNull(user.getOTPExpire());
         assertNull(user.getRole());
         assertNull(user.getPassword());
+    }
+    @Test
+   void getAuthorities(){
+        User user = new User();
+        user.setRole(Role.USER);
+
+        System.out.println(user.getAuthorities());
+        assertEquals(List.of(new SimpleGrantedAuthority(Role.USER.name())),user.getAuthorities());
+    }
+    @Test
+    void getUsername(){
+        User user = new User();
+        user.setEmail("email@a.com");
+        assertEquals("email@a.com",user.getUsername());
     }
 
     @Test

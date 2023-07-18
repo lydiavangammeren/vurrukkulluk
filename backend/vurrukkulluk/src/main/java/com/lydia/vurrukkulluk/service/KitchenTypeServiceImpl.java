@@ -18,8 +18,8 @@ public class KitchenTypeServiceImpl implements KitchenTypeService {
   }
 
   @Override
-  public void updateKitchenType(KitchenType kitchenType) {
-    kitchenTypeRepository.save(kitchenType);
+  public KitchenType updateKitchenType(KitchenType kitchenType) {
+    return kitchenTypeRepository.save(kitchenType);
   }
 
   @Override

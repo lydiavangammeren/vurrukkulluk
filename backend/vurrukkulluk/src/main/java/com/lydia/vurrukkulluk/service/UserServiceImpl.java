@@ -37,9 +37,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void updateUser(User user) {
-    userRepository.save(user);
-  }
+  public User updateUser(User user) { return userRepository.save(user); }
 
   @Override
   public void deleteById(int id) {
@@ -52,15 +50,13 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void setImageInUser(int id, Image image) {
-    var user = getUserById(id);
+  public void setImageInUser(User user, Image image) {
     user.setImage(image);
     saveUser(user);
   }
 
   @Override
-  public void setNewPassword(String email, String password) {
-    User user = getUserByEmail(email);
+  public void setNewPassword(User user, String password) {
     user.setPassword(password);
     userRepository.save(user);
   }

@@ -14,8 +14,8 @@ public class KitchenCategoriesLinkServiceImpl implements KitchenCategoriesLinkSe
     @Autowired
     private KitchenCategoriesLinkRepository kitchenCategoriesLinkRepository;
     @Override
-    public void saveKCLink(KitchenCategoriesLink kitchenCategoriesLink) {
-        kitchenCategoriesLinkRepository.save(kitchenCategoriesLink);
+    public KitchenCategoriesLink saveKCLink(KitchenCategoriesLink kitchenCategoriesLink) {
+        return kitchenCategoriesLinkRepository.save(kitchenCategoriesLink);
     }
 
     @Override

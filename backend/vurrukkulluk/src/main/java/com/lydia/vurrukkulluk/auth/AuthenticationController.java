@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.auth;
 
+import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -49,8 +50,8 @@ public class AuthenticationController {
             @RequestBody AuthenticationRequestOTP request
     ){
       AuthenticationResponse response = service.authenticateOTP(request);
-
-      userService.setNewPassword(request.getEmail(),passwordEncoder.encode(request.getNewPassword()));
+      User user = userService.getUserByEmail(request.getEmail());
+      userService.setNewPassword(user,passwordEncoder.encode(request.getNewPassword()));
         return ResponseEntity.ok(response);
     }
 }

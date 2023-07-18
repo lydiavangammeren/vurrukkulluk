@@ -15,8 +15,8 @@ public class FavoriteServiceImpl implements FavoriteService {
   @Autowired
   private FavoriteRepository favoriteRepository;
   @Override
-  public void saveFavorite(Favorite favorite) {
-    favoriteRepository.save(favorite);
+  public Favorite saveFavorite(Favorite favorite) {
+    return favoriteRepository.save(favorite);
   }
 
   @Override
@@ -30,8 +30,8 @@ public class FavoriteServiceImpl implements FavoriteService {
   }
 
   @Override
-  public void updateFavorite(Favorite favorite) {
-    favoriteRepository.save(favorite);
+  public Favorite updateFavorite(Favorite favorite) {
+    return favoriteRepository.save(favorite);
   }
 
   @Override

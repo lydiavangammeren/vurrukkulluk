@@ -8,9 +8,9 @@ import java.util.List;
 
 
 public interface ImageService {
-  public Image saveImage(MultipartFile file) throws IOException;
+  public Image saveImage(Image image) throws IOException;
   public byte[] getImageById(int id);
-  public Image updateImage(MultipartFile file, int id) throws IOException;
+  public Image updateImage(Image image) throws IOException;
   public void deleteImage(int id);
 
 }

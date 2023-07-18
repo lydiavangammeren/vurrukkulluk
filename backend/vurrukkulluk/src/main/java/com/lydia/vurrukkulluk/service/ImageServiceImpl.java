@@ -19,11 +19,7 @@ public class ImageServiceImpl implements ImageService {
   @Autowired
   private ImageRepository imageRepository;
   @Override
-  public Image saveImage(MultipartFile file) throws IOException {
-    Image image = new Image();
-    image.setName(file.getOriginalFilename());
-    image.setType(file.getContentType());
-    image.setImageData(UserImageUtil.compressImage(file.getBytes()));
+  public Image saveImage(Image image) throws IOException {
     return imageRepository.save(image);
   }
 
@@ -34,14 +30,8 @@ public class ImageServiceImpl implements ImageService {
   }
 
   @Override
-  public Image updateImage(MultipartFile file, int id) throws IOException {
-    Image image = new Image();
-    image.setId(id);
-    image.setName(file.getOriginalFilename());
-    image.setType(file.getContentType());
-    image.setImageData(UserImageUtil.compressImage(file.getBytes()));
+  public Image updateImage(Image image) {
     return imageRepository.save(image);
-
   }
 
   @Override

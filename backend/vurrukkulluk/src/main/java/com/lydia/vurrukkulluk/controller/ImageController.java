@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.dto.RatingDto;
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.Recipe;
+import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.ArticleService;
 import com.lydia.vurrukkulluk.service.ImageService;
 import com.lydia.vurrukkulluk.service.RecipeService;
@@ -50,22 +51,25 @@ public class ImageController {
 
   @GetMapping("/{id}")
   public ResponseEntity<byte[]> getImage(@PathVariable int id) {
+
     byte[] image = imageService.getImageById(id);
     return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(image);
   }
   @ResponseStatus(value = HttpStatus.OK)
   @PostMapping()
   public String add(@RequestParam("image") MultipartFile file, @RequestParam String type, @RequestParam int id) throws IOException {
-    Image image = imageService.saveImage(file);
+    Image image = new Image(file);
+    image = imageService.saveImage(image);
     switch (type) {
       case "user" -> {
         if (!securityUtil.isAuthorizedUserOrAdmin(id)) {return "not authorized";}
-        userService.setImageInUser(id,image);
+        User user = userService.getUserById(id);
+        userService.setImageInUser(user,image);
       }
       case "recipe" -> {
         Recipe recipe = recipeService.getRecipeById(id);
         if (!securityUtil.isAuthorizedUserOrAdmin(recipe.getUser().getId())){return "not authorized";}
-        recipeService.setImageInRecipe(id,recipe,image);
+        recipeService.setImageInRecipe(recipe,image);
       }
       case "article" -> {
 //        if (!securityUtil.isAdmin()) {return "not authorized";}
@@ -79,7 +83,9 @@ public class ImageController {
 
   @PutMapping("/{id}")
   public String put(@RequestParam("image") MultipartFile file, @PathVariable int id) throws IOException{
-    Image image = imageService.updateImage(file, id);
+
+    Image image = new Image(id,file);
+    imageService.updateImage(image);
     return "Updated image with id:" + id;
   }
 

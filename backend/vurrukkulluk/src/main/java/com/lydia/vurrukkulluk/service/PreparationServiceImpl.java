@@ -24,8 +24,8 @@ public class PreparationServiceImpl implements PreparationService {
     }
 
     @Override
-    public void savePreparation(Preparation preparation) {
-        preparationRepository.save(preparation);
+    public Preparation savePreparation(Preparation preparation) {
+        return preparationRepository.save(preparation);
     }
 
     @Override
