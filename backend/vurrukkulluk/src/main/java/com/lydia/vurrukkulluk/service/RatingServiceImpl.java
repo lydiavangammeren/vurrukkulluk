@@ -2,6 +2,7 @@ package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Rating;
 import com.lydia.vurrukkulluk.repository.RatingRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.aop.AopInvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class RatingServiceImpl implements RatingService {
 
     @Autowired

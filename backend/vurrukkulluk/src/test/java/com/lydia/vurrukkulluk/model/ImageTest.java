@@ -1,25 +1,17 @@
 package com.lydia.vurrukkulluk.model;
 
-import com.lydia.vurrukkulluk.util.Role;
 import com.lydia.vurrukkulluk.util.UserImageUtil;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-@ExtendWith(MockitoExtension.class)
 class ImageTest {
-    //@Mock
-    byte [] imagedata;
+
     @Test
     void loadAndRead() throws IOException {
         Image image = new Image();
@@ -27,8 +19,8 @@ class ImageTest {
         image.setId(1);
         image.setType("file");
         image.setName("name");
-        //String imagePath = "src\\main\\resources\\images\\VeganBurger.jpg";
-        //byte [] imagedata = UserImageUtil.compressImage(Files.readAllBytes(Paths.get(imagePath)));
+        String imagePath = "src\\main\\resources\\images\\VeganBurger.jpg";
+        byte [] imagedata = UserImageUtil.compressImage(Files.readAllBytes(Paths.get(imagePath)));
         image.setImageData(imagedata);
 
 

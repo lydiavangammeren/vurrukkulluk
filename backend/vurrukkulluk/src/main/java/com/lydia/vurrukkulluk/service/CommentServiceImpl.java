@@ -2,11 +2,13 @@ package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Comment;
 import com.lydia.vurrukkulluk.repository.CommentRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@AllArgsConstructor
 public class CommentServiceImpl implements CommentService{
   @Autowired
   private CommentRepository commentRepository;

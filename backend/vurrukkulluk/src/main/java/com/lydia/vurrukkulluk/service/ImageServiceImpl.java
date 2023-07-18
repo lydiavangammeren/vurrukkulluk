@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.service;
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.repository.ImageRepository;
 import com.lydia.vurrukkulluk.util.UserImageUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ImageServiceImpl implements ImageService {
   @Autowired
   private ImageRepository imageRepository;

@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.model;
 import com.lydia.vurrukkulluk.util.Role;
 import com.lydia.vurrukkulluk.util.UserImageUtil;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -25,6 +26,13 @@ class CommentTest {
     User user;
     @Mock
     Recipe recipe;
+
+    @BeforeEach
+    void mocktest(){
+        assertNotNull(image);
+        assertNotNull(user);
+        assertNotNull(recipe);
+    }
 
     @Test
     void loadAndRead(){

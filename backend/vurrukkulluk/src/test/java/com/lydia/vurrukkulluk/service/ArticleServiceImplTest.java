@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.repository.ArticleRepository;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,20 +30,22 @@ class ArticleServiceImplTest {
     Image image;
     ArticleServiceImpl articleService;
 
-    @Test
-    void saveArticle() {
+    @BeforeEach
+    void makeService(){
         assertNotNull(repository);
         articleService = new ArticleServiceImpl(repository);
+    }
+
+    @Test
+    void saveArticle() {
 
         when(repository.save(article)).thenReturn(article);
-
         assertEquals(article,articleService.saveArticle(article));
+        verify(repository).save(article);
     }
 
     @Test
     void getAllArticles() {
-        assertNotNull(repository);
-        articleService = new ArticleServiceImpl(repository);
         List<Article> allArticles = new ArrayList<>();
         allArticles.add(article);
         allArticles.add(article);
@@ -52,43 +55,39 @@ class ArticleServiceImplTest {
         when(repository.findAll()).thenReturn(allArticles);
 
         assertEquals(allArticles,articleService.getAllArticles());
-
+        verify(repository).findAll();
 
     }
 
     @Test
     void getArticleByName() {
-        assertNotNull(repository);
-        articleService = new ArticleServiceImpl(repository);
+
         List<Article> allArticleswithName = new ArrayList<>();
         allArticleswithName.add(article);
         when(repository.findByName("articlename")).thenReturn(allArticleswithName);
 
         assertEquals(allArticleswithName,articleService.getArticleByName("articlename"));
+        verify(repository).findByName("articlename");
     }
 
     @Test
     void getArticleById() {
-        assertNotNull(repository);
-        articleService = new ArticleServiceImpl(repository);
 
         when(repository.findById(1)).thenReturn(article);
-
         assertEquals(article,articleService.getArticleById(1));
+        verify(repository).findById(1);
     }
 
     @Test
     void updateArticle() {
-        assertNotNull(repository);
-        articleService = new ArticleServiceImpl(repository);
+
         when(repository.save(article)).thenReturn(article);
         assertEquals(article,articleService.saveArticle(article));
+        verify(repository).save(article);
     }
 
     @Test
     void deleteArticleById() {
-        assertNotNull(repository);
-        articleService = new ArticleServiceImpl(repository);
 
         articleService.deleteArticleById(1);
         verify(repository).deleteById(1);
@@ -96,8 +95,7 @@ class ArticleServiceImplTest {
 
     @Test
     void setImageInArticle() {
-        assertNotNull(repository);
-        articleService = new ArticleServiceImpl(repository);
+
         when(repository.findById(1)).thenReturn(article);
 
         articleService.setImageInArticle(1,image);

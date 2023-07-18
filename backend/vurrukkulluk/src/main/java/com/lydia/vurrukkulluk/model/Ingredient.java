@@ -26,7 +26,7 @@ public class Ingredient {
     private Recipe recipe;
 
     public Article getArticle(){
-        return articleUnit.getArticle();
+        return articleUnit==null ? null : articleUnit.getArticle() ;
     }
 
 }

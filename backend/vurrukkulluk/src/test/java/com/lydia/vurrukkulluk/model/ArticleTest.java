@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -14,10 +15,14 @@ class ArticleTest {
     @Mock
     Image imageMock;
 
+    @BeforeEach
+    void mocktest(){
+        assertNotNull(imageMock);
+    }
     @Test
     void loadAndRead(){
 
-        assertNotNull(imageMock);
+
         Article article = new Article();
         article.setId(1);
         article.setCalories(1234);

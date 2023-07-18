@@ -4,17 +4,16 @@ import com.lydia.vurrukkulluk.model.ArticleUnit;
 import com.lydia.vurrukkulluk.model.Unit;
 import com.lydia.vurrukkulluk.repository.ArticleUnitRepository;
 import com.lydia.vurrukkulluk.repository.UnitRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class ArticleUnitServiceImpl implements ArticleUnitService{
 
     @Autowired
     private ArticleUnitRepository articleUnitRepository;
-
-    @Autowired
-    private UnitRepository unitRepository;
 
     @Override
     public ArticleUnit save(ArticleUnit articleUnit) {

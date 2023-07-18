@@ -2,12 +2,14 @@ package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Preparation;
 import com.lydia.vurrukkulluk.repository.PreparationRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class PreparationServiceImpl implements PreparationService {
     @Autowired
     private PreparationRepository preparationRepository;
