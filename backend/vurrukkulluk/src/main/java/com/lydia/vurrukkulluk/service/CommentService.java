@@ -6,7 +6,7 @@ import com.lydia.vurrukkulluk.model.User;
 import java.util.List;
 
 public interface CommentService {
-  void saveComment(Comment comment);
+  Comment saveComment(Comment comment);
 
   List<Comment> getAllComments();
 
@@ -14,7 +14,7 @@ public interface CommentService {
 
   Comment getCommentById(int id);
 
-  void updateComment(Comment comment);
+  Comment updateComment(Comment comment);
 
   void deleteCommentById(int id);
 }

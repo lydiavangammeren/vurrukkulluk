@@ -13,8 +13,8 @@ public class CommentServiceImpl implements CommentService{
   @Autowired
   private CommentRepository commentRepository;
   @Override
-  public void saveComment(Comment comment) {
-    commentRepository.save(comment);
+  public Comment saveComment(Comment comment) {
+    return commentRepository.save(comment);
   }
 
   @Override
@@ -33,9 +33,7 @@ public class CommentServiceImpl implements CommentService{
   }
 
   @Override
-  public void updateComment(Comment comment) {
-      commentRepository.save(comment);
-  }
+  public Comment updateComment(Comment comment) { return commentRepository.save(comment); }
 
   @Override
   public void deleteCommentById(int id) {
