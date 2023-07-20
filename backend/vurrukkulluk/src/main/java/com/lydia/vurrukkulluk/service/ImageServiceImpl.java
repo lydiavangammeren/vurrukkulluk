@@ -30,8 +30,9 @@ public class ImageServiceImpl implements ImageService {
   }
 
   @Override
-  public Image updateImage(Image image) {
-    return imageRepository.save(image);
+  public Image updateImage(int id, MultipartFile file) throws IOException {
+
+    return imageRepository.save(new Image(id,file));
   }
 
   @Override

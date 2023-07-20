@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.dto.FavoriteDto;
 import com.lydia.vurrukkulluk.model.Favorite;
 import com.lydia.vurrukkulluk.service.FavoriteService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("api/favorites")
 @CrossOrigin
@@ -32,7 +34,7 @@ public class FavoriteController {
     }
     Favorite favorite = reverseFavoriteFromDto(favoriteDto);
     favoriteService.saveFavorite(favorite);
-    return "New favorite is added";
+    return "new favorite is added";
   }
 
   @GetMapping()
@@ -72,5 +74,7 @@ public class FavoriteController {
     return modelMapper.map(favoriteDto,Favorite.class);
   }
 
-
+  public void setModelMapper(ModelMapper modelMapper) {
+    this.modelMapper = modelMapper;
+  }
 }

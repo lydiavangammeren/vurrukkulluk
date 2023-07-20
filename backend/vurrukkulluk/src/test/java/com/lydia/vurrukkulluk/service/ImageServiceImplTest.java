@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -53,10 +54,12 @@ class ImageServiceImplTest {
     }
 
     @Test
-    void updateImage() {
-        when(repository.save(image)).thenReturn(image);
-        assertEquals(image,imageService.updateImage(image));
-        verify(repository).save(image);
+    void updateImage() throws IOException {
+        MultipartFile file = new MockMultipartFile("image","image.png","file",new byte[16]);
+        when(repository.save(new Image(1,file))).thenReturn(image);
+
+        assertEquals(image,imageService.updateImage(1,file));
+        verify(repository).save(new Image(1,file));
 
     }
 

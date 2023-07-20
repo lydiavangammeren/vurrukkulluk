@@ -147,8 +147,8 @@ public class RecipeController {
 
         double amount = amountInDefaultValue(ingredientDto);
 
-        int articlePrice = ingredientDto.getArticle().getPrice();
-        int articleAmount = ingredientDto.getArticle().getAmount();
+        int articlePrice = ingredientDto.getArticleUnit().getArticle().getPrice();
+        int articleAmount = ingredientDto.getArticleUnit().getArticle().getAmount();
         return ((int) (amount * articlePrice))/ articleAmount;})
             .reduce(0, (a, b) -> a+b);
   }
@@ -157,8 +157,8 @@ public class RecipeController {
 
     return ingredients.stream().map(ingredientDto -> {
               double amount = amountInDefaultValue(ingredientDto);
-              int articleCalories = ingredientDto.getArticle().getCalories();
-              int articleAmount = ingredientDto.getArticle().getAmount();
+              int articleCalories = ingredientDto.getArticleUnit().getArticle().getCalories();
+              int articleAmount = ingredientDto.getArticleUnit().getArticle().getAmount();
               return ((int) (amount * articleCalories))/ articleAmount;})
             .reduce(0, (a, b) -> a+b);
   }

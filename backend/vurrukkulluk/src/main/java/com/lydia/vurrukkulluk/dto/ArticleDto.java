@@ -13,7 +13,6 @@ public class ArticleDto {
     private String description;
     private int price;
     private int calories;
-    private String unit;
     private int amount;
     private int imageId;
 }

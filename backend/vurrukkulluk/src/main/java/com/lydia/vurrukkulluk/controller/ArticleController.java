@@ -6,6 +6,7 @@ import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.service.ArticleService;
 import com.lydia.vurrukkulluk.service.ImageService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@AllArgsConstructor
 @RestController
 @RequestMapping("api/articles")
 @CrossOrigin
@@ -22,8 +23,8 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
-  @Autowired
-  private ImageService imageService;
+    @Autowired
+    private ImageService imageService;
 
 
     @Autowired
@@ -32,16 +33,11 @@ public class ArticleController {
     @Autowired
     private SecurityUtil securityUtil;
 
-    public ArticleController(){
-
-    }
-
     @PostMapping()
     public String add(@RequestBody ArticleDto articleDto){
         Article article = reverseArticleFromDto(articleDto);
         articleService.saveArticle(article);
-//        return "new ingredient added";
-        return "" + article.getId();
+        return "new ingredient added";
     }
 
     @GetMapping()
@@ -83,4 +79,8 @@ public class ArticleController {
     public Article reverseArticleFromDto(ArticleDto articleDto){
         return modelMapper.map(articleDto, Article.class);
     }
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
+
 }

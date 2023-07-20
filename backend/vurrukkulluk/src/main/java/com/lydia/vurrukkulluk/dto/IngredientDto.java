@@ -12,14 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IngredientDto {
-    @Autowired
-    private ArticleService articleService;
     ArticleUnitDto articleUnit;
-    int amount;
+    double amount;
     int recipeId;
-
-    public ArticleDto getArticle(){
-        return articleUnit.getArticle();
-    }
 
 }

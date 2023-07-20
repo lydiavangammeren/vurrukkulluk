@@ -12,5 +12,5 @@ public class IngredientCreateDto {
     int id;
     int articleId;
     int recipeId;
-    int amount;
+    double amount;
 }
