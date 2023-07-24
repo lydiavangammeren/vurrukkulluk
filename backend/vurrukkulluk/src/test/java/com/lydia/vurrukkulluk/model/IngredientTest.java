@@ -29,12 +29,12 @@ class IngredientTest {
         Ingredient ingredient = new Ingredient();
         ingredient.setId(1);
         ingredient.setAmount(12.5d);
-        ingredient.setArticleUnit(articleUnit);
+        ingredient.setArticleunit(articleUnit);
         ingredient.setRecipe(recipe);
 
         assertEquals(1,ingredient.getId());
         assertEquals(12.5d,ingredient.getAmount());
-        assertEquals(articleUnit,ingredient.getArticleUnit());
+        assertEquals(articleUnit,ingredient.getArticleunit());
         assertEquals(article,ingredient.getArticle());
         assertEquals(recipe,ingredient.getRecipe());
 
@@ -48,7 +48,7 @@ class IngredientTest {
         assertEquals(0.0d,ingredient.getAmount());
         assertNull(ingredient.getRecipe());
         assertNull(ingredient.getArticle());
-        assertNull(ingredient.getArticleUnit());
+        assertNull(ingredient.getArticleunit());
     }
 
     @Test
@@ -58,7 +58,7 @@ class IngredientTest {
 
         assertEquals(1,ingredient.getId());
         assertEquals(12.5d,ingredient.getAmount());
-        assertEquals(articleUnit,ingredient.getArticleUnit());
+        assertEquals(articleUnit,ingredient.getArticleunit());
         assertEquals(article,ingredient.getArticle());
         assertEquals(recipe,ingredient.getRecipe());
     }

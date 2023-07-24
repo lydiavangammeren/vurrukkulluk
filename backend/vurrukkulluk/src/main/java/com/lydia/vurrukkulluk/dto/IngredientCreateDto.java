@@ -1,6 +1,5 @@
 package com.lydia.vurrukkulluk.dto;
 
-import com.lydia.vurrukkulluk.model.Article;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class IngredientCreateDto {
     int id;
-    int articleId;
+    int articleunitId;
     int recipeId;
     double amount;
 }

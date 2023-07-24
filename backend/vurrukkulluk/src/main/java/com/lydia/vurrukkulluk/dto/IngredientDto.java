@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IngredientDto {
-    ArticleUnitDto articleUnit;
+    ArticleUnitDto articleunit;
     double amount;
     int recipeId;
 

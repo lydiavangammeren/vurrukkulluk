@@ -405,7 +405,7 @@ public class TestDataController {
     public void addIngredientToRecipe(Recipe recipe, ArticleUnit aU, int amount){
         Ingredient ingredient = new Ingredient();
         ingredient.setRecipe(recipe);
-        ingredient.setArticleUnit(aU);
+        ingredient.setArticleunit(aU);
         ingredient.setAmount(amount);
         ingredientService.saveIngredient(ingredient);
     }

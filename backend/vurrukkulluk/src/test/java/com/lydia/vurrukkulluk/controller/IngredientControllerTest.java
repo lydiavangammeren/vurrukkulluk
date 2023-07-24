@@ -154,7 +154,7 @@ class IngredientControllerTest {
         controller.setModelMapper(new ModelMapper());
 
         Ingredient ingredient1 = new Ingredient(1,1.2d,new ArticleUnit(),new Recipe());
-        ingredient1.getArticleUnit().setId(1);
+        ingredient1.getArticleunit().setId(1);
         ingredient1.getRecipe().setId(1);
         ingredient1.getRecipe().setTimeAdded(null);
         ArticleUnitDto articleUnitDto = new ArticleUnitDto();
@@ -166,11 +166,15 @@ class IngredientControllerTest {
 
     @Test
     void reverseIngredientFromCreateDto() {
-
-        IngredientCreateDto ingredientCreateDto1 = new IngredientCreateDto(1,1,1,12.34d);
+        controller.setModelMapper(new ModelMapper());
+        IngredientCreateDto ingredientCreateDto1 = new IngredientCreateDto(1,2,3,12.34d);
         Ingredient ingredient1 = new Ingredient(1,12.34d,new ArticleUnit(),new Recipe());
-
-        assertEquals(ingredient1,controller.reverseIngredientFromCreateDto(ingredientCreateDto1));
+        ingredient1.getRecipe().setId(3);
+        ingredient1.getRecipe().setTimeAdded(null);
+        ingredient1.getArticleunit().setId(2);
+        Ingredient result = controller.reverseIngredientFromCreateDto(ingredientCreateDto1);
+        result.getRecipe().setTimeAdded(null);
+        assertEquals(ingredient1,result);
         
     }
 

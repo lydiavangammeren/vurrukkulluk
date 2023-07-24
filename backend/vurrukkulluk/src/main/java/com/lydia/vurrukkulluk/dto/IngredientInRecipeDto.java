@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IngredientInRecipeDto {
-    int articleId;
+    int articleunitId;
     int amount;
 }

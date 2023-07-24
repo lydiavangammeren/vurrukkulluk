@@ -4,6 +4,8 @@ import com.lydia.vurrukkulluk.dto.*;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @RestController
 @RequestMapping("api/recipes")
 @CrossOrigin
@@ -27,25 +31,11 @@ public class RecipeController {
   @Autowired
   private IngredientService ingredientService;
   @Autowired
-  private ArticleService articleService;
-  @Autowired
-  private FavoriteService favoriteService;
-  @Autowired
-  private KitchenTypeService kitchenTypeService;
-  @Autowired
-  private KitchenRegionService kitchenRegionService;
-  @Autowired
   private KitchenCategoriesLinkService kitchenCategoriesLinkService;
-  @Autowired
-  private KitchenCategoryService kitchenCategoryService;
   @Autowired
   private UserService userService;
   @Autowired
   private ImageService imageService;
-
-  @Autowired
-  private ArticleUnitService articleUnitService;
-
   @Autowired
   private ModelMapper modelMapper;
   @Autowired
@@ -68,9 +58,8 @@ public class RecipeController {
     recipeCreateDto.getIngredients().forEach(ingredientInRecipeDto ->{
       Ingredient ingredient = new Ingredient();
       ingredient.setAmount(ingredientInRecipeDto.getAmount());
-      Article article = new Article();
-      article.setId(ingredientInRecipeDto.getArticleId());
-      //ingredient.setArticle(article);
+      ingredient.setArticleunit(new ArticleUnit());
+      ingredient.getArticleunit().setId(ingredientInRecipeDto.getArticleunitId());
       ingredient.setRecipe(finalRecipe);
       ingredientService.saveIngredient(ingredient);
     });
@@ -103,7 +92,6 @@ public class RecipeController {
   @GetMapping()
   public List<RecipeDto> get() {
     List<Recipe> allRecipes = recipeService.getAllRecipes();
-
     return allRecipes.stream().map(this::fillRecipeDto).collect(Collectors.toList());
   }
 
@@ -141,39 +129,38 @@ public class RecipeController {
 
   }
 
-  public int calculateCurrentPrice(List<IngredientDto> ingredients){
+  public int calculateCurrentPrice(List<IngredientDto> ingredients) throws NullPointerException{
 
     return ingredients.stream().map(ingredientDto -> {
 
         double amount = amountInDefaultValue(ingredientDto);
 
-        int articlePrice = ingredientDto.getArticleUnit().getArticle().getPrice();
-        int articleAmount = ingredientDto.getArticleUnit().getArticle().getAmount();
+        int articlePrice = ingredientDto.getArticleunit().getArticle().getPrice();
+        int articleAmount = ingredientDto.getArticleunit().getArticle().getAmount();
         return ((int) (amount * articlePrice))/ articleAmount;})
             .reduce(0, (a, b) -> a+b);
   }
 
-  public int calculateCalories(List<IngredientDto> ingredients) {
+  public int calculateCalories(List<IngredientDto> ingredients) throws NullPointerException {
 
     return ingredients.stream().map(ingredientDto -> {
               double amount = amountInDefaultValue(ingredientDto);
-              int articleCalories = ingredientDto.getArticleUnit().getArticle().getCalories();
-              int articleAmount = ingredientDto.getArticleUnit().getArticle().getAmount();
+              int articleCalories = ingredientDto.getArticleunit().getArticle().getCalories();
+              int articleAmount = ingredientDto.getArticleunit().getArticle().getAmount();
               return ((int) (amount * articleCalories))/ articleAmount;})
             .reduce(0, (a, b) -> a+b);
   }
 
   private double amountInDefaultValue(IngredientDto ingredientDto) {
     double amount = ingredientDto.getAmount();
-    amount = amount * ingredientDto.getArticleUnit().getAmount();
+    amount = amount * ingredientDto.getArticleunit().getAmount();
     return amount;
   }
 
-  public RecipeDto fillRecipeDto(Recipe recipe){
-
+  private RecipeDto fillRecipeDto(Recipe recipe){
     RecipeDto recipeDto = convertRecipeToDto(recipe);
     fillRecipeDtoComments(recipeDto);
-    fillRecipeDtoIngrients(recipeDto);
+    fillRecipeDtoIngredients(recipeDto);
     fillRecipeDtoPreparations(recipeDto);
     fillRecipeDtoKitchenCategories(recipeDto);
     fillRecipeDtoAvgRating(recipeDto);
@@ -200,13 +187,16 @@ public class RecipeController {
     recipeDto.setCategories(kitchenCategories);
   }
 
-  private void fillRecipeDtoIngrients(RecipeDto recipeDto) {
+  private void fillRecipeDtoIngredients(RecipeDto recipeDto){
     List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(recipeDto.getId());
-    List<IngredientDto> ingredientsDto = ingredients.stream().map(this::convertIngredientToDto).collect(Collectors.toList());
-    recipeDto.setIngredients(ingredientsDto);
-    recipeDto.setPrice(calculateCurrentPrice(ingredientsDto));
-    recipeDto.setCalories(calculateCalories(ingredientsDto));
-  }
+    List<IngredientDto> ingredientDtos = ingredients.stream().map(this::convertIngredientToDto).collect(Collectors.toList());
+    recipeDto.setIngredients(ingredientDtos);
+    try {
+      recipeDto.setPrice(calculateCurrentPrice(ingredientDtos));
+    } catch (NullPointerException ignored){}
+    try {
+      recipeDto.setCalories(calculateCalories(ingredientDtos));
+    } catch (NullPointerException ignored){}}
 
   private void fillRecipeDtoComments(RecipeDto recipeDto) {
     List<Comment> comments = commentService.getAllCommentsOfRecipe(recipeDto.getId());
@@ -236,5 +226,9 @@ public class RecipeController {
 
   public Recipe revertCreateRecipeDto(RecipeCreateDto recipeCreateDto){
     return modelMapper.map(recipeCreateDto,Recipe.class);
+  }
+
+  public void setModelMapper(ModelMapper modelMapper) {
+    this.modelMapper = modelMapper;
   }
 }

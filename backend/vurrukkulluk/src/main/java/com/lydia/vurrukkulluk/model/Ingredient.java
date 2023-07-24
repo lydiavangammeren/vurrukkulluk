@@ -19,14 +19,14 @@ public class Ingredient {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_unit_id",nullable = false)
-    private ArticleUnit articleUnit;
+    private ArticleUnit articleunit;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id",nullable = false)
     private Recipe recipe;
 
     public Article getArticle(){
-        return articleUnit==null ? null : articleUnit.getArticle() ;
+        return articleunit==null ? null : articleunit.getArticle() ;
     }
 
 }
