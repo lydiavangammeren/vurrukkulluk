@@ -48,6 +48,8 @@ const ShoppingCart = () => {
   const {products, recipeIds, checkedProductIds, deletedProductIds, dispatch} = useShopContext();
   const [articles, articlesLoaded ] = useDatabase('/articles');
   const [allProducts, setAllProducts] = useState(null);
+  const [availableProducts, setAvailableProducts] = useState([]);
+  const [unavailableProducts, setUnvailableProducts] = useState([])
   
   useEffect(() => {
     dispatch({type: SL_ACTION.REFRESH_LIST});
@@ -73,21 +75,15 @@ const ShoppingCart = () => {
 
    useEffect(() => {
     console.log('alles: ', allProducts)
+    // if(allProducts){
+      
+    // }
    }, [allProducts])
-  // const fullProducts = products.map((key, value)=> {
 
-  //   return {
-  //     article: articles.filter((article) => {return article.id !== key}),
-  //     amount: value
-  //   }
-  // })
-  // console.log('fullProducts: ', fullProducts)
   const currentProducts = allProducts ? allProducts.filter(
     (product)=> !deletedProductIds.includes(product.article.id)
   ) : [];
-  // const currentProducts = products.filter(
-  //   (product)=> !deletedProductIds.includes(product.article.id)
-  // )
+  
   console.log('current products: ', currentProducts)
   const uncheckedProducts = currentProducts.filter(
     (product) => !checkedProductIds.includes(product.article.id))
@@ -109,24 +105,24 @@ const ShoppingCart = () => {
             </th>
           </tr>    
         </thead>
-          <tbody>
-            {uncheckedProducts.map((product) => (
-              <ShoppingCartItem
-                checked={false}
-                key={product.article.id}
-                product={product}
-                dispatch={dispatch}
-              />
-            ))}
-            {checkedProducts.map((product) => (
-              <ShoppingCartItem
-                checked={true}
-                key={product.article.id}
-                product={product}
-                dispatch={dispatch}
-              />
-            ))}
-          </tbody>
+        <tbody>
+          {uncheckedProducts.map((product) => (
+            <ShoppingCartItem
+              checked={false}
+              key={product.article.id}
+              product={product}
+              dispatch={dispatch}
+            />
+          ))}
+          {checkedProducts.map((product) => (
+            <ShoppingCartItem
+              checked={true}
+              key={product.article.id}
+              product={product}
+              dispatch={dispatch}
+            />
+          ))}
+        </tbody>
         <tfoot>
           <tr>
             <td colSpan="3">
@@ -146,6 +142,17 @@ const ShoppingCart = () => {
               />
             </td>
           </tr>
+        </tfoot>
+      </table>
+      <table>
+        <thead>
+          
+        </thead>
+        <tbody>
+
+        </tbody>
+        <tfoot>
+
         </tfoot>
       </table>
     </div>

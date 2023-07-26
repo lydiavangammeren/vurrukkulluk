@@ -30,7 +30,7 @@ const ShoppingCartItem = ({product, checked, dispatch}) => {
         <p>{article.description}</p>
       </td>
 
-      <td>
+      <td className="shoppingcart_quantity">
         <input 
           className="quantity_value" 
           type="number" 
@@ -44,7 +44,7 @@ const ShoppingCartItem = ({product, checked, dispatch}) => {
                     }
         />
       </td>
-      <td>
+      <td className="shoppingcart_price">
         <p>
           <span className="price_value">&euro;&nbsp;</span>
           {(price * product.amount).toFixed(2)}

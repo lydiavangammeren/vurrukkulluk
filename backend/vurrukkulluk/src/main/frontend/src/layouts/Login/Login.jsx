@@ -64,7 +64,7 @@ const Login = () => {
         }
         console.log('Inlog success ' , user)
         localStorage.setItem('user', JSON.stringify(user));
-        // alert('Welkom ' + userName)
+        alert('Welkom ' + user.email)
         // setUser(input.email)
         // setUserName('');
         // setPwd('');
@@ -81,25 +81,25 @@ const Login = () => {
 
   const loginForm = () => {
     return (
-      <div className="Login">
+      <div className="Login" id="login">
       <h1 className="login-header">Login</h1>
       <div className="form-container">
         <form className="form" onSubmit={handleSubmit}>
-          <label className="label" htmlFor="email">Email </label>
+          <label className="label" htmlFor="login_email">Email </label>
           <br/>
           <input 
             name="email" 
-            id="email" 
+            id="login_email" 
             type="email" 
             value={input.email}
             onChange={handleChange}
             />
           <br/><br/>
-          <label className="label" htmlFor="loginPassword">Wachtwoord </label>  
+          <label className="label" htmlFor="login_password">Wachtwoord </label>  
           <br/>        
           <input 
             name="loginPassword" 
-            id="loginPassword" 
+            id="login_password" 
             type="password" 
             value={input.loginPassword}
             onChange={handleChange}
