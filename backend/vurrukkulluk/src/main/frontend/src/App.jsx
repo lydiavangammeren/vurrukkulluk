@@ -11,7 +11,8 @@ import { ContextProvider, ShopContextProvider } from "./contexts";
 import Layout from "./layouts";
 // import ImageResize from "./pages/testPage/ImageResize";
 // import ImgDropAndCrop from "./pages/testPage/ImgDropAndCrop";
-import CropDemo from "./pages/testPage/CropDemo";
+// import CropDemo from "./pages/testPage/CropDemo";
+// import ObjectToArray from "./pages/testPage/ObjectToArray";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
               <Route path="/shoppingcart" element={<ShoppingCart />} />
               <Route path="/addrecipe" element={<AddRecipe />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/test" element={<CropDemo />} />
+              {/* <Route path="/test" element={<ObjectToArray />} /> */}
             </Routes>
           </Layout>
           </ShopContextProvider>

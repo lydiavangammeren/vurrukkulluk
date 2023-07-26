@@ -9,6 +9,8 @@ import { useAppContext } from "../../contexts";
 const ShoppingCartItem = ({product, checked, dispatch}) => {
   const { baseUrl } = useAppContext();
   const article = product.article;
+  const price = article.price / 100;
+  console.log('product: ', product)
   return (
     <tr
       className={
@@ -27,15 +29,25 @@ const ShoppingCartItem = ({product, checked, dispatch}) => {
         <h2>{article.name}</h2>
         <p>{article.description}</p>
       </td>
+
       <td>
-        <input className="quantity_value" type="number" value={product.amount} min="0" max="999"
-               onChange={(e) => dispatch({ type: SC_ACTION.UPDATE_QUANTITY, 
-                                           payload: {id: article.id, quantity: e.target.value}})} ></input>
+        <input 
+          className="quantity_value" 
+          type="number" 
+          value={product.amount} 
+          min="0" max="999"
+          onChange= {(e) => e.target.value != 0 ? 
+                      dispatch({ type: SC_ACTION.UPDATE_QUANTITY, 
+                      payload: {id: article.id, quantity: e.target.value}}) :
+                      dispatch({ type: SC_ACTION.REMOVE_ITEM, 
+                      payload: {id: article.id}})
+                    }
+        />
       </td>
       <td>
         <p>
           <span className="price_value">&euro;&nbsp;</span>
-          {article.price.toFixed(2)}
+          {(price * product.amount).toFixed(2)}
         </p>
       </td>
       <td>
