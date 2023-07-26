@@ -7,6 +7,6 @@ public interface PreparationService {
      List<Preparation> getAllPreparations();
 
      List<Preparation> getAllPreparationsRecipe(int id);
-     void savePreparation(Preparation preparation);
+     Preparation savePreparation(Preparation preparation);
      void deleteById(int id);
 }

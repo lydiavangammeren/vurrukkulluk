@@ -11,7 +11,7 @@ public interface RatingService {
 
     List<Rating> getAllRatingsRecipe(int recipeId);
 
-    void saveRating(Rating rating);
+    Rating saveRating(Rating rating);
 
     float getAvgRatingOfRecipe(int recipeId);
     void deleteById(int id);

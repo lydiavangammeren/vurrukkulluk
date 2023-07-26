@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.service;
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
   @Autowired
   private UserRepository userRepository;
@@ -35,9 +37,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void updateUser(User user) {
-    userRepository.save(user);
-  }
+  public User updateUser(User user) { return userRepository.save(user); }
 
   @Override
   public void deleteById(int id) {
@@ -50,15 +50,13 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void setImageInUser(int id, Image image) {
-    var user = getUserById(id);
+  public void setImageInUser(User user, Image image) {
     user.setImage(image);
     saveUser(user);
   }
 
   @Override
-  public void setNewPassword(String email, String password) {
-    User user = getUserByEmail(email);
+  public void setNewPassword(User user, String password) {
     user.setPassword(password);
     userRepository.save(user);
   }

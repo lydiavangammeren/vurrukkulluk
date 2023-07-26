@@ -7,6 +7,8 @@ import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.CommentService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @RestController
 @RequestMapping("api/comments")
 @CrossOrigin
@@ -25,8 +29,6 @@ public class CommentController {
 
   @Autowired
   private SecurityUtil securityUtil;
-  public CommentController() {
-  }
 
   @PostMapping()
   public String add(@RequestBody CommentCreateDto commentCreateDto) {
@@ -86,4 +88,7 @@ public class CommentController {
     return modelMapper.map(commentCreateDto,Comment.class);
   }
 
+  public void setModelMapper(ModelMapper modelMapper) {
+    this.modelMapper = modelMapper;
+  }
 }

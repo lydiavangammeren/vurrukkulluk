@@ -3,12 +3,14 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.model.KitchenType;
 import com.lydia.vurrukkulluk.service.KitchenTypeService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@AllArgsConstructor
 @RestController
 @RequestMapping("api/kitchentypes")
 @CrossOrigin

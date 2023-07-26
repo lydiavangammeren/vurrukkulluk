@@ -4,12 +4,14 @@ import com.lydia.vurrukkulluk.model.Favorite;
 import com.lydia.vurrukkulluk.model.KitchenCategory;
 import com.lydia.vurrukkulluk.repository.KitchenCategoryRepository;
 import jdk.jfr.Category;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class KitchenCategoryServiceImpl implements KitchenCategoryService{
     @Autowired
     private KitchenCategoryRepository kitchenCategoryRepository;

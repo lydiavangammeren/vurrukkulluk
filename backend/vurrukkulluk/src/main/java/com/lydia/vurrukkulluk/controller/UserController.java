@@ -9,6 +9,7 @@ import com.lydia.vurrukkulluk.service.ImageService;
 import com.lydia.vurrukkulluk.service.UserService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,7 @@ import javax.security.sasl.AuthenticationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("api/users")
 @CrossOrigin
@@ -53,13 +55,13 @@ public class UserController {
   }
 
   @GetMapping("email/{email}")
-  public UserDto getName(@PathVariable String email) {
+  public UserDto getEmail(@PathVariable String email) {
     return convertUserToDto(userService.getUserByEmail(email));
   }
 
 
   @GetMapping("/{id}")
-  public UserDto getNameDto(@PathVariable int id) {
+  public UserDto getId(@PathVariable int id) {
     return convertUserToDto(userService.getUserById(id));
   }
 

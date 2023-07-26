@@ -3,11 +3,13 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.model.CalendarItem;
 import com.lydia.vurrukkulluk.service.CalendarItemService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("api/calendar")
 @CrossOrigin
@@ -35,7 +37,7 @@ public class CalendarItemController {
 
     @PutMapping()
     public String updateCalendarItem(@RequestBody CalendarItem calendarItem){
-        if (securityUtil.isAdmin()) {
+        if (!securityUtil.isAdmin()) {
             return "not authorized";
         }
         calendarItemService.save(calendarItem);
@@ -44,7 +46,7 @@ public class CalendarItemController {
     }
     @DeleteMapping("/{id}")
     public String deleteCalendarItem(@PathVariable int id){
-        if (securityUtil.isAdmin()) {
+        if (!securityUtil.isAdmin()) {
             return "not authorized";
         }
         calendarItemService.deleteById(id);

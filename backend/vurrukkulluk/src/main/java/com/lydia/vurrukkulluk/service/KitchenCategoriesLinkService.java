@@ -6,7 +6,7 @@ import com.lydia.vurrukkulluk.model.KitchenCategoriesLink;
 import java.util.List;
 
 public interface KitchenCategoriesLinkService {
-    void saveKCLink(KitchenCategoriesLink kitchenCategoriesLink);
+    KitchenCategoriesLink saveKCLink(KitchenCategoriesLink kitchenCategoriesLink);
 
     List<KitchenCategoriesLink> getKCLinkByRecipeId(int id);
 

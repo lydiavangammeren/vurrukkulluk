@@ -23,8 +23,6 @@ public class Article {
 
     private int calories;
 
-    private String unit;
-
     private int amount;
 
     private boolean isAvailable;

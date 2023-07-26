@@ -12,10 +12,10 @@ public interface RecipeService {
   List<Recipe> getRecipeByTitle(String title);
 
   Recipe getRecipeBySlug(String slug);
-  void updateRecipe(Recipe recipe);
+  Recipe updateRecipe(Recipe recipe);
   void deleteById(int id);
   void deleteRecipe(Recipe recipe);
   Recipe getRecipeById(int id);
 
-  void setImageInRecipe(int id, Recipe recipe,Image image);
+  void setImageInRecipe(Recipe recipe,Image image);
 }

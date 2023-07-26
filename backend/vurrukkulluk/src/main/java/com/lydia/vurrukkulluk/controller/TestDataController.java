@@ -2,7 +2,10 @@ package com.lydia.vurrukkulluk.controller;
 
 
 import com.lydia.vurrukkulluk.model.*;
+import com.lydia.vurrukkulluk.repository.ArticleUnitRepository;
 import com.lydia.vurrukkulluk.repository.ImageRepository;
+import com.lydia.vurrukkulluk.repository.RatingRepository;
+import com.lydia.vurrukkulluk.repository.UnitRepository;
 import com.lydia.vurrukkulluk.service.*;
 import com.lydia.vurrukkulluk.util.Role;
 import com.lydia.vurrukkulluk.util.UserImageUtil;
@@ -54,6 +57,12 @@ public class TestDataController {
     private KitchenCategoriesLinkService kitchenCategoriesLinkService;
     @Autowired
     private KitchenCategoryService kitchenCategoryService;
+
+    @Autowired
+    private UnitService unitService;
+    @Autowired
+    private ArticleUnitService articleUnitService;
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -61,22 +70,68 @@ public class TestDataController {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final ArticleUnitRepository articleUnitRepository;
     @PostMapping()
     public String createTestData(){
 
         List<User> users = createUsers();
+        List<Unit> units = createUnits();
         List<Article> articles = createArticles();
+        List<ArticleUnit> articleUnits = createArticleUnits(units,articles);
         List<KitchenRegion> kitchenRegions = createKitchenRegion();
         List<KitchenType> kitchenTypes = createKitchenType();
         List<KitchenCategory> kitchenCategories = createKitchenCategory();
-        List<Recipe> recipes = createRecipe(users, articles, kitchenRegions, kitchenTypes, kitchenCategories);
+        List<Recipe> recipes = createRecipe(users, articleUnits, kitchenRegions, kitchenTypes, kitchenCategories);
         createComments(users, recipes);
         createFavorites(users, recipes);
         createRatings(users, recipes);
         createCalendar();
 
-
         return "testdata made";
+    }
+
+    private List<ArticleUnit> createArticleUnits(List<Unit> units, List<Article> articles) {
+
+        List<ArticleUnit> articleUnits = new ArrayList<>();
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(1),1.0,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(0),1000.0,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(0),0.001,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(6),0.4,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(4),1000,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(3),1,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(5),10,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(2),units.get(4),1,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(3),units.get(4),1,units.get(4)));
+
+        return articleUnits;
+    }
+
+    private ArticleUnit addArticleUnit(Article article, Unit unit, double i, Unit defUnit) {
+        ArticleUnit articleUnit= new ArticleUnit();
+        articleUnit.setArticle(article);
+        articleUnit.setUnit(unit);
+        articleUnit.setAmount(i);
+        articleUnit.setDefUnit(defUnit);
+        articleUnitService.save(articleUnit);
+        return articleUnit;
+    }
+
+    private List<Unit> createUnits() {
+
+        String[] unitNames = {"kg","g","mg","l","ml","cl","mespunt","snufje","theelepel","stuks"};
+        List<Unit> units = new ArrayList<>();
+
+        for (String name:unitNames) {
+            units.add(addUnit(name));
+        }
+        return units;
+    }
+
+    private Unit addUnit(String unitName) {
+        Unit unit = new Unit();
+        unit.setName(unitName);
+        unitService.save(unit);
+        return unit;
     }
 
     private void createCalendar() {
@@ -108,13 +163,13 @@ public class TestDataController {
         addComment(recipes.get(0),"bah!!!!!", users.get(1));
         addComment(recipes.get(0),"Lekker!!!!!", users.get(0));
         addComment(recipes.get(0),"Nou nee, niet echt ... :(", users.get(1));
-      addComment(recipes.get(1),"Jammie!", users.get(0));
-      addComment(recipes.get(1),"Duurt veel te lang om te maken", users.get(1));
-      addComment(recipes.get(1),"Valt wel mee, toch?", users.get(0));
-      addComment(recipes.get(1),"Ik heb 3 uur in de keuken gestaan!", users.get(1));
+        addComment(recipes.get(1),"Jammie!", users.get(0));
+        addComment(recipes.get(1),"Duurt veel te lang om te maken", users.get(1));
+        addComment(recipes.get(1),"Valt wel mee, toch?", users.get(0));
+        addComment(recipes.get(1),"Ik heb 3 uur in de keuken gestaan!", users.get(1));
     }
 
-    private List<Recipe> createRecipe(List<User> users, List<Article> articles, List<KitchenRegion> kitchenRegions, List<KitchenType> kitchenTypes, List<KitchenCategory> kitchenCategories) {
+    private List<Recipe> createRecipe(List<User> users, List<ArticleUnit> articleUnits, List<KitchenRegion> kitchenRegions, List<KitchenType> kitchenTypes, List<KitchenCategory> kitchenCategories) {
 
         List<Recipe> recipes = new ArrayList<>();
 
@@ -131,10 +186,10 @@ public class TestDataController {
         recipe.setUser(users.get(1));
         recipes.add(recipeService.saveRecipe(recipe));
 
-        addIngredientToRecipe(recipes.get(0),0, articles,2);
-        addIngredientToRecipe(recipes.get(0),1, articles,320);
-        addIngredientToRecipe(recipes.get(0),2, articles,30);
-        addIngredientToRecipe(recipes.get(0),3, articles,20);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(0),7);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(1),320);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(6),13);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(7),304);
 
         addCategoryToRecipe(recipes.get(0), 0,kitchenCategories);
         addCategoryToRecipe(recipes.get(0), 7,kitchenCategories);
@@ -158,10 +213,10 @@ public class TestDataController {
         recipe2.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe2));
 
-        addIngredientToRecipe(recipes.get(1),0, articles,5);
-        addIngredientToRecipe(recipes.get(1),1, articles,220);
-        addIngredientToRecipe(recipes.get(1),2, articles,10);
-        addIngredientToRecipe(recipes.get(1),3, articles,30);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(0),5);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(1),220);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(2),10);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(3),30);
 
         return recipes;
     }
@@ -263,7 +318,6 @@ public class TestDataController {
         String imagePath = "src\\main\\resources\\images\\hamb.jpg";
         Image image = uploadImageByPath(imagePath,"hamb.jpg");
         article1.setImage(image);
-        article1.setUnit("stuks");
         article1.setCalories(250);
         article1.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article1.setPrice(120);
@@ -275,7 +329,6 @@ public class TestDataController {
         String imagePath2 = "src\\main\\resources\\images\\VeganBurgerI.jpg";
         Image image2 = uploadImageByPath(imagePath,"VeganBurgerI.jpg");
         article2.setImage(image2);
-        article2.setUnit("g");
         article2.setCalories(469);
         article2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article2.setPrice(540);
@@ -287,7 +340,6 @@ public class TestDataController {
         String imagePath3 = "src\\main\\resources\\images\\VeganSauce.jpg";
         Image image3 = uploadImageByPath(imagePath,"VeganSauce.jpg");
         article3.setImage(image3);
-        article3.setUnit("ml");
         article3.setCalories(750);
         article3.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article3.setPrice(520);
@@ -299,7 +351,6 @@ public class TestDataController {
         String imagePath4 = "src\\main\\resources\\images\\VeganBurgerI.jpg";
         Image image4 = uploadImageByPath(imagePath,"VeganBurgerI.jpg");
         article4.setImage(image4);
-        article4.setUnit("stuks");
         article4.setCalories(300);
         article4.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article4.setPrice(200);
@@ -351,10 +402,10 @@ public class TestDataController {
         return image;
     }
 
-    public void addIngredientToRecipe(Recipe recipe, int articleId, List<Article> articles, int amount){
+    public void addIngredientToRecipe(Recipe recipe, ArticleUnit aU, int amount){
         Ingredient ingredient = new Ingredient();
         ingredient.setRecipe(recipe);
-        ingredient.setArticle(articles.get(articleId));
+        ingredient.setArticleunit(aU);
         ingredient.setAmount(amount);
         ingredientService.saveIngredient(ingredient);
     }

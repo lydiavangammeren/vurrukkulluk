@@ -7,6 +7,6 @@ import java.util.List;
 public interface CalendarItemService {
 
     List<CalendarItem> getAll();
-    void save(CalendarItem calendarItem);
+    CalendarItem save(CalendarItem calendarItem);
     void deleteById(int id);
 }

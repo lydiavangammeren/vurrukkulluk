@@ -2,17 +2,19 @@ package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Comment;
 import com.lydia.vurrukkulluk.repository.CommentRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@AllArgsConstructor
 public class CommentServiceImpl implements CommentService{
   @Autowired
   private CommentRepository commentRepository;
   @Override
-  public void saveComment(Comment comment) {
-    commentRepository.save(comment);
+  public Comment saveComment(Comment comment) {
+    return commentRepository.save(comment);
   }
 
   @Override
@@ -31,9 +33,7 @@ public class CommentServiceImpl implements CommentService{
   }
 
   @Override
-  public void updateComment(Comment comment) {
-      commentRepository.save(comment);
-  }
+  public Comment updateComment(Comment comment) { return commentRepository.save(comment); }
 
   @Override
   public void deleteCommentById(int id) {

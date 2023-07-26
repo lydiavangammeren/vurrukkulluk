@@ -7,6 +7,7 @@ import com.lydia.vurrukkulluk.model.Ingredient;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.service.IngredientService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("api/ingredients")
 @CrossOrigin
@@ -82,12 +84,11 @@ public class IngredientController {
         return modelMapper.map(ingredient,IngredientDto.class);
     }
 
-    public Ingredient reverseIngredientFromDto(IngredientDto ingredientDto){
-        return modelMapper.map(ingredientDto,Ingredient.class);
-    }
-
     public Ingredient reverseIngredientFromCreateDto(IngredientCreateDto ingredientCreateDto){
         return modelMapper.map(ingredientCreateDto,Ingredient.class);
     }
 
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 }

@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.dto.RatingDto;
 import com.lydia.vurrukkulluk.model.Rating;
 import com.lydia.vurrukkulluk.service.RatingService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("api/ratings")
 @CrossOrigin
@@ -69,4 +71,5 @@ public class RatingController {
 
     public Rating reverseRatingFromDto(RatingDto ratingDto){ return modelMapper.map(ratingDto, Rating.class);}
 
+    public void setModelMapper(ModelMapper modelMapper) { this.modelMapper = modelMapper; }
 }

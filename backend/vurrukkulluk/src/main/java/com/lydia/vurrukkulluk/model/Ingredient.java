@@ -15,13 +15,18 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int amount;
+    private double amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id",nullable = false)
-    private Article article;
+    @JoinColumn(name = "article_unit_id",nullable = false)
+    private ArticleUnit articleunit;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id",nullable = false)
     private Recipe recipe;
+
+    public Article getArticle(){
+        return articleunit==null ? null : articleunit.getArticle() ;
+    }
+
 }

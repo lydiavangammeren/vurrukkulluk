@@ -3,12 +3,14 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.dto.RatingDto;
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.Recipe;
+import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.ArticleService;
 import com.lydia.vurrukkulluk.service.ImageService;
 import com.lydia.vurrukkulluk.service.RecipeService;
 import com.lydia.vurrukkulluk.service.UserService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
 import com.lydia.vurrukkulluk.util.UserImageUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,7 +32,7 @@ import java.util.Objects;
 // GET: In Postman, make a HTTP GET request to
 // http://localhost:8080/image/{id} You will see the image in the response body downloaded from the database.
 
-
+@AllArgsConstructor
 @RestController
 @RequestMapping("api/image")
 @CrossOrigin
@@ -50,44 +52,89 @@ public class ImageController {
 
   @GetMapping("/{id}")
   public ResponseEntity<byte[]> getImage(@PathVariable int id) {
+
     byte[] image = imageService.getImageById(id);
     return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(image);
   }
   @ResponseStatus(value = HttpStatus.OK)
   @PostMapping()
   public String add(@RequestParam("image") MultipartFile file, @RequestParam String type, @RequestParam int id) throws IOException {
-    Image image = imageService.saveImage(file);
+
     switch (type) {
       case "user" -> {
         if (!securityUtil.isAuthorizedUserOrAdmin(id)) {return "not authorized";}
-        userService.setImageInUser(id,image);
+        Image image = new Image(file);
+        image = imageService.saveImage(image);
+        User user = userService.getUserById(id);
+        userService.setImageInUser(user,image);
       }
       case "recipe" -> {
         Recipe recipe = recipeService.getRecipeById(id);
         if (!securityUtil.isAuthorizedUserOrAdmin(recipe.getUser().getId())){return "not authorized";}
-        recipeService.setImageInRecipe(id,recipe,image);
+        Image image = new Image(file);
+        image = imageService.saveImage(image);
+        recipeService.setImageInRecipe(recipe,image);
       }
       case "article" -> {
-//        if (!securityUtil.isAdmin()) {return "not authorized";}
-        articleService.setImageInRecipe(id,image);
+        if (!securityUtil.isAdmin()) {return "not authorized";}
+        Image image = new Image(file);
+        image = imageService.saveImage(image);
+        articleService.setImageInArticle(id,image);
 
       }
     }
 
-    return "Saved image with id: " + id;
+    return "Saved image";
   }
 
   @PutMapping("/{id}")
-  public String put(@RequestParam("image") MultipartFile file, @PathVariable int id) throws IOException{
-    Image image = imageService.updateImage(file, id);
-    return "Updated image with id:" + id;
+  public String put(@RequestParam("image") MultipartFile file, @PathVariable int imageId, @PathVariable String type,@PathVariable int objectId) throws IOException{
+
+    String authorizationMessage = imageAuthorization(type,objectId);
+    if (!authorizationMessage.equals("authorized")) {
+      return authorizationMessage;
+    }
+
+    imageService.updateImage(imageId,file);
+    return "Updated image with id:" + imageId;
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable int id) {
+  public String delete(@PathVariable int id, @PathVariable String type, @PathVariable int objectId ) {
+
+    String authorizationMessage = imageAuthorization(type,objectId);
+    if (!authorizationMessage.equals("authorized")) {
+      return authorizationMessage;
+    }
+
     imageService.deleteImage(id);
     return "Deleted image with id: " + id;
   }
+  private String imageAuthorization(String type, int objectId){
+    switch (type) {
+      case "user" -> {
+        if (!securityUtil.isAuthorizedUserOrAdmin(objectId)) {
+          return "not authorized";
+        }
+      }
+      case "recipe" -> {
+        Recipe recipe = recipeService.getRecipeById(objectId);
+        if (!securityUtil.isAuthorizedUserOrAdmin(recipe.getUser().getId())) {
+          return "not authorized";
+        }
+      }
+      case "article" -> {
+        if (!securityUtil.isAdmin()) {
+          return "not authorized";
+        }
+      }
+      default -> {
+        return "invalid type";
+      }
+    }
+    return "authorized";
+    }
+
 
 }
 

@@ -3,13 +3,13 @@ import com.lydia.vurrukkulluk.model.Favorite;
 import java.util.List;
 
 public interface FavoriteService {
-  void saveFavorite(Favorite favorite);
+  Favorite saveFavorite(Favorite favorite);
 
   List<Favorite> getAllFavorites();
 
   Favorite getFavoriteById(int id);
 
-  void updateFavorite(Favorite favorite);
+  Favorite updateFavorite(Favorite favorite);
   void deleteFavoriteById(int id);
 
   public List<Favorite> getFavoritesUserId(int id);
