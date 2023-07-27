@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class UnitServiceImpl implements UnitService{
@@ -17,5 +19,10 @@ public class UnitServiceImpl implements UnitService{
     public Unit save(Unit unit) {
         unitRepository.save(unit);
         return unit;
+    }
+
+    @Override
+    public List<Unit> getAll() {
+        return unitRepository.findAll();
     }
 }

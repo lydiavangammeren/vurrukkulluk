@@ -95,7 +95,7 @@ public class TestDataController {
         List<ArticleUnit> articleUnits = new ArrayList<>();
         articleUnits.add(addArticleUnit(articles.get(0),units.get(1),1.0,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(0),1000.0,units.get(1)));
-        articleUnits.add(addArticleUnit(articles.get(0),units.get(0),0.001,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(2),0.001,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(6),0.4,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(1),units.get(4),1000,units.get(4)));
         articleUnits.add(addArticleUnit(articles.get(1),units.get(3),1,units.get(4)));
