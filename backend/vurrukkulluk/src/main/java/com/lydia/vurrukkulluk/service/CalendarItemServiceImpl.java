@@ -22,6 +22,11 @@ public class CalendarItemServiceImpl implements CalendarItemService{
     }
 
     @Override
+    public List<CalendarItem> getAllFromTodayOn() {
+        return  calendarItemRepository.findAllAfterToday();
+    }
+
+    @Override
     public CalendarItem save(CalendarItem calendarItem) {
         return calendarItemRepository.save(calendarItem);
     }

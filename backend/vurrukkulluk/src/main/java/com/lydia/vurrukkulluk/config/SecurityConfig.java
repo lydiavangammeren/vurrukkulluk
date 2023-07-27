@@ -50,7 +50,7 @@ public class SecurityConfig {
             "api/ingredients/**",
             "api/favorites/**",
             "api/comments/**",
-            "api/calendar",
+            "api/calendar/**",
             "api/articles/**"
 
 
