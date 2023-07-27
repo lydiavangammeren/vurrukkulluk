@@ -6,10 +6,16 @@ import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.service.ArticleService;
 import com.lydia.vurrukkulluk.service.ImageService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,10 +40,17 @@ public class ArticleController {
     private SecurityUtil securityUtil;
 
     @PostMapping()
-    public String add(@RequestBody ArticleDto articleDto){
-        Article article = reverseArticleFromDto(articleDto);
-        articleService.saveArticle(article);
-        return "new ingredient added";
+    public ResponseEntity<String> add(@Valid @RequestBody ArticleDto articleDto){
+        articleDto.setId(0);
+
+        try {
+            @Valid Article article = reverseArticleFromDto(articleDto);
+            articleService.saveArticle(article);
+        } catch (ConstraintViolationException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body("new ingredient added");
     }
 
     @GetMapping()
@@ -46,30 +59,41 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public ArticleDto getId(@PathVariable int id){
-        return convertArticleToDto(articleService.getArticleById(id));
+    public ResponseEntity<ArticleDto> getId(@PathVariable int id){
+        Article article = articleService.getArticleById(id);
+        if (article==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(convertArticleToDto(article));
     }
 
     @PatchMapping("/{id}")
-    public String update(@RequestBody Article article){
+    public ResponseEntity<String> update(@RequestBody ArticleDto articleDto){
         if (!securityUtil.isAdmin()) {
-            return "not authorized";
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }
-        articleService.updateArticle(article);
-        return "article updated";
+
+        try {
+            @Valid Article article = reverseArticleFromDto(articleDto);
+            articleService.updateArticle(article);
+        } catch (ConstraintViolationException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body("article updated");
 
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id){
+    public ResponseEntity<String> delete(@PathVariable int id){
 
         if (!securityUtil.isAdmin()){
-            return "not authorized";
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }
       Image image = articleService.getArticleById(id).getImage();
       imageService.deleteImage(image.getId());
       articleService.deleteArticleById(id);
-      return "article updated";
+      return ResponseEntity.status(HttpStatus.OK).body("article deleted");
 
     }
 

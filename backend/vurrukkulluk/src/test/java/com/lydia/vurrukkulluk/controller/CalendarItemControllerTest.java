@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -41,39 +43,39 @@ class CalendarItemControllerTest {
     @Test
     void saveCalendarItemWhenAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(true);
-        assertEquals("saved calendar item",controller.saveCalendarItem(calendarItem));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("saved calendar item"),controller.saveCalendarItem(calendarItem));
         verify(calendarItemService).save(calendarItem);
     }
     @Test
     void saveCalendarItemWhenNotAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(false);
-        assertEquals("not authorized",controller.saveCalendarItem(calendarItem));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.saveCalendarItem(calendarItem));
         verifyNoInteractions(calendarItemService);
 
     }
     @Test
     void updateCalendarItemWhenAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(true);
-        assertEquals("updated calendar item",controller.updateCalendarItem(calendarItem));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("updated calendar item"),controller.updateCalendarItem(calendarItem));
         verify(calendarItemService).save(calendarItem);
     }
 
     @Test
     void updateCalendarItemWhenNotAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(false);
-        assertEquals("not authorized",controller.updateCalendarItem(calendarItem));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.updateCalendarItem(calendarItem));
         verifyNoInteractions(calendarItemService);
     }
     @Test
     void deleteCalendarItemWhenAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(true);
-        assertEquals("deleted calendar item",controller.deleteCalendarItem(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("deleted calendar item"),controller.deleteCalendarItem(1));
         verify(calendarItemService).deleteById(1);
     }
     @Test
     void deleteCalendarItemWhenNotAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(false);
-        assertEquals("not authorized",controller.updateCalendarItem(calendarItem));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.updateCalendarItem(calendarItem));
         verifyNoInteractions(calendarItemService);
     }
 }

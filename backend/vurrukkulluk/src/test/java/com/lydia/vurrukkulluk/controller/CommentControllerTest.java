@@ -16,6 +16,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +62,7 @@ class CommentControllerTest {
         when(commentCreateDto.getUserId()).thenReturn(1);
         when(securityUtil.isIdOfAuthorizedUser(1)).thenReturn(true);
         when(modelMapper.map(commentCreateDto, Comment.class)).thenReturn(comment);
-        assertEquals("New comment is added",controller.add(commentCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("New comment is added"),controller.add(commentCreateDto));
         verify(commentService).saveComment(comment);
     }
     @Test
@@ -69,7 +71,7 @@ class CommentControllerTest {
         when(commentCreateDto.getUserId()).thenReturn(1);
         when(securityUtil.isIdOfAuthorizedUser(1)).thenReturn(false);
 
-        assertEquals("not authorized",controller.add(commentCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(commentCreateDto));
         verifyNoInteractions(commentService);
     }
 
@@ -94,7 +96,7 @@ class CommentControllerTest {
     void getId() {
         when(modelMapper.map(comment, CommentDto.class)).thenReturn(commentDto);
         when(commentService.getCommentById(1)).thenReturn(comment);
-        assertEquals(commentDto,controller.getId(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body(commentDto),controller.getId(1));
 
     }
 
@@ -118,7 +120,7 @@ class CommentControllerTest {
         when(securityUtil.isIdOfAuthorizedUser(1)).thenReturn(true);
         when(modelMapper.map(commentCreateDto, Comment.class)).thenReturn(comment);
 
-        assertEquals("Comment is updated",controller.update(commentCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Comment is updated"),controller.update(commentCreateDto));
         verify(commentService).saveComment(comment);
     }
     @Test
@@ -126,7 +128,7 @@ class CommentControllerTest {
         when(commentCreateDto.getUserId()).thenReturn(1);
         when(securityUtil.isIdOfAuthorizedUser(1)).thenReturn(false);
 
-        assertEquals("not authorized",controller.update(commentCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.update(commentCreateDto));
         verifyNoInteractions(commentService);
     }
     @Test
@@ -135,7 +137,7 @@ class CommentControllerTest {
         when(comment.getUser()).thenReturn(user);
         when(user.getId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
-        assertEquals("Comment is deleted", controller.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Comment is deleted"), controller.delete(1));
         verify(commentService).deleteCommentById(1);
     }
     @Test
@@ -144,7 +146,7 @@ class CommentControllerTest {
         when(comment.getUser()).thenReturn(user);
         when(user.getId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
-        assertEquals("not authorized",controller.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.delete(1));
         verify(commentService).getCommentById(1);
         verifyNoMoreInteractions(commentService);
     }

@@ -14,6 +14,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +51,7 @@ class ArticleControllerTest {
     @Test
     void add() {
         when(modelMapper.map(articleDto,Article.class)).thenReturn(article);
-        assertEquals("new ingredient added",articleController.add(articleDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("new ingredient added"),articleController.add(articleDto));
         verify(articleService).saveArticle(article);
     }
 
@@ -74,20 +76,20 @@ class ArticleControllerTest {
     void getId() {
         when(modelMapper.map(article,ArticleDto.class)).thenReturn(articleDto);
         when(articleService.getArticleById(1)).thenReturn(article);
-        assertEquals(articleDto,articleController.getId(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body(articleDto),articleController.getId(1));
     }
 
     @Test
     void updateWhenAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(true);
-
-        assertEquals("article updated",articleController.update(article));
+        when(modelMapper.map(articleDto,Article.class)).thenReturn(article);
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("article updated"),articleController.update(articleDto));
         verify(articleService).updateArticle(article);
     }
     @Test
     void updateWhenNotAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(false);
-        assertEquals("not authorized",articleController.update(article));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),articleController.update(articleDto));
         verifyNoInteractions(articleService);
     }
 
@@ -97,7 +99,7 @@ class ArticleControllerTest {
         when(articleService.getArticleById(1)).thenReturn(article);
         when(article.getImage()).thenReturn(image);
 
-        assertEquals("article updated",articleController.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("article deleted"),articleController.delete(1));
         verify(imageService).deleteImage(image.getId());
         verify(articleService).deleteArticleById(1);
     }
@@ -105,7 +107,7 @@ class ArticleControllerTest {
     void deleteWhenNotAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(false);
 
-        assertEquals("not authorized",articleController.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),articleController.delete(1));
         verifyNoInteractions(imageService);
         verifyNoInteractions(articleService);
     }

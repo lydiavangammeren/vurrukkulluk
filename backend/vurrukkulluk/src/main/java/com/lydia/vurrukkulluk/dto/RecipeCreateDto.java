@@ -17,8 +17,8 @@ public class RecipeCreateDto {
     private int kitchenTypeId;
     private int kitchenRegionId;
     private int userId;
-    private List<Integer> categoryIds;
+    private List<CategoryLinkInRecipeDto> categoryIds;
     private List<IngredientInRecipeDto> ingredients;
     private List<PreparationInRecipeDto> preparations;
-    private int id = 0; // Deze stond uit, maar moest aan staan om te kunnen posten - 25-06-2023
+    private int id = 0;
 }

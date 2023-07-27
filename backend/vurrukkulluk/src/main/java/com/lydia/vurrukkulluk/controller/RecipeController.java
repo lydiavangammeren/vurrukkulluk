@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -42,52 +44,37 @@ public class RecipeController {
   private SecurityUtil securityUtil;
 
   @PostMapping()
-  public String add(@RequestBody RecipeCreateDto recipeCreateDto) {
-    User user = userService.getUserById(recipeCreateDto.getUserId());
-    if (!securityUtil.isIdOfAuthorizedUser(user.getId())){
-      return "not authorized";
+  public ResponseEntity<String> add(@RequestBody RecipeCreateDto recipeCreateDto) {
+    if (!securityUtil.isIdOfAuthorizedUser(recipeCreateDto.getUserId())){
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     //recipe creation
     Recipe recipe = revertCreateRecipeDto(recipeCreateDto);
     recipe.setId(0);
-    recipe = recipeService.saveRecipe(recipe);
-
+    final Recipe finalRecipe = recipeService.saveRecipe(recipe);
 
     //ingredient creation
-    Recipe finalRecipe = recipe;
     recipeCreateDto.getIngredients().forEach(ingredientInRecipeDto ->{
-      Ingredient ingredient = new Ingredient();
-      ingredient.setAmount(ingredientInRecipeDto.getAmount());
-      ingredient.setArticleunit(new ArticleUnit());
-      ingredient.getArticleunit().setId(ingredientInRecipeDto.getArticleunitId());
-      ingredient.setRecipe(finalRecipe);
+      Ingredient ingredient = revertIngredientInRecipeDto(ingredientInRecipeDto,finalRecipe.getId());
       ingredientService.saveIngredient(ingredient);
     });
 
     //preparation creation
-    Recipe finalRecipe1 = recipe;
     recipeCreateDto.getPreparations().forEach(preparationInRecipeDto -> {
-      Preparation preparation = new Preparation();
-      preparation.setInstructions(preparationInRecipeDto.getInstructions());
-      preparation.setStep(preparationInRecipeDto.getStep());
-      preparation.setRecipe(finalRecipe1);
+      Preparation preparation = revertPreparationInRecipeDto(preparationInRecipeDto,finalRecipe.getId());
       preparationService.savePreparation(preparation);
     });
 
     //category link creation
-    Recipe finalRecipe2 = recipe;
     recipeCreateDto.getCategoryIds().forEach((categoryId) ->{
-      KitchenCategoriesLink link = new KitchenCategoriesLink();
-      KitchenCategory kitchenCategory = new KitchenCategory();
-      kitchenCategory.setId(categoryId);
-      link.setKitchenCategory(kitchenCategory);
-      link.setRecipe(finalRecipe2);
+      KitchenCategoriesLink link = revertCategoryLinkInRecipeDto(categoryId,finalRecipe.getId());
       kitchenCategoriesLinkService.saveKCLink(link);
     });
 
-//    return "New recipe is added with id " + recipe.getId() ;
-    return String.valueOf(recipe.getId());
+    return ResponseEntity.status(HttpStatus.OK).body("New recipe is added");
   }
+
+
 
   @GetMapping()
   public List<RecipeDto> get() {
@@ -96,26 +83,28 @@ public class RecipeController {
   }
 
   @GetMapping("/{slug}")
-  public RecipeDto getTitle(@PathVariable String slug){
+  public ResponseEntity<RecipeDto> getSlug(@PathVariable String slug){
     Recipe recipe = recipeService.getRecipeBySlug(slug);
-    return fillRecipeDto(recipe);
+    if (recipe==null){
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(fillRecipeDto(recipe));
   }
 
   @PutMapping("/{id}")
-  public String update(@RequestBody Recipe recipe, @PathVariable int id) {
+  public ResponseEntity<String> update(@RequestBody Recipe recipe, @PathVariable int id) {
     if (!securityUtil.isAuthorizedUserOrAdmin(recipeService.getRecipeById(id).getUser().getId())) {
-      return "not authorized";
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     recipeService.updateRecipe(recipe);
-    return "Recipe is updated";
-
+    return ResponseEntity.status(HttpStatus.OK).body("Recipe is updated");
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable int id) {
+  public ResponseEntity<String> delete(@PathVariable int id) {
 
     if (!securityUtil.isAuthorizedUserOrAdmin(recipeService.getRecipeById(id).getUser().getId())) {
-      return "not authorized";
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     ingredientService.getIngredientsRecipeId(id).stream().forEach(ingredient -> ingredientService.deleteById(ingredient.getId()));
     commentService.getAllCommentsOfRecipe(id).stream().forEach(comment -> commentService.deleteCommentById(comment.getId()));
@@ -125,7 +114,7 @@ public class RecipeController {
     Image image = recipeService.getRecipeById(id).getImage();
     imageService.deleteImage(image.getId());
     recipeService.deleteById(id);
-    return "Recipe is deleted";
+    return ResponseEntity.status(HttpStatus.OK).body("Recipe is deleted");
 
   }
 
@@ -226,6 +215,32 @@ public class RecipeController {
 
   public Recipe revertCreateRecipeDto(RecipeCreateDto recipeCreateDto){
     return modelMapper.map(recipeCreateDto,Recipe.class);
+  }
+
+  public Ingredient revertIngredientInRecipeDto(IngredientInRecipeDto inRecipeDto,int recipeID){
+    Ingredient ingredient = modelMapper.map(inRecipeDto,Ingredient.class);
+    ingredient.getRecipe().setTimeAdded(null);
+    ingredient.getRecipe().setId(recipeID);
+    ingredient.setId(0);
+    return ingredient;
+  }
+
+  public Preparation revertPreparationInRecipeDto(PreparationInRecipeDto preparationInRecipeDto, int recipeID){
+    Preparation preparation = modelMapper.map(preparationInRecipeDto,Preparation.class);
+    preparation.setRecipe(new Recipe());
+    preparation.getRecipe().setTimeAdded(null);
+    preparation.getRecipe().setId(recipeID);
+    preparation.setId(0);
+    return preparation;
+  }
+
+  public KitchenCategoriesLink revertCategoryLinkInRecipeDto(CategoryLinkInRecipeDto linkDto,int recipeId){
+    KitchenCategoriesLink link = modelMapper.map(linkDto,KitchenCategoriesLink.class);
+    link.setId(0);
+    link.setRecipe(new Recipe());
+    link.getRecipe().setTimeAdded(null);
+    link.getRecipe().setId(recipeId);
+    return link;
   }
 
   public void setModelMapper(ModelMapper modelMapper) {

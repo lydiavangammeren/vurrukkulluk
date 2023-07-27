@@ -23,14 +23,10 @@ class dtoTests {
             FavoriteDto.class,IngredientCreateDto.class,IngredientDto.class,IngredientInRecipeDto.class,
             KitchenCategoryDto.class,PreparationDto.class,PreparationInRecipeDto.class,
             RatingDto.class,RecipeCreateDto.class,RecipeDto.class,ShoppingCartDto.class,
-            ShoppingCartPostDto.class,UserCreateDto.class,UserDto.class,
+            ShoppingCartPostDto.class,UserCreateDto.class,UserDto.class,CategoryLinkInRecipeDto.class,
             AuthenticationResponse.class,AuthenticationRequest.class,RegisterRequest.class,
             AuthenticationRequestOTP.class})
     public void dtoConstructorGettersSettersHashEqualsTest(Class clazz) throws Exception {
-
-
-
-        //assertNotNull(new clasz());
 
         assertThat(clazz, allOf(hasValidBeanConstructor(), hasValidBeanEquals(),
                 hasValidGettersAndSetters(),

@@ -9,6 +9,7 @@ import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.FavoriteService;
 import com.lydia.vurrukkulluk.service.ImageService;
 import com.lydia.vurrukkulluk.service.UserService;
+import com.lydia.vurrukkulluk.util.Role;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,7 +67,7 @@ class UserControllerTest {
     @Test
     void add() {
         when(modelMapper.map(userCreateDto, User.class)).thenReturn(user);
-        assertEquals("New user is added",controller.add(userCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("New user is added"),controller.add(userCreateDto));
         verify(userService).saveUser(user);
     }
 
@@ -89,14 +93,14 @@ class UserControllerTest {
     void getEmail() {
         when(modelMapper.map(user, UserDto.class)).thenReturn(userDto);
         when(userService.getUserByEmail("email@a.com")).thenReturn(user);
-        assertEquals(userDto,controller.getEmail("email@a.com"));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body(userDto),controller.getEmail("email@a.com"));
     }
 
     @Test
     void getId() {
         when(modelMapper.map(user, UserDto.class)).thenReturn(userDto);
         when(userService.getUserById(1)).thenReturn(user);
-        assertEquals(userDto,controller.getId(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body(userDto),controller.getId(1));
 
     }
 
@@ -104,13 +108,13 @@ class UserControllerTest {
     void updateAuthorized() {
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
         when(modelMapper.map(userCreateDto, User.class)).thenReturn(user);
-        assertEquals("User is updated",controller.update(userCreateDto,1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("User is updated"),controller.update(userCreateDto,1));
         verify(userService).saveUser(user);
     }
     @Test
     void updateNotAuthorized() {
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
-        assertEquals("not authorized",controller.update(userCreateDto,1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.update(userCreateDto,1));
         verifyNoInteractions(userService);
     }
     @Test
@@ -128,7 +132,7 @@ class UserControllerTest {
         when(user.getImage()).thenReturn(image);
         when(image.getId()).thenReturn(25);
 
-        assertEquals("User is deleted",controller.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("User is deleted"),controller.delete(1));
         verify(imageService).deleteImage(25);
         verify(userService).deleteById(1);
         verify(favoriteService, times(4)).deleteFavoriteById(5);
@@ -136,15 +140,27 @@ class UserControllerTest {
     @Test
     void deleteNotAuthorized() {
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
-        assertEquals("not authorized",controller.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.delete(1));
         verifyNoInteractions(userService);
     }
 
     @Test
     void convertUserToDto() {
+        controller.setModelMapper(new ModelMapper());
+        User user1 = new User(1,"name","password","12345",new Date(),"email@a.com",new Image(), Role.USER);
+        user1.getImage().setId(3);
+        UserDto userDto1 = new UserDto(1,"name","email@a.com",3);
+
+        assertEquals(userDto1,controller.convertUserToDto(user1));
     }
 
     @Test
     void reverseUserToCreateDto() {
+        controller.setModelMapper(new ModelMapper());
+        User user1 = new User(0,"name","password",null,null,"email@a.com",new Image(), null);
+        user1.getImage().setId(3);
+        UserCreateDto userCreateDto1 = new UserCreateDto(0,"name","password","email@a.com",3);
+
+        assertEquals(user1,controller.reverseUserToCreateDto(userCreateDto1));
     }
 }

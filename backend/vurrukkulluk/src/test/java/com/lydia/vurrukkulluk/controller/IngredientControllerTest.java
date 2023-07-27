@@ -15,6 +15,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +85,7 @@ class IngredientControllerTest {
         when(securityUtil.isIdOfAuthorizedUser(1)).thenReturn(true);
         when(modelMapper.map(ingredientCreateDto, Ingredient.class)).thenReturn(ingredient);
 
-        assertEquals("saved",controller.add(ingredientCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("saved"),controller.add(ingredientCreateDto));
         verify(ingredientService).saveIngredient(ingredient);
     }
     @Test
@@ -91,7 +93,7 @@ class IngredientControllerTest {
         addAndUpdateAuthorizationMock();
         when(securityUtil.isIdOfAuthorizedUser(1)).thenReturn(false);
 
-        assertEquals("not authorized",controller.add(ingredientCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(ingredientCreateDto));
     }
     @Test
     void updateAuthorized() {
@@ -99,7 +101,7 @@ class IngredientControllerTest {
         when(securityUtil.isIdOfAuthorizedUser(1)).thenReturn(true);
         when(modelMapper.map(ingredientCreateDto, Ingredient.class)).thenReturn(ingredient);
 
-        assertEquals("saved",controller.add(ingredientCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("saved"),controller.add(ingredientCreateDto));
         verify(ingredientService).saveIngredient(ingredient);
     }
     @Test
@@ -107,7 +109,7 @@ class IngredientControllerTest {
         addAndUpdateAuthorizationMock();
         when(securityUtil.isIdOfAuthorizedUser(1)).thenReturn(false);
 
-        assertEquals("not authorized",controller.add(ingredientCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(ingredientCreateDto));
     }
 
     @Test
@@ -118,7 +120,7 @@ class IngredientControllerTest {
         when(user.getId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
 
-        assertEquals("deleted",controller.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("deleted"),controller.delete(1));
         verify(ingredientService).deleteById(1);
     }
 
@@ -130,7 +132,7 @@ class IngredientControllerTest {
         when(user.getId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
 
-        assertEquals("not authorized",controller.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.delete(1));
     }
 
     @Test
@@ -138,7 +140,7 @@ class IngredientControllerTest {
         when(modelMapper.map(ingredient, IngredientDto.class)).thenReturn(ingredientDto);
         when(ingredientService.getIngredientById(1)).thenReturn(ingredient);
 
-        assertEquals(ingredientDto,controller.getId(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body(ingredientDto),controller.getId(1));
     }
 
     @Test

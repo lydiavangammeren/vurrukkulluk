@@ -13,13 +13,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class RatingControllerTest {
@@ -62,19 +63,34 @@ class RatingControllerTest {
     }
 
     @Test
-    void add() {
+    void addAuthorized() {
+        when(ratingDto.getUserId()).thenReturn(1);
+        when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
         when(modelMapper.map(ratingDto, Rating.class)).thenReturn(rating);
-        assertEquals("Saved rating",controller.add(ratingDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Saved rating"),controller.add(ratingDto));
         verify(ratingService).saveRating(rating);
     }
-
     @Test
-    void put() {
+    void addNotAuthorized() {
+        when(ratingDto.getUserId()).thenReturn(1);
+        when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(ratingDto));
+        verifyNoInteractions(ratingService);
+    }
+    @Test
+    void putAuthorized() {
+        when(ratingDto.getUserId()).thenReturn(1);
+        when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
         when(modelMapper.map(ratingDto, Rating.class)).thenReturn(rating);
-        assertEquals("Updated rating",controller.put(ratingDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Updated rating"),controller.put(ratingDto));
         verify(ratingService).saveRating(rating);
     }
-
+    @Test
+    void putNotAuthorized() {
+        when(ratingDto.getUserId()).thenReturn(1);
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"), controller.put(ratingDto));
+        verifyNoInteractions(ratingService);
+    }
     @Test
     void deleteAuthorized() {
         when(ratingService.getRatingById(1)).thenReturn(rating);
@@ -82,7 +98,7 @@ class RatingControllerTest {
         when(user.getId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
 
-        assertEquals("Updated rating",controller.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Updated rating"),controller.delete(1));
         verify(ratingService).deleteById(1);
 
     }
@@ -93,7 +109,7 @@ class RatingControllerTest {
         when(user.getId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
 
-        assertEquals("not authorized",controller.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.delete(1));
 
     }
 

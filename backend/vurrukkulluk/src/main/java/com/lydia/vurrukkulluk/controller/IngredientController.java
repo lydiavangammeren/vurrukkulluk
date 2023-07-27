@@ -10,6 +10,8 @@ import com.lydia.vurrukkulluk.util.SecurityUtil;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -38,45 +40,48 @@ public class IngredientController {
         return ingredientService.getAllIngredients().stream().map(this::convertIngredientToDto).collect(Collectors.toList());
     }
     @PostMapping()
-    public String add(@RequestBody IngredientCreateDto ingredientCreateDto){
+    public ResponseEntity<String> add(@RequestBody IngredientCreateDto ingredientCreateDto){
         if (!securityUtil.isIdOfAuthorizedUser(
                 ingredientService.getIngredientById(ingredientCreateDto.getRecipeId()).getRecipe().getUser().getId())){
-            return "not authorized";
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }
         Ingredient ingredient = reverseIngredientFromCreateDto(ingredientCreateDto);
         ingredientService.saveIngredient(ingredient);
-        return "saved";
+        return ResponseEntity.status(HttpStatus.OK).body("saved");
     }
 
     @PutMapping()
-    public String update(@RequestBody IngredientCreateDto ingredientCreateDto){
+    public ResponseEntity<String> update(@RequestBody IngredientCreateDto ingredientCreateDto){
         if (!securityUtil.isIdOfAuthorizedUser(
                 ingredientService.getIngredientById(ingredientCreateDto.getRecipeId()).getRecipe().getUser().getId())){
-            return "not authorized";
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }
         Ingredient ingredient = reverseIngredientFromCreateDto(ingredientCreateDto);
         ingredientService.saveIngredient(ingredient);
-        return "updated";
+        return ResponseEntity.status(HttpStatus.OK).body("updated");
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id){
+    public ResponseEntity<String> delete(@PathVariable int id){
         if (!securityUtil.isAuthorizedUserOrAdmin(
                 ingredientService.getIngredientById(id).getRecipe().getUser().getId())){
-            return "not authorized";
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }
         ingredientService.deleteById(id);
-        return "deleted";
+        return ResponseEntity.status(HttpStatus.OK).body("deleted");
     }
 
     @GetMapping("/{id}")
-    public IngredientDto getId(@PathVariable int id){
-        return convertIngredientToDto(ingredientService.getIngredientById(id));
+    public ResponseEntity<IngredientDto> getId(@PathVariable int id){
+        Ingredient ingredient = ingredientService.getIngredientById(id);
+        if (ingredient==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(convertIngredientToDto(ingredient));
     }
 
     @GetMapping("recipe/{id}")
     public List<IngredientDto> getRecepId(@PathVariable int id){
-
         return ingredientService.getIngredientsRecipeId(id).stream().map(this::convertIngredientToDto).collect(Collectors.toList());
     }
 

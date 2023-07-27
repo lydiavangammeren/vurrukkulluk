@@ -13,6 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,7 @@ class FavoriteControllerTest {
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
         when(favoriteDto.getUserId()).thenReturn(1);
         when(modelMapper.map(favoriteDto, Favorite.class)).thenReturn(favorite);
-        assertEquals("new favorite is added",controller.add(favoriteDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("new favorite is added"),controller.add(favoriteDto));
         verify(favoriteService).saveFavorite(favorite);
 
     }
@@ -53,7 +55,7 @@ class FavoriteControllerTest {
     void addNotAuthorized() {
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
         when(favoriteDto.getUserId()).thenReturn(1);
-        assertEquals("not authorized",controller.add(favoriteDto));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(favoriteDto));
         verifyNoInteractions(favoriteService);
     }
     @Test
@@ -76,7 +78,7 @@ class FavoriteControllerTest {
     @Test
     void getId() {
         when(favoriteService.getFavoriteById(1)).thenReturn(favorite);
-        assertEquals(favorite,controller.getId(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body(favorite),controller.getId(1));
     }
 
     @Test
@@ -84,7 +86,7 @@ class FavoriteControllerTest {
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
         when(favoriteDto.getUserId()).thenReturn(1);
         when(modelMapper.map(favoriteDto, Favorite.class)).thenReturn(favorite);
-        assertEquals("Favorite is updated",controller.update(favoriteDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Favorite is updated"),controller.update(favoriteDto));
         verify(favoriteService).saveFavorite(favorite);
 
     }
@@ -92,7 +94,7 @@ class FavoriteControllerTest {
     void updateNotAuthenticated() {
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
         when(favoriteDto.getUserId()).thenReturn(1);
-        assertEquals("not authorized",controller.update(favoriteDto));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.update(favoriteDto));
         verifyNoInteractions(favoriteService);
 
     }
@@ -103,7 +105,7 @@ class FavoriteControllerTest {
         when(user.getId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
 
-        assertEquals("Favorite is deleted",controller.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Favorite is deleted"),controller.delete(1));
         verify(favoriteService).deleteFavoriteById(1);
     }
     @Test
@@ -113,7 +115,7 @@ class FavoriteControllerTest {
         when(user.getId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
 
-        assertEquals("not authorized",controller.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.delete(1));
         verify(favoriteService).getFavoriteById(1);
         verifyNoMoreInteractions(favoriteService);
     }

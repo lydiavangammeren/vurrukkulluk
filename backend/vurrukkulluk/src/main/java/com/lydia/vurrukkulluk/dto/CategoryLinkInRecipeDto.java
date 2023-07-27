@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IngredientInRecipeDto {
-    int articleunitId;
-    double amount;
+public class CategoryLinkInRecipeDto {
+    int KitchenCategoryID;
 }

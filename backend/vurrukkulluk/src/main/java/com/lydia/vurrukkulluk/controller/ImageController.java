@@ -58,11 +58,11 @@ public class ImageController {
   }
   @ResponseStatus(value = HttpStatus.OK)
   @PostMapping()
-  public String add(@RequestParam("image") MultipartFile file, @RequestParam String type, @RequestParam int id) throws IOException {
+  public ResponseEntity<String> add(@RequestParam("image") MultipartFile file, @RequestParam String type, @RequestParam int id) throws IOException {
 
     switch (type) {
       case "user" -> {
-        if (!securityUtil.isAuthorizedUserOrAdmin(id)) {return "not authorized";}
+        if (!securityUtil.isAuthorizedUserOrAdmin(id)) {return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");}
         Image image = new Image(file);
         image = imageService.saveImage(image);
         User user = userService.getUserById(id);
@@ -70,13 +70,13 @@ public class ImageController {
       }
       case "recipe" -> {
         Recipe recipe = recipeService.getRecipeById(id);
-        if (!securityUtil.isAuthorizedUserOrAdmin(recipe.getUser().getId())){return "not authorized";}
+        if (!securityUtil.isAuthorizedUserOrAdmin(recipe.getUser().getId())){return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");}
         Image image = new Image(file);
         image = imageService.saveImage(image);
         recipeService.setImageInRecipe(recipe,image);
       }
       case "article" -> {
-        if (!securityUtil.isAdmin()) {return "not authorized";}
+        if (!securityUtil.isAdmin()) {return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");}
         Image image = new Image(file);
         image = imageService.saveImage(image);
         articleService.setImageInArticle(id,image);
@@ -84,31 +84,37 @@ public class ImageController {
       }
     }
 
-    return "Saved image";
+    return ResponseEntity.status(HttpStatus.OK).body("Saved image");
   }
 
   @PutMapping("/{id}")
-  public String put(@RequestParam("image") MultipartFile file, @PathVariable int imageId, @PathVariable String type,@PathVariable int objectId) throws IOException{
+  public ResponseEntity<String> put(@RequestParam("image") MultipartFile file, @PathVariable int imageId, @PathVariable String type,@PathVariable int objectId) throws IOException{
 
     String authorizationMessage = imageAuthorization(type,objectId);
     if (!authorizationMessage.equals("authorized")) {
-      return authorizationMessage;
+      if (authorizationMessage.equals("not authorized")){
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(authorizationMessage);
+      }
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(authorizationMessage);
     }
 
     imageService.updateImage(imageId,file);
-    return "Updated image with id:" + imageId;
+    return ResponseEntity.status(HttpStatus.OK).body("Updated image with id:" + imageId);
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable int id, @PathVariable String type, @PathVariable int objectId ) {
+  public ResponseEntity<String> delete(@PathVariable int id, @PathVariable String type, @PathVariable int objectId ) {
 
     String authorizationMessage = imageAuthorization(type,objectId);
     if (!authorizationMessage.equals("authorized")) {
-      return authorizationMessage;
+      if (authorizationMessage.equals("not authorized")){
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(authorizationMessage);
+      }
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(authorizationMessage);
     }
 
     imageService.deleteImage(id);
-    return "Deleted image with id: " + id;
+    return ResponseEntity.status(HttpStatus.OK).body("Deleted image with id: " + id);
   }
   private String imageAuthorization(String type, int objectId){
     switch (type) {

@@ -11,6 +11,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,13 +33,13 @@ public class CommentController {
   private SecurityUtil securityUtil;
 
   @PostMapping()
-  public String add(@RequestBody CommentCreateDto commentCreateDto) {
+  public ResponseEntity<String> add(@RequestBody CommentCreateDto commentCreateDto) {
     if (!securityUtil.isIdOfAuthorizedUser(commentCreateDto.getUserId())){
-      return "not authorized";
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     Comment comment = reverseCommentCreateDto(commentCreateDto);
     commentService.saveComment(comment);
-    return "New comment is added";
+    return ResponseEntity.status(HttpStatus.OK).body("New comment is added");
 
   }
 
@@ -49,8 +51,12 @@ public class CommentController {
   }
 
   @GetMapping("/{id}")
-  public CommentDto getId(@PathVariable int id){
-    return convertCommentToDto(commentService.getCommentById(id));
+  public ResponseEntity<CommentDto> getId(@PathVariable int id){
+    Comment comment = commentService.getCommentById(id);
+    if (comment==null){
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(convertCommentToDto(comment));
   }
 
   @GetMapping("/recipe/{id}")
@@ -61,22 +67,22 @@ public class CommentController {
   }
 
   @PutMapping()
-  public String update(@RequestBody CommentCreateDto commentCreateDto) {
+  public ResponseEntity<String> update(@RequestBody CommentCreateDto commentCreateDto) {
     if (!securityUtil.isIdOfAuthorizedUser(commentCreateDto.getUserId())){
-      return "not authorized";
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     Comment comment = reverseCommentCreateDto(commentCreateDto);
     commentService.saveComment(comment);
-    return "Comment is updated";
+    return ResponseEntity.status(HttpStatus.OK).body("Comment is updated");
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable int id) {
+  public ResponseEntity<String> delete(@PathVariable int id) {
     if (!securityUtil.isAuthorizedUserOrAdmin(commentService.getCommentById(id).getUser().getId())){
-      return "not authorized";
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     commentService.deleteCommentById(id);
-    return "Comment is deleted";
+    return ResponseEntity.status(HttpStatus.OK).body("Comment is deleted");
   }
 
 

@@ -66,7 +66,7 @@ class ImageControllerTest {
         when(imageService.saveImage(new Image(file))).thenReturn(image);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
         when(userService.getUserById(1)).thenReturn(user);
-        assertEquals("Saved image",controller.add(file,"user",1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Saved image"),controller.add(file,"user",1));
         verify(userService).getUserById(1);
         verify(userService).setImageInUser(user,image);
     }
@@ -75,7 +75,7 @@ class ImageControllerTest {
         MultipartFile file = new MockMultipartFile("file",
                 "image.png","jpg",new byte[6]);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
-        assertEquals("not authorized",controller.add(file,"user",1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(file,"user",1));
     }
 
     @Test
@@ -88,7 +88,7 @@ class ImageControllerTest {
         when(user.getId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
 
-        assertEquals("Saved image",controller.add(file,"recipe",1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Saved image"),controller.add(file,"recipe",1));
         verify(recipeService).getRecipeById(1);
         verify(recipeService).setImageInRecipe(recipe,image);
     }
@@ -101,7 +101,7 @@ class ImageControllerTest {
         when(user.getId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
 
-        assertEquals("not authorized",controller.add(file,"recipe",1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(file,"recipe",1));
 
     }
     @Test
@@ -111,7 +111,7 @@ class ImageControllerTest {
         when(imageService.saveImage(new Image(file))).thenReturn(image);
         when(securityUtil.isAdmin()).thenReturn(true);
 
-        assertEquals("Saved image",controller.add(file,"article",1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Saved image"),controller.add(file,"article",1));
         verify(articleService).setImageInArticle(1,image);
     }
     @Test
@@ -121,7 +121,7 @@ class ImageControllerTest {
 
         when(securityUtil.isAdmin()).thenReturn(false);
 
-        assertEquals("not authorized",controller.add(file,"article",1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(file,"article",1));
 
     }
     @Test
@@ -135,10 +135,10 @@ class ImageControllerTest {
         when(recipe.getUser()).thenReturn(user);
         when(user.getId()).thenReturn(1);
 
-        assertEquals("Updated image with id:1",controller.put(file,1,"user",1));
-        assertEquals("Updated image with id:1",controller.put(file,1,"recipe",1));
-        assertEquals("Updated image with id:1",controller.put(file,1,"article",1));
-        assertEquals("invalid type",controller.put(file,1,"ad89--==[;dafef",1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Updated image with id:1"),controller.put(file,1,"user",1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Updated image with id:1"),controller.put(file,1,"recipe",1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Updated image with id:1"),controller.put(file,1,"article",1));
+        assertEquals(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid type"),controller.put(file,1,"ad89--==[;dafef",1));
         verify(imageService,times(3)).updateImage(1,file);
 
 
@@ -155,10 +155,10 @@ class ImageControllerTest {
         when(recipe.getUser()).thenReturn(user);
         when(user.getId()).thenReturn(1);
 
-        assertEquals("not authorized",controller.put(file,1,"user",1));
-        assertEquals("not authorized",controller.put(file,1,"recipe",1));
-        assertEquals("not authorized",controller.put(file,1,"article",1));
-        assertEquals("invalid type",controller.put(file,1,"ad89--==[;dafef",1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.put(file,1,"user",1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.put(file,1,"recipe",1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.put(file,1,"article",1));
+        assertEquals(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid type"),controller.put(file,1,"ad89--==[;dafef",1));
         verifyNoInteractions(imageService);
 
 
@@ -171,10 +171,10 @@ class ImageControllerTest {
         when(recipeService.getRecipeById(1)).thenReturn(recipe);
         when(recipe.getUser()).thenReturn(user);
         when(user.getId()).thenReturn(1);
-        assertEquals("Deleted image with id: 1",controller.delete(1,"user",1));
-        assertEquals("Deleted image with id: 1",controller.delete(1,"recipe",1));
-        assertEquals("Deleted image with id: 1",controller.delete(1,"article",1));
-        assertEquals("invalid type",controller.delete(1,"ad89--==[;dafef",1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Deleted image with id: 1"),controller.delete(1,"user",1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Deleted image with id: 1"),controller.delete(1,"recipe",1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Deleted image with id: 1"),controller.delete(1,"article",1));
+        assertEquals(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid type"),controller.delete(1,"ad89--==[;dafef",1));
         verify(imageService,times(3)).deleteImage(1);
     }
     @Test
@@ -184,10 +184,10 @@ class ImageControllerTest {
         when(recipeService.getRecipeById(1)).thenReturn(recipe);
         when(recipe.getUser()).thenReturn(user);
         when(user.getId()).thenReturn(1);
-        assertEquals("not authorized",controller.delete(1,"user",1));
-        assertEquals("not authorized",controller.delete(1,"recipe",1));
-        assertEquals("not authorized",controller.delete(1,"article",1));
-        assertEquals("invalid type",controller.delete(1,"ad89--==[;dafef",1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.delete(1,"user",1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.delete(1,"recipe",1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.delete(1,"article",1));
+        assertEquals(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid type"),controller.delete(1,"ad89--==[;dafef",1));
         verifyNoInteractions(imageService);
     }
 }

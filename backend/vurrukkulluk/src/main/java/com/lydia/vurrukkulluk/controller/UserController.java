@@ -10,7 +10,10 @@ import com.lydia.vurrukkulluk.service.UserService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
 
@@ -32,6 +35,7 @@ public class UserController {
   @Autowired
   private ImageService imageService;
 
+  @Setter
   @Autowired
   private ModelMapper modelMapper;
 
@@ -42,10 +46,10 @@ public class UserController {
   }
 
   @PostMapping()
-  public String add(@RequestBody UserCreateDto userCreateDto) {
+  public ResponseEntity<String> add(@RequestBody UserCreateDto userCreateDto) {
     User user = reverseUserToCreateDto(userCreateDto);
     userService.saveUser(user);
-    return "New user is added";
+    return ResponseEntity.status(HttpStatus.OK).body("New user is added");
   }
 
   @GetMapping()
@@ -55,37 +59,45 @@ public class UserController {
   }
 
   @GetMapping("email/{email}")
-  public UserDto getEmail(@PathVariable String email) {
-    return convertUserToDto(userService.getUserByEmail(email));
+  public ResponseEntity<UserDto> getEmail(@PathVariable String email) {
+    User user = userService.getUserByEmail(email);
+    if (user==null){
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(convertUserToDto(user));
   }
 
 
   @GetMapping("/{id}")
-  public UserDto getId(@PathVariable int id) {
-    return convertUserToDto(userService.getUserById(id));
+  public ResponseEntity<UserDto> getId(@PathVariable int id) {
+    User user = userService.getUserById(id);
+    if (user==null){
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(convertUserToDto(user));
   }
 
   @PutMapping("/{id}")
-  public String update(@RequestBody UserCreateDto userCreateDto, @PathVariable int id) {
+  public ResponseEntity<String> update(@RequestBody UserCreateDto userCreateDto, @PathVariable int id) {
     if (!securityUtil.isAuthorizedUserOrAdmin(id)) {
-      return "not authorized";
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     User user = reverseUserToCreateDto(userCreateDto);
     userService.saveUser(user);
-    return "User is updated";
+    return ResponseEntity.status(HttpStatus.OK).body("User is updated");
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable int id) {
+  public ResponseEntity<String> delete(@PathVariable int id) {
 
     if (!securityUtil.isAuthorizedUserOrAdmin(id)) {
-      return "not authorized";
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     favoriteService.getFavoritesUserId(id).forEach(favorite -> favoriteService.deleteFavoriteById(favorite.getId()));
     Image image = userService.getUserById(id).getImage();
     imageService.deleteImage(image.getId());
     userService.deleteById(id);
-    return "User is deleted";
+    return ResponseEntity.status(HttpStatus.OK).body("User is deleted");
   }
 
 

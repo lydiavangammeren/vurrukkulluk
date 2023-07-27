@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -43,33 +45,33 @@ class KitchenTypeControllerTest {
     @Test
     void add() {
         when(kitchenTypeService.saveKitchenType(kitchenType)).thenReturn(kitchenType);
-        assertEquals("New kitchen type is added",kitchenTypeController.add(kitchenType));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("New kitchen type is added"),kitchenTypeController.add(kitchenType));
     }
 
     @Test
     void updateWhenAutorized() {
         when(securityUtil.isAdmin()).thenReturn(true);
-        assertEquals("This kitchen type is updated",kitchenTypeController.update(kitchenType));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("This kitchen type is updated"),kitchenTypeController.update(kitchenType));
         verify(kitchenTypeService).updateKitchenType(kitchenType);
     }
     @Test
     void updateWhenNotAutorized() {
         when(securityUtil.isAdmin()).thenReturn(false);
-        assertEquals("not authorized",kitchenTypeController.update(kitchenType));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),kitchenTypeController.update(kitchenType));
         verifyNoInteractions(kitchenTypeService);
     }
 
     @Test
     void deleteWhenAutorized() {
         when(securityUtil.isAdmin()).thenReturn(true);
-        assertEquals("Kitchen type is deleted",kitchenTypeController.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Kitchen type is deleted"),kitchenTypeController.delete(1));
         verify(kitchenTypeService).deleteById(1);
 
     }
     @Test
     void deleteWhenNotAutorized() {
         when(securityUtil.isAdmin()).thenReturn(false);
-        assertEquals("not authorized",kitchenTypeController.delete(1));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),kitchenTypeController.delete(1));
         verifyNoInteractions(kitchenTypeService);
     }
 }

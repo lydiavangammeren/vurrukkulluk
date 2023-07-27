@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,15 +45,22 @@ class RecipeControllerTest {
     private SecurityUtil securityUtil;
     @Mock Recipe recipe;
     @Mock RecipeDto recipeDto;
+    @Mock CategoryLinkInRecipeDto categoryLinkInRecipeDto;
+    @Mock RecipeCreateDto recipeCreateDto;
     @Mock Comment comment;
     @Mock CommentDto commentDto;
     @Mock Ingredient ingredient;
+    @Mock IngredientInRecipeDto ingredientInRecipeDto;
     @Mock IngredientDto ingredientDto;
     @Mock KitchenCategoriesLink kitchenCategoriesLink;
     @Mock KitchenCategory kitchenCategory;
     @Mock KitchenCategoryDto kitchenCategoryDto;
     @Mock Preparation preparation;
     @Mock PreparationDto preparationDto;
+    @Mock PreparationInRecipeDto preparationInRecipeDto;
+    @Mock User user;
+    @Mock Rating rating;
+    @Mock Image image;
     RecipeController controller;
     @BeforeEach
     void setUp(){
@@ -158,7 +167,54 @@ class RecipeControllerTest {
     }
 
     @Test
-    void add() {
+    void addAuthorized() {
+        when(recipeCreateDto.getUserId()).thenReturn(1);
+        when(securityUtil.isIdOfAuthorizedUser(1)).thenReturn(true);
+
+
+        when(modelMapper.map(recipeCreateDto,Recipe.class)).thenReturn(recipe);
+        when(recipeService.saveRecipe(recipe)).thenReturn(recipe);
+        when(recipe.getId()).thenReturn(1);
+        List<CategoryLinkInRecipeDto> categoryIds = new ArrayList<>();
+        categoryIds.add(categoryLinkInRecipeDto);
+        categoryIds.add(categoryLinkInRecipeDto);
+        List<IngredientInRecipeDto> ingredients = new ArrayList<>();
+        ingredients.add(ingredientInRecipeDto);
+        ingredients.add(ingredientInRecipeDto);
+        ingredients.add(ingredientInRecipeDto);
+        List<PreparationInRecipeDto> preparations = new ArrayList<>();
+        preparations.add(preparationInRecipeDto);
+        preparations.add(preparationInRecipeDto);
+
+        when(recipeCreateDto.getIngredients()).thenReturn(ingredients);
+        when(modelMapper.map(ingredientInRecipeDto,Ingredient.class)).thenReturn(ingredient);
+        when(ingredient.getRecipe()).thenReturn(recipe);
+        when(recipeCreateDto.getPreparations()).thenReturn(preparations);
+        when(modelMapper.map(preparationInRecipeDto,Preparation.class)).thenReturn(preparation);
+        when(preparation.getRecipe()).thenReturn(recipe);
+        when(recipeCreateDto.getCategoryIds()).thenReturn(categoryIds);
+        when(modelMapper.map(categoryLinkInRecipeDto,KitchenCategoriesLink.class)).thenReturn(kitchenCategoriesLink);
+        when(kitchenCategoriesLink.getRecipe()).thenReturn(recipe);
+
+
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("New recipe is added"),controller.add(recipeCreateDto));
+
+        verify(recipe).setId(0);
+        verify(recipeService).saveRecipe(recipe);
+        verify(ingredientService,times(3)).saveIngredient(ingredient);
+        verify(preparationService,times(2)).savePreparation(preparation);
+        verify(kitchenCategoriesLinkService,times(2)).saveKCLink(kitchenCategoriesLink);
+
+    }
+    @Test
+    void addNotAuthorized() {
+        when(recipeCreateDto.getUserId()).thenReturn(1);
+        when(securityUtil.isIdOfAuthorizedUser(1)).thenReturn(false);
+
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(recipeCreateDto));
+        verifyNoInteractions(recipeService);
+
+
     }
 
     @Test
@@ -222,6 +278,7 @@ class RecipeControllerTest {
 
         //add rating
         when(ratingService.getAvgRatingOfRecipe(1)).thenReturn(3.5f);
+
         assertEquals(recipeDtos,controller.get());
 
         verify(recipeDto,times(3)).setComments(commentDtos);
@@ -232,7 +289,46 @@ class RecipeControllerTest {
     }
 
     @Test
-    void getTitle() {
+    void getSlug() {
+        List<Comment> comments = new ArrayList<>();
+        comments.add(comment);
+        comments.add(comment);
+
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(ingredient);
+        ingredients.add(ingredient);
+
+        List<Preparation> preparations = new ArrayList<>();
+        preparations.add(preparation);
+        preparations.add(preparation);
+
+        List<KitchenCategoriesLink> kitchenCategoriesLinks = new ArrayList<>();
+        kitchenCategoriesLinks.add(kitchenCategoriesLink);
+        kitchenCategoriesLinks.add(kitchenCategoriesLink);
+        kitchenCategoriesLinks.add(kitchenCategoriesLink);
+
+        when(recipeService.getRecipeBySlug("slug")).thenReturn(recipe);
+        when(modelMapper.map(recipe,RecipeDto.class)).thenReturn(recipeDto);
+        when(recipeDto.getId()).thenReturn(1);
+        // add comments
+        when(commentService.getAllCommentsOfRecipe(1)).thenReturn(comments);
+        when(modelMapper.map(comment,CommentDto.class)).thenReturn(commentDto);
+        // add ingredient
+        when(ingredientService.getIngredientsRecipeId(1)).thenReturn(ingredients);
+        when(modelMapper.map(ingredient,IngredientDto.class)).thenReturn(ingredientDto);
+        //add preparation
+        when(preparationService.getAllPreparationsRecipe(1)).thenReturn(preparations);
+        when(modelMapper.map(preparation,PreparationDto.class)).thenReturn(preparationDto);
+        //add kitchencategory
+        when(kitchenCategoriesLinkService.getKCLinkByRecipeId(1)).thenReturn(kitchenCategoriesLinks);
+        when(kitchenCategoriesLink.getKitchenCategory()).thenReturn(kitchenCategory);
+        when(modelMapper.map(kitchenCategory,KitchenCategoryDto.class)).thenReturn(kitchenCategoryDto);
+
+        //add rating
+        when(ratingService.getAvgRatingOfRecipe(1)).thenReturn(3.5f);
+
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body(recipeDto),controller.getSlug("slug"));
+
     }
 
     @Test
@@ -240,11 +336,88 @@ class RecipeControllerTest {
     }
 
     @Test
-    void delete() {
+    void deleteAuthorized() {
+        when(recipeService.getRecipeById(1)).thenReturn(recipe);
+        when(recipe.getUser()).thenReturn(user);
+        when(user.getId()).thenReturn(2);
+        when(securityUtil.isAuthorizedUserOrAdmin(2)).thenReturn(true);
+
+        List<Comment> comments = new ArrayList<>();
+        comments.add(comment);
+        comments.add(comment);
+
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(ingredient);
+        ingredients.add(ingredient);
+
+        List<Preparation> preparations = new ArrayList<>();
+        preparations.add(preparation);
+        preparations.add(preparation);
+
+        List<KitchenCategoriesLink> kitchenCategoriesLinks = new ArrayList<>();
+        kitchenCategoriesLinks.add(kitchenCategoriesLink);
+        kitchenCategoriesLinks.add(kitchenCategoriesLink);
+        kitchenCategoriesLinks.add(kitchenCategoriesLink);
+
+        List<Rating> ratings = new ArrayList<>();
+        ratings.add(rating);
+        ratings.add(rating);
+        ratings.add(rating);
+
+        when(ingredientService.getIngredientsRecipeId(1)).thenReturn(ingredients);
+        when(ingredient.getId()).thenReturn(3);
+        when(commentService.getAllCommentsOfRecipe(1)).thenReturn(comments);
+        when(comment.getId()).thenReturn(4);
+        when(kitchenCategoriesLinkService.getKCLinkByRecipeId(1)).thenReturn(kitchenCategoriesLinks);
+        when(kitchenCategoriesLink.getId()).thenReturn(5);
+        when(preparationService.getAllPreparationsRecipe(1)).thenReturn(preparations);
+        when(preparation.getId()).thenReturn(6);
+        when(ratingService.getAllRatingsRecipe(1)).thenReturn(ratings);
+        when(rating.getId()).thenReturn(7);
+        when(recipe.getImage()).thenReturn(image);
+        when(image.getId()).thenReturn(8);
+
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Recipe is deleted"), controller.delete(1));
+        verify(ingredientService,times(2)).deleteById(3);
+        verify(commentService,times(2)).deleteCommentById(4);
+        verify(kitchenCategoriesLinkService,times(3)).deleteById(5);
+        verify(preparationService,times(2)).deleteById(6);
+        verify(ratingService,times(3)).deleteById(7);
+        verify(imageService,times(1)).deleteImage(8);
+        verify(recipeService).deleteById(1);
+
+
+
+    }
+    @Test
+    void deleteNotAuthorized() {
+        when(recipeService.getRecipeById(1)).thenReturn(recipe);
+        when(recipe.getUser()).thenReturn(user);
+        when(user.getId()).thenReturn(2);
+        when(securityUtil.isAuthorizedUserOrAdmin(2)).thenReturn(false);
+
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.delete(1));
+        verify(recipeService).getRecipeById(1);
+        verifyNoMoreInteractions(recipeService);
+
     }
 
     @Test
     void convertRecipeToDto() {
+        controller.setModelMapper(new ModelMapper());
+
+        KitchenType kitchenType = new KitchenType(2,"kitchentype");
+        KitchenRegion kitchenRegion = new KitchenRegion(3,"kitchenregion");
+        User user1 = new User();
+        user1.setId(4);
+        Image image1 = new Image();
+        image1.setId(5);
+        Recipe recipe1 = new Recipe(1,kitchenType,kitchenRegion,user1,"title"
+        ,"slug","description",null,image1,4);
+        RecipeDto recipeDto1 = new RecipeDto(1,"title","slug","description",4,0,0,kitchenType,
+                kitchenRegion,null,null,null,null,0.0f,5);
+
+        assertEquals(recipeDto1,controller.convertRecipeToDto(recipe1));
     }
 
     @Test
@@ -268,17 +441,101 @@ class RecipeControllerTest {
 
     @Test
     void convertIngredientToDto() {
+        controller.setModelMapper(new ModelMapper());
+
+        Ingredient ingredient1 = new Ingredient(1,1.2d,new ArticleUnit(),new Recipe());
+        ingredient1.getArticleunit().setId(1);
+        ingredient1.getRecipe().setId(1);
+        ingredient1.getRecipe().setTimeAdded(null);
+        ArticleUnitDto articleUnitDto = new ArticleUnitDto();
+        articleUnitDto.setId(1);
+        IngredientDto ingredientDto1 = new IngredientDto(articleUnitDto,1.2d,1);
+
+        assertEquals(ingredientDto1,controller.convertIngredientToDto(ingredient1));
     }
 
     @Test
     void convertPreparationToDto() {
+        controller.setModelMapper(new ModelMapper());
+        Preparation preparation1 = new Preparation(1,new Recipe(),3,"instructions");
+        preparation1.getRecipe().setId(2);
+        PreparationDto preparationDto1 = new PreparationDto(1,3,"instructions",2);
+        assertEquals(preparationDto1,controller.convertPreparationToDto(preparation1));
     }
 
     @Test
     void convertCategoryToDto() {
+        controller.setModelMapper(new ModelMapper());
+        KitchenCategory kitchenCategory1 = new KitchenCategory(123,"name");
+        KitchenCategoryDto kitchenCategoryDto1 = new KitchenCategoryDto("name");
+        assertEquals(kitchenCategoryDto1,controller.convertCategoryToDto(kitchenCategory1));
     }
 
     @Test
     void revertCreateRecipeDto() {
+        controller.setModelMapper(new ModelMapper());
+
+        List<CategoryLinkInRecipeDto> categoryIds = new ArrayList<>();
+        categoryIds.add(new CategoryLinkInRecipeDto(1));
+        categoryIds.add(new CategoryLinkInRecipeDto(2));
+        List<IngredientInRecipeDto> ingredients = new ArrayList<>();
+        ingredients.add(new IngredientInRecipeDto(1,15));
+        ingredients.add(new IngredientInRecipeDto(2,15));
+        ingredients.add(new IngredientInRecipeDto(3,15));
+        List<PreparationInRecipeDto> preparations = new ArrayList<>();
+        preparations.add(new PreparationInRecipeDto(2,"instruction"));
+
+        RecipeCreateDto recipeCreateDto1 = new RecipeCreateDto("title",2,4,"slug","description",
+                3,5,6,categoryIds,ingredients,preparations,1);
+        Recipe recipe1 = new Recipe(1,new KitchenType(),new KitchenRegion(),new User(),"title",
+                "slug","description",null,new Image(),4);
+        recipe1.getUser().setId(6);
+        recipe1.getImage().setId(2);
+        recipe1.getKitchenRegion().setId(5);
+        recipe1.getKitchenType().setId(3);
+        Recipe recipe2 = controller.revertCreateRecipeDto(recipeCreateDto1);
+        recipe2.setTimeAdded(null);
+        assertEquals(recipe1,recipe2);
+    }
+
+    @Test
+    void revertIngredientInRecipeDto() {
+        controller.setModelMapper(new ModelMapper());
+        IngredientInRecipeDto inRecipeDto = new IngredientInRecipeDto(3,15.6d);
+        Ingredient ingredient1 = new Ingredient(0,15.6d,new ArticleUnit(),new Recipe());
+        ingredient1.getRecipe().setTimeAdded(null);
+        ingredient1.getRecipe().setId(5);
+        ingredient1.getArticleunit().setId(3);
+
+        assertEquals(ingredient1,controller.revertIngredientInRecipeDto(inRecipeDto,5));
+
+    }
+    @Test
+    void revertPreparationInRecipeDto(){
+        controller.setModelMapper(new ModelMapper());
+        PreparationInRecipeDto inRecipeDto = new PreparationInRecipeDto(2,"instructions");
+        Preparation preparation1 = new Preparation(0,new Recipe(),2,"instructions");
+        preparation1.getRecipe().setId(5);
+        preparation1.getRecipe().setTimeAdded(null);
+
+        assertEquals(preparation1,controller.revertPreparationInRecipeDto(inRecipeDto,5));
+
+
+    }
+
+    @Test
+    void revertCategoryLinkInRecipeDto() {
+        controller.setModelMapper(new ModelMapper());
+
+        CategoryLinkInRecipeDto linkDto = new CategoryLinkInRecipeDto(3);
+        KitchenCategoriesLink link =
+                new KitchenCategoriesLink(0,new KitchenCategory(),new Recipe());
+
+        link.getRecipe().setId(5);
+        link.getRecipe().setTimeAdded(null);
+        link.getKitchenCategory().setId(3);
+
+        assertEquals(link,controller.revertCategoryLinkInRecipeDto(linkDto,5));
+
     }
 }

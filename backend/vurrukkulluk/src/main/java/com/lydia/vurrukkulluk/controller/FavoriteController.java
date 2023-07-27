@@ -7,6 +7,8 @@ import com.lydia.vurrukkulluk.util.SecurityUtil;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,13 +30,13 @@ public class FavoriteController {
   }
 
   @PostMapping()
-  public String add(@RequestBody FavoriteDto favoriteDto) {
+  public ResponseEntity<String> add(@RequestBody FavoriteDto favoriteDto) {
     if (!securityUtil.isAuthorizedUserOrAdmin(favoriteDto.getUserId())){
-      return "not authorized";
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     Favorite favorite = reverseFavoriteFromDto(favoriteDto);
     favoriteService.saveFavorite(favorite);
-    return "new favorite is added";
+    return ResponseEntity.status(HttpStatus.OK).body("new favorite is added");
   }
 
   @GetMapping()
@@ -43,27 +45,31 @@ public class FavoriteController {
   }
 
   @GetMapping("/{id}")
-  public Favorite getId(@PathVariable int id){
-    return favoriteService.getFavoriteById(id);
+  public ResponseEntity<Favorite> getId(@PathVariable int id){
+    Favorite favorite = favoriteService.getFavoriteById(id);
+    if (favorite==null){
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(favorite);
   }
 
   @PutMapping()
-  public String update(@RequestBody FavoriteDto favoriteDto) {
+  public ResponseEntity<String> update(@RequestBody FavoriteDto favoriteDto) {
     if (!securityUtil.isAuthorizedUserOrAdmin(favoriteDto.getUserId())){
-      return "not authorized";
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     Favorite favorite = reverseFavoriteFromDto(favoriteDto);
     favoriteService.saveFavorite(favorite);
-    return "Favorite is updated";
+    return ResponseEntity.status(HttpStatus.OK).body("Favorite is updated");
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable int id) {
+  public ResponseEntity<String> delete(@PathVariable int id) {
     if (!securityUtil.isAuthorizedUserOrAdmin(favoriteService.getFavoriteById(id).getUser().getId())){
-      return "not authorized";
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
     favoriteService.deleteFavoriteById(id);
-    return "Favorite is deleted";
+    return ResponseEntity.status(HttpStatus.OK).body("Favorite is deleted");
   }
 
   public FavoriteDto convertFavoriteToDto(Favorite favorite){
