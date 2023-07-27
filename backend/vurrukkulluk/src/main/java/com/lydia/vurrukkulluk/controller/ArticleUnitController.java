@@ -5,6 +5,7 @@ import com.lydia.vurrukkulluk.model.ArticleUnit;
 import com.lydia.vurrukkulluk.model.CalendarItem;
 import com.lydia.vurrukkulluk.service.ArticleUnitService;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,6 +24,7 @@ public class ArticleUnitController {
 
     @Autowired
     private ArticleUnitService articleUnitService;
+    @Setter
     @Autowired
     private ModelMapper modelMapper;
     @GetMapping()

@@ -197,7 +197,7 @@ class RecipeControllerTest {
         when(kitchenCategoriesLink.getRecipe()).thenReturn(recipe);
 
 
-        assertEquals(ResponseEntity.status(HttpStatus.OK).body("New recipe is added"),controller.add(recipeCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("1"),controller.add(recipeCreateDto));
 
         verify(recipe).setId(0);
         verify(recipeService).saveRecipe(recipe);

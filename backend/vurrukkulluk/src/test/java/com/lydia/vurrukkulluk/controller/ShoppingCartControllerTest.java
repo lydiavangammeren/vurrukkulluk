@@ -49,8 +49,10 @@ class ShoppingCartControllerTest {
 
         Ingredient ingredient1 = new Ingredient(1,10.0d,new ArticleUnit(),new Recipe());
         ingredient1.getArticleunit().setArticle(article1);
+        ingredient1.getArticleunit().setAmount(10.0d);
         Ingredient ingredient2 = new Ingredient(2,15.3d,new ArticleUnit(),new Recipe());
         ingredient2.getArticleunit().setArticle(article2);
+        ingredient2.getArticleunit().setAmount(1.0);
 
         List<Ingredient> ingredients1 = new ArrayList<>();
         ingredients1.add(ingredient1);
@@ -63,10 +65,10 @@ class ShoppingCartControllerTest {
 
 
         HashMap<Integer,Double> totalArticlesAmount = new HashMap<>() ;
-        totalArticlesAmount.put(1,20.0d);
+        totalArticlesAmount.put(1,200.0d);
         totalArticlesAmount.put(2,45.90d);
         HashMap<Integer,Integer> cart = new HashMap<>();
-        cart.put(1,1);
+        cart.put(1,2);
         cart.put(2,10);
 
         ShoppingCartDto expectedResult = new ShoppingCartDto();

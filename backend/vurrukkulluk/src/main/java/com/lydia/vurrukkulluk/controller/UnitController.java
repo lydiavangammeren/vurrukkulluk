@@ -5,6 +5,7 @@ import com.lydia.vurrukkulluk.model.Unit;
 import com.lydia.vurrukkulluk.service.UnitService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,6 +24,7 @@ public class UnitController {
 
     @Autowired
     private UnitService unitService;
+    @Setter
     @Autowired
     private ModelMapper modelMapper;
     @GetMapping()
