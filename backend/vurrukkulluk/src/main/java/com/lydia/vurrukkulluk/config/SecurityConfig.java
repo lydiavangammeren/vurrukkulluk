@@ -56,7 +56,7 @@ public class SecurityConfig {
             "api/units",
             "api/calendar/**",
             "api/articles/**"
-    
+
     };
     private static final String[] AUTH_WHITELIST_POST = {
             "api/testdata",

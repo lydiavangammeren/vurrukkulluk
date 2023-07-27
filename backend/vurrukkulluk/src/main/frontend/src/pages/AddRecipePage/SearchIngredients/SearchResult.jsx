@@ -17,7 +17,7 @@ export const SearchResult = ({ result, setSearchValue }) => {
 
   useEffect(()=>{
     setQuantity(amount)
-    setArticleUnitId(articleunits[0].defUnit.id);
+    setArticleUnitId(articleunits[0].id);
     setUnitName(articleunits[0].defUnit.name);
   }, [result])
 
@@ -32,6 +32,7 @@ export const SearchResult = ({ result, setSearchValue }) => {
   }
 
   const handleAdd = e => {
+    console.log("articleUnitId: ", e.target.value)
     const name = e.target.name
     const value = {
       // articleId: e.target.value,
@@ -76,7 +77,11 @@ export const SearchResult = ({ result, setSearchValue }) => {
               step={smallSteps.includes(unitName) ? 1 : 25}
               min={0}
               />
-              <select onChange={(e) => {setUnitName(e.target.value.split("|")[0]); setArticleUnitId(e.target.value.split("|")[1])}}>
+              <select onChange={(e) => {
+                console.log("Name + unitId: ", e.target.value);
+                setUnitName(e.target.value.split("|")[0]); 
+                setArticleUnitId(e.target.value.split("|")[1])
+                }}>
                 {articleunits.map((articleunit)=> {
                   return <option value={`${articleunit.unit.name}|${articleunit.id}`}>{articleunit.unit.name}</option>
                 })}
