@@ -3,10 +3,12 @@ import useAddRecipeContext from '../../hooks/useAddRecipeContext'
 import { useAppContext } from '../../contexts';
 import { RiDeleteBinLine } from "react-icons/ri";
 
-const Ingredient = ({article, ingredient}) => {
+const Ingredient = ({articleunit, ingredient}) => {
 
   const { baseUrl } = useAppContext();
   const { updateIngredientQuantity, removeItem, removeIngredient } = useAddRecipeContext();
+  const article = articleunit.article;
+  const unit = articleunit.unit.name;
 
   const updateQuantity = (e) => {
     const id = e.target.id
@@ -33,7 +35,7 @@ const Ingredient = ({article, ingredient}) => {
                 id={article?.id}
                 onChange={updateQuantity}
               />
-              <span>{article?.unit}</span>
+              <span>{unit}</span>
             {/* </div> */}
           </div>
         </div>
