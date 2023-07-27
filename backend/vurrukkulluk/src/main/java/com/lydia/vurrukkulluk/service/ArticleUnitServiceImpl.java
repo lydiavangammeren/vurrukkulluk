@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ArticleUnitServiceImpl implements ArticleUnitService{
@@ -29,5 +31,10 @@ public class ArticleUnitServiceImpl implements ArticleUnitService{
     @Override
     public ArticleUnit getDefaultUnitArticleFromArticleId(int articleId) {
         return articleUnitRepository.getDefaultUnitArticleFromArticleId(articleId);
+    }
+
+    @Override
+    public List<ArticleUnit> getAll() {
+        return articleUnitRepository.findAll();
     }
 }

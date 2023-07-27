@@ -86,13 +86,13 @@ class RecipeControllerTest {
         article2.setAmount(100);
         article2.setId(2);
 
-        Unit unit1 = new Unit();
+        UnitDto unit1 = new UnitDto();
         unit1.setName("g");
         unit1.setId(1);
-        Unit unit2 = new Unit();
+        UnitDto unit2 = new UnitDto();
         unit2.setName("kg");
         unit2.setId(2);
-        Unit unit3 = new Unit();
+        UnitDto unit3 = new UnitDto();
         unit3.setName("mg");
         unit3.setId(3);
 
