@@ -48,9 +48,9 @@ public class ShoppingCartController {
                 Integer key = ingredient.getArticle().getId();
 
                 if (totalArticlesAmount.containsKey(key)){
-                    totalArticlesAmount.put(key, round(totalArticlesAmount.get(key) + ingredient.getAmount(),2));
+                    totalArticlesAmount.put(key, round(totalArticlesAmount.get(key) + convertUnitToStandard(ingredient),2));
                 } else {
-                    totalArticlesAmount.put(key,ingredient.getAmount());
+                    totalArticlesAmount.put(key,convertUnitToStandard(ingredient));
                 }
             }
         }
