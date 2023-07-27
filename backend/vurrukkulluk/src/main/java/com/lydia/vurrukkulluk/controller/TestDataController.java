@@ -322,6 +322,7 @@ public class TestDataController {
         article1.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article1.setPrice(120);
         article1.setAmount(1);
+        article1.setAvailable(true);
         articles.add(articleService.saveArticle(article1));
 
         Article article2 = new Article();
@@ -333,6 +334,7 @@ public class TestDataController {
         article2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article2.setPrice(540);
         article2.setAmount(400);
+        article1.setAvailable(true);
         articles.add(articleService.saveArticle(article2));
 
         Article article3 = new Article();
@@ -344,6 +346,7 @@ public class TestDataController {
         article3.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article3.setPrice(520);
         article3.setAmount(250);
+        article1.setAvailable(true);
         articles.add(articleService.saveArticle(article3));
 
         Article article4 = new Article();
@@ -355,6 +358,7 @@ public class TestDataController {
         article4.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article4.setPrice(200);
         article4.setAmount(1);
+        article1.setAvailable(false);
         articles.add(articleService.saveArticle(article4));
 
         return articles;

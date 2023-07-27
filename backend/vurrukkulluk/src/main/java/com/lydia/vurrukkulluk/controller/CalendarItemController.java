@@ -1,8 +1,11 @@
 package com.lydia.vurrukkulluk.controller;
 
+import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.CalendarItem;
 import com.lydia.vurrukkulluk.service.CalendarItemService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +35,13 @@ public class CalendarItemController {
         if (!securityUtil.isAdmin()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }
-        calendarItemService.save(calendarItem);
+        try {
+
+            calendarItemService.save(calendarItem);
+        } catch (ConstraintViolationException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body("saved calendar item");
 
     }

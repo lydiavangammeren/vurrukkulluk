@@ -40,7 +40,7 @@ public class ArticleController {
     private SecurityUtil securityUtil;
 
     @PostMapping()
-    public ResponseEntity<String> add(@Valid @RequestBody ArticleDto articleDto){
+    public ResponseEntity<String> add(@RequestBody ArticleDto articleDto){
         articleDto.setId(0);
 
         try {
