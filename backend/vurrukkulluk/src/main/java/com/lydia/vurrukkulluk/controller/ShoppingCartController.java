@@ -85,4 +85,8 @@ public class ShoppingCartController {
         return bd.doubleValue();
     }
 
+    private double convertUnitToStandard(Ingredient ingredient){
+        return ingredient.getArticleunit().getAmount() * ingredient.getAmount();
+    }
+
 }

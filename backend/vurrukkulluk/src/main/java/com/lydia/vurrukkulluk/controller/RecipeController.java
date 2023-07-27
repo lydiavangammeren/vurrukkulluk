@@ -71,7 +71,7 @@ public class RecipeController {
       kitchenCategoriesLinkService.saveKCLink(link);
     });
 
-    return ResponseEntity.status(HttpStatus.OK).body("New recipe is added");
+    return ResponseEntity.status(HttpStatus.OK).body(String.valueOf(recipe.getId()));
   }
 
 
