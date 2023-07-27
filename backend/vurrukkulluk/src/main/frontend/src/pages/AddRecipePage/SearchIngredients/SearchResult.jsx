@@ -28,7 +28,8 @@ export const SearchResult = ({ result, setSearchValue }) => {
   const handleAdd = e => {
     const name = e.target.name
     const value = {
-      articleId: e.target.value,
+      // articleId: e.target.value,
+      articleunitId: e.target.value,
       amount: quantity
     }
     addItem(name, value);

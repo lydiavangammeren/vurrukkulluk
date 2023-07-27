@@ -8,6 +8,7 @@ import { search } from './SearchIngredients/search';
 const IngredientsForm = () => {
 
   const [ articles, articlesLoaded ] = useDatabase('/articles');
+  // const [ articleunits, articleunitsLoaded] = useDatabase('/articleunits');
 
   const { data, handleChange, updateIngredientQuantity } = useAddRecipeContext();                                                                                                 
   const [searchValue, setSearchValue] = useState('');
