@@ -28,7 +28,7 @@ validate.validators.alreadyExists = function(value) {
     api.get(`/users/email/${value}`)
       .then(function (response){
         // console.log('succes getEmail: ', response);
-        resolve("already taken");
+        resolve("bestaat al");
       })
       .catch(function (error) {
         // console.log('error getEmail: ', error);
@@ -92,6 +92,13 @@ const RegisterPage = () => {
       }
     }
   }
+
+  const goToLogin = () => {
+    let loginEmail = document.querySelector("#login_email");
+    let loginPassword = document.querySelector("#login_password")
+    loginEmail.value = inputs.email;
+    loginPassword.focus();
+  }
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -128,6 +135,7 @@ const RegisterPage = () => {
         console.log('Register success ' , user)
         localStorage.setItem('user', JSON.stringify(user));
         navigate("/");
+        alert('Welkom ' + inputs.name)
         break;
     case 403:
         console.log('Register incorrect')
@@ -172,6 +180,9 @@ const RegisterPage = () => {
             // onBlur={(e)=> testValidate(e)}
           />
           {errors.email && errors.email.map((error, index) => {
+            if(error === "Email bestaat al"){
+              return <li className="error-message" key={index}>{error} <a href="#login" onClick={()=>goToLogin()}>Log in</a></li>
+            }
               return <li className="error-message" key={index}>{error}</li>
             })
           }
@@ -196,7 +207,7 @@ const RegisterPage = () => {
               <FaInfoCircle />
               8 tot 32 karakters.<br />
               Moet een hoofdletter, een kleine letter,<br />
-              een nummer en een speciaal karakter bevatten.
+              een cijfer en een speciaal karakter bevatten.
             </p>
           </dialog>}
           {errors.password && errors.password.map((error) => {

@@ -37,6 +37,12 @@
   list-style-position: inside;
   color: red;
 }
+.error-message a{
+  color: blue;
+}
+.error-message a:hover{
+  cursor: pointer;
+}
 
 .infoBlock{
   position: relative;

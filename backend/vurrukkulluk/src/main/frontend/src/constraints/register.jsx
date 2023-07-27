@@ -37,7 +37,7 @@ export const constraints = {
     },
     format: {
       pattern: "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,32}",
-      message: "^Wachtwoord moet een kleine letter, een hoofdletter en een speciaal teken bevatten"
+      message: "^Wachtwoord moet een kleine letter, een hoofdletter, een cijfer en een speciaal teken bevatten"
     }
   }, 
   confirmPassword: {

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import ShoppingCartItem from "./ShoppingCartItem";
 import "./ShoppingCart.css";
 import api from "../../lib/recipeAPI";
@@ -47,25 +47,44 @@ const ShoppingCart = () => {
   // const [state, dispatch] = useReducer(reducer, { products: [], checkedProductIds: [] });
   const {products, recipeIds, checkedProductIds, deletedProductIds, dispatch} = useShopContext();
   const [articles, articlesLoaded ] = useDatabase('/articles');
+  const [allProducts, setAllProducts] = useState(null);
+  const [availableProducts, setAvailableProducts] = useState([]);
+  const [unavailableProducts, setUnvailableProducts] = useState([])
   
   useEffect(() => {
     dispatch({type: SL_ACTION.REFRESH_LIST});
    }, [products, recipeIds, dispatch] )
 
+   useEffect(()=> {
+    console.log('Do we have products?: ', products)
+    console.log('articlesLoaded: ', articlesLoaded)
+    if(!products || !articlesLoaded) return;
+    console.log('create array from products object', articles)
+    // let fullProducts = Object.keys(products).forEach(function(key, value) {
+    //     return {
+    //       article: articles.filter((article) => {return article.id == key}),
+    //       amount: value
+    //     }
+    //   })
+    // let fullProducts = Object.entries(products).map(([key, value]) => ({article: articles.filter((article) => {return article.id == key}), amount: value}));
+    // console.log('fullProducts: ', fullProducts)
+    let fullProducts = Object.entries(products).map(([key, value]) => ({article: articles.find((article) => {return article.id == key}), amount: value}));
+    console.log('fullProducts: ', fullProducts)
+    setAllProducts(fullProducts)
+   },[products, articles])
 
-  // const fullProducts = products.map((key, value)=> {
-  //   return {
-  //     article: articles.filter((article) => article.id === key),
-  //     amount: value
-  //   }
-  // })
-  // console.log(fullProducts)
-  // const currentProducts = fullProducts.filter(
-  //   (product)=> !deletedProductIds.includes(product.article.id)
-  // )
-  const currentProducts = products.filter(
+   useEffect(() => {
+    console.log('alles: ', allProducts)
+    // if(allProducts){
+      
+    // }
+   }, [allProducts])
+
+  const currentProducts = allProducts ? allProducts.filter(
     (product)=> !deletedProductIds.includes(product.article.id)
-  )
+  ) : [];
+  
+  console.log('current products: ', currentProducts)
   const uncheckedProducts = currentProducts.filter(
     (product) => !checkedProductIds.includes(product.article.id))
 
@@ -73,7 +92,7 @@ const ShoppingCart = () => {
     (product) => checkedProductIds.includes(product.article.id))
 
   const totalPrice = uncheckedProducts.reduce((acc, product) => {
-      return acc + (product.amount * product.article.price);
+      return acc + ((product.amount * product.article.price)/100);
     }, 0);
 
   return (
@@ -86,27 +105,27 @@ const ShoppingCart = () => {
             </th>
           </tr>    
         </thead>
-          <tbody>
-            {uncheckedProducts.map((product) => (
-              <ShoppingCartItem
-                checked={false}
-                key={product.article.id}
-                product={product}
-                dispatch={dispatch}
-              />
-            ))}
-            {checkedProducts.map((product) => (
-              <ShoppingCartItem
-                checked={true}
-                key={product.article.id}
-                product={product}
-                dispatch={dispatch}
-              />
-            ))}
-          </tbody>
+        <tbody>
+          {uncheckedProducts.map((product) => (
+            <ShoppingCartItem
+              checked={false}
+              key={product.article.id}
+              product={product}
+              dispatch={dispatch}
+            />
+          ))}
+          {checkedProducts.map((product) => (
+            <ShoppingCartItem
+              checked={true}
+              key={product.article.id}
+              product={product}
+              dispatch={dispatch}
+            />
+          ))}
+        </tbody>
         <tfoot>
           <tr>
-            <td colspan="3">
+            <td colSpan="3">
               <h2>Total</h2>
             </td>
             <td>
@@ -123,6 +142,17 @@ const ShoppingCart = () => {
               />
             </td>
           </tr>
+        </tfoot>
+      </table>
+      <table>
+        <thead>
+          
+        </thead>
+        <tbody>
+
+        </tbody>
+        <tfoot>
+
         </tfoot>
       </table>
     </div>
