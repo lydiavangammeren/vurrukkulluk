@@ -29,7 +29,10 @@ public class CalendarItemController {
     public List<CalendarItem> getAllItems(){
         return calendarItemService.getAll();
     }
-
+    @GetMapping("/fromtoday")
+    public List<CalendarItem> getAllItemsFromTodayOn(){
+        return calendarItemService.getAllFromTodayOn();
+    }
     @PostMapping()
     public ResponseEntity<String> saveCalendarItem(@RequestBody CalendarItem calendarItem){
         if (!securityUtil.isAdmin()) {
