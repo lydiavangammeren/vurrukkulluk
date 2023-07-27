@@ -2,12 +2,13 @@ import React from "react";
 import { useAppContext } from "../../contexts";
 
 const Ingredient = ({ingredient}) => {
-  const title = ingredient.article.name;
-  const description = ingredient.article.description;
-  const image = ingredient?.article?.image ?? '';
-  const imageId = ingredient.article.imageId;
+  const article = ingredient.articleunit.article; // new
+  const title = article.name;
+  const description = article.description;
+  const image = article?.image ?? '';
+  const imageId = article.imageId;
   const quantity = ingredient.amount;
-  const unit = ingredient?.article?.unit ?? '';
+  const unit = ingredient?.articleunit.unit.name ?? '';
   const { baseUrl } = useAppContext();
 
   const renderImage = () => {
