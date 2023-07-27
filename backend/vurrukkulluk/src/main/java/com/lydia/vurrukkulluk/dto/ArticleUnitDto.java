@@ -16,7 +16,7 @@ public class ArticleUnitDto {
     private int id;
     private ArticleDto article;
 
-    private Unit unit;
+    private UnitDto unit;
     private double amount;
-    private Unit defUnit;
+    private UnitDto defUnit;
 }
