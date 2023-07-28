@@ -107,7 +107,11 @@ const AddRecipeForm = () => {
     if(!imageLoaded) return;
     console.log('image status: ', image.status)
     console.log('uploaded image: ', resizedImage)
-    navigate(0) // To refetch all recipes, including the one just added.
+    if(image.status === 200){
+      navigate(0) // To refetch all recipes, including the one just added.
+    } else{
+      alert("Er gaat iets fout..")
+    }
   }, [imageLoaded])
 
   const display = {
