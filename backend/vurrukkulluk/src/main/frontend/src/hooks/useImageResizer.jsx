@@ -14,7 +14,7 @@ const useImageResizer = () => {
         1680, // max width
         640, // max height
         "JPEG",
-        90,
+        70,
         0,
         (uri) => {
           resolve(uri);

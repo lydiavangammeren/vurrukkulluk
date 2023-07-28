@@ -10,15 +10,17 @@ import useGetImages from "../../hooks/useGetImages";
 const Carousel = () => {
   const [slide, setSlide] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
-  const {recipes, bannerImages, detailImage, baseUrl} = useAppContext();
+  const {recipes, bannerImages, detailImage, baseUrl, exampleImage, setExampleImage} = useAppContext();
 
   const location = useLocation();
   const getImages = () => {
-    if(location.pathname.substring(0,8) === '/details'){
-      return detailImage ? [detailImage] : [];
+    if(location.pathname.substring(0,8) === '/details') {
+      return detailImage ? [detailImage] : []; 
     } else {
+      if(location.pathname.substring(0,10) !== '/addrecipe') setExampleImage(null);
       return bannerImages;
     }
+    
   }
   const data = getImages();
 
@@ -33,7 +35,7 @@ const Carousel = () => {
 
   return (
     <div className="carousel">
-      {data.map((image, index) => {
+      {exampleImage === null ? data.map((image, index) => {
         // console.log('Carousel image: ' + image);
         return (
           <img
@@ -42,14 +44,14 @@ const Carousel = () => {
             className={slide === index ? "slide" : "slide slide-hidden"}
           />
         )
-      })}
+      }) : <img src={exampleImage} style={{height:'100%'}}/>}
       <Header setVisible={setMenuVisible} />
       <div className={menuVisible ? 'main-menu menu-visible' : 'main-menu menu-gone'} onClick={() =>setMenuVisible(false)}>
         <MainMenu />
       </div>
 
       <span className="indicators">
-        {data.length > 1 && data.map((_, idx) => {
+        {data.length > 1 && exampleImage === null && data.map((_, idx) => {
           return (
             <button
               key={idx}

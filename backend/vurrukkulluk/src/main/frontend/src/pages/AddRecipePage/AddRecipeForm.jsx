@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useReducer, useState, useRef } from 'react'
 import DetailsForm from "./DetailsForm"
 import IngredientsForm from "./IngredientsForm"
 import PreparationForm from "./PreparationForm"
@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import validate from 'validate.js';
 import { constraints } from '../../constraints/recipeDetails';
 import useSlug from '../../hooks/useSlug';
+import { FaInfoCircle } from 'react-icons/fa';
+import { useAppContext } from '../../contexts';
 
 const AddRecipeForm = () => {
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ const AddRecipeForm = () => {
     setPage,
     data,
     title,
+    infoText,
     canSubmit,
     disablePrev,
     disableNext,
@@ -31,9 +34,12 @@ const AddRecipeForm = () => {
     selectedImage,
     setErrors
   } = useAddRecipeContext();
+  
   const [resizedImage, isResized, resize, urlToFile] = useImageResizer()
+  const infoRef = useRef();
 
   const [slug, ready, slugIt] = useSlug();
+  const [ thisSlug, setThisSlug ]= useState('');
 
   const handlePrev = () => setPage(prev => prev - 1)
 
@@ -56,6 +62,7 @@ const AddRecipeForm = () => {
     
     try{
       var slugger = await slugIt(data.name);
+      setThisSlug(slugger);
 
       const body = {
         "title": data.name,
@@ -72,7 +79,7 @@ const AddRecipeForm = () => {
         "preparations": data.preparation
       }
 
-      console.log(body)
+      console.log('Recipe Body: ', body)
     
       postRecipe('/recipes', body)
       resize(selectedImage.src);
@@ -108,7 +115,8 @@ const AddRecipeForm = () => {
     console.log('image status: ', image.status)
     console.log('uploaded image: ', resizedImage)
     if(image.status === 200){
-      navigate(0) // To refetch all recipes, including the one just added.
+      navigate(`/details/${thisSlug}`) 
+      window.location.reload(); // To refetch all recipes, including the one just added.
     } else{
       alert("Er gaat iets fout..")
     }
@@ -129,7 +137,10 @@ const AddRecipeForm = () => {
         <form className='' onSubmit={handleSubmit}>
           <div className='title_button_bar'>
             <div>
-              <h2>{title[page]}</h2>
+              <h2>{title[page]} <FaInfoCircle size={20} color='black' onMouseOver={() => infoRef.current.show()} onMouseOut={() => infoRef.current.close()} /></h2>
+              <dialog ref={infoRef}>
+                {infoText[page]}
+              </dialog>
             </div>
             <div className='next_prev'>
               <button type="button" className={`formButton ${prevHide}`} onClick={handlePrev} disabled={disablePrev}>Terug</button>

@@ -113,7 +113,7 @@ const Details = ({details}) => {
           </div>
         </div>
         <div className="details_categories">
-          {categories.map((category, index) => {
+          {categories && categories.map((category, index) => {
             return (
               <Category name={category.name} key={index}/>
             )

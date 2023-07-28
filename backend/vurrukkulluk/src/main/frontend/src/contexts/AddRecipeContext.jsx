@@ -6,8 +6,14 @@ export const AddRecipeProvider = ({ children }) => {
 
     const title = {
       0: 'Details',
-      1: 'Ingredients',
-      2: 'Preparation'
+      1: 'Ingrediënten',
+      2: 'Bereiding'
+    }
+
+    const infoText = {
+      0: "Alleen categorieën mogen leeg zijn.",
+      1: "Minimaal 2 ingrediënten voor een recept.",
+      2: "Minimaal 2 stappen als bereiding."
     }
 
     const [page, setPage] = useState(0)
@@ -206,7 +212,7 @@ export const AddRecipeProvider = ({ children }) => {
       <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, 
                                   disableNext, prevHide, nextHide, submitHide, addItem, removeItem, updateIngredientQuantity, 
                                   removeIngredient, selectedImage, setSelectedImage, updatePreparationInstructions, removeStep,
-                                  instructions, setInstructions, errors, setErrors }}>
+                                  instructions, setInstructions, errors, setErrors, infoText }}>
         {children}
       </AddRecipeContext.Provider>
     )

@@ -10,7 +10,8 @@ const DetailContent = () => {
   const { slug } = useParams();
   
   const { recipes, bannerImages, setDetailImage } = useAppContext();
-  const details = recipes.find(recipe => recipe.slug == slug);
+  const details = recipes.find(recipe => recipe.slug == slug) ? recipes.find(recipe => recipe.slug == slug) : {};
+  console.log('details: ', details);
   
   const ingredients = details?.ingredients ?? [];
   const prepsteps = details?.preparation ?? [];

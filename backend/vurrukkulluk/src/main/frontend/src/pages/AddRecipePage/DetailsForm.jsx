@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useDatabase } from '../../hooks';
-// import { useAppContext } from '../../contexts';
+import { useAppContext } from '../../contexts';
 import useAddRecipeContext from '../../hooks/useAddRecipeContext';
 import { SearchBar, SearchResultsList} from "./SearchCategories";
 import ImageCrop from '../../components/ImageCrop/ImageCrop';
@@ -21,6 +21,7 @@ const DetailsForm = () => {
   const [types, typesLoaded ] = useDatabase('/kitchentypes');
   const [regions, regionsLoaded] = useDatabase('/kitchenregions');
   const [categories, categoriesLoaded] = useDatabase('/categories');
+  const {setExampleImage} = useAppContext();
   // const { recipes } = useAppContext();
   const modalRef = useRef();
   const { data, handleChange, removeItem, selectedImage, setSelectedImage, errors, setErrors } = useAddRecipeContext();
@@ -61,6 +62,7 @@ const DetailsForm = () => {
     const reader = new FileReader();
     reader.onload = () => {
       setSelectedImage({file: file, src: reader.result});
+      
       modalRef.current.showModal();
     };
     if (file) {
@@ -87,6 +89,10 @@ const DetailsForm = () => {
     const foundObject = categories.find((object) => object.id === parseInt(id));
     return foundObject ? foundObject.name : 'Object not found';
   };
+
+  useEffect(() => {
+    setExampleImage(selectedImage.src);
+  }, [selectedImage])
 
 
   const renderContent = () => {
