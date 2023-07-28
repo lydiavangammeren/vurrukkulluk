@@ -8,7 +8,8 @@ import { search } from './SearchIngredients/search';
 const IngredientsForm = () => {
 
   const [ articles, articlesLoaded ] = useDatabase('/articles');
-  // const [ articleunits, articleunitsLoaded] = useDatabase('/articleunits');
+  const [ articleunits, articleunitsLoaded] = useDatabase('/articleunits');
+  const [ units, unitsLoaded ] = useDatabase('/units');
 
   const { data, handleChange, updateIngredientQuantity } = useAddRecipeContext();                                                                                                 
   const [searchValue, setSearchValue] = useState('');
@@ -23,16 +24,25 @@ const IngredientsForm = () => {
         )
       )
     });
+    
+    filtered.forEach(article => {
+      article.articleunits = articleunits.filter((articleunit) => {
+        return articleunit.article.id === article.id;
+      })
+    });
+
     console.log(filtered)
     return filtered;
   }
   const searchResults = filter();
+
+
   // const searchResults = search(searchValue, articles);
 
   const findObjectById = (id) => {
-    if(articlesLoaded){
+    if(articleunitsLoaded){
       // console.log('Articles: ' +  JSON.stringify(articles))
-      const foundObject = articles.find((object) => object.id === parseInt(id));
+      const foundObject = articleunits.find((articleunit) => articleunit.id === parseInt(id));
       return foundObject ? foundObject : {name:'Object not found'};
     }
   }
@@ -49,12 +59,13 @@ const IngredientsForm = () => {
         <h3>Toegevoegde ingrediënten</h3>
         {data.ingredients && articlesLoaded &&
         data.ingredients.map((ingredient) => {
-          const article = findObjectById(ingredient.articleId)
+          const articleunit = findObjectById(ingredient.articleunitId)
+
           return (
             <Ingredient 
-              article={article}
+              articleunit={articleunit}
               ingredient={ingredient}
-              key={ingredient.articleId}
+              key={ingredient.articleunitId}
             />
           )
         })}
