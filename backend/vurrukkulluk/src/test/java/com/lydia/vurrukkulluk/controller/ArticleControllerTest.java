@@ -118,7 +118,7 @@ class ArticleControllerTest {
         when(image.getId()).thenReturn(1);
         Article article = new Article(1,"name","des",
                 2,3,4,true,image);
-        ArticleDto articleDto = new ArticleDto(1,"name","des",2,3,4,1);
+        ArticleDto articleDto = new ArticleDto(1,"name","des",2,3,4,true,1);
 
         assertEquals(articleDto,articleController.convertArticleToDto(article));
     }
@@ -130,7 +130,7 @@ class ArticleControllerTest {
         image1.setId(1);
         Article article = new Article(1,"name","des",
                 2,3,4,false,image1);
-        ArticleDto articleDto = new ArticleDto(1,"name","des",2,3,4,1);
+        ArticleDto articleDto = new ArticleDto(1,"name","des",2,3,4,false,1);
 
         assertEquals(article,articleController.reverseArticleFromDto(articleDto));
 

@@ -7,6 +7,8 @@ import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.CommentService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -33,12 +35,14 @@ public class CommentController {
   private SecurityUtil securityUtil;
 
   @PostMapping()
-  public ResponseEntity<String> add(@RequestBody CommentCreateDto commentCreateDto) {
+  public ResponseEntity<String> add(@Valid @RequestBody CommentCreateDto commentCreateDto) {
     if (!securityUtil.isIdOfAuthorizedUser(commentCreateDto.getUserId())){
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
+
     Comment comment = reverseCommentCreateDto(commentCreateDto);
     commentService.saveComment(comment);
+
     return ResponseEntity.status(HttpStatus.OK).body("New comment is added");
 
   }
@@ -67,7 +71,7 @@ public class CommentController {
   }
 
   @PutMapping()
-  public ResponseEntity<String> update(@RequestBody CommentCreateDto commentCreateDto) {
+  public ResponseEntity<String> update(@Valid @RequestBody CommentCreateDto commentCreateDto) {
     if (!securityUtil.isIdOfAuthorizedUser(commentCreateDto.getUserId())){
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }

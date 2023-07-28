@@ -19,21 +19,11 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 
-    @NotBlank(message = "must have a name")
     private String name;
-    @NotBlank(message = "must have a description")
     private String description;
-
-    @NotNull
-    @Min(0)
     private int price;
-    @NotNull
-    @Min(0)
     private int calories;
-    @NotNull
-    @Min(1)
     private int amount;
-    @NotNull
     private boolean isAvailable;
 
     @ManyToOne(fetch = FetchType.LAZY)

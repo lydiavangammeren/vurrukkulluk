@@ -78,4 +78,10 @@ class CalendarItemControllerTest {
         assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.updateCalendarItem(calendarItem));
         verifyNoInteractions(calendarItemService);
     }
+
+    @Test
+    void getAllItemsFromTodayOn() {
+        when(calendarItemService.getAllFromTodayOn()).thenReturn(calendarItems);
+        assertEquals(calendarItems,controller.getAllItemsFromTodayOn());
+    }
 }
