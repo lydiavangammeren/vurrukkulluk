@@ -48,8 +48,8 @@ const ShoppingCart = () => {
   const {products, recipeIds, checkedProductIds, deletedProductIds, dispatch} = useShopContext();
   const [articles, articlesLoaded ] = useDatabase('/articles');
   const [allProducts, setAllProducts] = useState(null);
-  const [availableProducts, setAvailableProducts] = useState([]);
-  const [unavailableProducts, setUnvailableProducts] = useState([])
+  // const [availableProducts, setAvailableProducts] = useState([]);
+  // const [unavailableProducts, setUnvailableProducts] = useState([])
   
   useEffect(() => {
     dispatch({type: SL_ACTION.REFRESH_LIST});
@@ -90,6 +90,9 @@ const ShoppingCart = () => {
 
   const checkedProducts = currentProducts.filter(
     (product) => checkedProductIds.includes(product.article.id))
+
+  const otherProducts = currentProducts.filter(
+    (product) => !product.available)
 
   const totalPrice = uncheckedProducts.reduce((acc, product) => {
       return acc + ((product.amount * product.article.price)/100);
@@ -144,17 +147,33 @@ const ShoppingCart = () => {
           </tr>
         </tfoot>
       </table>
+
+      {
+
       <table>
         <thead>
-          
+          <tr>
+            <th colSpan="6">
+              <h1>Uit andere winkel</h1>
+            </th>
+          </tr>
         </thead>
+        
         <tbody>
-
+          {otherProducts.map((product) => (
+            <ShoppingCartItem
+              checked={false}
+              key={product.article.id}
+              product={product}
+              dispatch={dispatch}
+            />
+          ))}
         </tbody>
         <tfoot>
 
         </tfoot>
       </table>
+      }
     </div>
   );
 };

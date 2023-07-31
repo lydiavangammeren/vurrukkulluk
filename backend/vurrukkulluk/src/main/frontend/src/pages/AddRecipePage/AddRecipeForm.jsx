@@ -46,11 +46,11 @@ const AddRecipeForm = () => {
   const handleNext = () => {
     // console.log(selectedImage)
     let validationErrors = validate(data, constraints)
-    // if(validationErrors) {
-    //   setErrors(validationErrors)
-    // } else {
+    if(validationErrors) {
+      setErrors(validationErrors)
+    } else {
       setPage(prev => prev + 1)
-    // }
+    }
   }
 
 
@@ -138,7 +138,7 @@ const AddRecipeForm = () => {
           <div className='title_button_bar'>
             <div>
               <h2>{title[page]} <FaInfoCircle size={20} color='black' onMouseOver={() => infoRef.current.show()} onMouseOut={() => infoRef.current.close()} /></h2>
-              <dialog ref={infoRef}>
+              <dialog ref={infoRef} style={{zIndex:'9'}}>
                 {infoText[page]}
               </dialog>
             </div>

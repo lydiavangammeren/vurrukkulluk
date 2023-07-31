@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import "./AddNew.css";
 
 const AddNew = () => {
   const ref = document.querySelector("#add_article_modal")
@@ -8,7 +9,7 @@ const AddNew = () => {
   }
 
   return (
-    <div>
+    <div className='add_new'>
       <button 
         type='button' 
         className='add_article_btn'

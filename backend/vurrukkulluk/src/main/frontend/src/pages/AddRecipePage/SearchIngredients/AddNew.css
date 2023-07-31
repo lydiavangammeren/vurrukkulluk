@@ -1,0 +1,15 @@
+.add_new{
+  padding: 1rem;
+}
+.add_article_btn{
+  color: var(--white);
+  font-family: var(--heading);
+  font-size: 48px;
+  background-color: var(--lighter-orange);
+  border: none;
+  border-radius: 25px;
+  padding : 0.5rem;
+}
+.add_article_btn:hover{
+  background-color: var(--darker-orange);
+}
