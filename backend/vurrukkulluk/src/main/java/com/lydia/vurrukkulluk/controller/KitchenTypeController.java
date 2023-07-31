@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.model.KitchenType;
 import com.lydia.vurrukkulluk.service.KitchenTypeService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +29,16 @@ public class KitchenTypeController {
   }
 
   @PostMapping()
-  public ResponseEntity<String> add(@RequestBody KitchenType kitchenType) {
+  public ResponseEntity<String> add(@Valid @RequestBody KitchenType kitchenType) {
+    if (!securityUtil.isAdmin()){
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
+    }
     kitchenTypeService.saveKitchenType(kitchenType);
     return ResponseEntity.status(HttpStatus.OK).body("New kitchen type is added");
   }
 
   @PutMapping()
-  public ResponseEntity<String> update(@RequestBody KitchenType kitchenType) {
+  public ResponseEntity<String> update(@Valid @RequestBody KitchenType kitchenType) {
     if (!securityUtil.isAdmin()){
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }

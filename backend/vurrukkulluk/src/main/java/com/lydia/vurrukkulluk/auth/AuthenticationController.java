@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +22,7 @@ public class AuthenticationController {
   @Operation(summary = "Register a new user", description = "password should be between 8-32 and contain letter, digit and special character")
   @PostMapping("/register")
   public ResponseEntity<?> register(
-    @RequestBody RegisterRequest request
+    @Valid @RequestBody RegisterRequest request
   ) {
     try {
 

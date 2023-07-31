@@ -28,4 +28,6 @@ public class ArticleDto {
     @NotNull
     private boolean isAvailable;
     private int imageId;
+    @Min(1)
+    private int userId;
 }

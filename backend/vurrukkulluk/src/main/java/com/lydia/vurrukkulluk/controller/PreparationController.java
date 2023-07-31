@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.dto.PreparationDto;
 import com.lydia.vurrukkulluk.model.Preparation;
 import com.lydia.vurrukkulluk.service.PreparationService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +37,13 @@ public class PreparationController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> add(@RequestBody PreparationDto preparationDto){
+    public ResponseEntity<String> add(@Valid @RequestBody PreparationDto preparationDto){
         preparationService.savePreparation(reversePreparationFromDto(preparationDto));
         return ResponseEntity.status(HttpStatus.OK).body("New preparation added");
     }
 
     @PutMapping()
-    public ResponseEntity<String> put(@RequestBody PreparationDto preparationDto){
+    public ResponseEntity<String> put(@Valid @RequestBody PreparationDto preparationDto){
         if (!securityUtil.isAdmin()){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }

@@ -3,10 +3,15 @@ package com.lydia.vurrukkulluk.controller;
 import com.lydia.vurrukkulluk.dto.ArticleDto;
 import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.Image;
+import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.ArticleService;
-import com.lydia.vurrukkulluk.service.ArticleUnitService;
 import com.lydia.vurrukkulluk.service.ImageService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -40,19 +46,43 @@ class ArticleControllerTest {
     SecurityUtil securityUtil;
     @Mock
     private ModelMapper modelMapper;
+
+    private Validator validator;
     ArticleController articleController;
 
     @BeforeEach
     void makeController(){
         articleController = new ArticleController(articleService,
                 imageService,modelMapper,securityUtil);
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
     }
+
 
     @Test
     void add() {
         when(modelMapper.map(articleDto,Article.class)).thenReturn(article);
         assertEquals(ResponseEntity.status(HttpStatus.OK).body("new ingredient added"),articleController.add(articleDto));
         verify(articleService).saveArticle(article);
+    }
+
+    @Test
+    void assertionTest() {
+        ArticleDto articleDto1 = new ArticleDto();
+        Set<ConstraintViolation<ArticleDto>> violations =  validator.validate(articleDto1);
+        assertFalse(violations.isEmpty());
+        ArticleDto articleDto2 =  new ArticleDto(1,"","des",2,3,4,false,1,5);
+        assertFalse( validator.validate(articleDto2).isEmpty());
+        ArticleDto articleDto3 =  new ArticleDto(1,"name","",2,3,4,false,1,5);
+        assertFalse( validator.validate(articleDto3).isEmpty());
+        ArticleDto articleDto4 =  new ArticleDto(1,"name","des",-5,3,4,false,1,5);
+        assertFalse( validator.validate(articleDto4).isEmpty());
+        ArticleDto articleDto6 =  new ArticleDto(1,"name","des",2,3,0,false,1,5);
+        assertFalse( validator.validate(articleDto6).isEmpty());
+        ArticleDto articleDto7 =  new ArticleDto(1,"name","des",2,3,4,false,1,0);
+        assertFalse( validator.validate(articleDto7).isEmpty());
+        ArticleDto articleDto5 =  new ArticleDto(1,"name","des",2,3,4,false,1,5);
+        assertTrue( validator.validate(articleDto5).isEmpty());
     }
 
     @Test
@@ -117,8 +147,9 @@ class ArticleControllerTest {
         articleController.setModelMapper(new ModelMapper());
         when(image.getId()).thenReturn(1);
         Article article = new Article(1,"name","des",
-                2,3,4,true,image);
-        ArticleDto articleDto = new ArticleDto(1,"name","des",2,3,4,true,1);
+                2,3,4,true,image,new User());
+        article.getUser().setId(5);
+        ArticleDto articleDto = new ArticleDto(1,"name","des",2,3,4,true,1,5);
 
         assertEquals(articleDto,articleController.convertArticleToDto(article));
     }
@@ -129,8 +160,9 @@ class ArticleControllerTest {
         Image image1 = new Image();
         image1.setId(1);
         Article article = new Article(1,"name","des",
-                2,3,4,false,image1);
-        ArticleDto articleDto = new ArticleDto(1,"name","des",2,3,4,false,1);
+                2,3,4,false,image1,new User());
+        article.getUser().setId(5);
+        ArticleDto articleDto = new ArticleDto(1,"name","des",2,3,4,false,1,5);
 
         assertEquals(article,articleController.reverseArticleFromDto(articleDto));
 
