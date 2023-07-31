@@ -45,7 +45,7 @@ class ArticleTest {
 
     @Test
     void allArgsConstructor(){
-        Article article1 = new Article(1,"name","discr",1,2,3,true,imageMock);
+        Article article1 = new Article(1,"name","discr",1,2,3,true,imageMock,new User());
         assertEquals("name",article1.getName());
     }
 

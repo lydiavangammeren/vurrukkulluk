@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.dto.FavoriteDto;
 import com.lydia.vurrukkulluk.model.Favorite;
 import com.lydia.vurrukkulluk.service.FavoriteService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class FavoriteController {
   }
 
   @PostMapping()
-  public ResponseEntity<String> add(@RequestBody FavoriteDto favoriteDto) {
+  public ResponseEntity<String> add(@Valid @RequestBody FavoriteDto favoriteDto) {
     if (!securityUtil.isAuthorizedUserOrAdmin(favoriteDto.getUserId())){
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
@@ -54,7 +55,7 @@ public class FavoriteController {
   }
 
   @PutMapping()
-  public ResponseEntity<String> update(@RequestBody FavoriteDto favoriteDto) {
+  public ResponseEntity<String> update(@Valid @RequestBody FavoriteDto favoriteDto) {
     if (!securityUtil.isAuthorizedUserOrAdmin(favoriteDto.getUserId())){
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }

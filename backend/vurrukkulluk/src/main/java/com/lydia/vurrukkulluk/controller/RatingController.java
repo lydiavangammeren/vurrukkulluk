@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.dto.RatingDto;
 import com.lydia.vurrukkulluk.model.Rating;
 import com.lydia.vurrukkulluk.service.RatingService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class RatingController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> add(@RequestBody RatingDto ratingDto){
+    public ResponseEntity<String> add(@Valid @RequestBody RatingDto ratingDto){
         if (!securityUtil.isAuthorizedUserOrAdmin(ratingDto.getUserId())){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }
@@ -45,7 +46,7 @@ public class RatingController {
     }
 
     @PutMapping()
-    public ResponseEntity<String> put(@RequestBody RatingDto ratingDto){
+    public ResponseEntity<String> put(@Valid @RequestBody RatingDto ratingDto){
         if (!securityUtil.isAuthorizedUserOrAdmin(ratingDto.getUserId())){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }

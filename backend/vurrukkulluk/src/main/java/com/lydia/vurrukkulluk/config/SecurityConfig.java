@@ -55,12 +55,15 @@ public class SecurityConfig {
             "api/articleunits",
             "api/units",
             "api/calendar/**",
-            "api/articles/**"
+            "api/articles/**",
+            "api/articleunits"
+
 
     };
     private static final String[] AUTH_WHITELIST_POST = {
             "api/testdata",
-            "api/cart"
+            "api/cart",
+            "api/articles"
     };
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -73,7 +76,7 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers(HttpMethod.POST,AUTH_WHITELIST_POST)
                 .permitAll()
-                .requestMatchers("/api/auth/**")
+                .requestMatchers("/api/auth/**","/error")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

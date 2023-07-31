@@ -7,6 +7,7 @@ import com.lydia.vurrukkulluk.model.Ingredient;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.service.IngredientService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class IngredientController {
         return ingredientService.getAllIngredients().stream().map(this::convertIngredientToDto).collect(Collectors.toList());
     }
     @PostMapping()
-    public ResponseEntity<String> add(@RequestBody IngredientCreateDto ingredientCreateDto){
+    public ResponseEntity<String> add(@Valid @RequestBody IngredientCreateDto ingredientCreateDto){
         if (!securityUtil.isIdOfAuthorizedUser(
                 ingredientService.getIngredientById(ingredientCreateDto.getRecipeId()).getRecipe().getUser().getId())){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
@@ -51,7 +52,7 @@ public class IngredientController {
     }
 
     @PutMapping()
-    public ResponseEntity<String> update(@RequestBody IngredientCreateDto ingredientCreateDto){
+    public ResponseEntity<String> update(@Valid @RequestBody IngredientCreateDto ingredientCreateDto){
         if (!securityUtil.isIdOfAuthorizedUser(
                 ingredientService.getIngredientById(ingredientCreateDto.getRecipeId()).getRecipe().getUser().getId())){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");

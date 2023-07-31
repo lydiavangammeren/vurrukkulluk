@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class ArticleUnitDto {
     private int id;
     private ArticleDto article;
-
     private UnitDto unit;
     private double amount;
     private UnitDto defUnit;

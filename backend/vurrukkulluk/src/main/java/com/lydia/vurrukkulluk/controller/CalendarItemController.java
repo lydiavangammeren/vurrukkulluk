@@ -34,16 +34,13 @@ public class CalendarItemController {
         return calendarItemService.getAllFromTodayOn();
     }
     @PostMapping()
-    public ResponseEntity<String> saveCalendarItem(@RequestBody CalendarItem calendarItem){
+    public ResponseEntity<String> saveCalendarItem(@Valid @RequestBody CalendarItem calendarItem){
         if (!securityUtil.isAdmin()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }
-        try {
 
-            calendarItemService.save(calendarItem);
-        } catch (ConstraintViolationException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+        calendarItemService.save(calendarItem);
+
 
         return ResponseEntity.status(HttpStatus.OK).body("saved calendar item");
 

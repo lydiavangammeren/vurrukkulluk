@@ -40,15 +40,11 @@ public class ArticleController {
     private SecurityUtil securityUtil;
 
     @PostMapping()
-    public ResponseEntity<String> add(@RequestBody ArticleDto articleDto){
+    public ResponseEntity<String> add(@Valid @RequestBody ArticleDto articleDto){
         articleDto.setId(0);
 
-        try {
-            @Valid Article article = reverseArticleFromDto(articleDto);
-            articleService.saveArticle(article);
-        } catch (ConstraintViolationException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+        Article article = reverseArticleFromDto(articleDto);
+        articleService.saveArticle(article);
 
         return ResponseEntity.status(HttpStatus.OK).body("new ingredient added");
     }
@@ -68,7 +64,7 @@ public class ArticleController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<String> update(@RequestBody ArticleDto articleDto){
+    public ResponseEntity<String> update(@Valid @RequestBody ArticleDto articleDto){
         if (!securityUtil.isAdmin()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }

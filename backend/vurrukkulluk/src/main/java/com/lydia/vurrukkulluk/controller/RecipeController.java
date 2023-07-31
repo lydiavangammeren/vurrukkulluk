@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.dto.*;
 import com.lydia.vurrukkulluk.model.*;
 import com.lydia.vurrukkulluk.service.*;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -44,7 +45,7 @@ public class RecipeController {
   private SecurityUtil securityUtil;
 
   @PostMapping()
-  public ResponseEntity<String> add(@RequestBody RecipeCreateDto recipeCreateDto) {
+  public ResponseEntity<String> add(@Valid @RequestBody RecipeCreateDto recipeCreateDto) {
     if (!securityUtil.isIdOfAuthorizedUser(recipeCreateDto.getUserId())){
       return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
     }
