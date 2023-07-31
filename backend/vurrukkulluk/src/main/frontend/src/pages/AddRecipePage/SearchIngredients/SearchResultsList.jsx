@@ -4,6 +4,7 @@ import {AddNewArticle} from "./AddNewArticle";
 import AddNew from "./AddNew";
 
 export const SearchResultsList = ({ results, setSearchValue }) => {
+  console.log('searchResultsList: ', results)
   return (
     <div className="ingredients_results">
       {results.map((result, id) => {

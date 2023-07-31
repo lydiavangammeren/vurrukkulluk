@@ -30,14 +30,14 @@
   padding: 0.5em 0;
 }
 .login-button {
-    color: var(--white);
-    font-family: var(--heading);
-    font-size: 48px;
-    background-color: var(--lighter-orange);
-    border: none;
-    width: 5em;
-    border-radius: 20px;
-    padding:0;
+  color: var(--white);
+  font-family: var(--heading);
+  font-size: 48px;
+  background-color: var(--lighter-orange);
+  border: none;
+  width: 5em;
+  border-radius: 20px;
+  padding:0;
 }
 
 .otheroptions{

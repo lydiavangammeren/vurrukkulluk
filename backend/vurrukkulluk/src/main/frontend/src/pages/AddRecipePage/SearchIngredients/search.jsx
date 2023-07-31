@@ -1,6 +1,28 @@
+function arrayUnique(array) {
+  var a = array.concat();
+  for(var i=0; i<a.length; ++i) {
+      for(var j=i+1; j<a.length; ++j) {
+          if(a[i] === a[j])
+              a.splice(j--, 1);
+      }
+  }
 
+  return a;
+}
 
-export function search(query, documents){
+function filter (query, documents) {
+    if(!query) return [];
+    const filtered = documents.filter((article)=> {
+      return (
+        query && (
+          article.name.toLowerCase().includes(query)
+        )
+      )
+    });
+    return filtered;
+}
+
+export function search(query, documents, articleunits){
 
   // const searchValue = query.trim();
 
@@ -9,13 +31,25 @@ export function search(query, documents){
 
   var results = [];
 
+  results = filter(query, documents);
+
   queryWords.forEach((word)=> {
     const wordResults = documents.filter((doc) => doc.name.toLowerCase().includes(word));
     console.log('wordResults: ', wordResults)
-    // results = [...results, ...wordResults];
-    results = wordResults.filter(val => !results.includes(val));
+    results = [...results, ...wordResults];
+    // results = wordResults.filter(val => !results.includes(val));
   })
-
+  
+  results = arrayUnique(results);
+  
+  // add articleunits to the articles
+  results.forEach(result => {
+    result.articleunits = articleunits.filter((articleunit) => {
+      return articleunit.article.id === result.id;
+    })
+  });
+  
+  
   console.log('results: ', results)
 
   return results;
