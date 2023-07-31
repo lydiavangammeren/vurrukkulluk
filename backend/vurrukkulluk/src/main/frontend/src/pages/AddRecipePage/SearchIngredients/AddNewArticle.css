@@ -2,7 +2,7 @@
   padding: 1rem;
 }
 
-.add_article_form{
+.add_article_fields{
   display: flex;
   justify-content: space-between;
 }
@@ -26,12 +26,14 @@
 
 .button_box{
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  /* flex-direction: column; */
+  justify-content: center;
+  /* width: 100%; */
+  padding-top: 1rem;
 }
 
 .add_article_button {
-  /* width: 80px; */
+  width: 30%;
   color: var(--white);
   font-family: var(--heading);
   font-size: 30px;

@@ -44,13 +44,13 @@ const AddRecipeForm = () => {
   const handlePrev = () => setPage(prev => prev - 1)
 
   const handleNext = () => {
-    console.log(selectedImage)
+    // console.log(selectedImage)
     let validationErrors = validate(data, constraints)
-    if(validationErrors) {
-      setErrors(validationErrors)
-    } else {
+    // if(validationErrors) {
+    //   setErrors(validationErrors)
+    // } else {
       setPage(prev => prev + 1)
-    }
+    // }
   }
 
 
