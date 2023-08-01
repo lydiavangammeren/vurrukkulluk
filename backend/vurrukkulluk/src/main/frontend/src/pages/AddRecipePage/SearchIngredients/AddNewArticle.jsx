@@ -4,7 +4,7 @@ import usePostData from '../../../hooks/usePostData';
 import usePostImage from '../../../hooks/usePostImage';
 import { useDatabase } from '../../../hooks';
 
-export const AddNewArticle = () => {
+export const AddNewArticle = ({setNew}) => {
 
   const { data, addItem } = useAddRecipeContext();
   const [article, articleLoaded, postArticle ] = usePostData();
@@ -121,9 +121,15 @@ export const AddNewArticle = () => {
 
   useEffect(() => {
     if(articleLoaded){
-      postImage('/images?type=article&id=' + article.payLoad, articleData.imageFile)
+      
+      postImage('/image?type=article&id=' + article.payLoad, {image: articleData.imageFile})
     }
   }, [articleLoaded])
+
+  useEffect(() =>{
+    if(image.status != 200) return;
+    setNew(true);
+  }, [imageLoaded])
 
   return (
     <div className="add_article">
@@ -170,22 +176,25 @@ export const AddNewArticle = () => {
               <option value={4}>liter</option>
             </select>
           </div>
-          <div className='add_article_field'>
+          {/* <div className='add_article_field'>
             <label htmlFor=''>Calorieën:</label>
             <input type='number' id='calories' min={1} value={1}/>
           </div>
           <div className='add_article_field'>
             <label htmlFor=''>Prijs:</label>
             <input type='number' id='price' min={1} value={1}/>
-          </div>
+          </div> */}
         </div>
         <div className='add_article_units'>
           <table>
-            <tr>
-              <th>Eenheid:</th>
-              <th></th>
-              <th>{articleData.name}</th>
-            </tr>
+            <thead>
+              <tr>
+                <th>Eenheid:</th>
+                <th></th>
+                <th>{articleData.name}</th>
+              </tr>
+            </thead>
+            <tbody>
           {units && unitsLoaded &&
           units.map((unit)=> {
             return (<tr>
@@ -213,6 +222,7 @@ export const AddNewArticle = () => {
                       </td>
                     </tr>)
           })}
+            </tbody>
           </table>
         </div>
         </div>

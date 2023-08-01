@@ -60,7 +60,7 @@ public class ArticleController {
             articleUnitService.save(articleUnit);
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body("new ingredient added");
+        return ResponseEntity.status(HttpStatus.OK).body("" + article.getId());
     }
 
     @GetMapping()

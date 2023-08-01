@@ -32,7 +32,7 @@ export const SearchResult = ({ result, setSearchValue }) => {
   }
 
   const handleAdd = e => {
-    console.log("articleUnitId: ", e.target.value)
+    // console.log("articleUnitId: ", e.target.value)
     const name = e.target.name
     const value = {
       // articleId: e.target.value,
@@ -78,7 +78,7 @@ export const SearchResult = ({ result, setSearchValue }) => {
               min={0}
               />
               <select onChange={(e) => {
-                console.log("Name + unitId: ", e.target.value);
+                // console.log("Name + unitId: ", e.target.value);
                 setUnitName(e.target.value.split("|")[0]); 
                 setArticleUnitId(e.target.value.split("|")[1])
                 }}>

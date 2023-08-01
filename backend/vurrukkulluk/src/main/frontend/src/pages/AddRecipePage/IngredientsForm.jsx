@@ -4,17 +4,24 @@ import { SearchBar, SearchResultsList } from './SearchIngredients';
 import { useDatabase } from '../../hooks';
 import Ingredient from './Ingredient';
 import { search } from './SearchIngredients/search';
+// import api from "../../lib/recipeAPI";
 
 const IngredientsForm = () => {
 
-  const [ articles, articlesLoaded ] = useDatabase('/articles');
-  const [ articleunits, articleunitsLoaded] = useDatabase('/articleunits');
+  const [ articles, articlesLoaded, keepArticleCache ] = useDatabase('/articles');
+  // const [ currentArticles, setCurrentArticles] = useState([]);
+  // const [searchResults, setSearchResults] = useState([]);
+  const [ articleunits, articleunitsLoaded, keepArticleunitsCache] = useDatabase('/articleunits');
   // const [ units, unitsLoaded ] = useDatabase('/units');
+  const [newArticles, setNewArticles] = useState(false);
+  // const [ , updateState] = useState();
+  // const forceUpdate = React.useCallback(() => updateState({}), []);
 
   const { data, handleChange, updateIngredientQuantity } = useAddRecipeContext();                                                                                                 
   const [searchValue, setSearchValue] = useState('');
 
   const searchResults = search(searchValue, articles?? [], articleunits?? []);
+  // setSearchResults(search(searchValue, currentArticles?? [], articleunits?? []))
 
   const findObjectById = (id) => {
     if(articleunitsLoaded){
@@ -24,11 +31,44 @@ const IngredientsForm = () => {
     }
   }
 
+  useEffect(() => {
+    if(!newArticles) {
+      // setCurrentArticles(articles);
+      return;
+    };
+    // const getData = async () => {
+    //   try{
+    //     const response = await api.get('/articles');
+    //     console.log('Articles from database:')
+    //     console.log(JSON.stringify(response.data))
+    //     // setArticles(response.data);
+    //     // setCurrentArticles(response.data);
+    //     // forceUpdate();
+        
+    //   } catch(err){
+    //     if(err.response){
+    //       //Not in the 200 response range
+    //       console.log(err.response.data);
+    //       console.log(err.response.status);
+    //       console.log(err.response.headers);
+    //     }else{
+    //       console.log(`Error: ${err.message}`)
+    //     }
+    //   }
+    // }
+    // getData();
+
+    // return (setNewArticles(false))
+    keepArticleCache(false);
+    keepArticleunitsCache(false);
+    
+  }, [newArticles])
+
   return (
     <div>
       <SearchBar searchValue={searchValue} setSearchValue={setSearchValue}/>
-      {searchResults && searchValue.length > 0 &&
-      <SearchResultsList results={searchResults} setSearchValue={setSearchValue}/>}
+      {searchResults && searchValue.length >= 1 &&
+      <SearchResultsList results={searchResults} setSearchValue={setSearchValue} newArticles={newArticles} setNew={setNewArticles}/>}
 
       <div className='ingredient_list'>
         <h3>Toegevoegde ingrediënten</h3>
