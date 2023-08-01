@@ -189,11 +189,7 @@ public class TestDataController {
         recipe.setImage(image);
         recipe.setSlug("vegan-burger");
         recipe.setKitchenType(kitchenTypes.get(3));
-<<<<<<< HEAD
-        recipe.setKitchenRegion(kitchenRegions.get(16));
-=======
         recipe.setKitchenRegion(kitchenRegions.get(15));
->>>>>>> 1e0ab9a14e87ee59d0eed6b98295161aa8348d63
         recipe.setPersons(4);
         recipe.setUser(users.get(1));
         recipes.add(recipeService.saveRecipe(recipe));
