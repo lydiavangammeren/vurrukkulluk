@@ -313,6 +313,9 @@ public class TestDataController {
     private List<Article> createArticles() {
         List<Article> articles = new ArrayList<>();
 
+        User user = new User();
+        user.setId(1);
+
         Article article1 = new Article();
         article1.setName("Vegan Burger Bun");
         String imagePath = "src\\main\\resources\\images\\hamb.jpg";
@@ -323,6 +326,7 @@ public class TestDataController {
         article1.setPrice(120);
         article1.setAmount(1);
         article1.setAvailable(true);
+        article1.setUser(user);
         articles.add(articleService.saveArticle(article1));
 
         Article article2 = new Article();
@@ -334,7 +338,8 @@ public class TestDataController {
         article2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article2.setPrice(540);
         article2.setAmount(400);
-        article1.setAvailable(true);
+        article2.setAvailable(true);
+        article2.setUser(user);
         articles.add(articleService.saveArticle(article2));
 
         Article article3 = new Article();
@@ -346,7 +351,8 @@ public class TestDataController {
         article3.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article3.setPrice(520);
         article3.setAmount(250);
-        article1.setAvailable(true);
+        article3.setAvailable(true);
+        article3.setUser(user);
         articles.add(articleService.saveArticle(article3));
 
         Article article4 = new Article();
@@ -358,7 +364,8 @@ public class TestDataController {
         article4.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article4.setPrice(200);
         article4.setAmount(1);
-        article1.setAvailable(false);
+        article4.setAvailable(false);
+        article4.setUser(user);
         articles.add(articleService.saveArticle(article4));
 
         return articles;
@@ -375,7 +382,7 @@ public class TestDataController {
         user1.setName("Tess Ter");
         user1.setImage(image);
         user1.setPassword(passwordEncoder.encode("test123"));
-        user1.setRole(Role.USER);
+        user1.setRole(Role.ADMIN);
         userService.saveUser(user1);
         users.add(user1);
 
