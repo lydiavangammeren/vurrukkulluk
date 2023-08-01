@@ -97,12 +97,20 @@ public class TestDataController {
         articleUnits.add(addArticleUnit(articles.get(0),units.get(0),1000.0,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(2),0.001,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(6),0.4,units.get(1)));
+
         articleUnits.add(addArticleUnit(articles.get(1),units.get(4),1000,units.get(4)));
         articleUnits.add(addArticleUnit(articles.get(1),units.get(3),1,units.get(4)));
         articleUnits.add(addArticleUnit(articles.get(1),units.get(5),10,units.get(4)));
+
         articleUnits.add(addArticleUnit(articles.get(2),units.get(4),1,units.get(4)));
+
         articleUnits.add(addArticleUnit(articles.get(3),units.get(4),1,units.get(4)));
 
+        articleUnits.add(addArticleUnit(articles.get(4),units.get(1),1,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(4),units.get(0),1000,units.get(1)));
+
+        articleUnits.add(addArticleUnit(articles.get(5),units.get(10),1,units.get(10)));
+        articleUnits.add(addArticleUnit(articles.get(5),units.get(1),0.4,units.get(10)));
         return articleUnits;
     }
 
@@ -118,7 +126,7 @@ public class TestDataController {
 
     private List<Unit> createUnits() {
 
-        String[] unitNames = {"kg","g","mg","l","ml","cl","mespunt","snufje","theelepel","stuks"};
+        String[] unitNames = {"kg","g","mg","l","ml","cl","mespunt","snufje","theelepels","stuks","vellen"};
         List<Unit> units = new ArrayList<>();
 
         for (String name:unitNames) {
@@ -180,16 +188,16 @@ public class TestDataController {
         Image image = uploadImageByPath(imagePath,"VeganBurger.jpg");
         recipe.setImage(image);
         recipe.setSlug("vegan-burger");
-        recipe.setKitchenType(kitchenTypes.get(2));
-        recipe.setKitchenRegion(kitchenRegions.get(14));
+        recipe.setKitchenType(kitchenTypes.get(4));
+        recipe.setKitchenRegion(kitchenRegions.get(16));
         recipe.setPersons(4);
         recipe.setUser(users.get(1));
         recipes.add(recipeService.saveRecipe(recipe));
 
         addIngredientToRecipe(recipes.get(0),articleUnits.get(0),7);
         addIngredientToRecipe(recipes.get(0),articleUnits.get(6),320);
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(7),13);
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(8),304);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(7),100);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(8),1);
 
         addCategoryToRecipe(recipes.get(0), 0,kitchenCategories);
         addCategoryToRecipe(recipes.get(0), 7,kitchenCategories);
@@ -201,22 +209,22 @@ public class TestDataController {
         addPreparationToRecipe(recipes.get(0),"SAus suaucua c jfjen kjsbvkjvjej sk sv skvj bkjcb ksb ksv  svbkej jv dfghjk dfghjk dfghjk sdfghj dfghj dfghj dfghj dfgh.",3);
 
         Recipe recipe2 = new Recipe();
-        recipe2.setTitle("Vegan Burger N2");
+        recipe2.setTitle("SushiRolls");
         recipe2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.");
-        String imagePath2 = "src\\main\\resources\\images\\VeganBurger.jpg";
-        Image image2 = uploadImageByPath(imagePath,"VeganBurger.jpg");
+        String imagePath2 = "src\\main\\resources\\images\\SushiRolls.jpg";
+        Image image2 = uploadImageByPath(imagePath,"SushiRolls.jpg");
         recipe2.setImage(image2);
-        recipe2.setSlug("vegan-burger-2");
+        recipe2.setSlug("SushiRolls");
         recipe2.setKitchenType(kitchenTypes.get(2));
-        recipe2.setKitchenRegion(kitchenRegions.get(12));
-        recipe2.setPersons(6);
+        recipe2.setKitchenRegion(kitchenRegions.get(13));
+        recipe2.setPersons(4);
         recipe2.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe2));
 
-        addIngredientToRecipe(recipes.get(1),articleUnits.get(0),5);
-        addIngredientToRecipe(recipes.get(1),articleUnits.get(1),220);
-        addIngredientToRecipe(recipes.get(1),articleUnits.get(2),10);
-        addIngredientToRecipe(recipes.get(1),articleUnits.get(3),30);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(10),0.5);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(11),8);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(13),200);
+
 
         return recipes;
     }
@@ -318,8 +326,8 @@ public class TestDataController {
 
         Article article1 = new Article();
         article1.setName("Vegan Burger Bun");
-        String imagePath = "src\\main\\resources\\images\\hamb.jpg";
-        Image image = uploadImageByPath(imagePath,"hamb.jpg");
+        String imagePath1 = "src\\main\\resources\\images\\hamb.jpg";
+        Image image = uploadImageByPath(imagePath1,"hamb.jpg");
         article1.setImage(image);
         article1.setCalories(250);
         article1.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
@@ -332,7 +340,7 @@ public class TestDataController {
         Article article2 = new Article();
         article2.setName("Vegan Burger");
         String imagePath2 = "src\\main\\resources\\images\\VeganBurgerI.jpg";
-        Image image2 = uploadImageByPath(imagePath,"VeganBurgerI.jpg");
+        Image image2 = uploadImageByPath(imagePath2,"VeganBurgerI.jpg");
         article2.setImage(image2);
         article2.setCalories(469);
         article2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
@@ -345,28 +353,67 @@ public class TestDataController {
         Article article3 = new Article();
         article3.setName("Vegan Burger Sauce");
         String imagePath3 = "src\\main\\resources\\images\\VeganSauce.jpg";
-        Image image3 = uploadImageByPath(imagePath,"VeganSauce.jpg");
+        Image image3 = uploadImageByPath(imagePath3,"VeganSauce.jpg");
         article3.setImage(image3);
-        article3.setCalories(750);
+        article3.setCalories(150);
         article3.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article3.setPrice(520);
-        article3.setAmount(250);
+        article3.setAmount(50);
         article3.setAvailable(true);
         article3.setUser(user);
         articles.add(articleService.saveArticle(article3));
 
         Article article4 = new Article();
         article4.setName("Adocado");
-        String imagePath4 = "src\\main\\resources\\images\\VeganBurgerI.jpg";
-        Image image4 = uploadImageByPath(imagePath,"VeganBurgerI.jpg");
+        String imagePath4 = "src\\main\\resources\\images\\avocado.jpg";
+        Image image4 = uploadImageByPath(imagePath4,"avocado.jpg");
         article4.setImage(image4);
         article4.setCalories(300);
         article4.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
-        article4.setPrice(200);
+        article4.setPrice(100);
         article4.setAmount(1);
         article4.setAvailable(false);
         article4.setUser(user);
         articles.add(articleService.saveArticle(article4));
+
+        Article article5 = new Article();
+        article5.setName("Sushi rijst");
+        String imagePath5 = "src\\main\\resources\\images\\sushi_rijst.jpg";
+        Image image5 = uploadImageByPath(imagePath5,"sushi_rijst.jpg");
+        article5.setImage(image5);
+        article5.setCalories(1500);
+        article5.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
+        article5.setPrice(370);
+        article5.setAmount(500);
+        article5.setAvailable(true);
+        article5.setUser(user);
+        articles.add(articleService.saveArticle(article5));
+
+        Article article6 = new Article();
+        article6.setName("Sushi zeewier");
+        String imagePath6 = "src\\main\\resources\\images\\Nori.jpg";
+        Image image6 = uploadImageByPath(imagePath6,"Nori.jpg");
+        article6.setImage(image6);
+        article6.setCalories(91);
+        article6.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
+        article6.setPrice(500);
+        article6.setAmount(10);
+        article6.setAvailable(true);
+        article6.setUser(user);
+        articles.add(articleService.saveArticle(article6));
+
+        Article article7 = new Article();
+        article7.setName("Zalmfilet");
+        String imagePath7 = "src\\main\\resources\\images\\zalm.jpg";
+        Image image7 = uploadImageByPath(imagePath7,"zalm.jpg");
+        article7.setImage(image7);
+        article7.setCalories(208);
+        article7.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
+        article7.setPrice(260);
+        article7.setAmount(100);
+        article7.setAvailable(false);
+        article7.setUser(user);
+        articles.add(articleService.saveArticle(article7));
 
         return articles;
     }
@@ -413,7 +460,7 @@ public class TestDataController {
         return image;
     }
 
-    public void addIngredientToRecipe(Recipe recipe, ArticleUnit aU, int amount){
+    public void addIngredientToRecipe(Recipe recipe, ArticleUnit aU, double amount){
         Ingredient ingredient = new Ingredient();
         ingredient.setRecipe(recipe);
         ingredient.setArticleunit(aU);
