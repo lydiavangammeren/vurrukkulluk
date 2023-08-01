@@ -188,7 +188,7 @@ public class TestDataController {
         Image image = uploadImageByPath(imagePath,"VeganBurger.jpg");
         recipe.setImage(image);
         recipe.setSlug("vegan-burger");
-        recipe.setKitchenType(kitchenTypes.get(4));
+        recipe.setKitchenType(kitchenTypes.get(3));
         recipe.setKitchenRegion(kitchenRegions.get(16));
         recipe.setPersons(4);
         recipe.setUser(users.get(1));
@@ -223,7 +223,7 @@ public class TestDataController {
 
         addIngredientToRecipe(recipes.get(1),articleUnits.get(10),0.5);
         addIngredientToRecipe(recipes.get(1),articleUnits.get(11),8);
-        addIngredientToRecipe(recipes.get(1),articleUnits.get(13),200);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(12),200);
 
 
         return recipes;
