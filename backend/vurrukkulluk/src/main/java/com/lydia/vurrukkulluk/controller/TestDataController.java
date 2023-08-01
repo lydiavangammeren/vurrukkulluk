@@ -93,14 +93,14 @@ public class TestDataController {
     private List<ArticleUnit> createArticleUnits(List<Unit> units, List<Article> articles) {
 
         List<ArticleUnit> articleUnits = new ArrayList<>();
-        articleUnits.add(addArticleUnit(articles.get(0),units.get(1),1.0,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(7),1.0,units.get(7)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(0),1000.0,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(2),0.001,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(6),0.4,units.get(1)));
 
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(4),1000,units.get(4)));
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(3),1,units.get(4)));
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(5),10,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(0),1000,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(1),1,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(3),0.001,units.get(4)));
 
         articleUnits.add(addArticleUnit(articles.get(2),units.get(4),1,units.get(4)));
 
@@ -188,14 +188,14 @@ public class TestDataController {
         Image image = uploadImageByPath(imagePath,"VeganBurger.jpg");
         recipe.setImage(image);
         recipe.setSlug("vegan-burger");
-        recipe.setKitchenType(kitchenTypes.get(4));
-        recipe.setKitchenRegion(kitchenRegions.get(16));
+        recipe.setKitchenType(kitchenTypes.get(3));
+        recipe.setKitchenRegion(kitchenRegions.get(15));
         recipe.setPersons(4);
         recipe.setUser(users.get(1));
         recipes.add(recipeService.saveRecipe(recipe));
 
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(0),7);
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(6),320);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(0),4);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(6),300);
         addIngredientToRecipe(recipes.get(0),articleUnits.get(7),100);
         addIngredientToRecipe(recipes.get(0),articleUnits.get(8),1);
 
@@ -215,8 +215,8 @@ public class TestDataController {
         Image image2 = uploadImageByPath(imagePath,"SushiRolls.jpg");
         recipe2.setImage(image2);
         recipe2.setSlug("SushiRolls");
-        recipe2.setKitchenType(kitchenTypes.get(2));
-        recipe2.setKitchenRegion(kitchenRegions.get(13));
+        recipe2.setKitchenType(kitchenTypes.get(1));
+        recipe2.setKitchenRegion(kitchenRegions.get(12));
         recipe2.setPersons(4);
         recipe2.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe2));
@@ -224,6 +224,11 @@ public class TestDataController {
         addIngredientToRecipe(recipes.get(1),articleUnits.get(10),0.5);
         addIngredientToRecipe(recipes.get(1),articleUnits.get(11),8);
         addIngredientToRecipe(recipes.get(1),articleUnits.get(13),200);
+
+        addCategoryToRecipe(recipes.get(0), 0,kitchenCategories);
+        addCategoryToRecipe(recipes.get(0), 7,kitchenCategories);
+        addCategoryToRecipe(recipes.get(0), 14,kitchenCategories);
+        addCategoryToRecipe(recipes.get(0), 17,kitchenCategories);
 
 
         return recipes;
@@ -414,6 +419,33 @@ public class TestDataController {
         article7.setAvailable(false);
         article7.setUser(user);
         articles.add(articleService.saveArticle(article7));
+
+        Article article8 = new Article();
+        article8.setName("Rucola Sla");
+        String imagePath8 = "src\\main\\resources\\images\\RucolaSla.jpg";
+        Image image8 = uploadImageByPath(imagePath8,"RucolaSla.jpg");
+        article8.setImage(image8);
+        article8.setCalories(72);
+        article8.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
+        article8.setPrice(110);
+        article8.setAmount(85);
+        article8.setAvailable(false);
+        article8.setUser(user);
+        articles.add(articleService.saveArticle(article8));
+
+        Article article9 = new Article();
+        article9.setName("Rucola Sla");
+        String imagePath9 = "src\\main\\resources\\images\\RucolaSla.jpg";
+        Image image9 = uploadImageByPath(imagePath8,"RucolaSla.jpg");
+        article8.setImage(image8);
+        article8.setCalories(72);
+        article8.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
+        article8.setPrice(110);
+        article8.setAmount(85);
+        article8.setAvailable(false);
+        article8.setUser(user);
+        articles.add(articleService.saveArticle(article8));
+
 
         return articles;
     }
