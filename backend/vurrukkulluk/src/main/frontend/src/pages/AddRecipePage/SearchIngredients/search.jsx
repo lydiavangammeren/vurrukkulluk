@@ -24,6 +24,8 @@ function filter (query, documents) {
 
 export function search(query, documents, articleunits){
 
+  console.log('searchValue: ', query)
+  if(!query) return [];
   // const searchValue = query.trim();
 
   // Split the search query into separate words
@@ -35,7 +37,7 @@ export function search(query, documents, articleunits){
 
   queryWords.forEach((word)=> {
     const wordResults = documents.filter((doc) => doc.name.toLowerCase().includes(word));
-    console.log('wordResults: ', wordResults)
+    // console.log('wordResults: ', wordResults)
     results = [...results, ...wordResults];
     // results = wordResults.filter(val => !results.includes(val));
   })
@@ -50,7 +52,7 @@ export function search(query, documents, articleunits){
   });
   
   
-  console.log('results: ', results)
+  // console.log('results: ', results)
 
   return results;
 

@@ -25,9 +25,9 @@ const useDatabase = (url) => {
       }
     }
     getData();
-  }, [])
+  }, [isLoaded])
 
-  return [data, isLoaded];
+  return [data, isLoaded, setLoaded];
 }
 
 export default useDatabase;

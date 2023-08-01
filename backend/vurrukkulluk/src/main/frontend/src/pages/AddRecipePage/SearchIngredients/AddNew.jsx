@@ -3,12 +3,12 @@ import "./AddNew.css";
 
 const AddNew = () => {
   const ref = document.querySelector("#add_article_modal")
-  // console.log('ref: ', ref)
+  console.log('ref: ', ref)
   const openDialog = () => {
     ref.showModal();
   }
 
-  return (
+  return ( ref &&
     <div className='add_new'>
       <button 
         type='button' 
