@@ -223,7 +223,7 @@ public class TestDataController {
 
         addIngredientToRecipe(recipes.get(1),articleUnits.get(10),0.5);
         addIngredientToRecipe(recipes.get(1),articleUnits.get(11),8);
-        addIngredientToRecipe(recipes.get(1),articleUnits.get(13),200);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(12),200);
 
         addCategoryToRecipe(recipes.get(0), 0,kitchenCategories);
         addCategoryToRecipe(recipes.get(0), 7,kitchenCategories);
