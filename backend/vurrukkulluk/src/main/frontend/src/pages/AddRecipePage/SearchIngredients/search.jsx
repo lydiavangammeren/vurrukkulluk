@@ -44,6 +44,7 @@ export function search(query, documents, articleunits){
   
   results = arrayUnique(results);
   
+  
   // add articleunits to the articles
   results.forEach(result => {
     result.articleunits = articleunits.filter((articleunit) => {
@@ -51,8 +52,8 @@ export function search(query, documents, articleunits){
     })
   });
   
-  
-  // console.log('results: ', results)
+  console.log('articleunits: ', articleunits)
+  console.log('results: ', results)
 
   return results;
 
