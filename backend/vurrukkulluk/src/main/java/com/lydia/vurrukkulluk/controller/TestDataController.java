@@ -93,14 +93,14 @@ public class TestDataController {
     private List<ArticleUnit> createArticleUnits(List<Unit> units, List<Article> articles) {
 
         List<ArticleUnit> articleUnits = new ArrayList<>();
-        articleUnits.add(addArticleUnit(articles.get(0),units.get(7),1.0,units.get(7)));
+        articleUnits.add(addArticleUnit(articles.get(0),units.get(9),1.0,units.get(7)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(0),1000.0,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(2),0.001,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(0),units.get(6),0.4,units.get(1)));
 
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(0),1000,units.get(4)));
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(1),1,units.get(4)));
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(3),0.001,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(0),1000,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(1),1,units.get(1)));
+        articleUnits.add(addArticleUnit(articles.get(1),units.get(3),0.001,units.get(1)));
 
         articleUnits.add(addArticleUnit(articles.get(2),units.get(4),1,units.get(4)));
 
@@ -195,8 +195,8 @@ public class TestDataController {
         recipes.add(recipeService.saveRecipe(recipe));
 
         addIngredientToRecipe(recipes.get(0),articleUnits.get(0),4);
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(6),300);
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(7),100);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(5),300);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(7),50);
         addIngredientToRecipe(recipes.get(0),articleUnits.get(8),1);
 
         addCategoryToRecipe(recipes.get(0), 0,kitchenCategories);
@@ -212,7 +212,7 @@ public class TestDataController {
         recipe2.setTitle("SushiRolls");
         recipe2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.");
         String imagePath2 = "src\\main\\resources\\images\\SushiRolls.jpg";
-        Image image2 = uploadImageByPath(imagePath,"SushiRolls.jpg");
+        Image image2 = uploadImageByPath(imagePath2,"SushiRolls.jpg");
         recipe2.setImage(image2);
         recipe2.setSlug("SushiRolls");
         recipe2.setKitchenType(kitchenTypes.get(1));
