@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,4 +32,8 @@ public class ArticleDto {
     private int imageId;
     @Min(1)
     private int userId;
+
+    private int defaultUnitId;
+    private HashMap<Integer,Double> units;
+
 }

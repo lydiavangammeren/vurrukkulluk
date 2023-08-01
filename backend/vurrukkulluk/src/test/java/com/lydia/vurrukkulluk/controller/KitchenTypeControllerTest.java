@@ -45,6 +45,7 @@ class KitchenTypeControllerTest {
     @Test
     void add() {
         when(kitchenTypeService.saveKitchenType(kitchenType)).thenReturn(kitchenType);
+        when(securityUtil.isAdmin()).thenReturn(true);
         assertEquals(ResponseEntity.status(HttpStatus.OK).body("New kitchen type is added"),kitchenTypeController.add(kitchenType));
     }
 

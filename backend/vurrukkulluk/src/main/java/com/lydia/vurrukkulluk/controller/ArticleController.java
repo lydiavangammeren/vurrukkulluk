@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.dto.ArticleDto;
 import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.service.ArticleService;
+import com.lydia.vurrukkulluk.service.ArticleUnitService;
 import com.lydia.vurrukkulluk.service.ImageService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
 import jakarta.validation.ConstraintViolation;
@@ -32,6 +33,8 @@ public class ArticleController {
     @Autowired
     private ImageService imageService;
 
+    @Autowired
+    private ArticleUnitService articleUnitService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -45,6 +48,8 @@ public class ArticleController {
 
         Article article = reverseArticleFromDto(articleDto);
         articleService.saveArticle(article);
+        
+
 
         return ResponseEntity.status(HttpStatus.OK).body("new ingredient added");
     }
