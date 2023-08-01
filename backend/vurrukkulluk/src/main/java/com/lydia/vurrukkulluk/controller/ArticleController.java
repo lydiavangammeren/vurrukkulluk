@@ -2,7 +2,9 @@ package com.lydia.vurrukkulluk.controller;
 
 import com.lydia.vurrukkulluk.dto.ArticleDto;
 import com.lydia.vurrukkulluk.model.Article;
+import com.lydia.vurrukkulluk.model.ArticleUnit;
 import com.lydia.vurrukkulluk.model.Image;
+import com.lydia.vurrukkulluk.model.Unit;
 import com.lydia.vurrukkulluk.service.ArticleService;
 import com.lydia.vurrukkulluk.service.ArticleUnitService;
 import com.lydia.vurrukkulluk.service.ImageService;
@@ -18,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,9 +50,15 @@ public class ArticleController {
         articleDto.setId(0);
 
         Article article = reverseArticleFromDto(articleDto);
-        articleService.saveArticle(article);
-        
+        Article articlefinal = articleService.saveArticle(article);
+        HashMap<Integer,Double> units = articleDto.getUnits();
 
+        for (Integer unitId : units.keySet()){
+            ArticleUnit articleUnit = new ArticleUnit(0,articlefinal,new Unit(),units.get(unitId),new Unit());
+            articleUnit.getUnit().setId(unitId);
+            articleUnit.getDefUnit().setId(articleDto.getDefaultUnitId());
+            articleUnitService.save(articleUnit);
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body("new ingredient added");
     }
