@@ -81,18 +81,27 @@ const ShoppingCart = () => {
    }, [allProducts])
 
   const currentProducts = allProducts ? allProducts.filter(
-    (product)=> !deletedProductIds.includes(product.article.id)
+    (product)=> !deletedProductIds.includes(product.article.id) &&
+    product.article.available
+  ) : [];
+
+  const otherProducts = allProducts ? allProducts.filter(
+    (product)=> !deletedProductIds.includes(product.article.id) &&
+    !product.article.available
   ) : [];
   
-  console.log('current products: ', currentProducts)
+  // console.log('current products: ', currentProducts)
   const uncheckedProducts = currentProducts.filter(
     (product) => !checkedProductIds.includes(product.article.id))
 
   const checkedProducts = currentProducts.filter(
     (product) => checkedProductIds.includes(product.article.id))
+  
+  const uncheckedUnavailable = otherProducts.filter(
+    (product) => !checkedProductIds.includes(product.article.id))
 
-  const otherProducts = currentProducts.filter(
-    (product) => !product.available)
+  const checkedUnavailable = otherProducts.filter(
+    (product) => checkedProductIds.includes(product.article.id))
 
   const totalPrice = uncheckedProducts.reduce((acc, product) => {
       return acc + ((product.amount * product.article.price)/100);
@@ -160,9 +169,17 @@ const ShoppingCart = () => {
         </thead>
         
         <tbody>
-          {otherProducts.map((product) => (
+          {checkedUnavailable.map((product) => (
             <ShoppingCartItem
               checked={false}
+              key={product.article.id}
+              product={product}
+              dispatch={dispatch}
+            />
+          ))}
+          {uncheckedUnavailable.map((product) => (
+            <ShoppingCartItem
+              checked={true}
               key={product.article.id}
               product={product}
               dispatch={dispatch}

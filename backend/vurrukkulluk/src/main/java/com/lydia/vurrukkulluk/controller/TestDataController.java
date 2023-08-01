@@ -188,8 +188,8 @@ public class TestDataController {
 
         addIngredientToRecipe(recipes.get(0),articleUnits.get(0),7);
         addIngredientToRecipe(recipes.get(0),articleUnits.get(6),320);
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(8),13);
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(9),304);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(7),13);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(8),304);
 
         addCategoryToRecipe(recipes.get(0), 0,kitchenCategories);
         addCategoryToRecipe(recipes.get(0), 7,kitchenCategories);
