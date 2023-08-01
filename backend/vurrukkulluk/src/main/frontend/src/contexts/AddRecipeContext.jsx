@@ -206,7 +206,8 @@ export const AddRecipeProvider = ({ children }) => {
 
     const nextHide = page === Object.keys(title).length - 1 && "remove_button"
 
-    const submitHide = !canSubmit() && "remove_button"
+    // const submitHide = !canSubmit() && "remove_button"
+    const submitHide = !canSubmit() && "disable_button"
 
     return (
       <AddRecipeContext.Provider value={{ title, page, setPage, data, setData, canSubmit, handleChange, disablePrev, 

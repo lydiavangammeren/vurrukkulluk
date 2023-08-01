@@ -37,6 +37,7 @@ const AddRecipeForm = () => {
   
   const [resizedImage, isResized, resize, urlToFile] = useImageResizer()
   const infoRef = useRef();
+  const submitRef = useRef();
 
   const [slug, ready, slugIt] = useSlug();
   const [ thisSlug, setThisSlug ]= useState('');
@@ -153,7 +154,18 @@ const AddRecipeForm = () => {
           </div>
 
           <div className="button_bar">
-            <button className={`formButton ${submitHide}`} disabled={!canSubmit}>Submit</button>
+            {/* <button className={`formButton ${submitHide}`} disabled={!canSubmit()}>Submit</button> */}
+            <dialog ref={submitRef}>
+              <p>Er mist nog iets aan het recept, controleer alle velden</p>
+            </dialog>
+            <button 
+              className={`formButton ${submitHide}`} 
+              disabled={!canSubmit()}
+              onMouseOver={() => submitRef.current.show()}
+              onMouseLeave={() => submitRef.current.close()}
+            >
+              Maak recept
+            </button>
           </div>
           
         </form>

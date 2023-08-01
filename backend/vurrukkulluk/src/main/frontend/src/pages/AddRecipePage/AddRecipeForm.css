@@ -40,3 +40,11 @@
 .remove_button{
   display: none;
 }
+
+.disable_button{
+ background-color: grey;
+}
+.disable_button:hover{
+  background-color: grey;
+  cursor: default;
+ }
