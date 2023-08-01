@@ -58,10 +58,10 @@ const IngredientsForm = () => {
     // }
     // getData();
 
-    // return (setNewArticles(false))
     keepArticleCache(false);
     keepArticleunitsCache(false);
     
+    return (setNewArticles(false))
   }, [newArticles])
 
   return (

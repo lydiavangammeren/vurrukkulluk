@@ -98,10 +98,10 @@ const ShoppingCart = () => {
     (product) => checkedProductIds.includes(product.article.id))
   
   const uncheckedUnavailable = otherProducts.filter(
-    (product) => !checkedProductIds.includes(product.article.id))
+    (product) => checkedProductIds.includes(product.article.id))
 
   const checkedUnavailable = otherProducts.filter(
-    (product) => checkedProductIds.includes(product.article.id))
+    (product) => !checkedProductIds.includes(product.article.id))
 
   const totalPrice = uncheckedProducts.reduce((acc, product) => {
       return acc + ((product.amount * product.article.price)/100);

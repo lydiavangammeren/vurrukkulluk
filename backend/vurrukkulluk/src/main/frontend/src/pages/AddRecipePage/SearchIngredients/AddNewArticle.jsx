@@ -24,6 +24,17 @@ export const AddNewArticle = ({setNew}) => {
 
   const handleChange = e => {
     const name = e.target.name
+
+    // Voeg default nog toe:
+    if(name === "defaultUnit"){
+      const tempUnits = articleData.unitIds;
+      tempUnits[e.target.value] = "1";
+      setArticleData(prevData => ({
+        ...prevData,
+        defaultUnit: tempUnits
+      }))
+    }
+
     setArticleData(prevData => ({
       ...prevData,
       [name]: e.target.value

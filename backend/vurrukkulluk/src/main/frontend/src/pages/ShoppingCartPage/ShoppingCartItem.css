@@ -9,9 +9,10 @@
 }
 .shoppingcart_img {
   flex-grow: 2;
-  min-width: 4em;
-  max-width: 8em;
-  max-height: auto;
+  width: 8rem;
+  min-width: 4rem;
+  max-width: 8rem;
+  max-height: 8rem;
 }
 .shoppingcart_info {
   flex-grow: 8;
