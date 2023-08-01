@@ -104,7 +104,7 @@ public class TestDataController {
 
         articleUnits.add(addArticleUnit(articles.get(2),units.get(4),1,units.get(4)));
 
-        articleUnits.add(addArticleUnit(articles.get(3),units.get(4),1,units.get(4)));
+        articleUnits.add(addArticleUnit(articles.get(3),units.get(9),1,units.get(9)));
 
         articleUnits.add(addArticleUnit(articles.get(4),units.get(1),1,units.get(1)));
         articleUnits.add(addArticleUnit(articles.get(4),units.get(0),1000,units.get(1)));
