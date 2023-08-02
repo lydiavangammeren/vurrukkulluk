@@ -17,8 +17,8 @@ export const SearchResult = ({ result, setSearchValue }) => {
 
   useEffect(()=>{
     setQuantity(amount)
-    setArticleUnitId(articleunits[0].id);
-    setUnitName(articleunits[0].defUnit.name);
+    setArticleUnitId(articleunits[0]?.id?? 0);
+    setUnitName(articleunits[0]?.defUnit.name?? '');
   }, [result])
 
   // const increment = () => {
