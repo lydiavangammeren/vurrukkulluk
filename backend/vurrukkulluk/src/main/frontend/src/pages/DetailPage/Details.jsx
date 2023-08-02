@@ -18,8 +18,8 @@ const Details = ({details}) => {
   const description = details.description;
   const imageId = details.imageId;
   const persons = details.persons;
-  const price = details.price;
-  const calories = details.calories;
+  const price = details.price / 100;
+  const calories = details.calories / persons;
   const kitchenRegion = details?.kitchenRegion?.name ?? '';
   const kitchenType = details?.kitchenType?.name ?? '';
   const categories = details.categories;
@@ -77,7 +77,7 @@ const Details = ({details}) => {
         <div className="details_top">
           <div className="details_stats">
             <div className=".icon-align"><HiUsers size={18} color='#b31714'/><span className="setFont">{persons}</span></div>
-            <div className=".icon-align"><MdEuro size={18} color='#b31714'/><span className="setFont">{price}</span></div>
+            <div className=".icon-align"><MdEuro size={18} color='#b31714'/><span className="setFont">{price.toFixed(2)}</span></div>
             <div className=".icon-align"><VscFlame size={18} color='#b31714'/><span className="setFont">{calories}</span></div>
           </div>
           {/* <div className="details_categories">

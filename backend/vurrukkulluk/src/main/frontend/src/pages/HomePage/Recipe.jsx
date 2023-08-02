@@ -29,7 +29,8 @@ const Recipe = ({recipe}) => {
       )
     }
   // }
-  
+  const price = recipe.price / 100;
+  const calories = recipe.calories / recipe.persons;
   return (
     //Change for BACKEND API !!!
     // <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.id}`)}>
@@ -80,11 +81,11 @@ const Recipe = ({recipe}) => {
           </div>
           <div className='icon-align'>
             <MdEuro size={18} color='#b31714'/> 
-            <span>{recipe.price}</span>
+            <span>{price.toFixed(2)}</span>
           </div>
           <div className='icon-align'>
             <VscFlame size={18} color='#b31714'/> 
-            <span>{recipe.calories}</span>
+            <span>{calories.toFixed(0)}</span>
           </div>
            
         </div>

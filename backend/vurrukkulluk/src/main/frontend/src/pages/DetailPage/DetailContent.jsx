@@ -9,8 +9,8 @@ const DetailContent = () => {
   
   const { slug } = useParams();
   
-  const { recipes, bannerImages, setDetailImage } = useAppContext();
-  const details = recipes.find(recipe => recipe.slug == slug) ? recipes.find(recipe => recipe.slug == slug) : {};
+  const { recipes, bannerImages, setDetailImage, keepRecipeCache } = useAppContext();
+  const details = recipes.find(recipe => recipe.slug == slug)?? {};
   console.log('details: ', details);
   
   const ingredients = details?.ingredients ?? [];
@@ -32,6 +32,7 @@ const DetailContent = () => {
           <TabWrapper ingredients={ingredients}
             prepsteps={prepsteps}
             comments={comments}
+            keepRecipeCache={keepRecipeCache}
             recipeId={details.id}/>
         }
       </div>

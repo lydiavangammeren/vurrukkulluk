@@ -9,7 +9,7 @@ const SearchBar = ({searchValue, setSearchValue}) => {
   }
 
   return (
-      <div className="search_categories">
+      <div className="search_ingredients">
       <FaSearch color="#b31714" size={16} id="search-icon" />
       <input
         placeholder="Zoeken"

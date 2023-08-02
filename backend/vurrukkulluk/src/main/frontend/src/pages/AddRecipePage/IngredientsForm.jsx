@@ -70,8 +70,8 @@ const IngredientsForm = () => {
       {searchResults && searchValue.length >= 1 &&
       <SearchResultsList results={searchResults} setSearchValue={setSearchValue} newArticles={newArticles} setNew={setNewArticles}/>}
 
+      <h2>Toegevoegde ingrediënten</h2>
       <div className='ingredient_list'>
-        <h3>Toegevoegde ingrediënten</h3>
         {data.ingredients && articlesLoaded && articleunitsLoaded &&
         data.ingredients.map((ingredient) => {
           const articleunit = findObjectById(ingredient.articleunitId)

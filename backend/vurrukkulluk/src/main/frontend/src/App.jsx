@@ -16,7 +16,7 @@ import Layout from "./layouts";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
-  const [recipes, isLoaded] = useDatabase('recipes'); // Get all data from database (Recipes+ingredients+preparation+comments)
+  const [recipes, isLoaded, keepRecipeCache] = useDatabase('recipes'); // Get all data from database (Recipes+ingredients+preparation+comments)
   
   const getImages = () => {
     if(!isLoaded) return [];
@@ -29,7 +29,7 @@ function App() {
   const renderContent = () => {
     if(isLoaded){
       return (
-        <ContextProvider recipes={recipes} bannerImages={images}>
+        <ContextProvider recipes={recipes} bannerImages={images} keepRecipeCache={keepRecipeCache}>
           <ShopContextProvider >
           <ScrollToTop />
           <Layout >
