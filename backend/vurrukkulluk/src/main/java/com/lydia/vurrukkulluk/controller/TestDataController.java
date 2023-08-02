@@ -130,6 +130,10 @@ public class TestDataController {
         addCalendarItem(LocalDateTime.parse("2023-08-09 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
         addCalendarItem(LocalDateTime.parse("2023-08-16 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
         addCalendarItem(LocalDateTime.parse("2023-08-25 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
+        addCalendarItem(LocalDateTime.parse("2023-09-25 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
+        addCalendarItem(LocalDateTime.parse("2023-08-01 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
+        addCalendarItem(LocalDateTime.parse("2023-08-08 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
+        addCalendarItem(LocalDateTime.parse("2023-08-15 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
 
     }
 
@@ -499,7 +503,7 @@ public class TestDataController {
         article7.setAmount(300);
         article7.setAvailable(false);
         article7.setUser(user);
-        article7 = articleService.saveArticle(article6);
+        article7 = articleService.saveArticle(article7);
         articles.add(article7);
         Unit defUnit7 = unitService.getByName("g");
         addArticleUnit(article7,defUnit7,1.0,defUnit7);
