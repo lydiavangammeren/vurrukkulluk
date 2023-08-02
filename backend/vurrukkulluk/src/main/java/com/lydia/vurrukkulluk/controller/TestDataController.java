@@ -57,16 +57,16 @@ public class TestDataController {
     private KitchenCategoriesLinkService kitchenCategoriesLinkService;
     @Autowired
     private KitchenCategoryService kitchenCategoryService;
-
     @Autowired
     private UnitService unitService;
     @Autowired
     private ArticleUnitService articleUnitService;
-
     @Autowired
     private UserService userService;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private ArticleController articleController;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -76,8 +76,8 @@ public class TestDataController {
 
         List<User> users = createUsers();
         List<Unit> units = createUnits();
-        List<Article> articles = createArticles();
-        List<ArticleUnit> articleUnits = createArticleUnits(units,articles);
+        createArticles();
+        List<ArticleUnit> articleUnits = articleUnitService.getAll(); // createArticleUnits(units,articles);
         List<KitchenRegion> kitchenRegions = createKitchenRegion();
         List<KitchenType> kitchenTypes = createKitchenType();
         List<KitchenCategory> kitchenCategories = createKitchenCategory();
@@ -323,7 +323,8 @@ public class TestDataController {
         return kitchenRegions;
     }
 
-    private List<Article> createArticles() {
+    private List<Article> createArticles(List<Unit> units) {
+
         List<Article> articles = new ArrayList<>();
 
         User user = new User();
@@ -340,7 +341,13 @@ public class TestDataController {
         article1.setAmount(1);
         article1.setAvailable(true);
         article1.setUser(user);
-        articles.add(articleService.saveArticle(article1));
+        article1 = articleService.saveArticle(article1);
+        articles.add(article1);
+        addArticleUnit(article1,units.get(9),1.0,units.get(7));
+        addArticleUnit(article1,units.get(0),1000.0,units.get(1));
+        addArticleUnit(article1,units.get(2),0.001,units.get(1));
+        addArticleUnit(article1,units.get(6),0.4,units.get(1));
+
 
         Article article2 = new Article();
         article2.setName("Vegan Burger");
@@ -369,7 +376,7 @@ public class TestDataController {
         articles.add(articleService.saveArticle(article3));
 
         Article article4 = new Article();
-        article4.setName("Adocado");
+        article4.setName("Avocado");
         String imagePath4 = "src\\main\\resources\\images\\avocado.jpg";
         Image image4 = uploadImageByPath(imagePath4,"avocado.jpg");
         article4.setImage(image4);
