@@ -4,6 +4,14 @@ import usePostData from '../../../hooks/usePostData';
 import usePostImage from '../../../hooks/usePostImage';
 import { useDatabase } from '../../../hooks';
 
+const defaultUnits = [
+  {id: 10, name: 'stuks', selected: false},
+  {id: 2, name: 'gram', selected: false},
+  {id: 1, name: 'kilogram', selected: false},
+  {id: 5, name: 'mililiter', selected: false},
+  {id: 4, name: 'liter', selected: false}
+]
+
 export const AddNewArticle = ({setNew}) => {
 
   const { data, addItem } = useAddRecipeContext();
@@ -23,16 +31,21 @@ export const AddNewArticle = ({setNew}) => {
   // const [unitIds, setUnitIds] = useState([])
 
   const handleChange = e => {
-    const name = e.target.name
+    const name = e.target.name;
+    const value = e.target.value;
 
     // Voeg default nog toe:
     if(name === "defaultUnit"){
-      const tempUnits = articleData.unitIds;
-      tempUnits[e.target.value] = "1";
-      setArticleData(prevData => ({
-        ...prevData,
-        defaultUnit: tempUnits
-      }))
+      if(value) {
+        defaultUnits.forEach((unit)=>{
+          const defaultRef = document.querySelector(`#unit-${unit.id}`)
+          if(unit.id == value) {
+            defaultRef.checked = true;
+          } else{
+            defaultRef.checked = false;
+          }
+        })
+      }
     }
 
     setArticleData(prevData => ({
@@ -103,6 +116,15 @@ export const AddNewArticle = ({setNew}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    var tempUnits = articleData.unitIds;
+    tempUnits[articleData.defaultUnit] = "1";
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if(!user) {
+      alert('Je moet ingelogd zijn');
+      return;
+    }
 
     const body = {
       name: articleData.name,
@@ -111,9 +133,9 @@ export const AddNewArticle = ({setNew}) => {
       calories: 0,
       amount: articleData.amount,
       imageId: 1,
-      userId: JSON.parse(localStorage.getItem('user')).id,
+      userId: user.id,
       defaultUnitId: articleData.defaultUnit,
-      units: articleData.unitIds,
+      units: tempUnits,
       available: false,
     }
 
@@ -180,11 +202,14 @@ export const AddNewArticle = ({setNew}) => {
               onChange={handleChange}/>
             <select name='defaultUnit' onChange={handleChange}>
               <option value={''}>Kies</option>
-              <option value={10}>stuks</option>
+              {defaultUnits.map((unit)=>{
+                return <option value={unit.id} key={`option-${unit.id}`}>{unit.name}</option>
+              })}
+              {/* <option value={10}>stuks</option>
               <option value={2}>gram</option>
               <option value={1}>kilogram</option>
               <option value={5}>mililiter</option>
-              <option value={4}>liter</option>
+              <option value={4}>liter</option> */}
             </select>
           </div>
           {/* <div className='add_article_field'>
@@ -208,26 +233,35 @@ export const AddNewArticle = ({setNew}) => {
             <tbody>
           {units && unitsLoaded &&
           units.map((unit)=> {
-            return (<tr>
+            const isDefault = articleData.defaultUnit == unit.id;
+            return (<tr key={`unitrow-${unit.id}`}>
                       <td>
                         <div>
-                          <input type='checkbox' id={`unit-${unit.id}`} value={unit.id} onChange={handleCheckbox}/>
-                          <label htmlFor={`unit-${unit.id}`} >{unit.name}{articleData.defaultUnit == unit.id ? '(default)' : ''}</label>
+                          <input 
+                            type='checkbox' 
+                            id={`unit-${unit.id}`} 
+                            value={unit.id} 
+                            onChange={handleCheckbox} 
+                            // checked={isDefault}
+                            disabled={isDefault}
+                          />
+                          <label htmlFor={`unit-${unit.id}`} >{unit.name}{isDefault ? '(default)' : ''}</label>
                         </div>
                       </td>
                       <td>=</td>
                       <td>
-                        <div className='hide' id={`amount-unit-${unit.id}`}>
+                        <div className={isDefault ? '' : 'hide'} id={`amount-unit-${unit.id}`}>
                           <input 
                             type='number' 
-                            value={articleData.defaultUnit == unit.id ? '1' : articleData.unitIds[unit.id]?? ''}
+                            value={isDefault ? '1' : articleData.unitIds[unit.id]?? ''}
                             name={unit.id}
                             onChange={handleAmountChange}
+                            disabled={isDefault}
                           />
                         </div>
                       </td>
                       <td>
-                        <div className='hide' id={`hide-unit-${unit.id}`}>
+                        <div className={isDefault ? '' : 'hide'} id={`hide-unit-${unit.id}`}>
                           {getUnitById(articleData.defaultUnit)}
                         </div>
                       </td>

@@ -1,12 +1,12 @@
 .ingredients_results {
   width: 60rem;
-  background-color: white;
+  background-color: rgb(230, 230, 230);
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 8px #ddd;
   /* border-radius: 10px; */
   /* margin-top: 1rem; */
-  max-height: 300px;
+  max-height: 30rem;
   overflow-y: auto;
   position: absolute;
 }

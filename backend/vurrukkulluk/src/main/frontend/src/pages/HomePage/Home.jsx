@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Recipes from './Recipes';
 import Pagination from './Pagination';
 import { useAppContext } from '../../contexts';
+import { search } from './search';
 
 const Home = () => {
 
@@ -10,25 +11,7 @@ const Home = () => {
   
   const {recipes, searchValue} = useAppContext();
 
-  const filter = () => {
-    if(!searchValue) return recipes;
-    
-    return recipes.filter((recipe)=> {
-      return (
-        searchValue &&
-        recipe &&
-        recipe.title && (
-          recipe.title.toLowerCase().includes(searchValue) ||
-          recipe.kitchenRegion.name.toLowerCase().includes(searchValue) ||
-          recipe.kitchenType.name.toLowerCase().includes(searchValue) ||
-          recipe.categories.includes(searchValue) || //Does not work !!!
-          recipe.description.toLowerCase().includes(searchValue)
-        )
-      )
-    });
-  }
-
-  const content = filter();
+  const content = search(searchValue, recipes);
 
   const lastRecipeIndex = currentPage * recipesPerPage;
   const firstRecipeIndex = lastRecipeIndex - recipesPerPage;

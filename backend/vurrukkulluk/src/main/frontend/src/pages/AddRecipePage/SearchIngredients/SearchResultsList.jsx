@@ -15,7 +15,7 @@ export const SearchResultsList = ({ results, setSearchValue, newArticles, setNew
   return (
     <div className="ingredients_results">
       {results.map((result, id) => {
-        return <SearchResult result={result} key={id} setSearchValue={setSearchValue} />;
+        return <SearchResult result={result} key={`iresult-${id}`} setSearchValue={setSearchValue} />;
       })}
       {results.length === 0 && 
       // <AddNewArticle />

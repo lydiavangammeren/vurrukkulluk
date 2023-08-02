@@ -1,7 +1,7 @@
 .ingredient_item{
   display: flex;
   border-bottom: solid 1px #efefef;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   /* background-color: grey; */
 }
 .ingredient_item h3{
