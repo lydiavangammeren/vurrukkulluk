@@ -119,6 +119,7 @@ const AddRecipeForm = () => {
       navigate(`/details/${thisSlug}`) 
       window.location.reload(); // To refetch all recipes, including the one just added.
     } else{
+      console.log('Er gaat iets fout..')
       alert("Er gaat iets fout..")
     }
   }, [imageLoaded])
@@ -161,8 +162,8 @@ const AddRecipeForm = () => {
             <button 
               className={`formButton ${submitHide}`} 
               disabled={!canSubmit()}
-              onMouseOver={() => submitRef.current.show()}
-              onMouseLeave={() => submitRef.current.close()}
+              onMouseOver={() => {!canSubmit() && submitRef.current.show() }}
+              onMouseLeave={() => {!canSubmit() && submitRef.current.close() }}
             >
               Maak recept
             </button>

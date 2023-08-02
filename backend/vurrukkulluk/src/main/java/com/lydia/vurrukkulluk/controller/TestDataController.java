@@ -103,7 +103,7 @@ public class TestDataController {
     private List<Unit> createUnits() {
 
         String[] unitNames = {"kg","g","mg","l","ml","cl","mespunt","snufje","theelepels","stuks","vellen",
-        "eetlepels","kopjes","borrelgas","wijnglas"};
+        "eetlepels","kopjes","borrelglas","wijnglas"};
         List<Unit> units = new ArrayList<>();
 
         for (String name:unitNames) {

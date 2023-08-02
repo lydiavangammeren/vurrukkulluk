@@ -84,8 +84,8 @@ function reducer(state, action) {
     case SL_ACTION.ADD_RECIPE:
       return { ...state, products: null,
                recipeIds: [...state.recipeIds, action.payload.recipeId],
-               deletedProductIds: state.deletedProductIds.filter(id => !action.payload.articleIds.includes(id)),
-               checkedProductIds: state.checkedProductIds.filter(id => !action.payload.articleIds.includes(id))
+               deletedProductIds: state.deletedProductIds.filter(id => !action.payload.articleIds?.includes(id)),
+               checkedProductIds: state.checkedProductIds.filter(id => !action.payload.articleIds?.includes(id))
             }
 
     case SL_ACTION.REMOVE_ALL:
@@ -105,12 +105,21 @@ function reducer(state, action) {
       //   return p;
       // })}
       return {...state, products: Object.entries(state.products).map(([key, value]) => {
+        console.log('key / value: ', key + ' / ' + value)
         if(key == action.payload.id) {
+          console.log('Update quantity: ', value)
           return (key, Number(action.payload.quantity));
+          // return {[key]:Number(action.payload.quantity)}
           // value = action.payload.quantity;
+        } else {
+          return (key, Number(value));
+
         }
-        return (key, Number(value));
-        }).reduce(function(result, item, index) {result[index+1]=item; return result}, {})
+        }).reduce(function(result, item, index) {
+          console.log("result: ", result)
+          console.log("item: ", item)
+          console.log("index: ", index)
+          result[index+1]=item; return result}, {})
       }
 
 
