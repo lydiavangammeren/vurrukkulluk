@@ -1,5 +1,6 @@
 package com.lydia.vurrukkulluk.controller;
 
+import com.lydia.vurrukkulluk.dto.ArticleCreateDto;
 import com.lydia.vurrukkulluk.dto.ArticleDto;
 import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.ArticleUnit;
@@ -46,17 +47,17 @@ public class ArticleController {
     private SecurityUtil securityUtil;
 
     @PostMapping()
-    public ResponseEntity<String> add(@Valid @RequestBody ArticleDto articleDto){
-        articleDto.setId(0);
+    public ResponseEntity<String> add(@Valid @RequestBody ArticleCreateDto articleCreateDto){
+        articleCreateDto.setId(0);
 
-        Article article = reverseArticleFromDto(articleDto);
+        Article article = reverseArticleFromDto(articleCreateDto);
         Article articlefinal = articleService.saveArticle(article);
-        HashMap<Integer,Double> units = articleDto.getUnits();
+        HashMap<Integer,Double> units = articleCreateDto.getUnits();
 
         for (Integer unitId : units.keySet()){
             ArticleUnit articleUnit = new ArticleUnit(0,articlefinal,new Unit(),units.get(unitId),new Unit());
             articleUnit.getUnit().setId(unitId);
-            articleUnit.getDefUnit().setId(articleDto.getDefaultUnitId());
+            articleUnit.getDefUnit().setId(articleCreateDto.getDefaultUnitId());
             articleUnitService.save(articleUnit);
         }
 
@@ -78,20 +79,15 @@ public class ArticleController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<String> update(@Valid @RequestBody ArticleDto articleDto){
+    public ResponseEntity<String> update(@Valid @RequestBody ArticleCreateDto articleDto){
         if (!securityUtil.isAdmin()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }
 
-        try {
-            @Valid Article article = reverseArticleFromDto(articleDto);
-            articleService.updateArticle(article);
-        } catch (ConstraintViolationException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+        Article article = reverseArticleFromDto(articleDto);
+        articleService.updateArticle(article);
 
         return ResponseEntity.status(HttpStatus.OK).body("article updated");
-
     }
 
     @DeleteMapping("/{id}")
@@ -110,8 +106,8 @@ public class ArticleController {
     public ArticleDto convertArticleToDto(Article article){
         return modelMapper.map(article, ArticleDto.class);
     }
-    public Article reverseArticleFromDto(ArticleDto articleDto){
-        return modelMapper.map(articleDto, Article.class);
+    public Article reverseArticleFromDto(ArticleCreateDto articleCreateDto){
+        return modelMapper.map(articleCreateDto, Article.class);
     }
     public void setModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
