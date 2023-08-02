@@ -1,10 +1,13 @@
 package com.lydia.vurrukkulluk.controller;
 
+import com.lydia.vurrukkulluk.dto.ArticleCreateDto;
 import com.lydia.vurrukkulluk.dto.ArticleDto;
 import com.lydia.vurrukkulluk.model.Article;
+import com.lydia.vurrukkulluk.model.ArticleUnit;
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.service.ArticleService;
+import com.lydia.vurrukkulluk.service.ArticleUnitService;
 import com.lydia.vurrukkulluk.service.ImageService;
 import com.lydia.vurrukkulluk.util.SecurityUtil;
 import jakarta.validation.ConstraintViolation;
@@ -23,6 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -39,6 +43,8 @@ class ArticleControllerTest {
     @Mock
     ArticleDto articleDto;
     @Mock
+    ArticleCreateDto articleCreateDto;
+    @Mock
     ImageService imageService;
     @Mock
     Image image;
@@ -46,6 +52,8 @@ class ArticleControllerTest {
     SecurityUtil securityUtil;
     @Mock
     private ModelMapper modelMapper;
+    @Mock
+    private ArticleUnitService articleUnitService;
 
     private Validator validator;
     ArticleController articleController;
@@ -53,7 +61,7 @@ class ArticleControllerTest {
     @BeforeEach
     void makeController(){
         articleController = new ArticleController(articleService,
-                imageService,modelMapper,securityUtil);
+                imageService,articleUnitService,modelMapper,securityUtil);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
@@ -61,8 +69,8 @@ class ArticleControllerTest {
 
     @Test
     void add() {
-        when(modelMapper.map(articleDto,Article.class)).thenReturn(article);
-        assertEquals(ResponseEntity.status(HttpStatus.OK).body("new ingredient added"),articleController.add(articleDto));
+        when(modelMapper.map(articleCreateDto,Article.class)).thenReturn(article);
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("new ingredient added"),articleController.add(articleCreateDto));
         verify(articleService).saveArticle(article);
     }
 
@@ -112,14 +120,14 @@ class ArticleControllerTest {
     @Test
     void updateWhenAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(true);
-        when(modelMapper.map(articleDto,Article.class)).thenReturn(article);
-        assertEquals(ResponseEntity.status(HttpStatus.OK).body("article updated"),articleController.update(articleDto));
+        when(modelMapper.map(articleCreateDto,Article.class)).thenReturn(article);
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("article updated"),articleController.update(articleCreateDto));
         verify(articleService).updateArticle(article);
     }
     @Test
     void updateWhenNotAuthorized() {
         when(securityUtil.isAdmin()).thenReturn(false);
-        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),articleController.update(articleDto));
+        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),articleController.update(articleCreateDto));
         verifyNoInteractions(articleService);
     }
 
@@ -162,7 +170,7 @@ class ArticleControllerTest {
         Article article = new Article(1,"name","des",
                 2,3,4,false,image1,new User());
         article.getUser().setId(5);
-        ArticleDto articleDto = new ArticleDto(1,"name","des",2,3,4,false,1,5);
+        ArticleCreateDto articleDto = new ArticleCreateDto(1,"name","des",2,3,4,false,1,5,1,new HashMap<>());
 
         assertEquals(article,articleController.reverseArticleFromDto(articleDto));
 

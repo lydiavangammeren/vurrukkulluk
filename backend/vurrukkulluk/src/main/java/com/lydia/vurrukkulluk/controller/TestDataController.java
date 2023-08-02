@@ -57,16 +57,16 @@ public class TestDataController {
     private KitchenCategoriesLinkService kitchenCategoriesLinkService;
     @Autowired
     private KitchenCategoryService kitchenCategoryService;
-
     @Autowired
     private UnitService unitService;
     @Autowired
     private ArticleUnitService articleUnitService;
-
     @Autowired
     private UserService userService;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private ArticleController articleController;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -75,9 +75,9 @@ public class TestDataController {
     public String createTestData(){
 
         List<User> users = createUsers();
-        List<Unit> units = createUnits();
-        List<Article> articles = createArticles();
-        List<ArticleUnit> articleUnits = createArticleUnits(units,articles);
+        createUnits();
+        createArticles();
+        List<ArticleUnit> articleUnits = articleUnitService.getAll();
         List<KitchenRegion> kitchenRegions = createKitchenRegion();
         List<KitchenType> kitchenTypes = createKitchenType();
         List<KitchenCategory> kitchenCategories = createKitchenCategory();
@@ -88,30 +88,6 @@ public class TestDataController {
         createCalendar();
 
         return "testdata made";
-    }
-
-    private List<ArticleUnit> createArticleUnits(List<Unit> units, List<Article> articles) {
-
-        List<ArticleUnit> articleUnits = new ArrayList<>();
-        articleUnits.add(addArticleUnit(articles.get(0),units.get(9),1.0,units.get(7)));
-        articleUnits.add(addArticleUnit(articles.get(0),units.get(0),1000.0,units.get(1)));
-        articleUnits.add(addArticleUnit(articles.get(0),units.get(2),0.001,units.get(1)));
-        articleUnits.add(addArticleUnit(articles.get(0),units.get(6),0.4,units.get(1)));
-
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(0),1000,units.get(1)));
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(1),1,units.get(1)));
-        articleUnits.add(addArticleUnit(articles.get(1),units.get(3),0.001,units.get(1)));
-
-        articleUnits.add(addArticleUnit(articles.get(2),units.get(4),1,units.get(4)));
-
-        articleUnits.add(addArticleUnit(articles.get(3),units.get(9),1,units.get(9)));
-
-        articleUnits.add(addArticleUnit(articles.get(4),units.get(1),1,units.get(1)));
-        articleUnits.add(addArticleUnit(articles.get(4),units.get(0),1000,units.get(1)));
-
-        articleUnits.add(addArticleUnit(articles.get(5),units.get(10),1,units.get(10)));
-        articleUnits.add(addArticleUnit(articles.get(5),units.get(1),0.4,units.get(10)));
-        return articleUnits;
     }
 
     private ArticleUnit addArticleUnit(Article article, Unit unit, double i, Unit defUnit) {
@@ -126,7 +102,8 @@ public class TestDataController {
 
     private List<Unit> createUnits() {
 
-        String[] unitNames = {"kg","g","mg","l","ml","cl","mespunt","snufje","theelepels","stuks","vellen"};
+        String[] unitNames = {"kg","g","mg","l","ml","cl","mespunt","snufje","theelepels","stuks","vellen",
+        "eetlepels","kopjes","borrelgas","wijnglas"};
         List<Unit> units = new ArrayList<>();
 
         for (String name:unitNames) {
@@ -195,16 +172,15 @@ public class TestDataController {
         recipes.add(recipeService.saveRecipe(recipe));
 
         addIngredientToRecipe(recipes.get(0),articleUnits.get(0),4);
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(5),300);
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(7),50);
-        addIngredientToRecipe(recipes.get(0),articleUnits.get(8),1);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(1),300);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(2),50);
+        addIngredientToRecipe(recipes.get(0),articleUnits.get(4),1);
 
         addCategoryToRecipe(recipes.get(0), 0,kitchenCategories);
-        addCategoryToRecipe(recipes.get(0), 7,kitchenCategories);
-        addCategoryToRecipe(recipes.get(0), 14,kitchenCategories);
-        addCategoryToRecipe(recipes.get(0), 17,kitchenCategories);
+        addCategoryToRecipe(recipes.get(0), 9,kitchenCategories);
+        addCategoryToRecipe(recipes.get(0), 8,kitchenCategories);
 
-        addPreparationToRecipe(recipes.get(0),"Burger verbranden",1);
+        addPreparationToRecipe(recipes.get(0),"Burger bakken",1);
         addPreparationToRecipe(recipes.get(0),"Brood",2);
         addPreparationToRecipe(recipes.get(0),"SAus suaucua c jfjen kjsbvkjvjej sk sv skvj bkjcb ksb ksv  svbkej jv dfghjk dfghjk dfghjk sdfghj dfghj dfghj dfghj dfgh.",3);
 
@@ -221,14 +197,93 @@ public class TestDataController {
         recipe2.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe2));
 
-        addIngredientToRecipe(recipes.get(1),articleUnits.get(10),0.5);
-        addIngredientToRecipe(recipes.get(1),articleUnits.get(11),8);
-        addIngredientToRecipe(recipes.get(1),articleUnits.get(12),200);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(7),0.4);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(8),8);
+        addIngredientToRecipe(recipes.get(1),articleUnits.get(10),200);
 
-        addCategoryToRecipe(recipes.get(0), 0,kitchenCategories);
-        addCategoryToRecipe(recipes.get(0), 7,kitchenCategories);
-        addCategoryToRecipe(recipes.get(0), 14,kitchenCategories);
-        addCategoryToRecipe(recipes.get(0), 17,kitchenCategories);
+        addCategoryToRecipe(recipes.get(1), 0,kitchenCategories);
+        addCategoryToRecipe(recipes.get(1), 4,kitchenCategories);
+        addCategoryToRecipe(recipes.get(1), 9,kitchenCategories);
+        addCategoryToRecipe(recipes.get(1), 16,kitchenCategories);
+
+
+        Recipe recipe3 = new Recipe();
+        recipe3.setTitle("SushiRolls");
+        recipe3.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.");
+        String imagePath3 = "src\\main\\resources\\images\\SushiRolls2.jpg";
+        Image image3 = uploadImageByPath(imagePath3,"SushiRolls2.jpg");
+        recipe3.setImage(image3);
+        recipe3.setSlug("SushiRolls-2");
+        recipe3.setKitchenType(kitchenTypes.get(1));
+        recipe3.setKitchenRegion(kitchenRegions.get(12));
+        recipe3.setPersons(4);
+        recipe3.setUser(users.get(0));
+        recipes.add(recipeService.saveRecipe(recipe3));
+
+        addCategoryToRecipe(recipes.get(2), 0,kitchenCategories);
+        addCategoryToRecipe(recipes.get(2), 4,kitchenCategories);
+        addCategoryToRecipe(recipes.get(2), 9,kitchenCategories);
+        addCategoryToRecipe(recipes.get(2), 16,kitchenCategories);
+
+        Recipe recipe4 = new Recipe();
+        recipe4.setTitle("Burritos");
+        recipe4.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.");
+        String imagePath4 = "src\\main\\resources\\images\\Burrito.JPG";
+        Image image4 = uploadImageByPath(imagePath4,"Burrito.JPG");
+        recipe4.setImage(image4);
+        recipe4.setSlug("Burritos");
+        recipe4.setKitchenType(kitchenTypes.get(0));
+        recipe4.setKitchenRegion(kitchenRegions.get(14));
+        recipe4.setPersons(4);
+        recipe4.setUser(users.get(0));
+        recipes.add(recipeService.saveRecipe(recipe4));
+        addCategoryToRecipe(recipes.get(3), 3,kitchenCategories);
+
+        Recipe recipe5 = new Recipe();
+        recipe5.setTitle("Tomatensoep");
+        recipe5.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.");
+        String imagePath5 = "src\\main\\resources\\images\\tomaatsoup.jpg";
+        Image image5 = uploadImageByPath(imagePath5,"tomaatsoup.jpg");
+        recipe5.setImage(image5);
+        recipe5.setSlug("Tomatensoep");
+        recipe5.setKitchenType(kitchenTypes.get(2));
+        recipe5.setKitchenRegion(kitchenRegions.get(6));
+        recipe5.setPersons(4);
+        recipe5.setUser(users.get(0));
+        recipes.add(recipeService.saveRecipe(recipe5));
+        addCategoryToRecipe(recipes.get(4), 0,kitchenCategories);
+
+        Recipe recipe6 = new Recipe();
+        recipe6.setTitle("Lasagna");
+        recipe6.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.");
+        String imagePath6 = "src\\main\\resources\\images\\Lasagna.jpg";
+        Image image6 = uploadImageByPath(imagePath6,"Lasagna.jpg");
+        recipe6.setImage(image6);
+        recipe6.setSlug("Lasagna");
+        recipe6.setKitchenType(kitchenTypes.get(0));
+        recipe6.setKitchenRegion(kitchenRegions.get(11));
+        recipe6.setPersons(8);
+        recipe6.setUser(users.get(0));
+        recipes.add(recipeService.saveRecipe(recipe6));
+        addCategoryToRecipe(recipes.get(5), 3,kitchenCategories);
+        addCategoryToRecipe(recipes.get(5), 20,kitchenCategories);
+        addCategoryToRecipe(recipes.get(5), 12,kitchenCategories);
+
+        Recipe recipe7 = new Recipe();
+        recipe7.setTitle("Caesar Salade");
+        recipe7.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit. Fusce porttitor feugiat lectus, sit amet gravida elit egestas ac.\n\n Sed convallis sapien quis justo elementum consectetur. Maecenas tempus, turpis sed consectetur pellentesque, orci tortor consectetur nisl, sed posuere enim sem mattis diam. Sed leo magna, commodo et accumsan gravida, lobortis a diam. Curabitur dignissim finibus nunc in facilisis. Praesent at porta augue. Integer lacinia ipsum tellus, ut posuere risus consectetur in. Nullam ut elit nec eros rhoncus facilisis non a mauris.");
+        String imagePath7 = "src\\main\\resources\\images\\Caesar-Salad.jpg";
+        Image image7 = uploadImageByPath(imagePath7,"Caesar-Salad.jpg");
+        recipe7.setImage(image7);
+        recipe7.setSlug("Caesar-Salade");
+        recipe7.setKitchenType(kitchenTypes.get(2));
+        recipe7.setKitchenRegion(kitchenRegions.get(11));
+        recipe7.setPersons(8);
+        recipe7.setUser(users.get(0));
+        recipes.add(recipeService.saveRecipe(recipe7));
+        addCategoryToRecipe(recipes.get(6), 1,kitchenCategories);
+        addCategoryToRecipe(recipes.get(6), 11,kitchenCategories);
+        addCategoryToRecipe(recipes.get(6), 18,kitchenCategories);
 
 
         return recipes;
@@ -324,6 +379,7 @@ public class TestDataController {
     }
 
     private List<Article> createArticles() {
+
         List<Article> articles = new ArrayList<>();
 
         User user = new User();
@@ -340,7 +396,11 @@ public class TestDataController {
         article1.setAmount(1);
         article1.setAvailable(true);
         article1.setUser(user);
-        articles.add(articleService.saveArticle(article1));
+        article1 = articleService.saveArticle(article1);
+        articles.add(article1);
+        Unit defUnit1 = unitService.getByName("stuks");
+        addArticleUnit(article1,defUnit1,1.0,defUnit1);
+
 
         Article article2 = new Article();
         article2.setName("Vegan Burger");
@@ -353,7 +413,11 @@ public class TestDataController {
         article2.setAmount(400);
         article2.setAvailable(true);
         article2.setUser(user);
-        articles.add(articleService.saveArticle(article2));
+        article2 = articleService.saveArticle(article2);
+        articles.add(article2);
+        Unit defUnit2 = unitService.getByName("g");
+        addArticleUnit(article2,defUnit2,1.0,defUnit2);
+
 
         Article article3 = new Article();
         article3.setName("Vegan Burger Sauce");
@@ -366,10 +430,14 @@ public class TestDataController {
         article3.setAmount(50);
         article3.setAvailable(true);
         article3.setUser(user);
-        articles.add(articleService.saveArticle(article3));
+        article3 = articleService.saveArticle(article3);
+        articles.add(article3);
+        Unit defUnit3 = unitService.getByName("ml");
+        addArticleUnit(article3,defUnit3,1.0,defUnit3);
+        addArticleUnit(article3,unitService.getByName("theelepels"),5.0,defUnit3);
 
         Article article4 = new Article();
-        article4.setName("Adocado");
+        article4.setName("Avocado");
         String imagePath4 = "src\\main\\resources\\images\\avocado.jpg";
         Image image4 = uploadImageByPath(imagePath4,"avocado.jpg");
         article4.setImage(image4);
@@ -379,7 +447,11 @@ public class TestDataController {
         article4.setAmount(1);
         article4.setAvailable(false);
         article4.setUser(user);
-        articles.add(articleService.saveArticle(article4));
+        article4 = articleService.saveArticle(article4);
+        articles.add(article4);
+        Unit defUnit4 = unitService.getByName("stuks");
+        addArticleUnit(article4,defUnit4,1.0,defUnit4);
+        addArticleUnit(article4,unitService.getByName("g"),0.01,defUnit4);
 
         Article article5 = new Article();
         article5.setName("Sushi rijst");
@@ -392,7 +464,11 @@ public class TestDataController {
         article5.setAmount(500);
         article5.setAvailable(true);
         article5.setUser(user);
-        articles.add(articleService.saveArticle(article5));
+        article5 = articleService.saveArticle(article5);
+        articles.add(article5);
+        Unit defUnit5 = unitService.getByName("g");
+        addArticleUnit(article5,defUnit5,1.0,defUnit5);
+        addArticleUnit(article5,unitService.getByName("kg"),1000,defUnit5);
 
         Article article6 = new Article();
         article6.setName("Sushi zeewier");
@@ -405,20 +481,28 @@ public class TestDataController {
         article6.setAmount(10);
         article6.setAvailable(true);
         article6.setUser(user);
-        articles.add(articleService.saveArticle(article6));
+        article6 = articleService.saveArticle(article6);
+        articles.add(article6);
+        Unit defUnit6 = unitService.getByName("vellen");
+        addArticleUnit(article6,defUnit6,1.0,defUnit6);
+        addArticleUnit(article6,unitService.getByName("g"),0.4,defUnit6);
+
 
         Article article7 = new Article();
         article7.setName("Zalmfilet");
         String imagePath7 = "src\\main\\resources\\images\\zalm.jpg";
         Image image7 = uploadImageByPath(imagePath7,"zalm.jpg");
         article7.setImage(image7);
-        article7.setCalories(208);
+        article7.setCalories(624);
         article7.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
-        article7.setPrice(260);
-        article7.setAmount(100);
+        article7.setPrice(950);
+        article7.setAmount(300);
         article7.setAvailable(false);
         article7.setUser(user);
-        articles.add(articleService.saveArticle(article7));
+        article7 = articleService.saveArticle(article6);
+        articles.add(article7);
+        Unit defUnit7 = unitService.getByName("g");
+        addArticleUnit(article7,defUnit7,1.0,defUnit7);
 
         Article article8 = new Article();
         article8.setName("Rucola Sla");
@@ -429,22 +513,45 @@ public class TestDataController {
         article8.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
         article8.setPrice(110);
         article8.setAmount(85);
-        article8.setAvailable(false);
+        article8.setAvailable(true);
         article8.setUser(user);
-        articles.add(articleService.saveArticle(article8));
+        article8 = articleService.saveArticle(article8);
+        articles.add(article8);
+        Unit defUnit8 = unitService.getByName("g");
+        addArticleUnit(article8,defUnit8,1.0,defUnit8);
 
         Article article9 = new Article();
-        article9.setName("Rucola Sla");
-        String imagePath9 = "src\\main\\resources\\images\\RucolaSla.jpg";
-        Image image9 = uploadImageByPath(imagePath8,"RucolaSla.jpg");
-        article8.setImage(image8);
-        article8.setCalories(72);
-        article8.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
-        article8.setPrice(110);
-        article8.setAmount(85);
-        article8.setAvailable(false);
-        article8.setUser(user);
-        articles.add(articleService.saveArticle(article8));
+        article9.setName("Tomatenpuree");
+        String imagePath9 = "src\\main\\resources\\images\\tomatenpuree.jpg";
+        Image image9 = uploadImageByPath(imagePath9,"tomatenpuree.jpg");
+        article9.setImage(image9);
+        article9.setCalories(72);
+        article9.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
+        article9.setPrice(80);
+        article9.setAmount(140);
+        article9.setAvailable(true);
+        article9.setUser(user);
+        article9 = articleService.saveArticle(article9);
+        articles.add(article9);
+        Unit defUnit9 = unitService.getByName("g");
+        addArticleUnit(article9,defUnit9,1.0,defUnit9);
+        addArticleUnit(article9,unitService.getByName("eetlepels"),12,defUnit9);
+
+        Article article10 = new Article();
+        article10.setName("Mozzarella balletjes");
+        String imagePath10 = "src\\main\\resources\\images\\balletjes_mozzarella.jpg";
+        Image image10 = uploadImageByPath(imagePath10,"balletjes_mozzarella.jpg");
+        article10.setImage(image10);
+        article10.setCalories(306);
+        article10.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.");
+        article10.setPrice(140);
+        article10.setAmount(125);
+        article10.setAvailable(true);
+        article10.setUser(user);
+        article10 = articleService.saveArticle(article10);
+        articles.add(article10);
+        Unit defUnit10 = unitService.getByName("g");
+        addArticleUnit(article10,defUnit10,1.0,defUnit10);
 
 
         return articles;

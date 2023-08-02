@@ -22,6 +22,11 @@ public class UnitServiceImpl implements UnitService{
     }
 
     @Override
+    public Unit getByName(String name) {
+        return unitRepository.findByName(name);
+    }
+
+    @Override
     public List<Unit> getAll() {
         return unitRepository.findAll();
     }

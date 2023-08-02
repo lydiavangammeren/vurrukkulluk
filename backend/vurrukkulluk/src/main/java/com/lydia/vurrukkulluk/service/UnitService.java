@@ -8,5 +8,6 @@ import java.util.List;
 public interface UnitService {
     Unit save(Unit unit);
 
+    Unit getByName(String name);
     List<Unit> getAll();
 }
