@@ -103,7 +103,7 @@ public class TestDataController {
     private List<Unit> createUnits() {
 
         String[] unitNames = {"kg","g","mg","l","ml","cl","mespunt","snufje","theelepels","stuks","vellen",
-        "eetlepels","kopjes","borrelglas","wijnglas"};
+        "eetlepels","kopjes","borrelglazen","wijnglazen"};
         List<Unit> units = new ArrayList<>();
 
         for (String name:unitNames) {
@@ -130,10 +130,9 @@ public class TestDataController {
         addCalendarItem(LocalDateTime.parse("2023-08-09 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
         addCalendarItem(LocalDateTime.parse("2023-08-16 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
         addCalendarItem(LocalDateTime.parse("2023-08-25 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
-        addCalendarItem(LocalDateTime.parse("2023-09-25 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
-        addCalendarItem(LocalDateTime.parse("2023-08-01 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
-        addCalendarItem(LocalDateTime.parse("2023-08-08 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
-        addCalendarItem(LocalDateTime.parse("2023-08-15 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
+        addCalendarItem(LocalDateTime.parse("2023-09-01 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
+        addCalendarItem(LocalDateTime.parse("2023-09-08 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
+        addCalendarItem(LocalDateTime.parse("2023-09-15 14:00",formatter),"Vegetarisch koken","Een online workshop vegetarisch koken, onder leiding van Trientje Hupsakee");
 
     }
 
@@ -334,7 +333,7 @@ public class TestDataController {
         List<String> typeNames = new ArrayList<>();
         typeNames.add("Vlees");
         typeNames.add("Vis");
-        typeNames.add("Vegatarisch");
+        typeNames.add("Vegetarisch");
         typeNames.add("Vegan");
 
         for (String name : typeNames ) {

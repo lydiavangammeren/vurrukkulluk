@@ -48,6 +48,8 @@ public class UserController {
   @PostMapping()
   public ResponseEntity<String> add(@RequestBody UserCreateDto userCreateDto) {
     User user = reverseUserToCreateDto(userCreateDto);
+    user.setImage(new Image());
+    user.getImage().setId(1);
     userService.saveUser(user);
     return ResponseEntity.status(HttpStatus.OK).body("New user is added");
   }
