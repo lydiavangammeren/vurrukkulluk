@@ -23,7 +23,7 @@ const Home = () => {
       <div className='home-recipes'>
         <Recipes recipes={currentRecipes} />
       </div>
-      <Pagination totalPosts={recipes.length}
+      <Pagination totalPosts={content.length}
                   postsPerPage={recipesPerPage}
                   setCurrentPage={setCurrentPage}
                   currentPage={currentPage} />

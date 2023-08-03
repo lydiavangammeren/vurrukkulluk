@@ -24,7 +24,7 @@ const Recipe = ({recipe}) => {
           // src={'/images/EggsAndVeggies.jpg'}
           alt={recipe.title}
           width="100%"
-          height="auto"
+          height="100%"
         />
       )
     }
