@@ -14,6 +14,7 @@ const ShoppingCart = () => {
   // const [state, dispatch] = useReducer(reducer, { products: [], checkedProductIds: [] });
   const {products, recipeIds, checkedProductIds, deletedProductIds, dispatch} = useShopContext();
   const [articles, articlesLoaded ] = useDatabase('/articles');
+  const [articleunits, articleunitsLoaded ] = useDatabase('/articleunits');
   const [allProducts, setAllProducts] = useState(null);
   // const [availableProducts, setAvailableProducts] = useState([]);
   // const [unavailableProducts, setUnvailableProducts] = useState([])
@@ -40,7 +41,8 @@ const ShoppingCart = () => {
     //   })
     // let fullProducts = Object.entries(products).map(([key, value]) => ({article: articles.filter((article) => {return article.id == key}), amount: value}));
     // console.log('fullProducts: ', fullProducts)
-    let fullProducts = Object.entries(products).map(([key, value]) => ({article: articles.find((article) => {return article.id == key}), amount: value}));
+    let fullProducts = Object.entries(products).map(([key, value]) => ({article: articleunits.find((article) => {return article.article.id == key}), amount: value}));
+    // let fullProducts = Object.entries(products).map(([key, value]) => ({article: articles.find((article) => {return article.id == key}), amount: value}));
     console.log('fullProducts: ', fullProducts)
     setAllProducts(fullProducts)
    },[products, articles])
@@ -53,30 +55,30 @@ const ShoppingCart = () => {
    }, [allProducts])
 
   const currentProducts = allProducts ? allProducts.filter(
-    (product)=> !deletedProductIds.includes(product.article.id) &&
-    product.article.available
+    (product)=> !deletedProductIds.includes(product.article.article.id) &&
+    product.article.article.available
   ) : [];
 
   const otherProducts = allProducts ? allProducts.filter(
-    (product)=> !deletedProductIds.includes(product.article.id) &&
-    !product.article.available
+    (product)=> !deletedProductIds.includes(product.article.article.id) &&
+    !product.article.article.available
   ) : [];
   
   // console.log('current products: ', currentProducts)
   const uncheckedProducts = currentProducts.filter(
-    (product) => !checkedProductIds.includes(product.article.id))
+    (product) => !checkedProductIds.includes(product.article.article.id))
 
   const checkedProducts = currentProducts.filter(
-    (product) => checkedProductIds.includes(product.article.id))
+    (product) => checkedProductIds.includes(product.article.article.id))
   
   const uncheckedUnavailable = otherProducts.filter(
-    (product) => checkedProductIds.includes(product.article.id))
+    (product) => checkedProductIds.includes(product.article.article.id))
 
   const checkedUnavailable = otherProducts.filter(
-    (product) => !checkedProductIds.includes(product.article.id))
+    (product) => !checkedProductIds.includes(product.article.article.id))
 
   const totalPrice = uncheckedProducts.reduce((acc, product) => {
-      return acc + ((product.amount * product.article.price)/100);
+      return acc + ((product.amount * product.article.article.price)/100);
     }, 0);
 
   return (
@@ -110,7 +112,7 @@ const ShoppingCart = () => {
         <tfoot>
           <tr>
             <td colSpan="3">
-              <h2 onClick={() => refresh()}>Total</h2>
+              <h2>Total</h2>
             </td>
             <td>
               <span className="price_value">&euro;&nbsp;</span>

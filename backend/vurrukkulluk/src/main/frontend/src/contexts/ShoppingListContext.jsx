@@ -16,57 +16,10 @@ const ShoppingListContext = createContext()
 export function useShopContext() {
   return useContext(ShoppingListContext);
 }
-// const tempProducts = [
-//   {
-//     "article": {
-//       "name": "Vegan Burger Bun",
-//       "imageId": 2,
-//       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-//       "price": 3,
-//       "unit": "broodje",
-//       "id": 1
-//     },
-//     "amount": 1
-//   },
-//   {
-//     "article": {
-//       "name": "Vegan Burger",
-//       "imageId": 3,
-//       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-//       "price": 1,
-//       "unit": "gram",
-//       "id": 2
-//     },
-//     "amount": 320
-//   },
-//   {
-//     "article": {
-//       "name": "Vegan Burger Sauce",
-//       "imageId": 4,
-//       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-//       "price": 1,
-//       "unit": "ml",
-//       "id": 3
-//     },
-//     "amount": 30
-//   },
-//   {
-//     "article": {
-//       "name": "Avocado",
-//       "imageId": 8,
-//       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-//       "price": 2,
-//       "unit": "stuks",
-//       "id": 4
-//     },
-//     "amount": 1
-//   }
-// ]
-
 
 function reducer(state, action) {
-  console.log("action", action);
-  console.log("prevState", state);
+  // console.log("action", action);
+  // console.log("prevState", state);
   switch (action.type) {
     case SL_ACTION.POPULATE_LIST:
       return { ...state, products: action.payload.products}
@@ -133,7 +86,7 @@ export function ShopContextProvider({children}){
         api.post("/cart", {recipeIds: state.recipeIds})
         .then((value) => {
           console.log('response: ', value)
-          localDispatch({type:SL_ACTION.POPULATE_LIST, payload: {products: value.data.articlesToBuy}});
+          localDispatch({type:SL_ACTION.POPULATE_LIST, payload: {products: value.data.articlesToBuy, amounts: value.data.articlesAmount}});
         })
         .catch((err) =>
           console.log('catch: ', err)

@@ -22,7 +22,7 @@
 }
 
 .shoppingcart_desc{
-  width: 72%;
+  width: 67%;
 }
 .shoppingcart_desc p {
   /* Show at most 3 lines of text */
@@ -32,7 +32,7 @@
   overflow: hidden;
 }
 .shoppingcart_quantity{
-  width: 5rem;
+  width: 10rem;
 }
 .quantity_span {
   font-family: var(--heading);
