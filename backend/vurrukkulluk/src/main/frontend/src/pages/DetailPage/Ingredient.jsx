@@ -1,13 +1,13 @@
 import React from "react";
 import { useAppContext } from "../../contexts";
 
-const Ingredient = ({ingredient}) => {
+const Ingredient = ({ingredient, persons, defPersons}) => {
   const article = ingredient.articleunit.article; // new
   const title = article.name;
   const description = article.description;
   const image = article?.image ?? '';
   const imageId = article.imageId;
-  const quantity = ingredient.amount;
+  const quantity = (ingredient.amount / defPersons) * persons;
   const unit = ingredient?.articleunit.unit.name ?? '';
   const { baseUrl } = useAppContext();
 

@@ -34,6 +34,11 @@
   font-size: 18px;
   margin-left: 0.3rem;
 }
+.details_stats input{
+  width: 2.5rem;
+  border: none;
+  margin-left: 0.2rem;
+}
 
 
 .title_rating {
