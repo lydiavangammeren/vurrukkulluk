@@ -31,6 +31,7 @@ const Recipe = ({recipe}) => {
   // }
   const price = recipe.price / 100;
   const calories = recipe.calories / recipe.persons;
+  const rating = recipe.avgRating;
   return (
     //Change for BACKEND API !!!
     // <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.id}`)}>
@@ -61,7 +62,7 @@ const Recipe = ({recipe}) => {
       {/* <Link to={`/details/${recipe.id}`}> */}
         <div className='recipe_title'><h2>{recipe.title}</h2></div>
       {/* </Link> */}
-      <Rating />
+      <Rating rating={rating} recipeId={recipe.id}/>
       </div>
       <div className='recipe_desc'>
         <div>
