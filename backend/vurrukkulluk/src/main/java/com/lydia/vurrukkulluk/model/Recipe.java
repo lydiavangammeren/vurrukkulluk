@@ -47,4 +47,7 @@ public class Recipe {
   private Image image;
 
   private int persons;
+
+  private int prepTime;
+
 }

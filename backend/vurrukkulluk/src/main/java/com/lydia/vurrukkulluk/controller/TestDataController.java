@@ -171,6 +171,7 @@ public class TestDataController {
         recipe.setKitchenType(kitchenTypes.get(3));
         recipe.setKitchenRegion(kitchenRegions.get(15));
         recipe.setPersons(4);
+        recipe.setPrepTime(15);
         recipe.setUser(users.get(1));
         recipes.add(recipeService.saveRecipe(recipe));
 
@@ -197,6 +198,7 @@ public class TestDataController {
         recipe2.setKitchenType(kitchenTypes.get(1));
         recipe2.setKitchenRegion(kitchenRegions.get(12));
         recipe2.setPersons(4);
+        recipe2.setPrepTime(20);
         recipe2.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe2));
 
@@ -220,6 +222,7 @@ public class TestDataController {
         recipe3.setKitchenType(kitchenTypes.get(1));
         recipe3.setKitchenRegion(kitchenRegions.get(12));
         recipe3.setPersons(4);
+        recipe3.setPrepTime(20);
         recipe3.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe3));
 
@@ -238,6 +241,7 @@ public class TestDataController {
         recipe4.setKitchenType(kitchenTypes.get(0));
         recipe4.setKitchenRegion(kitchenRegions.get(14));
         recipe4.setPersons(4);
+        recipe4.setPrepTime(30);
         recipe4.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe4));
         addCategoryToRecipe(recipes.get(3), 3,kitchenCategories);
@@ -252,6 +256,7 @@ public class TestDataController {
         recipe5.setKitchenType(kitchenTypes.get(2));
         recipe5.setKitchenRegion(kitchenRegions.get(6));
         recipe5.setPersons(4);
+        recipe5.setPrepTime(30);
         recipe5.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe5));
         addCategoryToRecipe(recipes.get(4), 0,kitchenCategories);
@@ -266,6 +271,7 @@ public class TestDataController {
         recipe6.setKitchenType(kitchenTypes.get(0));
         recipe6.setKitchenRegion(kitchenRegions.get(11));
         recipe6.setPersons(8);
+        recipe6.setPrepTime(70);
         recipe6.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe6));
         addCategoryToRecipe(recipes.get(5), 3,kitchenCategories);
@@ -282,6 +288,7 @@ public class TestDataController {
         recipe7.setKitchenType(kitchenTypes.get(2));
         recipe7.setKitchenRegion(kitchenRegions.get(11));
         recipe7.setPersons(8);
+        recipe7.setPrepTime(5);
         recipe7.setUser(users.get(0));
         recipes.add(recipeService.saveRecipe(recipe7));
         addCategoryToRecipe(recipes.get(6), 1,kitchenCategories);
