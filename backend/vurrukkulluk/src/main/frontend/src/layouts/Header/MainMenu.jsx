@@ -18,7 +18,7 @@ const MainMenu = () => {
             <span>Voeg Recept toe</span>
           </div>
         </Link>}
-        {user && <Link to={'/favourites'} >
+        {user && <Link to={'/favorites'} >
         <div className='menu-link'>
           <span>Mijn Favorieten</span>
         </div>
