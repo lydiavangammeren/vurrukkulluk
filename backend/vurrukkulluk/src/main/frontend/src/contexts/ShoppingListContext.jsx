@@ -71,16 +71,6 @@ function reducer(state, action) {
     case SL_ACTION.POPULATE_LIST:
       return { ...state, products: action.payload.products}
 
-    // case SL_ACTION.REFRESH_LIST:
-    //   if (state.products.length === 0 && state.recipesIds.length !== 0) {
-    //     console.log("getting products for recipies: ", state.recipesIds);
-        
-    //     // async backend call . then(
-    //     return {...state, products:tempProducts}
-    //      // )
-    //   }
-    //   return state;
-
     case SL_ACTION.ADD_RECIPE:
       return { ...state, products: null,
                recipeIds: [...state.recipeIds, action.payload.recipeId],
@@ -98,19 +88,19 @@ function reducer(state, action) {
       return { ...state, deletedProductIds: [...state.deletedProductIds, action.payload.id]}
 
     case SL_ACTION.UPDATE_QUANTITY:
-      // return { ...state, products: state.products.map((p) => {
-      //   if (p.article.id === action.payload.id) {
-      //     return { ...p, quantity: action.payload.quantity };
-      //   } 
-      //   return p;
-      // })}
       return {...state, products: Object.entries(state.products).map(([key, value]) => {
+        // console.log('key / value: ', key + ' / ' + value)
         if(key == action.payload.id) {
-          return (key, Number(action.payload.quantity));
-          // value = action.payload.quantity;
+          // console.log('Update quantity: ', value)
+          return [key, Number(action.payload.quantity)];
+        } else {
+          return [key, Number(value)];
+
         }
-        return (key, Number(value));
-        }).reduce(function(result, item, index) {result[index+1]=item; return result}, {})
+        }).reduce(function(result, item) {
+          console.log("result: ", result)
+          console.log("item: ", item)
+          result[item[0]]=item[1]; return result}, {})
       }
 
 

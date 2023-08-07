@@ -7,7 +7,7 @@ const Agenda = () => {
 
   // AGENDA TIJDELIJK UIT VANWEGE DATABASE CONNECTIE
   // const [ agendaItems, isLoaded ] = [[], true];
-  const [ agendaItems, isLoaded ] = useDatabase('calendar');
+  const [ agendaItems, isLoaded ] = useDatabase('calendar/fromtoday');
 
   const currentMonth = useRef(12);
 

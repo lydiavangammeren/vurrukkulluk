@@ -9,39 +9,6 @@ import { useDatabase } from "../../hooks";
 // import useLocalStorage from "../../hooks/useLocalStorage";
 import { useShopContext, SL_ACTION } from "../../contexts";
 
-// function reducer(state, action) {
-//   switch (action.type) {
-//     case SC_ACTION.POPULATE_LIST:
-//       return { ...state, products: action.payload.products}
-
-//     case SC_ACTION.REMOVE_ALL:
-//       return { ...state, products: []}
-
-//     case SC_ACTION.REMOVE_ITEM:
-//       return { ...state, products: state.products.filter((p) => p.id !== action.payload.id)}
-
-//     case SC_ACTION.UPDATE_QUANTITY:
-//       return { ...state, products: state.products.map((p) => {
-//         if (p.id === action.payload.id) {
-//           return { ...p, quantity: action.payload.quantity };
-//         } 
-//         return p;
-//       })}
-
-//     case SC_ACTION.TOGGLE_ITEM:
-//       if (state.checkedProductIds.includes(action.payload.id)) {
-//         return {...state, checkedProductIds: state.checkedProductIds.filter((i) => i !== action.payload.id)}
-//       } else {
-//         return { ...state, checkedProductIds: [...state.checkedProductIds, action.payload.id]}
-//       }
-  
-
-//     default: 
-//       console.log("unknown action in reduce for shopping cart: " + action.type);
-//       return state
-//   }
-// }
-
 const ShoppingCart = () => {
   /* video on useReducer: https://www.youtube.com/watch?v=kK_Wqx3RnHk */
   // const [state, dispatch] = useReducer(reducer, { products: [], checkedProductIds: [] });
@@ -51,9 +18,14 @@ const ShoppingCart = () => {
   // const [availableProducts, setAvailableProducts] = useState([]);
   // const [unavailableProducts, setUnvailableProducts] = useState([])
   
+  const refresh = () => {
+    dispatch({type: SL_ACTION.REFRESH_LIST});
+  }
+
   useEffect(() => {
     dispatch({type: SL_ACTION.REFRESH_LIST});
    }, [products, recipeIds, dispatch] )
+
 
    useEffect(()=> {
     console.log('Do we have products?: ', products)
@@ -138,7 +110,7 @@ const ShoppingCart = () => {
         <tfoot>
           <tr>
             <td colSpan="3">
-              <h2>Total</h2>
+              <h2 onClick={() => refresh()}>Total</h2>
             </td>
             <td>
               <span className="price_value">&euro;&nbsp;</span>

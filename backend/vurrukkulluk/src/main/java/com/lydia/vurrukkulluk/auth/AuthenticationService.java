@@ -1,6 +1,7 @@
 package com.lydia.vurrukkulluk.auth;
 
 import com.lydia.vurrukkulluk.config.JwtService;
+import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.User;
 import com.lydia.vurrukkulluk.repository.UserRepository;
 import com.lydia.vurrukkulluk.util.MailSendService;
@@ -41,6 +42,8 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
 
       var user = new User();
+      user.setImage(new Image());
+      user.getImage().setId(1);
       user.setName(request.getName());
       repository.findByEmail(request.getEmail()).ifPresentOrElse((value) -> {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email is already in use");

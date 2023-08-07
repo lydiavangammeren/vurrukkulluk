@@ -53,3 +53,7 @@
 .add_article_button:hover{
   background-color: var(--lighter-red);
 }
+.add_article_button:disabled{
+  cursor: default;
+  background-color: grey;
+}

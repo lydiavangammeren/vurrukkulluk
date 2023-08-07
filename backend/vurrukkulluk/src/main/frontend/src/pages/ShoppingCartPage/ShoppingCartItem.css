@@ -21,6 +21,9 @@
   color: var(--darker-green);
 }
 
+.shoppingcart_desc{
+  width: 72%;
+}
 .shoppingcart_desc p {
   /* Show at most 3 lines of text */
   display: -webkit-box;

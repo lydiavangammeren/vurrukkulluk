@@ -76,7 +76,7 @@ public class ImageController {
         recipeService.setImageInRecipe(recipe,image);
       }
       case "article" -> {
-        if (!securityUtil.isAdmin()) {return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");}
+        if (!securityUtil.isAuthorizedUserOrAdmin(articleService.getArticleById(id).getUser().getId())) {return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");}
         Image image = new Image(file);
         image = imageService.saveImage(image);
         articleService.setImageInArticle(id,image);

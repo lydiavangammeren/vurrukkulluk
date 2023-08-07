@@ -37,7 +37,10 @@ const Details = ({details}) => {
 
   const addToList = () => {
     console.log('click', ingredients)
-    dispatch({type: SL_ACTION.ADD_RECIPE, payload: {recipeId: details.id}})
+    const articleIds = ingredients.map(ing => {
+      return ing.articleunit.article.id;
+    })
+    dispatch({type: SL_ACTION.ADD_RECIPE, payload: {recipeId: details.id, articleIds: articleIds}})
     // ingredients.map(ingredient => {
     //   console.log('ingredients: ', ingredient.article.id)
       
