@@ -16,6 +16,8 @@ public class RecipeCreateDto {
     private int imageId;
     @NotNull
     private int persons;
+    @NotNull
+    private int prepTime;
     @NotBlank
     private String slug;
     @NotBlank

@@ -17,6 +17,7 @@ public class RecipeDto {
     private String slug;
     private String description;
     private int persons;
+    private int prepTime;
     private int price;
     private int calories;
     private KitchenType kitchenType;
