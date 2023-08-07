@@ -132,7 +132,7 @@ const Login = () => {
       <div className="Login">
         <h1>Welkom</h1>
         <h2>{JSON.parse(localStorage.getItem('user')).email}</h2>
-        <button onClick={logout}>Log uit</button>
+        <button className="login-button" onClick={logout}>Log uit</button>
       </div>
     )
   }
