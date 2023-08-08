@@ -14,6 +14,7 @@ import Layout from "./layouts";
 // import CropDemo from "./pages/testPage/CropDemo";
 // import ObjectToArray from "./pages/testPage/ObjectToArray";
 import ScrollToTop from "./components/ScrollToTop";
+import Favorites from "./pages/Favorites/Favorites";
 
 function App() {
   const [recipes, isLoaded, keepRecipeCache] = useDatabase('recipes'); // Get all data from database (Recipes+ingredients+preparation+comments)
@@ -42,6 +43,7 @@ function App() {
               <Route path="/shoppingcart" element={<ShoppingCart />} />
               <Route path="/addrecipe" element={<AddRecipe />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/favorites" element={<Favorites />} />
               {/* <Route path="/test" element={<ObjectToArray />} /> */}
             </Routes>
           </Layout>

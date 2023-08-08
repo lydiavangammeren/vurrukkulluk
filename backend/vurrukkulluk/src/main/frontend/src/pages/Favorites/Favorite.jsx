@@ -7,31 +7,23 @@ import { VscFlame } from 'react-icons/vsc';
 import { useAppContext } from '../../contexts';
 import Category from '../../components/Category/Category';
 
-const Recipe = ({recipe}) => {
+const Favorite = ({recipe}) => {
   const navigate = useNavigate();
-  const { baseUrl } = useAppContext();
-  // const [image, imageLoaded] = useDatabase(`image/${recipe.imgid}`);
-  // const [image, imageLoaded] = useDatabase(`image/1`);
+  const { baseUrl } = useAppContext();;
 
   const renderImage = () => {
-    // if(imageLoaded){
-      // console.log(`recipe Image: ${image.src}`);
       return (
-        // <div></div>
         <img 
-          // src={require(`../../assets/images/${image.src}`)}
           src={baseUrl + recipe.imageId}
-          // src={'/images/EggsAndVeggies.jpg'}
           alt={recipe.title}
           width="100%"
           height="100%"
         />
       )
     }
-  // }
+  
   const price = recipe.price / 100;
   const calories = recipe.calories / recipe.persons;
-  const rating = recipe.avgRating;
   return (
     //Change for BACKEND API !!!
     // <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.id}`)}>
@@ -42,13 +34,6 @@ const Recipe = ({recipe}) => {
       </div>
       
       <div className='recipe_categories'>
-        {/* {recipe.categories.forEach((category, index) => {
-          console.log('CATEGORY' + index)
-          if(index < 4){
-            console.log('category below 5');
-            <Category name={category.name} />
-          }
-        })} */}
         {recipe.categories.map((category, index)=> {
           if(index < 4){
             return (
@@ -59,10 +44,8 @@ const Recipe = ({recipe}) => {
       </div>
 
       <div className='recipe_title_rating'>
-      {/* <Link to={`/details/${recipe.id}`}> */}
         <div className='recipe_title'><h2>{recipe.title}</h2></div>
-      {/* </Link> */}
-      <Rating rating={rating} recipeId={recipe.id}/>
+      <Rating />
       </div>
       <div className='recipe_desc'>
         <div>
@@ -96,4 +79,4 @@ const Recipe = ({recipe}) => {
   )
 }
 
-export default Recipe
+export default Favorite

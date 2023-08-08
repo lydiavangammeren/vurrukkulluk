@@ -8,7 +8,9 @@ import { useAppContext } from "../../contexts";
 
 const ShoppingCartItem = ({product, checked, dispatch}) => {
   const { baseUrl } = useAppContext();
-  const article = product.article;
+  const article = product.article.article;
+  const quantity = article.amount;
+  const unit = product.article.defUnit.name;
   const price = article.price / 100;
   console.log('product: ', product)
   return (
@@ -43,6 +45,7 @@ const ShoppingCartItem = ({product, checked, dispatch}) => {
                       payload: {id: article.id}})
                     }
         />
+        <span> x {`${quantity} ${unit}`}</span>
       </td>
       <td className="shoppingcart_price">
         <p>

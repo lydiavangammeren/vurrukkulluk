@@ -62,6 +62,7 @@ class RecipeTest {
 
         assertEquals(0,recipe.getId());
         assertEquals(0,recipe.getPersons());
+        assertEquals(0,recipe.getPrepTime());
         assertNull(recipe.getSlug());
         assertNull(recipe.getDescription());
         assertNull(recipe.getTitle());
@@ -70,12 +71,13 @@ class RecipeTest {
         assertNull(recipe.getUser());
         assertNull(recipe.getImage());
         assertNotNull(recipe.getTimeAdded());
+
     }
 
     @Test
     void allArgsConstructor(){
         Recipe recipe = new Recipe(1,kitchenType,kitchenRegion,user,"title","slug","description"
-                ,LocalDateTime.parse("2023-06-07 14:00",formatter),image,4);
+                ,LocalDateTime.parse("2023-06-07 14:00",formatter),image,4,15);
 
         assertEquals(1,recipe.getId());
         assertEquals(4,recipe.getPersons());
@@ -87,5 +89,6 @@ class RecipeTest {
         assertEquals(LocalDateTime.parse("2023-06-07 14:00",formatter),recipe.getTimeAdded());
         assertEquals(user,recipe.getUser());
         assertEquals(image,recipe.getImage());
+        assertEquals(recipe.getPrepTime(),15);
     }
 }

@@ -16,76 +16,19 @@ const ShoppingListContext = createContext()
 export function useShopContext() {
   return useContext(ShoppingListContext);
 }
-// const tempProducts = [
-//   {
-//     "article": {
-//       "name": "Vegan Burger Bun",
-//       "imageId": 2,
-//       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-//       "price": 3,
-//       "unit": "broodje",
-//       "id": 1
-//     },
-//     "amount": 1
-//   },
-//   {
-//     "article": {
-//       "name": "Vegan Burger",
-//       "imageId": 3,
-//       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-//       "price": 1,
-//       "unit": "gram",
-//       "id": 2
-//     },
-//     "amount": 320
-//   },
-//   {
-//     "article": {
-//       "name": "Vegan Burger Sauce",
-//       "imageId": 4,
-//       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-//       "price": 1,
-//       "unit": "ml",
-//       "id": 3
-//     },
-//     "amount": 30
-//   },
-//   {
-//     "article": {
-//       "name": "Avocado",
-//       "imageId": 8,
-//       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu metus sem. Sed lobortis tempor arcu. Nulla id nulla in nibh dictum feugiat. Donec sed accumsan est, at accumsan velit.",
-//       "price": 2,
-//       "unit": "stuks",
-//       "id": 4
-//     },
-//     "amount": 1
-//   }
-// ]
-
 
 function reducer(state, action) {
-  console.log("action", action);
-  console.log("prevState", state);
+  // console.log("action", action);
+  // console.log("prevState", state);
   switch (action.type) {
     case SL_ACTION.POPULATE_LIST:
       return { ...state, products: action.payload.products}
 
-    // case SL_ACTION.REFRESH_LIST:
-    //   if (state.products.length === 0 && state.recipesIds.length !== 0) {
-    //     console.log("getting products for recipies: ", state.recipesIds);
-        
-    //     // async backend call . then(
-    //     return {...state, products:tempProducts}
-    //      // )
-    //   }
-    //   return state;
-
     case SL_ACTION.ADD_RECIPE:
       return { ...state, products: null,
                recipeIds: [...state.recipeIds, action.payload.recipeId],
-               deletedProductIds: state.deletedProductIds.filter(id => !action.payload.articleIds?.includes(id)),
-               checkedProductIds: state.checkedProductIds.filter(id => !action.payload.articleIds?.includes(id))
+               deletedProductIds: state.deletedProductIds.filter(id => !action.payload.articleIds.includes(id)),
+               checkedProductIds: state.checkedProductIds.filter(id => !action.payload.articleIds.includes(id))
             }
 
     case SL_ACTION.REMOVE_ALL:
@@ -98,28 +41,19 @@ function reducer(state, action) {
       return { ...state, deletedProductIds: [...state.deletedProductIds, action.payload.id]}
 
     case SL_ACTION.UPDATE_QUANTITY:
-      // return { ...state, products: state.products.map((p) => {
-      //   if (p.article.id === action.payload.id) {
-      //     return { ...p, quantity: action.payload.quantity };
-      //   } 
-      //   return p;
-      // })}
       return {...state, products: Object.entries(state.products).map(([key, value]) => {
-        console.log('key / value: ', key + ' / ' + value)
+        // console.log('key / value: ', key + ' / ' + value)
         if(key == action.payload.id) {
-          console.log('Update quantity: ', value)
-          return (key, Number(action.payload.quantity));
-          // return {[key]:Number(action.payload.quantity)}
-          // value = action.payload.quantity;
+          // console.log('Update quantity: ', value)
+          return [key, Number(action.payload.quantity)];
         } else {
-          return (key, Number(value));
+          return [key, Number(value)];
 
         }
-        }).reduce(function(result, item, index) {
+        }).reduce(function(result, item) {
           console.log("result: ", result)
           console.log("item: ", item)
-          console.log("index: ", index)
-          result[index+1]=item; return result}, {})
+          result[item[0]]=item[1]; return result}, {})
       }
 
 
@@ -152,7 +86,7 @@ export function ShopContextProvider({children}){
         api.post("/cart", {recipeIds: state.recipeIds})
         .then((value) => {
           console.log('response: ', value)
-          localDispatch({type:SL_ACTION.POPULATE_LIST, payload: {products: value.data.articlesToBuy}});
+          localDispatch({type:SL_ACTION.POPULATE_LIST, payload: {products: value.data.articlesToBuy, amounts: value.data.articlesAmount}});
         })
         .catch((err) =>
           console.log('catch: ', err)

@@ -2,6 +2,11 @@
     height: 8rem;
     display: flex;
     flex-direction: row;
+    cursor: pointer;
+    border: solid transparent;
+}
+.agenda_item:hover{
+    border: solid grey;
 }
 .agenda_calendar{
     padding: 0 1rem;

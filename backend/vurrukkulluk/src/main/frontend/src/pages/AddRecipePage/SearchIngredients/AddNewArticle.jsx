@@ -164,6 +164,10 @@ export const AddNewArticle = ({setNew}) => {
     setNew(true);
   }, [imageLoaded])
 
+  const canSubmit = () => {
+    if(![...Object.values(articleData)].every(Boolean)) return false;
+    return true;
+  }
   return (
     <div className="add_article">
       <h2>Voeg artikel toe</h2>
@@ -274,7 +278,9 @@ export const AddNewArticle = ({setNew}) => {
         <div className='button_box'>
           <button 
             className='add_article_button'
-            onClick={handleSubmit}>
+            onClick={handleSubmit}
+            disabled={!canSubmit()}
+            >
             Voeg artikel toe
           </button>
         </div>
