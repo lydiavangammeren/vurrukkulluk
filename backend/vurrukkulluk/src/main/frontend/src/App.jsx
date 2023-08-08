@@ -15,6 +15,7 @@ import Layout from "./layouts";
 // import ObjectToArray from "./pages/testPage/ObjectToArray";
 import ScrollToTop from "./components/ScrollToTop";
 import Favorites from "./pages/Favorites/Favorites";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 function App() {
   const [recipes, isLoaded, keepRecipeCache] = useDatabase('recipes'); // Get all data from database (Recipes+ingredients+preparation+comments)
@@ -44,6 +45,7 @@ function App() {
               <Route path="/addrecipe" element={<AddRecipe />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/favorites" element={<Favorites />} />
+              <Route path="/resetpassword" element={<ResetPassword />} />
               {/* <Route path="/test" element={<ObjectToArray />} /> */}
             </Routes>
           </Layout>
