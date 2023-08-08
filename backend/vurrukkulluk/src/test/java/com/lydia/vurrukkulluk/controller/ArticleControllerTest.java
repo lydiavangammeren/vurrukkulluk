@@ -70,7 +70,7 @@ class ArticleControllerTest {
     @Test
     void add() {
         when(modelMapper.map(articleCreateDto,Article.class)).thenReturn(article);
-        assertEquals(ResponseEntity.status(HttpStatus.OK).body("new ingredient added"),articleController.add(articleCreateDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("0"),articleController.add(articleCreateDto));
         verify(articleService).saveArticle(article);
     }
 

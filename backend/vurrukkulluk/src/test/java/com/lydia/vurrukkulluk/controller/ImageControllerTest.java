@@ -109,7 +109,10 @@ class ImageControllerTest {
         MultipartFile file = new MockMultipartFile("file",
                 "image.png","jpg",new byte[6]);
         when(imageService.saveImage(new Image(file))).thenReturn(image);
-        when(securityUtil.isAdmin()).thenReturn(true);
+        when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
+        when(articleService.getArticleById(1)).thenReturn(article);
+        when(article.getUser()).thenReturn(user);
+        when(user.getId()).thenReturn(1);
 
         assertEquals(ResponseEntity.status(HttpStatus.OK).body("Saved image"),controller.add(file,"article",1));
         verify(articleService).setImageInArticle(1,image);
@@ -119,7 +122,11 @@ class ImageControllerTest {
         MultipartFile file = new MockMultipartFile("file",
                 "image.png","jpg",new byte[6]);
 
-        when(securityUtil.isAdmin()).thenReturn(false);
+        when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(false);
+        when(articleService.getArticleById(1)).thenReturn(article);
+        when(article.getUser()).thenReturn(user);
+        when(user.getId()).thenReturn(1);
+
 
         assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(file,"article",1));
 

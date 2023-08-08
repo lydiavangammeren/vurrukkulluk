@@ -67,7 +67,9 @@ class UserControllerTest {
     @Test
     void add() {
         when(modelMapper.map(userCreateDto, User.class)).thenReturn(user);
+        when(user.getImage()).thenReturn(image);
         assertEquals(ResponseEntity.status(HttpStatus.OK).body("New user is added"),controller.add(userCreateDto));
+
         verify(userService).saveUser(user);
     }
 
