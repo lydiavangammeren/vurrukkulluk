@@ -8,6 +8,7 @@ import { useAppContext } from '../../contexts';
 import Category from '../../components/Category/Category';
 
 const Favorite = ({recipe}) => {
+  console.log('Favorite: ', recipe)
   const navigate = useNavigate();
   const { baseUrl } = useAppContext();;
 

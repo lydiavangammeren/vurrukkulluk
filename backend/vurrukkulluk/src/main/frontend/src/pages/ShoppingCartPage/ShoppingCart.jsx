@@ -41,7 +41,7 @@ const ShoppingCart = () => {
     //   })
     // let fullProducts = Object.entries(products).map(([key, value]) => ({article: articles.filter((article) => {return article.id == key}), amount: value}));
     // console.log('fullProducts: ', fullProducts)
-    let fullProducts = Object.entries(products).map(([key, value]) => ({article: articleunits.find((article) => {return article.article.id == key}), amount: value}));
+    let fullProducts = Object.entries(products).map(([key, value]) => ({article: articleunits?.find((article) => {return article.article.id == key}), amount: value}));
     // let fullProducts = Object.entries(products).map(([key, value]) => ({article: articles.find((article) => {return article.id == key}), amount: value}));
     console.log('fullProducts: ', fullProducts)
     setAllProducts(fullProducts)

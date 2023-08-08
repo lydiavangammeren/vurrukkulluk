@@ -25,8 +25,10 @@ function reducer(state, action) {
       return { ...state, products: action.payload.products}
 
     case SL_ACTION.ADD_RECIPE:
+      
       return { ...state, products: null,
-               recipeIds: [...state.recipeIds, action.payload.recipeId],
+              //  recipeIds: [...state.recipeIds, action.payload.recipeId],
+               recipeIds: {...state.recipeIds, [action.payload.recipeId]:action.payload.persons},
                deletedProductIds: state.deletedProductIds.filter(id => !action.payload.articleIds.includes(id)),
                checkedProductIds: state.checkedProductIds.filter(id => !action.payload.articleIds.includes(id))
             }
@@ -51,8 +53,8 @@ function reducer(state, action) {
 
         }
         }).reduce(function(result, item) {
-          console.log("result: ", result)
-          console.log("item: ", item)
+          // console.log("result: ", result)
+          // console.log("item: ", item)
           result[item[0]]=item[1]; return result}, {})
       }
 
@@ -73,19 +75,19 @@ function reducer(state, action) {
 
 export function ShopContextProvider({children}){
 
-  const [state, localDispatch] = useReducer(reducer, { products: null, recipeIds: [], checkedProductIds: [], deletedProductIds: [] });
+  const [state, localDispatch] = useReducer(reducer, { products: null, recipeIds: {}, checkedProductIds: [], deletedProductIds: [] });
   
   const dispatch = async (action) => {
-    console.log('custom action: ', action)
+    // console.log('custom action: ', action)
     switch (action.type) {
       case SL_ACTION.REFRESH_LIST:
-        console.log('state @ refresh: ', state)
+        // console.log('state @ refresh: ', state)
       if (state.products == null && state.recipeIds.length !== 0) {
-        console.log("getting products for recipies: ", state.recipeIds);
+        // console.log("getting products for recipies: ", state.recipeIds);
         // async backend call . then(
-        api.post("/cart", {recipeIds: state.recipeIds})
+        api.post("/cart", {recipeIdsPersonMap: state.recipeIds})
         .then((value) => {
-          console.log('response: ', value)
+          // console.log('response: ', value)
           localDispatch({type:SL_ACTION.POPULATE_LIST, payload: {products: value.data.articlesToBuy, amounts: value.data.articlesAmount}});
         })
         .catch((err) =>
@@ -103,7 +105,7 @@ export function ShopContextProvider({children}){
   }
 
   useEffect(()=> {
-    console.log('current state: ', state)
+    // console.log('current state: ', state)
   },[state])
 
   return (

@@ -1,21 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs';
 import usePostData from "../../hooks/usePostData";
+import api from "../../lib/recipeAPI";
+import { useDatabase } from '../../hooks';
+import { useAppContext } from '../../contexts';
 
 const Rating = ({rating, recipeId}) => {
   // console.log('Rating: ', rating)
   const [data, isLoaded, postData] = usePostData();
+  // const [ratings, ratingsLoaded] = useDatabase();
+  const {keepRecipeCache} = useAppContext();
   const [hoverRating, setHoverRating] = useState(null);
+  const user = JSON.parse(localStorage.getItem('user'));
 
-  const addRating = (rating) => {
+  const addRating = async (rating) => {
+    if(!user) return;
+
+    // const token = localStorage.getItem('user') === null ? '' : 'Bearer ' + JSON.parse(localStorage.getItem('user')).token
+
+    // const headers = {
+    //   'Content-Type': 'application/json',
+    //   'Authorization': token 
+    // }
+
     const body = {
       rating: rating,
       userId: JSON.parse(localStorage.getItem('user')).id,
       recipeId: recipeId
     }
 
+    // try{
+    //   const response = await api.put('/ratings', JSON.stringify(body), {headers:headers})
+    //   console.log('rating response: ', response)
+    // } catch(err){
+    //   console.log('Rating is niet gewijzigd')
+    // }
+
     postData('/ratings', body);
   }
+
+  useEffect(()=>{
+    if(isLoaded) keepRecipeCache(false);
+  }, [isLoaded])
 
   const handleMouseEnter = (index) => {
     setHoverRating(index + 1);

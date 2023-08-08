@@ -42,7 +42,7 @@ const Details = ({details, persons, setPersons}) => {
       return ing.articleunit.article.id;
     })
     // add persons to the dispatch 
-    dispatch({type: SL_ACTION.ADD_RECIPE, payload: {recipeId: details.id, articleIds: articleIds}})
+    dispatch({type: SL_ACTION.ADD_RECIPE, payload: {recipeId: details.id, articleIds: articleIds, persons: persons}})
   }
 
   const renderImage = () => {
