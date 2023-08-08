@@ -6,9 +6,11 @@ import { MdEuro } from 'react-icons/md';
 import { VscFlame } from 'react-icons/vsc';
 import { useAppContext } from '../../contexts';
 import Category from '../../components/Category/Category';
+import api from "../../lib/recipeAPI";
 
-const Favorite = ({recipe}) => {
-  console.log('Favorite: ', recipe)
+const Favorite = ({favorite, keepFavoritesCache}) => {
+  console.log('Favorite: ', favorite)
+  const recipe = favorite?.recipe;
   const navigate = useNavigate();
   const { baseUrl } = useAppContext();;
 
@@ -22,15 +24,34 @@ const Favorite = ({recipe}) => {
         />
       )
     }
+
+  const removeFavorite = async () => {
+    if(localStorage.getItem('user') === null) return console.log('Niet ingelogd');
+    const token = localStorage.getItem('user') === null ? '' : 'Bearer ' + JSON.parse(localStorage.getItem('user')).token
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token 
+    }
+
+    try{
+      const response = await api.delete(`/favorites/${favorite.id}`, {headers:headers})
+      keepFavoritesCache(false);
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
   
   const price = recipe.price / 100;
   const calories = recipe.calories / recipe.persons;
   return (
     //Change for BACKEND API !!!
     // <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.id}`)}>
-    <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.slug}`)}>
+    <div className='Recipe' key={recipe.id} >
       
-      <div className='recipe_img'>
+      <div className='recipe_img' onClick={() => navigate(`/details/${recipe.slug}`)}>
         {renderImage()}
       </div>
       
@@ -48,7 +69,7 @@ const Favorite = ({recipe}) => {
         <div className='recipe_title'><h2>{recipe.title}</h2></div>
       <Rating />
       </div>
-      <div className='recipe_desc'>
+      <div className='recipe_desc' onClick={() => navigate(`/details/${recipe.slug}`)}>
         <div>
           {/* <Link to={`/details/${recipe.id}`}> */}
             {recipe.description}
@@ -57,7 +78,7 @@ const Favorite = ({recipe}) => {
       </div>
       <div className='recipe_bottom'>
         <div className='recipe_button'>
-          <button onClick={() => navigate(`/details/${recipe.id}`)}>Smullen</button>
+          <button onClick={() => removeFavorite()}>Verwijder</button>
         </div>
         <div className='recipe_stats'>
           <div className='icon-align'>

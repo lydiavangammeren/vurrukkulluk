@@ -7,7 +7,7 @@ import "./Favorites.css";
 const Favorites = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   console.log('User: ', user)
-  const [favorites, favoritesLoaded ] = useDatabase(`/favorites`)
+  const [favorites, favoritesLoaded, keepFavoritesCache ] = useDatabase(`/favorites`)
   const {recipes} = useAppContext();
 
   const current = favorites?.filter((favorite)=>{
@@ -16,9 +16,9 @@ const Favorites = () => {
   console.log('Current: ', current)
 
   const favRecipes = current?.map((fav) => {
-    return recipes.find((recipe)=> {
+    return {id: fav.id , recipe: recipes.find((recipe)=> {
       return recipe.id === fav.recipeId;
-    })
+    })}
   })
 
   console.log('favRecipes: ', favRecipes)
@@ -30,8 +30,8 @@ const Favorites = () => {
     <div className='favorites'>
       <h1>Favorieten</h1>
       <div className='favorites_list'>
-        {favRecipes && favRecipes.map((recipe)=> {
-          return <Favorite recipe={recipe} />;
+        {favRecipes && favRecipes.map((favorite)=> {
+          return <Favorite favorite={favorite} keepFavoritesCache={keepFavoritesCache}/>;
         })}
       </div>
       
