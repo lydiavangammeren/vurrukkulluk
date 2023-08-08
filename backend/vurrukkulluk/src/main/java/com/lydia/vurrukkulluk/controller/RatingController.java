@@ -52,16 +52,7 @@ public class RatingController {
 
         return ResponseEntity.status(HttpStatus.OK).body(String.valueOf(ratingService.getAvgRatingOfRecipe(ratingDto.getRecipeId())));
     }
-
-    @PutMapping()
-    public ResponseEntity<String> put(@Valid @RequestBody RatingDto ratingDto){
-        if (!securityUtil.isAuthorizedUserOrAdmin(ratingDto.getUserId())){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
-        }
-        ratingService.saveRating(reverseRatingFromDto(ratingDto));
-        return ResponseEntity.status(HttpStatus.OK).body("Updated rating");
-    }
-
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable int id){
 
