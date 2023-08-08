@@ -4,6 +4,7 @@ import com.lydia.vurrukkulluk.dto.ShoppingCartDto;
 import com.lydia.vurrukkulluk.dto.ShoppingCartPostDto;
 import com.lydia.vurrukkulluk.model.Article;
 import com.lydia.vurrukkulluk.model.Ingredient;
+import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.service.ArticleService;
 import com.lydia.vurrukkulluk.service.IngredientService;
 import com.lydia.vurrukkulluk.service.RecipeService;
@@ -27,6 +28,8 @@ public class ShoppingCartController {
     private ArticleService articleService;
     @Autowired
     private IngredientService ingredientService;
+    @Autowired
+    private RecipeService recipeService;
     @PostMapping
     public ShoppingCartDto getCart(@RequestBody ShoppingCartPostDto recipesIds){
 
@@ -40,17 +43,20 @@ public class ShoppingCartController {
         return result;
     }
 
-    private HashMap<Integer,Double> getTotalArticlesAmount(ShoppingCartPostDto recipesIds){
+    private HashMap<Integer,Double> getTotalArticlesAmount(ShoppingCartPostDto recipesIdsPersonMap){
         HashMap<Integer,Double> totalArticlesAmount = new HashMap<>();
-        for (int i: recipesIds.getRecipeIds()) {
+        for (int i: recipesIdsPersonMap.getRecipeIdsPersonMap().keySet()) {
+            Recipe recipe = recipeService.getRecipeById(i);
+            int persons = recipe.getPersons();
+            float personsFactor =   (float) recipesIdsPersonMap.getRecipeIdsPersonMap().get(i) / persons;
             List<Ingredient> ingredients = ingredientService.getIngredientsRecipeId(i);
             for (Ingredient ingredient: ingredients){
                 Integer key = ingredient.getArticle().getId();
 
                 if (totalArticlesAmount.containsKey(key)){
-                    totalArticlesAmount.put(key, round(totalArticlesAmount.get(key) + convertUnitToStandard(ingredient),2));
+                    totalArticlesAmount.put(key, round(totalArticlesAmount.get(key) + ( personsFactor * convertUnitToStandard(ingredient)),2));
                 } else {
-                    totalArticlesAmount.put(key,convertUnitToStandard(ingredient));
+                    totalArticlesAmount.put(key,personsFactor * convertUnitToStandard(ingredient));
                 }
             }
         }
