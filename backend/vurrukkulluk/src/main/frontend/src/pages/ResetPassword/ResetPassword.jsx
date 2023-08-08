@@ -32,7 +32,7 @@ const ResetPassword = () => {
           id='new_password'
           name='new_password'
         />
-        <label htmlFor='repeat_new_password'>Nieuw wachtwoord</label>
+        <label htmlFor='repeat_new_password'>Herhaal wachtwoord</label>
         <input 
           type='password' 
           id='repeat_new_password'

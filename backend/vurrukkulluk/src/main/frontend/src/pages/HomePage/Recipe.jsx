@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import { HiUsers } from 'react-icons/hi';
 import { MdEuro } from 'react-icons/md';
 import { VscFlame } from 'react-icons/vsc';
+import { AiOutlineClockCircle } from 'react-icons/ai';
 import { useAppContext } from '../../contexts';
 import Category from '../../components/Category/Category';
 
@@ -88,7 +89,10 @@ const Recipe = ({recipe}) => {
             <VscFlame size={18} color='#b31714'/> 
             <span>{calories.toFixed(0)}</span>
           </div>
-           
+          <div className='icon-align'>
+            <AiOutlineClockCircle size={18} color='#b31714'/> 
+            <span>{recipe.prepTime}</span>
+          </div>
         </div>
         
       </div>

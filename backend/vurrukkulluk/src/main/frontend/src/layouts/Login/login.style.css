@@ -70,3 +70,7 @@
 .form-container {
   width:80%;
 }
+.forgot_link{
+  display: flex;
+  flex-direction: column;
+}

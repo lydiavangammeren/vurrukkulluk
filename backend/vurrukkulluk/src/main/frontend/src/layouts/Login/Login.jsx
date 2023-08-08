@@ -30,6 +30,8 @@ const Login = () => {
 
   const forgotPassword = () => {
     console.log("Send email to reset password")
+    document.querySelector(".forgot_dialog").showModal();
+
   }  
 
   const handleSubmit = async (e) => {
@@ -120,8 +122,13 @@ const Login = () => {
               </button>
             </div>
           </div>
-          
       </div>
+      <dialog className="forgot_dialog" >
+        <div className="forgot_link">
+          <a href="http://localhost:3000/resetpassword" >Klik hier om je wachtwoord te resetten!</a>
+          <button onClick={() => {document.querySelector(".forgot_dialog").close()}}>Sluiten</button>
+        </div>
+      </dialog>
     </div>
     )
   }
