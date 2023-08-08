@@ -11,6 +11,8 @@ import java.util.List;
 public interface RatingRepository extends JpaRepository<Rating,Integer> {
     List<Rating> findAllByRecipeId(int recipeId);
 
+    Rating findAllByUserIdAndRecipeId(int userId,int recipId);
+
     @Query("SELECT AVG(r.rating) FROM Rating r WHERE r.recipe.id=?1 GROUP BY r.recipe.id ")
     float findAvgByRecipeId(int recipeId);
 

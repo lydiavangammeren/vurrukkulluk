@@ -41,8 +41,16 @@ public class RatingController {
         if (!securityUtil.isAuthorizedUserOrAdmin(ratingDto.getUserId())){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized");
         }
-        ratingService.saveRating(reverseRatingFromDto(ratingDto));
-        return ResponseEntity.status(HttpStatus.OK).body("Saved rating");
+
+        Rating rating = reverseRatingFromDto(ratingDto);
+        Rating rating1 = ratingService.getRatingOfUserOfRecipe(ratingDto.getUserId(),ratingDto.getRecipeId());
+        if (  rating1 != null){
+            rating.setId(rating1.getId());
+        }
+
+        ratingService.saveRating(rating);
+
+        return ResponseEntity.status(HttpStatus.OK).body(String.valueOf(ratingService.getAvgRatingOfRecipe(ratingDto.getRecipeId())));
     }
 
     @PutMapping()

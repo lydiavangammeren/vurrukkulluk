@@ -1,6 +1,7 @@
 package com.lydia.vurrukkulluk.util;
 
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.io.File;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Getter
+@Component
 public class VulgarityFilter {
     private List<String> blackList = new ArrayList<>();
 

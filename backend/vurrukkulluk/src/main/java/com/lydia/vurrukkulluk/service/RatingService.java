@@ -10,7 +10,7 @@ public interface RatingService {
     List<Rating> getAllRatings();
 
     List<Rating> getAllRatingsRecipe(int recipeId);
-
+    Rating getRatingOfUserOfRecipe(int userId,int recipeId);
     Rating saveRating(Rating rating);
 
     float getAvgRatingOfRecipe(int recipeId);

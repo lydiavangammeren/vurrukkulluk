@@ -33,6 +33,10 @@ public class RatingServiceImpl implements RatingService {
         return ratingRepository.findAllByRecipeId(recipeId);
     }
 
+    public Rating getRatingOfUserOfRecipe(int userId,int recipeId){
+        return ratingRepository.findAllByUserIdAndRecipeId(userId,recipeId);
+    }
+
     @Override
     public Rating saveRating(Rating rating) { return ratingRepository.save(rating); }
     @Override
