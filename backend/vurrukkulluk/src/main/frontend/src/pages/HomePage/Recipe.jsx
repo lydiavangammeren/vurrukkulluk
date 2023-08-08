@@ -35,9 +35,9 @@ const Recipe = ({recipe}) => {
   return (
     //Change for BACKEND API !!!
     // <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.id}`)}>
-    <div className='Recipe' key={recipe.id} onClick={() => navigate(`/details/${recipe.slug}`)}>
+    <div className='Recipe' key={recipe.id} >
       
-      <div className='recipe_img'>
+      <div className='recipe_img' onClick={() => navigate(`/details/${recipe.slug}`)}>
         {renderImage()}
       </div>
       
@@ -64,7 +64,7 @@ const Recipe = ({recipe}) => {
       {/* </Link> */}
       <Rating rating={rating} recipeId={recipe.id}/>
       </div>
-      <div className='recipe_desc'>
+      <div className='recipe_desc' onClick={() => navigate(`/details/${recipe.slug}`)}>
         <div>
           {/* <Link to={`/details/${recipe.id}`}> */}
             {recipe.description}
@@ -73,7 +73,7 @@ const Recipe = ({recipe}) => {
       </div>
       <div className='recipe_bottom'>
         <div className='recipe_button'>
-          <button onClick={() => navigate(`/details/${recipe.id}`)}>Smullen</button>
+          <button onClick={() => navigate(`/details/${recipe.slug}`)}>Smullen</button>
         </div>
         <div className='recipe_stats'>
           <div className='icon-align'>
