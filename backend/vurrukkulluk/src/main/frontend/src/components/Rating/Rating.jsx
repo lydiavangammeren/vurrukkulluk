@@ -14,7 +14,7 @@ const Rating = ({rating, recipeId}) => {
   const user = JSON.parse(localStorage.getItem('user'));
 
   const addRating = async (rating) => {
-    if(!user) return;
+    if(!user) return console.log('Niet ingelogd');
 
     // const token = localStorage.getItem('user') === null ? '' : 'Bearer ' + JSON.parse(localStorage.getItem('user')).token
 
@@ -41,6 +41,10 @@ const Rating = ({rating, recipeId}) => {
 
   useEffect(()=>{
     if(isLoaded) keepRecipeCache(false);
+    // if(isLoaded) {
+    //   console.log("data: ", data)
+    //   rating = data.payLoad;
+    // }
   }, [isLoaded])
 
   const handleMouseEnter = (index) => {
