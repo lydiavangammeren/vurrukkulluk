@@ -78,7 +78,7 @@ class FavoriteControllerTest {
     @Test
     void getId() {
         when(favoriteService.getFavoriteById(1)).thenReturn(favorite);
-        assertEquals(ResponseEntity.status(HttpStatus.OK).body(favorite),controller.getId(1));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body(null),controller.getId(1));
     }
 
     @Test

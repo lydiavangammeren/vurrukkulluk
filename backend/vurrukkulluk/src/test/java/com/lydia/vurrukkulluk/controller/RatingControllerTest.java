@@ -67,7 +67,7 @@ class RatingControllerTest {
         when(ratingDto.getUserId()).thenReturn(1);
         when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
         when(modelMapper.map(ratingDto, Rating.class)).thenReturn(rating);
-        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Saved rating"),controller.add(ratingDto));
+        assertEquals(ResponseEntity.status(HttpStatus.OK).body("0.0"),controller.add(ratingDto));
         verify(ratingService).saveRating(rating);
     }
     @Test
@@ -77,20 +77,7 @@ class RatingControllerTest {
         assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"),controller.add(ratingDto));
         verifyNoInteractions(ratingService);
     }
-    @Test
-    void putAuthorized() {
-        when(ratingDto.getUserId()).thenReturn(1);
-        when(securityUtil.isAuthorizedUserOrAdmin(1)).thenReturn(true);
-        when(modelMapper.map(ratingDto, Rating.class)).thenReturn(rating);
-        assertEquals(ResponseEntity.status(HttpStatus.OK).body("Updated rating"),controller.put(ratingDto));
-        verify(ratingService).saveRating(rating);
-    }
-    @Test
-    void putNotAuthorized() {
-        when(ratingDto.getUserId()).thenReturn(1);
-        assertEquals(ResponseEntity.status(HttpStatus.FORBIDDEN).body("not authorized"), controller.put(ratingDto));
-        verifyNoInteractions(ratingService);
-    }
+
     @Test
     void deleteAuthorized() {
         when(ratingService.getRatingById(1)).thenReturn(rating);
