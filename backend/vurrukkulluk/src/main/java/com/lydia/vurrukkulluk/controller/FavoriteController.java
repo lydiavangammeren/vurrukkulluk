@@ -46,12 +46,12 @@ public class FavoriteController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Favorite> getId(@PathVariable int id){
+  public ResponseEntity<FavoriteDto> getId(@PathVariable int id){
     Favorite favorite = favoriteService.getFavoriteById(id);
     if (favorite==null){
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    return ResponseEntity.status(HttpStatus.OK).body(favorite);
+    return ResponseEntity.status(HttpStatus.OK).body(convertFavoriteToDto(favorite));
   }
 
   @PutMapping()

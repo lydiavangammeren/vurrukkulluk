@@ -51,8 +51,8 @@ function reducer(state, action) {
 
         }
         }).reduce(function(result, item) {
-          console.log("result: ", result)
-          console.log("item: ", item)
+          // console.log("result: ", result)
+          // console.log("item: ", item)
           result[item[0]]=item[1]; return result}, {})
       }
 
@@ -73,7 +73,7 @@ function reducer(state, action) {
 
 export function ShopContextProvider({children}){
 
-  const [state, localDispatch] = useReducer(reducer, { products: null, recipeIds: [], checkedProductIds: [], deletedProductIds: [] });
+  const [state, localDispatch] = useReducer(reducer, { products: null, recipeIds: {}, checkedProductIds: [], deletedProductIds: [] });
   
   const dispatch = async (action) => {
     console.log('custom action: ', action)

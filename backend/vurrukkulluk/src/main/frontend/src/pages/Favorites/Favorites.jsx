@@ -6,11 +6,13 @@ import Favorite from './Favorite';
 const Favorites = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   console.log('User: ', user)
-  const [favorites, favoritesLoaded ] = useDatabase(`/favorites/${user.id}`)
+  const [favorites, favoritesLoaded ] = useDatabase(`/favorites`)
   const {recipes} = useAppContext();
 
-  const current = favorites ?? [];
-  console.log('Current: ', favorites)
+  const current = favorites?.filter((favorite)=>{
+    return favorite.userId === user.id;
+  });
+  console.log('Current: ', current)
 
   useEffect(() => {
     console.log('Favorites: ', favorites)
@@ -20,7 +22,7 @@ const Favorites = () => {
     <div className='favorites'>
       <h1>Favorieten</h1>
       <div className='favorites_list'>
-        {current.length > 0 && current.map((recipe)=> {
+        {current && current.map((recipe)=> {
           return <Favorite recipe={recipe} />;
         })}
       </div>
