@@ -397,7 +397,7 @@ public class TestDataController {
 
         Article article1 = new Article();
         article1.setName("Vegan Burger Bun");
-        String imagePath1 = "src\\main\\resources\\images\\hamb.jpg";
+        String imagePath1 = "src\\\\main\\\\resources\\\\images\\hamb.jpg";
         Image image = uploadImageByPath(imagePath1,"hamb.jpg");
         article1.setImage(image);
         article1.setCalories(250);

@@ -27,5 +27,5 @@ public class Comment {
   private Recipe recipe;
 
   @NotBlank
-  String commentText;
+  private String commentText;
 }

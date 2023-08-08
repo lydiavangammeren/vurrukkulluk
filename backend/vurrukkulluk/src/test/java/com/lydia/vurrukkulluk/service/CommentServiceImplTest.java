@@ -2,6 +2,7 @@ package com.lydia.vurrukkulluk.service;
 
 import com.lydia.vurrukkulluk.model.Comment;
 import com.lydia.vurrukkulluk.repository.CommentRepository;
+import com.lydia.vurrukkulluk.util.VulgarityFilter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,13 +23,14 @@ class CommentServiceImplTest {
     Comment comment;
     @Mock
     CommentRepository repository;
-
+    @Mock
+    VulgarityFilter vulgarityFilter;
     CommentServiceImpl commentService;
 
     @BeforeEach
     void setup(){
         assertNotNull(repository);
-        commentService = new CommentServiceImpl(repository);
+        commentService = new CommentServiceImpl(repository,vulgarityFilter);
     }
 
     @Test

@@ -8,6 +8,7 @@ import com.lydia.vurrukkulluk.model.Ingredient;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.service.ArticleService;
 import com.lydia.vurrukkulluk.service.IngredientService;
+import com.lydia.vurrukkulluk.service.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,12 +29,15 @@ class ShoppingCartControllerTest {
     ArticleService articleService;
     @Mock
     IngredientService ingredientService;
-
+    @Mock
+    RecipeService recipeService;
+    @Mock
+    Recipe recipe;
     ShoppingCartController controller;
 
     @BeforeEach
     void makeController(){
-        controller = new ShoppingCartController(articleService,ingredientService);
+        controller = new ShoppingCartController(articleService,ingredientService,recipeService);
     }
 
     @Test
@@ -76,15 +80,18 @@ class ShoppingCartControllerTest {
         expectedResult.setArticlesAmount(totalArticlesAmount);
 
         ShoppingCartPostDto postDto = new ShoppingCartPostDto();
-        List<Integer> recipeIds = new ArrayList<>();
-        recipeIds.add(1);
-        recipeIds.add(2);
-        postDto.setRecipeIds(recipeIds);
+        HashMap<Integer,Integer> recipeIds = new HashMap<>();
+        recipeIds.put(1,4);
+        recipeIds.put(2,4);
+        postDto.setRecipeIdsPersonMap(recipeIds);
 
         when(ingredientService.getIngredientsRecipeId(1)).thenReturn(ingredients1);
         when(ingredientService.getIngredientsRecipeId(2)).thenReturn(ingredients2);
         when(articleService.getArticleById(1)).thenReturn(article1);
         when(articleService.getArticleById(2)).thenReturn(article2);
+        when(recipeService.getRecipeById(1)).thenReturn(recipe);
+        when(recipeService.getRecipeById(2)).thenReturn(recipe);
+        when(recipe.getPersons()).thenReturn(4);
 
         ShoppingCartDto result = controller.getCart(postDto);
         assertEquals(expectedResult.getArticlesAmount(),result.getArticlesAmount());

@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.service;
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.repository.RecipeRepository;
+import com.lydia.vurrukkulluk.util.VulgarityFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,13 @@ import java.util.List;
 public class RecipeServiceImpl implements RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
+    @Autowired
+    private VulgarityFilter vulgarityFilter;
 
     @Override
     public Recipe saveRecipe(Recipe recipe) {
-    return recipeRepository.save(recipe);
+        recipe.setDescription(vulgarityFilter.doFilter(recipe.getDescription()));
+        return recipeRepository.save(recipe);
     }
 
     @Override

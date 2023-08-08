@@ -413,8 +413,8 @@ class RecipeControllerTest {
         Image image1 = new Image();
         image1.setId(5);
         Recipe recipe1 = new Recipe(1,kitchenType,kitchenRegion,user1,"title"
-        ,"slug","description",null,image1,4);
-        RecipeDto recipeDto1 = new RecipeDto(1,"title","slug","description",4,0,0,kitchenType,
+        ,"slug","description",null,image1,4,15);
+        RecipeDto recipeDto1 = new RecipeDto(1,"title","slug","description",4,15,0,0,kitchenType,
                 kitchenRegion,null,null,null,null,0.0f,5);
 
         assertEquals(recipeDto1,controller.convertRecipeToDto(recipe1));
@@ -485,10 +485,10 @@ class RecipeControllerTest {
         List<PreparationInRecipeDto> preparations = new ArrayList<>();
         preparations.add(new PreparationInRecipeDto(2,"instruction"));
 
-        RecipeCreateDto recipeCreateDto1 = new RecipeCreateDto("title",2,4,"slug","description",
+        RecipeCreateDto recipeCreateDto1 = new RecipeCreateDto("title",2,4,15,"slug","description",
                 3,5,6,categoryIds,ingredients,preparations,1);
         Recipe recipe1 = new Recipe(1,new KitchenType(),new KitchenRegion(),new User(),"title",
-                "slug","description",null,new Image(),4);
+                "slug","description",null,new Image(),4,15);
         recipe1.getUser().setId(6);
         recipe1.getImage().setId(2);
         recipe1.getKitchenRegion().setId(5);

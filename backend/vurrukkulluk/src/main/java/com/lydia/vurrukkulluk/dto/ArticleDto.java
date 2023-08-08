@@ -32,4 +32,5 @@ public class ArticleDto {
     private int imageId;
     @Min(1)
     private int userId;
+
 }

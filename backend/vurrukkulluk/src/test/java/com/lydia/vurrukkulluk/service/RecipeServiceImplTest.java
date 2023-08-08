@@ -3,6 +3,7 @@ package com.lydia.vurrukkulluk.service;
 import com.lydia.vurrukkulluk.model.Image;
 import com.lydia.vurrukkulluk.model.Recipe;
 import com.lydia.vurrukkulluk.repository.RecipeRepository;
+import com.lydia.vurrukkulluk.util.VulgarityFilter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,11 +27,13 @@ class RecipeServiceImplTest {
     Recipe recipe;
     @Mock
     RecipeRepository repository;
+    @Mock
+    VulgarityFilter vulgarityFilter;
     RecipeServiceImpl recipeService;
     @BeforeEach
     void setup(){
         assertNotNull(repository);
-        recipeService = new RecipeServiceImpl(repository);
+        recipeService = new RecipeServiceImpl(repository,vulgarityFilter);
     }
 
     @Test
