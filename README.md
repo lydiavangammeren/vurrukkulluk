@@ -1,6 +1,5 @@
 #vurrukkulluk
-
-[TO DO: beschrijving van project]
+Voor details over het project zie: https://e-learning.educom.nu/cases/verrukkulluk/intro
 
 ##back office
 
