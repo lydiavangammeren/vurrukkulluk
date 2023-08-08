@@ -1,0 +1,14 @@
+.favorites h1{
+  font-family: var(--heading);
+  color: var(--lighter-green);
+  font-size: 6rem;
+  margin: 0;
+}
+
+.favorites_list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 77rem;
+  overflow: auto;
+}
