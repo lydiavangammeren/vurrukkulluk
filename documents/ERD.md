@@ -1,5 +1,4 @@
 ```mermaid
-%%{`  More info on mermaid notation see: https://mermaid.js.org/syntax/entityRelationshipDiagram.html.  `}%%
 erDiagram
     user ||--o{ recipe : Places
     kitchen_region ||--o{ recipe : Places
