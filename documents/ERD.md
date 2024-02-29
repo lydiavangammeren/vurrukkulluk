@@ -32,7 +32,7 @@ erDiagram
         string  title
         datetime time_added
         string name              
-        string slug             UK  %%{` a slang is a url friendly concaternation of the name `}%%
+        string slug             UK  
         int    user_id           FK
         int    kitchen_region_id       FK
         int    kitchen_type_id      FK
@@ -104,5 +104,4 @@ erDiagram
         date date
         String discription
     }
-%%{` Fill in the rest of the tables `}%%  
 ```
